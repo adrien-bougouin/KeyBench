@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc id="0251">
+ <motscles>
+  <nombre>5</nombre>
+ </motscles>
+ <article>
+  <resume>
+   <p>Les processus de déverbalisation (Seleskovitch) et de reverbalisation dans la traduction sont intégrés dans un modèle dont le module central est un système permettant la génération systématique de formes logiques variantes pour les phrases.</p>
+  </resume>
+  <corps>
+   <p>Selon une position traductologique classique (Seleskovitch, Lederer), la traduction suppose une déverbalisation du texte de la langue de départ, sa conversion en sens, puis une reverbalisation vers la langue d’arrivée. Même si des nuances peuvent être apportées à cette vision, celle-ci comporte une part suffisante de vérité pour qu’on continue à lui accorder du crédit. L’article vise à préciser cette hypothèse par une modélisation délibérément théorisante.</p>
+  <p>Pour que les ambitions du modèle soient réalistes, il exige une stylisation nette d’une réalité compliquée que, de toute façon, nous n’entrevoyons que de façon floue. Cette idéalisation, caractéristique des conceptualisations scientifiques, n’épousera aucune perspective psychologisante précise, compte tenu de notre grande ignorance dans ce domaine. Le modèle sera plus une conjecture théorique de style logicisant qu’un schéma finement empiriste à visées directement pratiques.</p>
+  <p>D’autre part, à titre illustratif, nous opérerons sur un minime fragment d’anglais : de fait, sur une phrase hors contexte. Prenons « Every musician likes Stravinsky » et supposons que nous ayons à traduire ceci en français. Le caractère élémentaire du problème permet d’envisager réalistement l’atteinte de notre objectif limité.</p>
+  <p>Cette phrase doit d’abord subir un processus de « déverbalisation ». Qu’est-ce à dire ? Nous devons obtenir sa représentation sémantique, son sens, son sémème global, son signifié (telles sont les variantes terminologiques). C’est-à-dire que, en particulier, nous devons atteindre son contenu propositionnel, sa « forme logique » (ci-après FL), conçue en première approximation comme linguistiquement neutre, et telle que les logiciens l’ont rendue familière depuis Frege, Peano, Whitehead et Russell. L’accès à la FL peut s’envisager de deux manières. La première, celle des logiciens purs, consiste à convertir directement le donné linguistique pris en bloc en lui attribuant la forme canonique des expressions logiques. Avec la notation fonctionnelle acquise depuis Frege, les conventions M = le signifié de « (be a) musician », L = le signifié de « like », s = la constante correspondant à « Stravinsky », x = le symbole d’une variable sémantique, les signes usuels pour le quantificateur universel et la relation d’implication, on obtiendra alors ceci : ∀x M(x) → L(x, s). Une telle représentation sémantique est simplifiée, notamment parce que nous supposons connue la décomposition sémique des foncteurs M et L, dans laquelle nous n’entrerons pas ici, puisqu’elle n’est pas (ou peu) pertinente au niveau où nous nous situons.</p>
+  <p>La deuxième conception nous fait atteindre cette FL de façon linguistiquement plus réaliste, à savoir non pas par un fiat du logicien, mais par un processus compositionnel explicite dans lequel le sens de chacun des mots est combiné au sens de son voisin de syntagme (sa « soeur »), et ceci de proche en proche, pour obtenir in fine le sens de la phrase. Le modus operandi pourra se concevoir dans la perspective de sémantique formelle attachée depuis les années 1970 au nom de Richard Montague. La formalisation utilise des représentations dans le cadre du lambda-calcul d’Alonzo Church, permettant une combinatoire s’effectuant essentiellement par application fonctionnelle : je me contente ici d’être allusif. Notons simplement que, dans les cas où le « calcul » sémantique en question (il s’agit bien de cela, puisque le processus est totalement explicite dans les limites de la formalisation) peut se faire par plus d’un chemin, donc autorise des variantes de calcul, un théorème, le théorème de Church-Rosser, garantit l’unicité du résultat obtenu, qui est dit la « forme normale », et qui ne sera autre que la FL ci-dessus. Ce qui vient d’être dit trace donc les grands traits de ce qu’« est » un processus de déverbalisation dans l’optique qui sera la nôtre. J’ai écrit « est » puisque, manifestement, il s’agit d’un « tout se passe comme si ». Je le redis, nous n’avons rien à avancer quant à la légitimité psycholinguistique de cette approche.</p>
+  <p>Si nous nous bornions à la FL « normale », canonique, nous en resterions sur le plan des platitudes, sans pouvoir progresser. Pour aller plus loin, nous devons introduire des processus de transformation logique permettant l’obtention de FL vériconditionnellement équivalentes à la FL canonique. Voici une première batterie T de telles transformations, ou règles d’équivalence, illustrées sur des propositions P et Q quelconques, en restant strictement à l’intérieur de la logique des prédicats classique. J’ai sélectionné celles qui me semblent les plus intéressantes.</p>
+  <p>(1) </p>
+  <p>Contraposition (modus tollens)</p>
+  <p>P → Q ≡ -Q → -P (où - = la négation)</p>
+  <p>(2)</p>
+  <p>Lois dites de De Morgan (en fait connues au Moyen Âge)</p>
+  <p>(2a)</p>
+  <p>-(P &amp; Q) ≡ -P ⋁ -Q (où &amp; symbolise la conjonction et ⋁ la disjonction inclusive « ou P ou Q ou P &amp; Q »)</p>
+  <p>(2b)</p>
+  <p>(P ⋁ Q) ≡ -P &amp; -Q</p>
+  <p>(3)</p>
+  <p>Loi d’équivalence pour l’implication et la disjonction</p>
+  <p>P → Q ≡ -P ⋁ Q</p>
+  <p>(4)</p>
+  <p>Lois d’échange des quantificateurs</p>
+  <p>(4a)</p>
+  <p>∀x P(x) → Q(x) ≡ - ∃x -(P(x) → Q(x)) (où ∃ est le quantificateur existentiel)</p>
+  <p>(4b)</p>
+  <p>∀x P(x) → Q(x) ≡ - ∃x P(x) &amp; -Q(x)</p>
+  <p>(5)</p>
+  <p>Réduction de l’implication avec l’opérateur de Sheffer</p>
+  <p>P → Q ≡ P | -Q (« | » note l’opérateur de Sheffer, c’est-à-dire la disjonction exclusive : « ou P ou Q, mais pas (P &amp; Q) »)</p>
+  <p>(6)</p>
+  <p>Réduction de l’implication par la conjonction</p>
+  <p>P → Q ≡ - (P &amp; -Q) (qu’on peut obtenir par (3) et (2a))</p>
+  <p>Comme on le voit, cette classe T de transformations logiques élémentaires est un ensemble de processus « centraux » (internes à la sémantique) qui nous permet de générer mécaniquement des FL alternatives constituant une classe d’équivalence V. Cet ensemble V (pour « variantes ») de FL équivalentes modélise élémentairement les différentes perspectives d’« idées » que nous pouvons avoir « en tête » quand nous produisons et nous comprenons une phrase telle que notre exemple. C’est V qui est le coeur du modèle, puisque, dans notre perspective, la déverbalisation n’aboutit pas nécessairement à une représentation sémantique unique. Nous établissons donc le module central du modèle avec T et V. Et c’est en lui que réside l’intérêt principal pour l’étude de la traduction. Malgré le formalisme, on doit comprendre que les règles de T sont intuitives pour tout être humain.</p>
+  <p>À partir des FL de V générables par les règles de T ci-dessus, nous pourrons effectuer un processus de « verbalisation », de « codage », de réalisation linguistique dans un troisième module. Cela peut se faire de deux façons. (1) Sans traduction, dans la langue à partir de laquelle la déverbalisation a eu lieu, et alors on obtiendra des paraphrases de la phrase de départ. Un tel ensemble paraphrastique est généré par un auteur qui cherche la meilleure expression possible de ses idées, ou par un apprenti traducteur qui s’exercerait à la reformulation dans sa langue maternelle. (2) Avec traduction, par une reverbalisation en direction de la langue-cible. Nous prendrons nos illustrations dans cette deuxième perspective, puisque nous nous intéressons au premier chef à la traduction, disons ici de l’anglais vers le français.</p>
+  <p>Voici donc des variantes de traduction possibles pour « Every musician likes Stravinsky », où nous indiquons à chaque fois : la FL correspondante et la règle de T utilisée pour l’obtenir, puis plusieurs réalisations linguistiques en français, séparées par |. De plus, on utilisera occasionnellement une réalisation lexicale directe de -L, l’antonyme d’« aimer », disons « détester », ainsi que diverses autres variantes de réalisation que chacun reconnaîtra au passage, et que je me passe généralement de commenter. J’y reviendrai brièvement à la fin.</p>
+  <p>FL 1 (FL canonique, sans recours à une règle de T)</p>
+  <p>∀x M(x) → L(x, s)</p>
+  <p>Tout le monde, s’il est musicien, aime Stravinsky. | Tout musicien aime Stravinsky. | Les musiciens aiment Stravinsky, et ça vaut pour tous. | Tout un chacun aime Stravinsky s’il est musicien. | Quiconque est musicien aime Stravinsky. | Celui qui est musicien aime Stravinsky. | Qui est musicien aime Stravinsky. | Stravinsky est apprécié des musiciens. | Chacun, étant musicien, va aimer Stravinsky. | Vous êtes musicien ? alors vous aimerez Stravinsky. | On est musicien ? alors on aime Stravinsky. | Dès l’instant qu’on est musicien, on aime Stravinsky. | Dès lors qu’on est un musicien, on va aimer Stravinsky. | À partir du moment où quelqu’un est musicien, il apprécie Stravinsky. | Etre musicien et aimer Stravinsky, c’est tout un. (Par abus, car une implication n’est pas une équivalence.) | Être musicien c’est aimer Stravinsky. (idem)</p>
+  <p>FL 2 (par la règle 1)</p>
+  <p>∀x -L(x, s) → -M(x)</p>
+  <p>Si on n’aime pas Stravinsky, alors on n’est pas musicien. | Ne pas aimer Stravinsky implique qu’on n’est pas musicien. | Quand on déteste Stravinsky, eh bien on n’est pas musicien. | Si on déteste Stravinsky, dès cet instant on cesse d’être un musicien. | Détester Stravinsky ça veut dire qu’on n’est pas musicien. | Celui qui n’aime pas Stravinsky n’est pas un musicien. | Celui-là n’est pas musicien qui déteste Stravinsky. | Ceux qui détestent Stravinsky ne sont pas des musiciens, c’est pour tous pareil.</p>
+  <p>FL 3 (par la règle 4)</p>
+  <p>-∃x M(x) &amp; -L(x, s)</p>
+  <p>Il n’y a personne qui soit musicien et qui n’aime Stravinsky. | Personne n’est musicien sans aimer Stravinsky. | Personne n’est musicien qui déteste Stravinsky. | Un musicien qui n’aime pas Stravinsky, ça n’existe pas. | Être musicien et détester Stravinsky, c’est inconnu dans les annales. | Un musicien qui n’est pas un admirateur de Stravinsky, on n’en trouve pas. | Des musiciens qui détesteraient Stravinsky ? ça se saurait ! | Quelqu’un qui est musicien et déteste Stravinsky, je n’en connais pas. | Un musicien détestant Stravinsky ? !</p>
+  <p>FL 4 (par la règle 2)</p>
+  <p>-∃x - (-M(x) ⋁ L(x, s))</p>
+  <p>On aime Stravinsky ou alors on n’est pas musicien, parce que sinon…</p>
+  <p>FL 5 (par la règle 4)</p>
+  <p>-∃x - (M(x) → L(x, s))</p>
+  <p>Tout musicien aime Stravinsky, c’est pas autrement. | Quelqu’un qui est un musicien aime Stravinsky, il n’y a pas à tortiller. | Un musicien aimera Stravinsky, ou alors sinon…</p>
+  <p>FL 6 (par la règle 3)</p>
+  <p>∀x - M(x) ⋁ L(x, s)</p>
+  <p>On aime Stravinsky, sinon on n’est pas musicien. (Commutativité de la disjonction.) | Ou bien ne pas être un vrai musicien ou alors aimer Stravinsky : c’est tout vu. (ordre moins naturel que le précédent)</p>
+  <p>FL 7 (par la règle 2, ou par 6)</p>
+  <p>∀x - (M(x) &amp; -L(x, s))</p>
+  <p>Il est impensable d’être musicien tout en détestant Stravinsky. | Un musicien qui n’aime pas Stravinsky : et puis quoi encore  ! | Un musicien qui n’est pas admirateur de Stravinsky : on n’y pense même pas  ! | Un musicien n’aimant pas Stravinsky, voyons  ! | Un musicien qui déteste Stravinsky : c’est trop fort !</p>
+  <p>FL 8 (par la règle 5)</p>
+  <p>∀x M(x) | -L(x, s)</p>
+  <p>Être musicien est incompatible avec le fait de détester Stravinsky. | Être musicien et ne pas aimer Stravinsky, ça ne va pas bien ensemble. | Être musicien et détester Stravinsky : ça ne colle pas. | Un musicien, ne pas aimer Stravinsky ! | Un musicien ne saurait détester Stravinsky.</p>
+  <p>Maintenant nous pouvons étendre l’ensemble V des FL en lui adjoignant un appendice V’. V’ est obtenu par une incursion dans les logiques modales. Je proposerai des conversions de la FL canonique en des FL modales, en conformité avec ce que la pratique langagière montre être le fonctionnement de l’utilisateur.</p>
+  <p>Prenons les foncteurs modaux unaires M et N, tel quel NP équivaut à -M-P (voir ci-dessous). En voici trois interprétations principales. (1) Dans une logique des mondes possibles, M = « il est nécessaire que », « il est nécessairement vrai que », et N = « il est possible que ». (2) Dans une interprétation probabiliste, M = « il est certain que », et N = « il est probable que », « il est probablement vrai que ». (3) Dans une interprétation de logique temporelle, M = « il est toujours vrai que », et N = « il est vrai au moins une fois que », « il est inévitable que » (mais de façon peu intuitive).</p>
+  <p>À l’ensemble T nous adjoignons T’, comprenant les règles 7 :</p>
+  <p>(7)</p>
+  <p>Règles d’échange des modalisateurs</p>
+  <p>(7a)</p>
+  <p>M P ≡ -N-P</p>
+  <p>(7b)</p>
+  <p>NP ≡ -M-P</p>
+  <p>À partir de la FL canonique, en ayant recours à T + T’, nous pouvons générer les FL suivantes (classe V’ adjointe à V), avec élimination de la quantification, et leurs verbalisations possibles, là encore avec des variantes généralement non commentées.</p>
+  <p>FL 9 (conversion modale de la FL canonique)</p>
+  <p>M (M(x) → L(x, s)</p>
+  <p>Un musicien aime nécessairement Stravinsky. | Il est certain que les musiciens aiment Stravinsky. | Il est hors de doute que les musiciens aiment Stravinsky. | Le musicien aimera toujours Stravinsky. | Les musiciens aiment Stravinsky, voilà tout. | Ipso facto, qui dit musicien dit qu’on aime Stravinsky. | A partir du moment où quelqu’un est musicien, il ne peut manquer d’aimer Stravinsky. (« ne peut manquer d’aimer » est la verbalisation de - - L ? L)</p>
+  <p>FL 10 (par la règle 1)</p>
+  <p>M (-L(x, s) → -M(x))</p>
+  <p>Nécessairement, qui déteste Stravinsky n’est pas musicien. | Ceux qui n’aiment pas Stravinsky ne sont certainement pas des musiciens. | Dès lors qu’on déteste Stravinsky, on ne saurait être un musicien. | C’est comme ça : celui qui n’aime pas Stravinsky n’est pas un musicien. | Quand on déteste Stravinsky, on n’est jamais un musicien. | Il faut vraiment ne pas être musicien pour détester Stravinsky.</p>
+  <p>FL 11 (par la règle 5, et par 7)</p>
+  <p>-N -(M(x) → L(x,s))</p>
+  <p>Il n’est pas possible qu’un musicien n’aime pas Stravinsky. | Un musicien ne saurait manquer d’aimer Stravinsky. | Quand on est musicien, on ne peut éviter d’aimer Stravinsky. | Un musicien aimera Stravinsky, le contraire ne se peut pas. | Les musiciens aiment Stravinsky, on n’a jamais vu le contraire.</p>
+  <p>FL 12 (par la règle 3, et par 7)</p>
+  <p>-N -(-M(x) ⋁ L(x,s))</p>
+  <p>Immanquablement, on aime Stravinsky ou on n’est pas musicien. | Ou ne pas être musicien ou aimer Stravinsky : impossible autrement. | C’est ou aimer Stravinsky ou ne pas être musicien : le contraire est impossible.</p>
+  <p>FL 13 (par la règle 2, et par 7)</p>
+  <p>-N (M(x) &amp; -L(x,s))</p>
+  <p>Il n’est pas possible d’être musicien et de ne pas aimer Stravinsky. | Un musicien qui déteste Stravinsky, ça ne se peut pas. | Quand on est musicien, il n’est pas probable qu’on déteste Stravinsky. | Un musicien détestant Stravinsky, ça n’est pas banal. | On ne s’attend pas à ce qu’un musicien déteste Stravinsky. | On n’envisagerait pas un musisien qui détesterait Stravinsky. | Un musicien qui détesterait Stravinsky, ça serait étonnant. | On voit mal un musicien détester Stravinsky. | Si Stravinsky n’est pas aimé des musiciens, je veux bien être pendu.</p>
+  <p>FL 14 (par la règle 1, et par 7)</p>
+  <p>-N -(-L(x,s) → -M(x))</p>
+  <p>Immanquablement, si on n’aime pas Stravinsky, c’est qu’on n’est pas musicien. | Ça ne saurait manquer : qui n’aime pas Stravinsky n’est pas musicien. | Qui déteste Stravinsky n’est pas musicien : on voit mal le contraire.</p>
+  <p>Le module central peut encore s’enrichir, car à V et V’ obtenus par T et T’, on peut adjoindre V’’ obtenu par T”. Par exemple ceci.</p>
+  <p>(8)</p>
+  <p>Règle d’extensionnalité</p>
+  <p>F(a, y) ≡ (a ∊ {x : F(x, y)})</p>
+  <p>Si a est en relation F avec y, cela équivaut à dire que a fait partie de l’ensemble des x possédant ladite propriété.</p>
+  <p>(9)</p>
+  <p>Règle de la converse d’une fonction</p>
+  <p>F(x, y) ≡ F-1(y, x)</p>
+  <p>La relation converse d’une relation de départ s’obtient en intervertissant l’ordre des arguments (« a est à gauche de b » donnant « b est à droite de a »).</p>
+  <p>D’où, à titre d’exemple, ces variantes, sur « Every musician admires Stravinsky » (le changement de « loves » en « admires », noté A, sera plus pratique pour nos illustrations).</p>
+  <p>FL 15 (par la règle 8)</p>
+  <p>∀x M(x) → (x ∊ {y : A(y, s)})</p>
+  <p>Tout musicien est un admirateur de Stravinsky (La nominalisation est une réalisation naturelle de l’interprétation extensionnelle du sens de « admire Stravinsky ».)</p>
+  <p>FL 16 (par la règle 9)</p>
+  <p>∀x M(x) → A-1(s, x)</p>
+  <p>Stravinsky est admiré de tous les musiciens. (La passivation est une réalisation naturelle d’une fonction converse.)</p>
+  <p>On l’aura naturellement observé, pour les exemples de reverbalisations traduisantes d’une même phrase de départ en anglais obtenues dans le troisième module à partir de la classe V + V’ + V” des FL issues d’une déverbalisation et de transformations (par règles de T + T’ + T”), on fait appel à des procédés de verbalisation divers. Notamment ceci. (1) Des variantes lexicales (mots et locutions synonymiques ou quasiment). (2) Des variantes morpho-syntaxiques telles que : relativisation, adjectivalisation, apposition, changement de voix verbale, nominalisation (voir ci-dessus), etc. (3) Des modulations de visée énonciative (thématisation, mise en valeur ou non de la quantification). (4) Des procédés rhétoriques tels que la question rhétorique, l’exclamation vectrice d’émotion, la métaphore, etc. (5) Des variations de registre, de niveau de langue. La modélisation doit idéalement prendre en compte ces constatations, au prix de détails techniques qu’il serait oiseux de détailler. Elle devrait également prendre en compte la possibilité d’atteindre l’implicite, le non-dit, récupérable à partir des FL de V + V’ + V”, en fonction du contexte et des connaissances encyclopédiques, grâce à un module général d’inférence, nécessaire de toute façon, et d’une applicabilité générale, au même titre du reste que l’ensemble des règles T + T’ + T”. En effet, le traducteur peut expliciter l’implicite s’il le juge bon : il aura verbalisé du non-dit atteint par raisonnement.</p>
+  <p>Sans parler de la simplification (légitime) due à l’abstraction du contexte linguistique et de la situation, le lecteur sera porté à objecter que beaucoup des traductions obtenues sont, d’évidence, prolixes, infidèles, gauches, etc. Ces objections tombent si l’on veut bien garder à l’esprit mon objectif, qui est de clarifier la nature des processus de déverbalisation et de verbalisation, et non pas de porter des jugements sur les résultats obtenus, le tri ne pouvant intervenir que dans un second temps, en fonction de divers critères. Cela étant, le modèle n’est pas dénué de justification pratique, l’apprenti traducteur étant bien inspiré lorsqu’il s’exerce à générer des ensembles paraphrastiques profusément et sans censure, en dépassant la première idée qui lui traverse l’esprit. C’est cette génération que ma modélisation visait essentiellement à cerner. Du coup, a contrario, les limites de telle ou telle technique de traduction apparaîtront plus faciles à tracer. Il s’agissait de viser des idées claires dans un domaine où il n’est pas facile de les atteindre, tout se passant essentiellement dans une boîte noire. Et avoir des idées claires, c’est en particulier savoir en quoi consistent les processus de traduction globalement entendus, et où ils se situent. Si simpliste soit-elle, l’architecture de notre modèle en trois modules vise une telle clarification des processus de déverbalisation et de reverbalisation, par l’intermédiaire d’un module central comportant l’ensemble des formes logiques variantes constructibles par des règles logiques intuitivement accessibles à tout utilisateur.</p>
+   </corps>
+ </article>
+</doc>

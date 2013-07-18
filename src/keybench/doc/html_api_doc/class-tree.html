@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class Hierarchy</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="keybench-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Trees&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">&nbsp;</td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="class-tree.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<center><b>
+ [ <a href="module-tree.html">Module Hierarchy</a>
+ | <a href="class-tree.html">Class Hierarchy</a> ]
+</b></center><br />
+<h1 class="epydoc">Class Hierarchy</h1>
+<ul class="nomargin-top">
+    <li> <strong class="uidlink">object</strong>:
+      <em class="summary">The most base type</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="keybench.benchmark_component.BenchmarkComponent-class.html">keybench.benchmark_component.BenchmarkComponent</a></strong>:
+      <em class="summary">Core component of all the keyphrase extractor system's components.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="keybench.candidate_extractor.CandidateExtractorC-class.html">keybench.candidate_extractor.CandidateExtractorC</a></strong>:
+      <em class="summary">Component responsible of the term filtering.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="keybench.default.n_gram_extractor.NGramExtractor-class.html">keybench.default.n_gram_extractor.NGramExtractor</a></strong>:
+      <em class="summary">Component performing candidate terms extraction.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="keybench.evaluator.EvaluatorC-class.html">keybench.evaluator.EvaluatorC</a></strong>:
+      <em class="summary">Component responsible of the keyphrases evaluation, compared to 
+        reference keyphrases.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="keybench.default.prf_evaluator.PRFEvaluator-class.html">keybench.default.prf_evaluator.PRFEvaluator</a></strong>:
+      <em class="summary">Component performing keyphrases evaluation.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="keybench.pre_processor.PreProcessorC-class.html">keybench.pre_processor.PreProcessorC</a></strong>:
+      <em class="summary">Component responsible of the document pre-processing.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="keybench.default.stanford_pre_processor.StanfordPreProcessor-class.html">keybench.default.stanford_pre_processor.StanfordPreProcessor</a></strong>:
+      <em class="summary">Component performing pre-processing of documents using the punkt 
+        sentence tokenizer, a regular expression word tokenizer and the 
+        stanford's tagger.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="keybench.ranker.RankerC-class.html">keybench.ranker.RankerC</a></strong>:
+      <em class="summary">Component responsible of the candidates' ranking.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="keybench.default.tfidf_ranker.TFIDFRanker-class.html">keybench.default.tfidf_ranker.TFIDFRanker</a></strong>:
+      <em class="summary">Component performing candidate terms ranking based on their TF-IDF 
+        weight.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="keybench.selector.SelectorC-class.html">keybench.selector.SelectorC</a></strong>:
+      <em class="summary">Component responsible of the selection of the candidate keyphrases.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="keybench.default.top_k_selector.TopKSelector-class.html">keybench.default.top_k_selector.TopKSelector</a></strong>:
+      <em class="summary">Component performing selecting the real keyphrases among the ranked
+        candidate terms.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="keybench.keyphrase_extractor.KeyphraseExtractor-class.html">keybench.keyphrase_extractor.KeyphraseExtractor</a></strong>:
+      <em class="summary">Configuration of the keyphrase extraction system.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="keybench.pre_processed_file.PreProcessedFile-class.html">keybench.pre_processed_file.PreProcessedFile</a></strong>:
+      <em class="summary">Represents a file containing a title, an abstract and a body.</em>
+    </li>
+    <li> <strong class="uidlink">multiprocessing.process.Process</strong>:
+      <em class="summary">Process objects represent activity that is run in a separate 
+        process</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="keybench.keybench_worker.KeyBenchWorker-class.html">keybench.keybench_worker.KeyBenchWorker</a></strong>:
+      <em class="summary">Process launching the keyphrase extraction workflow.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+</ul>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="keybench-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Trees&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Jan 22 19:02:18 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

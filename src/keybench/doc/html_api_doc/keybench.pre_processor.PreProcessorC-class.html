@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>keybench.pre_processor.PreProcessorC</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="keybench-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="keybench-module.html">Package&nbsp;keybench</a> ::
+        <a href="keybench.pre_processor-module.html">Module&nbsp;pre_processor</a> ::
+        Class&nbsp;PreProcessorC
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="keybench.pre_processor.PreProcessorC-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class PreProcessorC</h1><p class="nomargin-top"><span class="codelink"><a href="keybench.pre_processor-pysrc.html#PreProcessorC">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+                            object --+    
+                                     |    
+<a href="keybench.benchmark_component.BenchmarkComponent-class.html">benchmark_component.BenchmarkComponent</a> --+
+                                         |
+                                        <strong class="uidshort">PreProcessorC</strong>
+</pre>
+
+<dl><dt>Known Subclasses:</dt>
+<dd>
+      <ul class="subclass-list">
+<li><a href="keybench.default.stanford_pre_processor.StanfordPreProcessor-class.html">default.stanford_pre_processor.StanfordPreProcessor</a></li>  </ul>
+</dd></dl>
+
+<hr />
+<p>Component responsible of the document pre-processing. It pre-processed
+  files in three steps:</p>
+  <ol start="1">
+    <li>
+      Splitting of the text into sentences
+    </li>
+    <li>
+      Word tokenization of the sentences
+    </li>
+    <li>
+      Part of Speech tagging of the sentences' words
+    </li>
+  </ol>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="keybench.pre_processor.PreProcessorC-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">name</span>,
+        <span class="summary-sig-arg">is_lazy</span>,
+        <span class="summary-sig-arg">encoding</span>,
+        <span class="summary-sig-arg">tag_separator</span>)</span><br />
+      Constructor of the component.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="keybench.pre_processor-pysrc.html#PreProcessorC.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><code>string</code></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="keybench.pre_processor.PreProcessorC-class.html#encoding" class="summary-sig-name">encoding</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Gives the encoding used by the pre-processor.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="keybench.pre_processor-pysrc.html#PreProcessorC.encoding">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><code>(string, string, string)</code></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="keybench.pre_processor.PreProcessorC-class.html#parse_file" class="summary-sig-name">parse_file</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">filepath</span>)</span><br />
+      Extract the title, the abstract and the body contained in a file.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="keybench.pre_processor-pysrc.html#PreProcessorC.parse_file">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><code>list of string</code></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="keybench.pre_processor.PreProcessorC-class.html#pos_tagging" class="summary-sig-name">pos_tagging</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tokenized_sentences</span>,
+        <span class="summary-sig-arg">tag_separator</span>)</span><br />
+      Takes a list of tokenized sentences and applies POS-tagging on each.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="keybench.pre_processor-pysrc.html#PreProcessorC.pos_tagging">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><code>PreProcessedFile</code></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="keybench.pre_processor.PreProcessorC-class.html#pre_process_file" class="summary-sig-name">pre_process_file</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">filepath</span>)</span><br />
+      Applies the three pre-processing steps.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="keybench.pre_processor-pysrc.html#PreProcessorC.pre_process_file">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><code>list of string</code></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="keybench.pre_processor.PreProcessorC-class.html#sentence_tokenization" class="summary-sig-name">sentence_tokenization</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">text</span>)</span><br />
+      Takes a raw text and split it into a list of sentences.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="keybench.pre_processor-pysrc.html#PreProcessorC.sentence_tokenization">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="keybench.pre_processor.PreProcessorC-class.html#set_encoding" class="summary-sig-name">set_encoding</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">encoding</span>)</span><br />
+      Sets the encoding used by the pre-processor.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="keybench.pre_processor-pysrc.html#PreProcessorC.set_encoding">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="keybench.pre_processor.PreProcessorC-class.html#set_tag_separator" class="summary-sig-name">set_tag_separator</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tag_separator</span>)</span><br />
+      Sets the tag separator used for the POS tagging.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="keybench.pre_processor-pysrc.html#PreProcessorC.set_tag_separator">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">tag_separator:  <code>string</code></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="keybench.pre_processor.PreProcessorC-class.html#tag_separator" class="summary-sig-name">tag_separator</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Gives the tag separator used for the POS tagging.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="keybench.pre_processor-pysrc.html#PreProcessorC.tag_separator">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><code>list of string</code></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="keybench.pre_processor.PreProcessorC-class.html#word_tokenization" class="summary-sig-name">word_tokenization</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">sentences</span>)</span><br />
+      Takes a list of sentences and applies word tokenize on each.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="keybench.pre_processor-pysrc.html#PreProcessorC.word_tokenization">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="keybench.benchmark_component.BenchmarkComponent-class.html">benchmark_component.BenchmarkComponent</a></code></b>:
+      <code><a href="keybench.benchmark_component.BenchmarkComponent-class.html#is_cached">is_cached</a></code>,
+      <code><a href="keybench.benchmark_component.BenchmarkComponent-class.html#is_lazy">is_lazy</a></code>,
+      <code><a href="keybench.benchmark_component.BenchmarkComponent-class.html#lazy_directory">lazy_directory</a></code>,
+      <code><a href="keybench.benchmark_component.BenchmarkComponent-class.html#load">load</a></code>,
+      <code><a href="keybench.benchmark_component.BenchmarkComponent-class.html#log">log</a></code>,
+      <code><a href="keybench.benchmark_component.BenchmarkComponent-class.html#set_is_lazy">set_is_lazy</a></code>,
+      <code><a href="keybench.benchmark_component.BenchmarkComponent-class.html#set_lazy_directory">set_lazy_directory</a></code>,
+      <code><a href="keybench.benchmark_component.BenchmarkComponent-class.html#store">store</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">name</span>,
+        <span class="sig-arg">is_lazy</span>,
+        <span class="sig-arg">encoding</span>,
+        <span class="sig-arg">tag_separator</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="keybench.pre_processor-pysrc.html#PreProcessorC.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Constructor of the component.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>name</code></strong> (<code>string</code>) - The name of the pre-processor.</li>
+        <li><strong class="pname"><code>is_lazy</code></strong> (<code>boolean</code>) - True if the component can load previous datas, false if 
+          everything must be computed tought it has already been computed.</li>
+        <li><strong class="pname"><code>encoding</code></strong> (<code>string</code>) - The encoding of the files to pre-process.</li>
+        <li><strong class="pname"><code>tag_separator</code></strong> (<code>string</code>) - The symbol to use as a separator between a word and its POS tag.</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="encoding"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">encoding</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="keybench.pre_processor-pysrc.html#PreProcessorC.encoding">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Gives the encoding used by the pre-processor.</p>
+  <dl class="fields">
+    <dt>Returns: <code>string</code></dt>
+        <dd>The encoding of the files to pre-process.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="parse_file"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">parse_file</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">filepath</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="keybench.pre_processor-pysrc.html#PreProcessorC.parse_file">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Extract the title, the abstract and the body contained in a file.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>filepath</code></strong> (<code>string</code>) - The path of the file to analyse.</li>
+    </ul></dd>
+    <dt>Returns: <code>(string, string, string)</code></dt>
+        <dd>The title, the abstract and the body of the file's text.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="pos_tagging"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">pos_tagging</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">tokenized_sentences</span>,
+        <span class="sig-arg">tag_separator</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="keybench.pre_processor-pysrc.html#PreProcessorC.pos_tagging">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Takes a list of tokenized sentences and applies POS-tagging on 
+  each.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>tokenized_sentences</code></strong> (<code>list of string</code>) - The tokenized sentences to POS-tag.</li>
+    </ul></dd>
+    <dt>Returns: <code>list of string</code></dt>
+        <dd>A list of sentences which are POS-tagged.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="pre_process_file"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">pre_process_file</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">filepath</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="keybench.pre_processor-pysrc.html#PreProcessorC.pre_process_file">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Applies the three pre-processing steps.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>filepath</code></strong> (<code>string</code>) - The path of the file to pre-process.</li>
+    </ul></dd>
+    <dt>Returns: <code>PreProcessedFile</code></dt>
+        <dd>The pre-processed file.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="sentence_tokenization"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">sentence_tokenization</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">text</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="keybench.pre_processor-pysrc.html#PreProcessorC.sentence_tokenization">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Takes a raw text and split it into a list of sentences.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>text</code></strong> (<code>string</code>) - The raw text to pre-processed.</li>
+    </ul></dd>
+    <dt>Returns: <code>list of string</code></dt>
+        <dd>A list of sentences contained in the text.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_encoding"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_encoding</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">encoding</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="keybench.pre_processor-pysrc.html#PreProcessorC.set_encoding">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sets the encoding used by the pre-processor.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>encoding</code></strong> (<code>string</code>) - The encoding of the files to pre-process.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_tag_separator"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_tag_separator</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">tag_separator</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="keybench.pre_processor-pysrc.html#PreProcessorC.set_tag_separator">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sets the tag separator used for the POS tagging.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>tag_separator</code></strong> (<code>string</code>) - The symbol to use as a separator between a word and its tag.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="tag_separator"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">tag_separator</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="keybench.pre_processor-pysrc.html#PreProcessorC.tag_separator">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Gives the tag separator used for the POS tagging.</p>
+  <dl class="fields">
+    <dt>Returns: tag_separator:  <code>string</code></dt>
+        <dd>The symbol to use as a separator between a word and its tag.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="word_tokenization"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">word_tokenization</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">sentences</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="keybench.pre_processor-pysrc.html#PreProcessorC.word_tokenization">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Takes a list of sentences and applies word tokenize on each.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>sentences</code></strong> (<code>list of string</code>) - The sentences to tokenize.</li>
+    </ul></dd>
+    <dt>Returns: <code>list of string</code></dt>
+        <dd>A list of sentences which are tokenized.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="keybench-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Jan 22 19:02:18 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

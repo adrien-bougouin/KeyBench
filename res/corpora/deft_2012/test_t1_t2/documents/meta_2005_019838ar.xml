@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc id="0271">
+ <motscles>
+  <nombre>5</nombre>
+ </motscles>
+ <article>
+  <resume>
+   <p>Cette communication est l’oeuvre d’un praticien devenu enseignant, puis chercheur. Parce qu’il existe des traductions sans traducteurs et que les traducteurs se limitent de moins en moins à la traduction, nous pensons qu’une traductologie proactive doit choisir entre ces deux pôles et, en l’occurrence, se construire autour des problèmes concrets rencontrés par les traducteurs : comment s’agencent, pour les praticiens, les questions de la confiance, des différentiels de savoir, de l’erreur, de la transparence des textes. En assumant l’impureté consubstantielle à cette profession, on parviendra ainsi à une réflexion opératoire sur la mise en cycle des savoirs, l’hybridation et le dialogue des disciplines. Nous explorons, exemples à l’appui, deux de ces dialogues possibles entre, d’une part, la traduction pragmatique et, d’une part, la terminologie et narratologie. Familier des espaces liminaires, le traducteur est ainsi idéalement placé pour se livrer à un ensemble de raisonnements aux limites, qui pourront à bon droit sembler simplistes, mais dont le caractère opératoire est attesté par une pratique.</p>
+  </resume>
+  <corps>
+   <p>«&amp;#x00A0;Le cinéma est un art impur.&amp;#x00A0;» (André Bazin)</p>
+  <p>«&amp;#x00A0;En principe, n.importe quel genre peut s.introduire dans la structure d.un roman, et il n.est guère facile de</p>
+  <p>découvrir un seul genre qui n.ait été, un jour ou l.autre, incorporé par un auteur ou un autre.&amp;#x00A0;» (Mikhaïl Bakhtine,</p>
+  <p>1978, p. 141)</p>
+  <p>«&amp;#x00A0;Le gouvernement est l.émanation du peuple. Si le peuple est en désaccord avec le gouvernement, alors il faut</p>
+  <p>dissoudre le peuple et en élire un autre.&amp;#x00A0;» (Berthold Brecht1)</p>
+  <p>«&amp;#x00A0;La recherche, d.ailleurs, est-elle tenue de se traduire dans une pratique ?&amp;#x00A0;» (Meta, 50e anniversaire, appel à</p>
+  <p>communications)</p>
+  <p>Comme le cinéma, comme le roman, comme la politique, la traduction est une discipline impure, en</p>
+  <p>ceci qu.elle subit . ne serait-ce que par les textes dont elle peut se saisir . une influence sans limite</p>
+  <p>des autres disciplines, tout en amalgamant celles-ci. Il est donc méritoire mais délicat de vouloir en</p>
+  <p>élaborer une théorie&amp;#x00A0;: le saut de la traduction à la traductologie est périlleux. Ce n.est pas un hasard</p>
+  <p>si, historiquement, une partie non négligeable des écrits sur la traduction s.attachent en fait à</p>
+  <p>démontrer l.impossibilité de traduire2.</p>
+  <p>Vainement puisque, jour après jour, des traducteurs, de plus en plus nombreux, exercent</p>
+  <p>cette profession ; et beaucoup l.enseignent. Les uns comme les autres ont besoin d.outils pour</p>
+  <p>penser leur activité et pour transmettre leur savoir. Voilà, à notre sens, à quoi doit servir une</p>
+  <p>traductologie proactive, c.est-à-dire tournée vers l.avenir, volontariste, qui prenne le taureau par</p>
+  <p></p>
+  <p>Peut-on penser la traduction in abstracto ? Non, parce que cette discipline impure se déploie</p>
+  <p>dans trop de dimensions différentes&amp;#x00A0;: nous craignons qu.une théorie platonicienne de la traduction</p>
+  <p>ne résiste pas aux feux croisés des contre-exemples. Pour reprendre un concept poppérien, elle</p>
+  <p>serait certes réfutable, mais aussi constamment réfutée. Il nous faut donc une boussole, un élément</p>
+  <p>discriminant, pour tenter de mettre un semblant d.ordre dans ce chaos. Nous posons qu.il est</p>
+  <p>possible d.y parvenir en désaxant nos investigations de la traduction vers le(s) traducteur(s). Nous</p>
+  <p>estimons en effet qu.une traductologie proactive se construit à partir de cas et d.exemples concrets,</p>
+  <p>dont il s.agit d.extraire la logique profonde. Nous pensons, enfin, que cette traductologie devra</p>
+  <p>ensuite se replier sur la pratique, afin . au minimum . de permettre des traductions de qualité, mais</p>
+  <p>aussi de contribuer à fabriquer des traducteurs qui durent. Qui durent, tout d.abord, parce qu.ils</p>
+  <p>rendent des traductions qui fonctionnent ; qui durent, ensuite, parce qu.ils exercent ce métier avec</p>
+  <p>bonheur, ce qui leur donne la volonté de persévérer. La renonciation à une théorie abstraite</p>
+  <p>n.interdit pas de se fixer des enjeux ambitieux, dussent-ils sembler grandiloquents.</p>
+  <p></p>
+  <p>Pourquoi préférer, tout d.abord, les traducteurs à la traduction ? Parce qu.il y a de plus en plus de</p>
+  <p>traductions sans traducteur et de traducteurs qui réalisent plus que des traductions&amp;#x00A0;:</p>
+  <p>- D.un côté, combien de textes impliquant le passage d.une langue dans une autre sont publiés</p>
+  <p>chaque jour sans passer entre les mains expertes de traducteurs professionnels ? Journalistes,</p>
+  <p>attachés de presse, diplomates, patrons pressés&amp;#x00A0;: tous sont, à l.occasion, auteurs de traductions (pas</p>
+  <p>toujours présentées comme telles et dont la qualité est fort variable, mais là n.est pas notre propos).</p>
+  <p>Ajoutons à ce lot tout ce que l.on peut avoir l.idée de soumettre à la seule opération d.un logiciel de</p>
+  <p>traduction automatique, et l.on pourra en conclure que bien des traductions échappent à notre belle</p>
+  <p>profession.</p>
+  <p>- De l.autre, combien de traducteurs font aujourd.hui, dans l.exercice de leur métier, beaucoup plus</p>
+  <p>que de la traduction ? Mise en page, adaptation, localisation, révision, synthèse, corrections d.auteur,</p>
+  <p>lexicographie, balisage&amp;#x00A0;: être traducteur, aujourd.hui, cela suppose de disposer, au moins à l.état</p>
+  <p>latent, d.un éventail de connaissances fort larges, même si ces dernières n.auront pas à être utilisées</p>
+  <p>concrètement par tous. Certains deviendront des artisans, des orfèvres de la tournure ; d.autres</p>
+  <p>travailleront dans une logique industrielle, avec de tout autres impératifs de productivité ; d.autres,</p>
+  <p>encore, ne seront occupés qu.une partie de leur temps, voire pas du tout, par la traduction stricto</p>
+  <p></p>
+  <p>2003).</p>
+  <p>Les formations l.ont bien compris. Bien souvent3, la part des cours estampillés traduction</p>
+  <p>proprement dite s.y retrouve minoritaire en volume. En revanche, la préoccupation centrale demeure,</p>
+  <p>pour chacune des autres composantes, le traducteur en devenir&amp;#x00A0;: sa part à lui doit rester de 100 %.</p>
+  <p>Ce décalage croissant entre traductions et traducteurs est symptomatique d.un</p>
+  <p>fonctionnement plus général&amp;#x00A0;: nous restons des êtres du seuil, toujours à la limite entre langues,</p>
+  <p>cultures, domaines de spécialité., avec pour mission, paradoxalement, de produire des textes qui se</p>
+  <p>recoupent aussi parfaitement que possible avec l.original dans leur fonction ! La position en</p>
+  <p>question n.est pas toujours confortable, mais elle offre un point de vue imprenable sur le monde et</p>
+  <p>sur la langue&amp;#x00A0;: de quoi faire le bonheur d.un traducteur comme celui d.un traductologue.</p>
+  <p>Si nous pensons, donc, qu.il faut centrer nos réflexions sur le traducteur, c.est par respect</p>
+  <p>du principe de réalité, parce que ce personnage est immergé dans un univers certes incommode,</p>
+  <p>certes imparfait, certes critiquable, mais qui permet de trancher avec efficacité les questions sans fin</p>
+  <p>que ne peut manquer de poser une traduction envisagée hors de son contexte. Cet univers, c.est le</p>
+  <p>marché ; qu.on l.aime ou non.</p>
+  <p>Tout ce qui est validé ou refusé par le marché permet en effet de dessiner des démarches de</p>
+  <p>traduction et donc d.avancer vers une traductologie proactive. Un exemple&amp;#x00A0;: le 31 décembre 2004,</p>
+  <p>l.hebdomadaire allemand Die Zeit publie un (très) long article sur le tsunami qui vient de ravager</p>
+  <p>les côtes de l.océan Indien. À la fin d.un développement sur l.histoire des grandes catastrophes</p>
+  <p>naturelles, on y trouve cette phrase&amp;#x00A0;:</p>
+  <p>Im November 1755 war der Atlantik an der Reihe: Nach dem schweren Erdbeben von Lissabon, das Kleist</p>
+  <p>zu seiner Erzählung Das Erdbeben in Chili inspirierte, türmte sich das Wasser bis zu zehn Meter hoch auf.</p>
+  <p>Que faire de la référence à Kleist, qui ne dit pas grand chose même aux jeunes germanistes de l.an</p>
+  <p>2005 (un rapide sondage auprès d.étudiants nous l.a confirmé), sachant que le même tremblement</p>
+  <p>de terre de Lisbonne a inspiré, dans la sphère francophone, un de ses contes les plus fameux à un</p>
+  <p>certain François-Marie Arouet, plus connu sous le nom de Voltaire ? Comment trancher entre une</p>
+  <p>traduction conservant l.auteur allemand et une autre lui substituant une référence française ?</p>
+  <p>En novembre 1755, ce sont les côtes de l.Atlantique qui étaient frappées4&amp;#x00A0;: après le violent tremblement de</p>
+  <p>terre de Lisbonne, qui a inspiré à Heinrich von Kleist sa nouvelle Le tremblement de terre du Chili, les</p>
+  <p>vagues ont atteint dix mètres de hauteur.</p>
+  <p>En novembre 1755, ce sont les côtes de l.Atlantique qui étaient frappées&amp;#x00A0;: après le violent tremblement de</p>
+  <p>terre de Lisbonne, qui a inspiré à Voltaire son célèbre Candide, les vagues ont atteint dix mètres de hauteur.</p>
+  <p>Dans un exercice de traduction en salle blanche, l.une comme l.autre de ces solutions pourrait être</p>
+  <p>valide&amp;#x00A0;: on ne pourrait alors trancher qu.en fonction de la subjectivité du relecteur. Dans le monde</p>
+  <p>réel, la situation serait tout autre&amp;#x00A0;:</p>
+  <p>- Si cette traduction était destinée à faire connaître à un lectorat francophone (pour l.hebdomadaire</p>
+  <p>français Courrier international, par exemple) la vision qu.a un organe de presse allemand de la</p>
+  <p>catastrophe du 26 décembre 2004, alors il faudrait garder la référence à Kleist (en ajoutant, bien sûr,</p>
+  <p>le prénom et la particule, pour faciliter l.identification).</p>
+  <p>- Si elle était destinée à une publication sur les catastrophes naturelles en général, quelle que soit</p>
+  <p>l.origine des textes, alors il serait préférable d.adapter en fonction des connaissances supposées de</p>
+  <p>notre lectorat, et donc de remplacer Kleist par Voltaire. (La traduction étant le royaume des</p>
+  <p>exceptions, on peut aussi imaginer d.autres variantes, consistant notamment et prudemment à faire</p>
+  <p>référence aux deux auteurs.). </p>
+  <p>L.exemple est banal, certes. Mais il rappelle qu.on ne peut utilement réfléchir qu.à partir des cas</p>
+  <p>concrets, en nous servant de l.impureté consubstantielle à la traduction, des multiples attentes</p>
+  <p>adressées aux traducteurs, comme d.autant d.armes pour mieux comprendre la nature profonde de</p>
+  <p>cette discipline.</p>
+  <p></p>
+  <p>Restons donc pour un temps dans l.empirisme. Voici quelques-unes de ces questions qui</p>
+  <p>déterminent au quotidien les libertés et les contraintes du traducteur et sur lesquelles nous avons,</p>
+  <p>dans d.autres publications, commencé de réfléchir&amp;#x00A0;:</p>
+  <p>- Les différentiels de savoirs&amp;#x00A0;: la traduction n.étant pas un acte gratuit, si on me confie un texte,</p>
+  <p>c.est parce qu.il y a, quelque part, quelqu.un qui ignore quelque chose. Mais moi-même, au départ,</p>
+  <p>je suis encore plus ignorant que ce destinataire. Quelle est, alors, l.étendue de ces méconnaissances</p>
+  <p>respectives ? Et comment faire pour me hisser à un niveau de savoir qui me permette d.annuler ce</p>
+  <p>différentiel, pour faire en sorte que l.émetteur et le destinataire aient l.impression que je ne suis pas</p>
+  <p>là ?</p>
+  <p>- La confiance&amp;#x00A0;: quels procédés rhétoriques vais-je pouvoir utiliser pour que mon texte, in fine,</p>
+  <p>ressemble à une traduction de bon aloi, c.est-à-dire pour qu.il ne ressemble pas à une traduction (ce</p>
+  <p>qui, au passage, en dit long sur la vision que le monde se fait de notre profession) ? Au-delà, quelles</p>
+  <p>stratégies vais-je pouvoir mettre en .uvre pour que mes interlocuteurs aient confiance dans mes</p>
+  <p>qualités de traducteur ? Sans oublier, évidemment, la problématique et indispensable confiance du</p>
+  <p>traducteur en lui-même.</p>
+  <p>- L.erreur&amp;#x00A0;: on le sait, une traduction, pour le commun des mortels, c.est forcément moins bien</p>
+  <p>qu.un original parce que les traducteurs ne comprennent rien, et surtout parce qu.ils se trompent.</p>
+  <p>Nous, praticiens, savons que la réalité est plus nuancée. Nous savons que nous n.avons pas le</p>
+  <p>monopole des bévues, et nous devons nous débrouiller avec les erreurs . souvent bénignes, parfois</p>
+  <p>grossières, mais presque toujours présentes . de nos textes initiaux. Mais qu.en faire, de ces</p>
+  <p>satanés accrocs à la réalité des choses telle que nous la percevons ? Les conserver, les corriger, les</p>
+  <p>camoufler, ou au contraire les mettre en exergue ? Là encore, il n.y a pas de réponse unique, mais</p>
+  <p>un éventail de possibilités, et un choix à opérer en fonction de la situation de communication.</p>
+  <p>- La transparence&amp;#x00A0;: si j.applique de manière rigide les principes qui gouvernent a priori une</p>
+  <p>traduction pragmatique de qualité, c.est-à-dire en clarifiant ce qui est obscur, est-ce que cela ne va</p>
+  <p>pas, dans certains cas, desservir l.intention prêtée au texte ? Ne faut-il pas laisser à certains écrits .</p>
+  <p>en particulier ceux qui ont pour visée de faire cohabiter des subjectivités conflictuelles, comme les</p>
+  <p>contrats et traités . leur part de mystère si l.on veut qu.ils produisent l.effet qu.on attend d.eux ?</p>
+  <p>- La question des images&amp;#x00A0;: en traduction pragmatique, j.ai une grande liberté quant aux outils</p>
+  <p>expressifs à employer dans mon texte d.arrivée&amp;#x00A0;: à la différence de la traduction littéraire, je ne suis</p>
+  <p>pas tenu par les choix stylistiques de l.auteur initial. Je peux donc, a priori ajouter, retirer ou</p>
+  <p>modifier des images (métaphores, clichés, etc.). Mais en fonction de quoi ? À quel endroit, pour</p>
+  <p>quel type de demandeur et de lecteur aurai-je raison de le faire ? Et où faudra-t-il m.en abstenir ?</p>
+  <p>Ajoutons à cette première problématique celle, encore plus riche, des métaphores de référence (ou</p>
+  <p>«&amp;#x00A0;métaphores conceptuelles&amp;#x00A0;», pour reprendre le terme de Lakoff et Johnson)&amp;#x00A0;: comment</p>
+  <p>s.organise, pour le traducteur, la circulation des images d.une discipline à l.autre ? Comment s.en</p>
+  <p>servir pour aborder une technique qui nous est inconnue ? Quels sont les pièges d.une telle</p>
+  <p>démarche ?.</p>
+  <p>Aussi diverses soient-elles, ces interrogations possèdent une structure commune. À l.image,</p>
+  <p>justement, de ces métaphores de référence, toutes se rencontrent dans l.agencement des textes, des</p>
+  <p>domaines de spécialité comme de la profession, ce qui nous donne un puissant levier pour y</p>
+  <p>répondre, puisqu.une solution valide dans un contexte X pourra, logiquement, être transposée dans</p>
+  <p>le contexte Y. Si la diversité nous submerge, c.est parce que nous ne discernons pas les</p>
+  <p>ressemblances de fond qui permettraient de l.organiser. Ce qu.il nous faut, c.est donc une</p>
+  <p>démarche systémique, qui cherche à dégager des invariants pour surmonter des difficultés</p>
+  <p>différentes dans leurs natures et leurs champs d.émergence.</p>
+  <p>Parce que le traducteur est un être du passage, il est idéalement placé pour opérer cette</p>
+  <p>«&amp;#x00A0;mise en cycle des savoirs&amp;#x00A0;» (Castoriadis, 1975, passim). Ce qui incombe, pensons-nous, à une</p>
+  <p>traductologie proactive, c.est notamment de penser une telle approche encyclopédique, dans laquelle</p>
+  <p>il ne s.agit pas de tout connaître . ne rêvons pas . mais de faire que nos connaissances se</p>
+  <p>répondent et s.éclairent mutuellement, pour faciliter notre appréhension de l.inconnu. Après tout,</p>
+  <p>c.est grâce aux mêmes mécanismes de pensée que je sais me repérer dans l.espace et dans le temps,</p>
+  <p>me situer à l.intérieur d.un texte et d.un domaine de spécialité, me positionner face à la pensée</p>
+  <p>d.un auteur et aux attentes d.un demandeur. Prendre conscience de l.unicité profonde de ces</p>
+  <p>savoirs de base, c.est donc se donner les moyens d.aborder la diversité qui fait l.intérêt de cette</p>
+  <p>profession.</p>
+  <p>Il faut pour cela amener à se croiser des disciplines qui, laissées à elles-mêmes, ne se</p>
+  <p>rencontreraient pas. Pour tenter d.esquisser des pistes dans cette direction, attardons-nous plus</p>
+  <p>précisément sur deux nouveaux problèmes concrets de traducteurs mettant en .uvre une telle</p>
+  <p>convergence des savoirs&amp;#x00A0;: celui d.un rapprochement entre les activités respectives des traducteurs et</p>
+  <p>des terminologues et celui de l.apport d.une étude des voix et points de vue à la pratique de la</p>
+  <p>traduction technique.</p>
+  <p></p>
+  <p>Histoire vécue&amp;#x00A0;: dans la publication phare d.une organisation internationale se trouve un encadré sur</p>
+  <p>la relation entre respect des droits de l.homme et lutte contre le sida (UNDP, 2000, p. 165). Dans</p>
+  <p>l.original anglais, reproduit ci-dessous (à l.exception de quelques phrases hors de notre propos), le</p>
+  <p>terme HIV/AIDS revient à 15 reprises sur 365 mots. Il faut y ajouter un HIV solitaire, ainsi qu.un</p>
+  <p>UNAIDS.</p>
+  <p></p>
+  <p>Protection and fulfilment of human rights is essential for an effective response to HIV/AIDS.</p>
+  <p>Respect for human rights helps to reduce vulnerability to HIV/AIDS, to ensure that those living</p>
+  <p>with or affected by HIV/AIDS live a life of dignity without discrimination and to alleviate the</p>
+  <p>personal and societal impact of HIV infection. Conversely, violations of human rights are primary</p>
+  <p>forces in the spread of HIV/AIDS.</p>
+  <p>Disrespect for civil and political rights makes society-wide mobilization against HIV/AIDS and</p>
+  <p>open dialogue about prevention impossible. And poverty and deprivation contribute to the spread of</p>
+  <p>HIV/AIDS. Where people lack access to information about the risks of HIV/AIDS and are denied</p>
+  <p>adequate education, prevention efforts are bound to fail and the epidemic will spread more quickly.</p>
+  <p>HIV/AIDS is also likely to spread more quickly in countries where the right to health is neglected.</p>
+  <p>[.] Discrimination against people affected by HIV/AIDS leads to shame, silence and denial,</p>
+  <p>fuelling the epidemic.</p>
+  <p>In 1998 the United Nations High Commissioner for Human Rights and the Joint United</p>
+  <p>Nations Programme on HIV/AIDS (UNAIDS) together issued the International Guidelines on</p>
+  <p></p>
+  <p>rights and public health, emphasizing the synergy between the two, and offer concrete measures for</p>
+  <p>protecting human rights in order to deal effectively with HIV/AIDS. [.] And supporting increased</p>
+  <p>private sector and community participation in the response to HIV/AIDS.</p>
+  <p>[.] South Africa has set a good example. Its human rights commission has endorsed the</p>
+  <p>guidelines and recommended that the parliament adopt a charter on HIV/AIDS. [.]</p>
+  <p>Que faire de cette accumulation de répétitions ? Une réflexion rapide sur la nature du texte et l.effet</p>
+  <p>recherché nous amènera rapidement à éliminer l.hypothèse de l.intentionnalité (le contre-exemple,</p>
+  <p>en littérature, serait fourni par Milan Kundera dans sa postface à la retraduction de La Plaisanterie</p>
+  <p>[Kundera, 1985, pp. 459-462]). Pour ne pas endormir notre lecteur, nous serons donc contraints de</p>
+  <p>varier nos formulations, ce qui nous amènera à nous poser les questions suivantes&amp;#x00A0;:</p>
+  <p>- Quels sont les endroits où nous devons absolument conserver ces termes ?</p>
+  <p>* À l.orée du texte, pour que le lecteur sache de quoi nous parlons. Et il importera de</p>
+  <p>répéter au premier paragraphe ce qui figure dans le titre&amp;#x00A0;: c.est une règle de composition</p>
+  <p>des documents.</p>
+  <p>* Dans les appellations officielles.</p>
+  <p>- Quels hypéronymes envisager ?</p>
+  <p>* Épidémie, pandémie, fléau, mal, menace, maladie, cause de mortalité, risque sanitaire.</p>
+  <p>- Comment faire éclater les éléments de sens ? (Quels liens partitifs envisager ?) Un diplôme</p>
+  <p>universitaire de troisième cycle n.est pas indispensable pour saisir que le terme officiel VIH/sida</p>
+  <p>par lequel l.ONU cherche à rendre compte de la totalité du phénomène et qui s.est, pour cette</p>
+  <p>raison, multiplié dans les textes internationaux, se décompose en deux éléments de sens, unis par</p>
+  <p>une relation à la fois temporelle et causale&amp;#x00A0;:</p>
+  <p>* VIH donnera virus, infection, séropositivité, séropositif, contamination, propagation,</p>
+  <p>etc.</p>
+  <p>* sida (en minuscules en français) se déclinera en maladie déclarée, déclarée, déclaration,</p>
+  <p>malades, etc.</p>
+  <p>Cet ensemble s.enrichira ensuite d.un nombre conséquent de collocations&amp;#x00A0;:</p>
+  <p>* côté VIH&amp;#x00A0;: infecter, contaminer, contracter, porteur du virus, personnes vivant avec le</p>
+  <p>virus, notification</p>
+  <p>* côté sida&amp;#x00A0;: déclarer, être atteint, mort, décès, ravages, catastrophe, crise (sanitaire).</p>
+  <p>* plus généralement&amp;#x00A0;: personnes touchées, progression, diffusion, croissance, progression,</p>
+  <p>propagation, prévention, prophylaxie, endiguer, maîtriser, mettre un frein, combattre,</p>
+  <p>contenir.</p>
+  <p>Cette liste est bien sûr extrêmement sommaire et empirique. Cependant, elle met en .uvre les</p>
+  <p>mêmes outils que nos étudiants lorsqu.ils rédigent un mémoire terminologique, et c.est seulement</p>
+  <p>parce que notre traduction ne nous demande pas d.aller plus loin que nous ne sommes pas rentrés,</p>
+  <p>par exemple, dans les arcanes médicales de la question (mais qui peut le plus peut le moins).</p>
+  <p>Néanmoins, nous aurons ainsi pu démontrer à nos étudiants que les mécanismes de pensée sont les</p>
+  <p>mêmes et qu.une terminologie appropriée peut absolument se mettre au service d.une traduction</p>
+  <p>correcte.</p>
+  <p>À partir de là, on peut passer à l.exercice de style consistant à n.utiliser le terme officiel VIH/sida</p>
+  <p>(ou ses deux déclinaisons) que là où nous avons vu qu.il était indispensable&amp;#x00A0;:</p>
+  <p>Encadré 2.5</p>
+  <p></p>
+  <p>La protection et la mise en .uvre des droits de l.homme sont essentielles à toute action contre le</p>
+  <p>VIH et le sida. Elles contribuent à réduire la vulnérabilité à ce fléau, à garantir aux séropositifs et</p>
+  <p>aux malades une vie digne et exempte de discriminations, et à atténuer l.impact de la menace sur les</p>
+  <p>individus et la société. A contrario, les violations des droits de l.homme sont de puissants facteurs</p>
+  <p>de diffusion du virus.</p>
+  <p>Sans respect des droits civils et politiques, la mobilisation à grande échelle et l.ouverture du</p>
+  <p>dialogue sur la prévention deviennent impossibles. La pauvreté, sous ses multiples formes,</p>
+  <p>contribue en outre au progrès du mal. Faute d.informations sur les risques de contamination et</p>
+  <p>d.une éducation adéquate, les efforts de prophylaxie sont voués à l.échec et la propagation ne peut</p>
+  <p>que s.accélérer, a fortiori dans les pays où le droit à la santé est ignoré. [.] Enfin, la</p>
+  <p>discrimination envers les personnes touchées suscite la honte, le silence et le rejet, qui favorisent à</p>
+  <p>leur tour les nouvelles infections.</p>
+  <p>En 1988, le Haut commissaire des Nations Unies5 aux droits de l.homme et le Programme</p>
+  <p>commun coparrainé par les Nations Unies sur le VIH et le sida (ONUSIDA) ont émis</p>
+  <p>conjointement des Directives internationales concernant le VIH/sida et les droits de l.homme. Ces</p>
+  <p>textes constituent un cadre pour la double sauvegarde de ces droits et de la santé publique. Ils</p>
+  <p>mettent l.accent sur la synergie entre ces deux aspects et proposent des mesures concrètes pour</p>
+  <p>protéger les droits de l.homme dans l.optique d.une action efficace contre la pandémie. [.] Enfin,</p>
+  <p>ils recommandent une participation accrue du privé et de la collectivité à la lutte contre cette</p>
+  <p>catastrophe sanitaire.</p>
+  <p>[.] L.Afrique du Sud a déjà montré l.exemple, sa commission pour les droits de l.homme ayant</p>
+  <p>adopté ces textes et recommandé l.adoption par le parlement d.une charte sur le VIH/sida. [.]</p>
+  <p>De 16 mentions des mots (ou termes, nous laissons ce débat aux spécialistes) HIV et AIDS, accolés</p>
+  <p>ou séparés dans l.original, nous sommes passés à 6 et 5, respectivement, pour leurs équivalents en</p>
+  <p>français. Il n.aura pas échappé à un observateur attentif qu.un autre terme revient de multiples fois</p>
+  <p>dans le même temps&amp;#x00A0;: human rights. Et cette fois, les synonymes sont moindres. On aurait pu</p>
+  <p>envisager droits humains ou droits de la personne humaine, mais nous avons fait le choix</p>
+  <p>stylistique de n.utiliser ici qu.un seul terme&amp;#x00A0;: c.est celui-là qu.il faut marteler. Pour autant, nous</p>
+  <p>avons fait passer sa mention de 13 à 8 occurrences dans le texte complet (6 dans celle reproduite</p>
+  <p>ici).</p>
+  <p>Rappelons enfin qu.il ne s.agit que d.un exercice de style&amp;#x00A0;: cette traduction n.est pas</p>
+  <p>forcément la meilleure possible sur le plan professionnel6. Elle a en revanche une utilité didactique&amp;#x00A0;:</p>
+  <p>celle de montrer concrètement que deux disciplines . terminologie et traduction . qui pourraient</p>
+  <p>avoir tendance à se regarder en chiens de faïence utilisent les mêmes outils et ont tout à gagner à</p>
+  <p>mieux se connaître. Il n.est pas interdit de travailler en salle blanche dès lors que la visée est</p>
+  <p>concrète.</p>
+  <p></p>
+  <p>Dur métier que celui de publicitaire, qui aboutit parfois à produire des textes de pur compromis</p>
+  <p>entre instances aux intérêts divergents. Prenons l.exemple d.un encart, paru en 1999 dans une</p>
+  <p>revue allemande d.architecture et d.urbanisme et vantant un appareil destiné à éloigner les pigeons</p>
+  <p>et autres volatiles au moyen d.ultrasons. Dur métier, donc, car comme le montre une lecture</p>
+  <p>attentive (celle qui doit précéder une traduction), le produit en question semble n.avoir qu.une</p>
+  <p>efficacité très relative. Pourtant, il faut le faire vendre, sans pour autant raconter n.importe quoi, car</p>
+  <p>les publicités sont vérifiées, et un procès est vite arrivé. Nous avons là les ingrédients d.un</p>
+  <p>dispositif narratif simple, mais essentiel à saisir pour le traducteur hypothétique&amp;#x00A0;: un vendeur</p>
+  <p>présente le produit sous un jour évidemment flatteur, un avocat parsème cet argumentaire de bémols</p>
+  <p>pour prémunir le fournisseur du même produit contre les actions en justice.</p>
+  <p>Il s.agit donc de trouver des arguments convaincants, mais en même temps de tempérer ces</p>
+  <p>derniers afin de mettre le fabricant à l.abri d.éventuelles poursuites pour publicité mensongère.</p>
+  <p>D.où un rythme binaire, qui fera alterner proclamations et modérations&amp;#x00A0;: deux pas en avant, un pas</p>
+  <p>en arrière. Comment cela fonctionne-t-il sur quelques phrases7 ?</p>
+  <p>Das Wirkungsspektrum dieser Systeme beträgt etwa 90% nach einer Einwirkungszeit von 2-3 Wochen</p>
+  <p>(Zermürbungseffekt). Dabei ist zu beachten, daß das Anfliegen und kurzzeitiges Absitzen von Tauben nicht</p>
+  <p>immer vermieden werden kann. Jedoch wird das Einnisten und Kolonie bilden erfolgreich verhindert. [...]</p>
+  <p>Die Reichweite der einzelnen Resonatoren beträgt ca. 10 Meter und die Abstrahlcharakteristik erfordert</p>
+  <p>eine Anbringung in 5-8 Meter Abstand nebeneinander, um eine vollflächige Abdeckung zu erreichen.</p>
+  <p></p>
+  <p>- Notre appareil est efficace à 90 % ! (Das Wirkungsspektrum dieser Systeme beträgt etwa</p>
+  <p></p>
+  <p></p>
+  <p>- À peu près 90 % («&amp;#x00A0;etwa&amp;#x00A0;»), ce qui n.est pas tout à fait pareil&amp;#x00A0;: cela peut très bien être 85, car dans</p>
+  <p>ces cas là, les corrections se font plus souvent à la baisse qu.à la hausse.</p>
+  <p>- De plus, il faut deux à trois semaines . surcroît d.imprécision . pour en arriver là (nach einer</p>
+  <p></p>
+  <p>- Et encore, on ne peut pas toujours («&amp;#x00A0;nicht immer&amp;#x00A0;») empêcher qu.un pigeon égaré, intrépide ou</p>
+  <p>atteint de surdité passe par là, et vienne se poser pour un court laps de temps sur l.endroit protégé.</p>
+  <p></p>
+  <p>- Admettons, mais nous avons de quoi remotiver l.acheteur potentiel&amp;#x00A0;: «&amp;#x00A0;Jedoch wird das Einnisten</p>
+  <p></p>
+  <p></p>
+  <p>- En cas de litige sur l.efficacité, le fabricant est couvert&amp;#x00A0;: s.il reste deux pigeons sur dix (ce qui en</p>
+  <p>valeur absolue peut faire beaucoup) trois semaines après l.implantation du système, la publicité ne</p>
+  <p>peut pas être considérée comme mensongère. L.acheteur sera-t-il pour autant satisfait ? On peut se</p>
+  <p>le demander.</p>
+  <p></p>
+  <p>- La portée de chaque résonateur (les points d.émission des ultrasons) atteint environ (ca.,</p>
+  <p>abréviation de circa) 10 mètres&amp;#x00A0;: ce n.est pas rien.</p>
+  <p></p>
+  <p>- Oui, mais, d.une part, cet environ, là encore, est bien pratique&amp;#x00A0;: c.est plus probablement 9 que 11</p>
+  <p>et, d.autre part, c.est pour ajouter aussitôt que mieux vaut espacer ces résonateurs de 5 à 8 mètres</p>
+  <p>(charmante hésitation, là encore&amp;#x00A0;: la marge n.est jamais que de 60 %, pour un dispositif que le texte</p>
+  <p>décrit par ailleurs comme «&amp;#x00A0;à la pointe de la technologie&amp;#x00A0;».). Il faudra donc, dans le pire des cas,</p>
+  <p>acheter deux fois plus de résonateurs.</p>
+  <p>En somme, notre avocat retranche systématiquement une part à ce que son compère vendeur vient</p>
+  <p>d.affirmer. À l.évidence, ce dialogue est un peu trop sommaire&amp;#x00A0;: qui voudrait acheter dans ces</p>
+  <p>conditions ? Pour masquer cette opposition, notre texte va donc faire appel à une troisième stratégie</p>
+  <p>d.écriture&amp;#x00A0;: la complexification par emploi de termes techniques hypertrophiés (alors que le</p>
+  <p>fonctionnement de notre appareil est relativement simple). Affirmer quelque chose de peu</p>
+  <p>compréhensible, c.est, ici, proclamer sa maîtrise des processus technologiques et renvoyer le</p>
+  <p>destinataire du message à sa propre ignorance. Ce faisant, on ne s.adresse plus à la raison, mais à</p>
+  <p>l.émotion&amp;#x00A0;: puisqu.on vous dit que ça marche ! On aura ainsi rendu plus discret le balancement</p>
+  <p>entre vendeur et avocat qui structure notre texte.</p>
+  <p>Le traducteur doit être pleinement conscient de cette polyphonie avant d.écrire le premier</p>
+  <p>mot de la version française. Et cela d.autant plus que ce jeu des voix narratives, c.est en fait à lui de</p>
+  <p>l.organiser. Nous avons parlé d.un vendeur, d.un avocat, d.un technicien, tous trois coiffés par un</p>
+  <p>publicitaire, mais peu importe que de tels personnages aient effectivement participé à l.élaboration</p>
+  <p>de notre texte. Puisque notre souci unique est la réception du texte d.arrivée, les circonstances</p>
+  <p>réelles de la rédaction de l.original nous sont, ici, indifférentes. Nous devons faire comme si, c.est-</p>
+  <p>à-dire imaginer ce texte tel qu.il aurait été écrit par un être parfait, maîtrisant pleinement son objectif</p>
+  <p>et ses moyens d.expression, et opérer à partir de ce texte idéal, .uvre de ce que nous appellerons</p>
+  <p>un agent rationnel (voir Froeliger, 2004). Ce n.est pas la trace (les suites de caractères que nous</p>
+  <p>avons sous les yeux) que l.on traduit, mais l.intention, c.est-à-dire un mélange entre ce que l.auteur</p>
+  <p>aimerait avoir écrit et ce que le destinataire attend, le tout médiatisé par notre propre regard et notre</p>
+  <p>propre plume. Le traducteur pragmatique est donc un marionnettiste&amp;#x00A0;: armé d.un original souvent</p>
+  <p>bancal et en tout cas imparfait, il va susciter un dispositif narratif comportant un auteur imaginaire,</p>
+  <p>reflété dans le regard d.un lectorat spécifique, et se positionner en fonction de cet appareil.</p>
+  <p>Une connaissance de base de la narratologie (Booth, 1961, Bakhtine, 1978, Genette, 1972,</p>
+  <p>notamment) l.y aidera considérablement. Ces éléments, on les acquiert plus souvent dans les</p>
+  <p>formations littéraires que dans les cursus de traduction pragmatique. Là encore, une traductologie</p>
+  <p>proactive pourra utilement en dégager l.intérêt pour notre discipline, afin d.en préciser les modalités</p>
+  <p>dans un sens qui soit opératoire pour les traducteurs.</p>
+  <p>Narratologie et traduction, terminologie et traduction&amp;#x00A0;: nous sommes restés, dans ces deux</p>
+  <p>exemples, dans une relation bilatérale. La tâche, en réalité, est bien plus complexe&amp;#x00A0;: c.est idéalement</p>
+  <p>avec toutes les matières qu.il faut la mener à bien. Elle nécessitera de se poser toujours la même</p>
+  <p>question&amp;#x00A0;: en quoi tel aspect du savoir humain est-il utile au traducteur, et comment le faire</p>
+  <p>comprendre à ce dernier ?</p>
+  <p>Nous pensons donc que faire progresser une traductologie sur la voie de la pure traduction</p>
+  <p>peut certes, d.une part, aboutir à de très pures et très brillantes constructions intellectuelles, comme</p>
+  <p>celle esquissée par Rajendra Singh (2005) dans ce même volume et, d.autre part, permettre de</p>
+  <p>rendre compte du phénomène passionnant des traductions sans traducteurs (dans le domaine</p>
+  <p>juridique, par exemple), mais qu.il est plus fécond, pour une traductologie proactive, de procéder</p>
+  <p>d.abord à un recentrage sur le(s) traducteur(s). C.est la voie de l.impureté, de l.hybridation, du</p>
+  <p>dialogue. C.est la voix d.une pratique qui vient irriguer un enseignement et une recherche.</p>
+  <p>Aboutira-t-on ainsi à une théorie unifiée de notre discipline, et celle-ci doit-elle être un objectif ?</p>
+  <p>Nous pensons qu.il est plus urgent et plus opératoire de dresser une taxinomie des manières de</p>
+  <p>traduire et des problématiques rencontrées par les traducteurs. On peut ainsi espérer obtenir un</p>
+  <p>ensemble de micro-modèles vérifiés par les faits, en attendant plus.</p>
+  <p>Dans un débat qui n.est pas neuf, il est clair que privilégier ainsi la perspective du traducteur</p>
+  <p>(des traducteurs) sur celle de la traduction aboutit à affirmer la primauté de l.intention sur le sens.</p>
+  <p>Dans un tel schéma, celui-ci n.est plus un concept abstrait, platonicien, mais au contraire le fruit</p>
+  <p>d.une négociation ; l.agent primordial de cette négociation est un traducteur conscient de sa</p>
+  <p>mission ; et le foyer de cette négociation, c.est la langue, une langue qui n.appartient à personne en</p>
+  <p>propre (voir Castoriadis, 1975, pp. 416-147, au sujet de Lacan), mais qui est au contraire la</p>
+  <p>propriété de tous. En plaçant le traducteur au c.ur de ce processus et de nos réflexions, on met</p>
+  <p>donc en avant la nature essentiellement démocratique de notre profession&amp;#x00A0;: traduire, c.est faire</p>
+  <p>dialoguer et converger des textes, des langues, des corps de métier, etc. Encore une évidence. Mais</p>
+  <p>vouloir contribuer à produire une traductologie utile à partir des pratiques nous expose, à vrai dire, à</p>
+  <p>proférer de telles évidences. Le souci premier d.un traducteur professionnel n.étant pas de</p>
+  <p>s.interroger sur ses présupposés, mais de rendre dans les temps un texte acceptable, il saura faire,</p>
+  <p>mais pas forcément dire. D.où le risque de la banalité lorsqu.il en vient à réfléchir sur sa pratique.</p>
+  <p>De même que les auteurs de traductions qui ne sont pas eux-mêmes traducteurs ont souvent une</p>
+  <p>attitude naïve face au langage, les chercheurs qui viennent de la pratique, via éventuellement,</p>
+  <p>l.enseignement de cette pratique, peuvent, à bon droit, paraître naïfs dans leur approche de la</p>
+  <p>recherche. Cette naïveté est aussi une source d.énergie, car elle crée un différentiel, une tension entre</p>
+  <p>des champs qui ne peuvent, à leur tour, que s.enrichir en convergeant les uns avec les autres, ce qui</p>
+  <p>passe notamment par un décloisonnement de ces différents champs d.activité, et en particulier sans</p>
+  <p>doute par des contacts plus étroits entre recherche et formation continue. Les traducteurs peuvent et</p>
+  <p>doivent passer du faire au dire ; la traductologie, du dire au faire. À la question, que nous espérons</p>
+  <p>ironique, posée par l.appel à communications de ces cinquante ans de Meta, «&amp;#x00A0;La recherche,</p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p>1. Ce syllogisme grinçant et évidemment ironique a été formulé à la suite des émeutes sanglantes du 17 novembre</p>
+  <p>1953, en République démocratique allemande.</p>
+  <p>2. Voir tout le premier chapitre de Mounin, 1955, pp. 7-29.</p>
+  <p>3. Voir par exemple, pour la France, la maquette du master professionnel ILTS, de l.Université Paris 7 . Denis</p>
+  <p>Diderot&amp;#x00A0;: https://www.eila.jussieu.fr/enseignement/lea/master/ILTS-CDMM/</p>
+  <p>4. On ne peut tout de même pas traduire littéralement le début, sauf à sombrer, c.est le cas de le dire, dans un humour</p>
+  <p>involontaire qui serait, ici, spécialement macabre&amp;#x00A0;: «&amp;#x00A0;c.était au tour de l.Atlantique&amp;#x00A0;».</p>
+  <p>5. Ce U majuscule est contraire aux règles typographiques, mais exigé par l.ONU pour les documents qui portent</p>
+  <p>son estampille&amp;#x00A0;: là aussi, nous avons une source intéressante de réflexion.</p>
+  <p>6. Voir le site http://www.undp.org/hdr2000/home-fr.html pour la traduction française publiée, réalisée par la société</p>
+  <p>Architexte, à Paris.</p>
+  <p>7. Une analyse beaucoup plus détaillée du texte complet figure à l.adresse http://www.eila.jussieu.fr/~nf/recherche/</p>
+   </corps>
+ </article>
+</doc>

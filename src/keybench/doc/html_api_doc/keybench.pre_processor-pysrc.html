@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>keybench.pre_processor</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="keybench-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="keybench-module.html">Package&nbsp;keybench</a> ::
+        Module&nbsp;pre_processor
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="keybench.pre_processor-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="keybench.pre_processor-module.html">Module keybench.pre_processor</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># -*- encoding: utf-8 -*-</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module keybench.benchmark_component=keybench.benchmark_component-module.html"><a title="keybench.benchmark_component" class="py-name" href="#" onclick="return doclink('link-0', 'benchmark_component', 'link-0');">benchmark_component</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Class keybench.benchmark_component.BenchmarkComponent=keybench.benchmark_component.BenchmarkComponent-class.html"><a title="keybench.benchmark_component.BenchmarkComponent" class="py-name" href="#" onclick="return doclink('link-1', 'BenchmarkComponent', 'link-1');">BenchmarkComponent</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">exceptions</tt> <tt class="py-keyword">import</tt> <tt class="py-name">NotImplementedError</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Module keybench.pre_processed_file=keybench.pre_processed_file-module.html"><a title="keybench.pre_processed_file" class="py-name" href="#" onclick="return doclink('link-2', 'pre_processed_file', 'link-2');">pre_processed_file</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class keybench.pre_processed_file.PreProcessedFile=keybench.pre_processed_file.PreProcessedFile-class.html"><a title="keybench.pre_processed_file.PreProcessedFile" class="py-name" href="#" onclick="return doclink('link-3', 'PreProcessedFile', 'link-3');">PreProcessedFile</a></tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"> </tt>
+<a name="PreProcessorC"></a><div id="PreProcessorC-def"><a name="L8"></a><tt class="py-lineno">  8</tt> <a class="py-toggle" href="#" id="PreProcessorC-toggle" onclick="return toggle('PreProcessorC');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="keybench.pre_processor.PreProcessorC-class.html">PreProcessorC</a><tt class="py-op">(</tt><tt class="py-base-class">BenchmarkComponent</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PreProcessorC-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="PreProcessorC-expanded"><a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line">  <tt class="py-docstring">"""</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">  Component responsible of the document pre-processing. It pre-processed files</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">  in three steps:</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">    1. Splitting of the text into sentences</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">    2. Word tokenization of the sentences</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">    3. Part of Speech tagging of the sentences' words</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"> </tt>
+<a name="PreProcessorC.__init__"></a><div id="PreProcessorC.__init__-def"><a name="L17"></a><tt class="py-lineno"> 17</tt> <a class="py-toggle" href="#" id="PreProcessorC.__init__-toggle" onclick="return toggle('PreProcessorC.__init__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="keybench.pre_processor.PreProcessorC-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">,</tt> <tt class="py-param">is_lazy</tt><tt class="py-op">,</tt> <tt class="py-param">encoding</tt><tt class="py-op">,</tt> <tt class="py-param">tag_separator</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PreProcessorC.__init__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PreProcessorC.__init__-expanded"><a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">    Constructor of the component.</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">    @param  name:           The name of the pre-processor.</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring">    @type   name:           C{string}</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">    @param  is_lazy:        True if the component can load previous datas, false</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring">                            if everything must be computed tought it has already</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">                            been computed.</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">    @type   is_lazy:        C{boolean}</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">    @param  encoding:       The encoding of the files to pre-process.</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">    @type   encoding:       C{string}</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring">    @param  tag_separator:  The symbol to use as a separator between a word and</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">                            its POS tag.</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring">    @type   tag_separator:  C{string}</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">    <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-4" class="py-name" targets="Class keybench.pre_processor.PreProcessorC=keybench.pre_processor.PreProcessorC-class.html"><a title="keybench.pre_processor.PreProcessorC" class="py-name" href="#" onclick="return doclink('link-4', 'PreProcessorC', 'link-4');">PreProcessorC</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method keybench.benchmark_component.BenchmarkComponent.__init__()=keybench.benchmark_component.BenchmarkComponent-class.html#__init__,Method keybench.candidate_extractor.CandidateExtractorC.__init__()=keybench.candidate_extractor.CandidateExtractorC-class.html#__init__,Method keybench.default.n_gram_extractor.NGramExtractor.__init__()=keybench.default.n_gram_extractor.NGramExtractor-class.html#__init__,Method keybench.default.prf_evaluator.PRFEvaluator.__init__()=keybench.default.prf_evaluator.PRFEvaluator-class.html#__init__,Method keybench.default.stanford_pre_processor.StanfordPreProcessor.__init__()=keybench.default.stanford_pre_processor.StanfordPreProcessor-class.html#__init__,Method keybench.default.tfidf_ranker.TFIDFRanker.__init__()=keybench.default.tfidf_ranker.TFIDFRanker-class.html#__init__,Method keybench.default.top_k_selector.TopKSelector.__init__()=keybench.default.top_k_selector.TopKSelector-class.html#__init__,Method keybench.evaluator.EvaluatorC.__init__()=keybench.evaluator.EvaluatorC-class.html#__init__,Method keybench.keybench_worker.KeyBenchWorker.__init__()=keybench.keybench_worker.KeyBenchWorker-class.html#__init__,Method keybench.keyphrase_extractor.KeyphraseExtractor.__init__()=keybench.keyphrase_extractor.KeyphraseExtractor-class.html#__init__,Method keybench.pre_processed_file.PreProcessedFile.__init__()=keybench.pre_processed_file.PreProcessedFile-class.html#__init__,Method keybench.pre_processor.PreProcessorC.__init__()=keybench.pre_processor.PreProcessorC-class.html#__init__,Method keybench.ranker.RankerC.__init__()=keybench.ranker.RankerC-class.html#__init__,Method keybench.selector.SelectorC.__init__()=keybench.selector.SelectorC-class.html#__init__"><a title="keybench.benchmark_component.BenchmarkComponent.__init__
+keybench.candidate_extractor.CandidateExtractorC.__init__
+keybench.default.n_gram_extractor.NGramExtractor.__init__
+keybench.default.prf_evaluator.PRFEvaluator.__init__
+keybench.default.stanford_pre_processor.StanfordPreProcessor.__init__
+keybench.default.tfidf_ranker.TFIDFRanker.__init__
+keybench.default.top_k_selector.TopKSelector.__init__
+keybench.evaluator.EvaluatorC.__init__
+keybench.keybench_worker.KeyBenchWorker.__init__
+keybench.keyphrase_extractor.KeyphraseExtractor.__init__
+keybench.pre_processed_file.PreProcessedFile.__init__
+keybench.pre_processor.PreProcessorC.__init__
+keybench.ranker.RankerC.__init__
+keybench.selector.SelectorC.__init__" class="py-name" href="#" onclick="return doclink('link-5', '__init__', 'link-5');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">name</tt><tt class="py-op">,</tt> <tt id="link-6" class="py-name" targets="Method keybench.benchmark_component.BenchmarkComponent.is_lazy()=keybench.benchmark_component.BenchmarkComponent-class.html#is_lazy"><a title="keybench.benchmark_component.BenchmarkComponent.is_lazy" class="py-name" href="#" onclick="return doclink('link-6', 'is_lazy', 'link-6');">is_lazy</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_encoding</tt> <tt class="py-op">=</tt> <tt id="link-7" class="py-name" targets="Method keybench.pre_processed_file.PreProcessedFile.encoding()=keybench.pre_processed_file.PreProcessedFile-class.html#encoding,Method keybench.pre_processor.PreProcessorC.encoding()=keybench.pre_processor.PreProcessorC-class.html#encoding"><a title="keybench.pre_processed_file.PreProcessedFile.encoding
+keybench.pre_processor.PreProcessorC.encoding" class="py-name" href="#" onclick="return doclink('link-7', 'encoding', 'link-7');">encoding</a></tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_tag_separator</tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name" targets="Method keybench.pre_processed_file.PreProcessedFile.tag_separator()=keybench.pre_processed_file.PreProcessedFile-class.html#tag_separator,Method keybench.pre_processor.PreProcessorC.tag_separator()=keybench.pre_processor.PreProcessorC-class.html#tag_separator"><a title="keybench.pre_processed_file.PreProcessedFile.tag_separator
+keybench.pre_processor.PreProcessorC.tag_separator" class="py-name" href="#" onclick="return doclink('link-8', 'tag_separator', 'link-8');">tag_separator</a></tt> </tt>
+</div><a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"> </tt>
+<a name="PreProcessorC.encoding"></a><div id="PreProcessorC.encoding-def"><a name="L39"></a><tt class="py-lineno"> 39</tt> <a class="py-toggle" href="#" id="PreProcessorC.encoding-toggle" onclick="return toggle('PreProcessorC.encoding');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="keybench.pre_processor.PreProcessorC-class.html#encoding">encoding</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PreProcessorC.encoding-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PreProcessorC.encoding-expanded"><a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">    Gives the encoding used by the pre-processor.</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring">    @return:  The encoding of the files to pre-process.</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">    @rtype:   C{string}</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_encoding</tt> </tt>
+</div><a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<a name="PreProcessorC.set_encoding"></a><div id="PreProcessorC.set_encoding-def"><a name="L49"></a><tt class="py-lineno"> 49</tt> <a class="py-toggle" href="#" id="PreProcessorC.set_encoding-toggle" onclick="return toggle('PreProcessorC.set_encoding');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="keybench.pre_processor.PreProcessorC-class.html#set_encoding">set_encoding</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">encoding</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PreProcessorC.set_encoding-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PreProcessorC.set_encoding-expanded"><a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">    Sets the encoding used by the pre-processor.</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">    @param  encoding:       The encoding of the files to pre-process.</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring">    @type   encoding:       C{string}</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_encoding</tt> <tt class="py-op">=</tt> <tt id="link-9" class="py-name"><a title="keybench.pre_processed_file.PreProcessedFile.encoding
+keybench.pre_processor.PreProcessorC.encoding" class="py-name" href="#" onclick="return doclink('link-9', 'encoding', 'link-7');">encoding</a></tt> </tt>
+</div><a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"> </tt>
+<a name="PreProcessorC.tag_separator"></a><div id="PreProcessorC.tag_separator-def"><a name="L59"></a><tt class="py-lineno"> 59</tt> <a class="py-toggle" href="#" id="PreProcessorC.tag_separator-toggle" onclick="return toggle('PreProcessorC.tag_separator');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="keybench.pre_processor.PreProcessorC-class.html#tag_separator">tag_separator</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PreProcessorC.tag_separator-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PreProcessorC.tag_separator-expanded"><a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">    Gives the tag separator used for the POS tagging.</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">    @return:  The symbol to use as a separator between a word and its tag.</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring">    @rtype:   tag_separator:  C{string}</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_tag_separator</tt> </tt>
+</div><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="PreProcessorC.set_tag_separator"></a><div id="PreProcessorC.set_tag_separator-def"><a name="L69"></a><tt class="py-lineno"> 69</tt> <a class="py-toggle" href="#" id="PreProcessorC.set_tag_separator-toggle" onclick="return toggle('PreProcessorC.set_tag_separator');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="keybench.pre_processor.PreProcessorC-class.html#set_tag_separator">set_tag_separator</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">tag_separator</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PreProcessorC.set_tag_separator-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PreProcessorC.set_tag_separator-expanded"><a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">    Sets the tag separator used for the POS tagging.</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">    @param  tag_separator:  The symbol to use as a separator between a word and</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring">                            its tag.</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring">    @type   tag_separator:  C{string}</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_tag_separator</tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="keybench.pre_processed_file.PreProcessedFile.tag_separator
+keybench.pre_processor.PreProcessorC.tag_separator" class="py-name" href="#" onclick="return doclink('link-10', 'tag_separator', 'link-8');">tag_separator</a></tt> </tt>
+</div><a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"> </tt>
+<a name="PreProcessorC.pre_process_file"></a><div id="PreProcessorC.pre_process_file-def"><a name="L80"></a><tt class="py-lineno"> 80</tt> <a class="py-toggle" href="#" id="PreProcessorC.pre_process_file-toggle" onclick="return toggle('PreProcessorC.pre_process_file');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="keybench.pre_processor.PreProcessorC-class.html#pre_process_file">pre_process_file</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">filepath</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PreProcessorC.pre_process_file-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PreProcessorC.pre_process_file-expanded"><a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">    Applies the three pre-processing steps.</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">    @param    filepath: The path of the file to pre-process.</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring">    @type     filepath: C{string}</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring">    @return:  The pre-processed file.</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring">    @rtype:   C{PreProcessedFile}</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">    <tt class="py-name">lazy_filename</tt> <tt class="py-op">=</tt> <tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-string">".pre"</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">    <tt id="link-11" class="py-name"><a title="keybench.pre_processed_file" class="py-name" href="#" onclick="return doclink('link-11', 'pre_processed_file', 'link-2');">pre_processed_file</a></tt> <tt class="py-op">=</tt> <tt id="link-12" class="py-name"><a title="keybench.pre_processed_file.PreProcessedFile" class="py-name" href="#" onclick="return doclink('link-12', 'PreProcessedFile', 'link-3');">PreProcessedFile</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-13" class="py-name"><a title="keybench.pre_processor.PreProcessorC" class="py-name" href="#" onclick="return doclink('link-13', 'PreProcessorC', 'link-4');">PreProcessorC</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="keybench.benchmark_component.BenchmarkComponent.is_lazy" class="py-name" href="#" onclick="return doclink('link-14', 'is_lazy', 'link-6');">is_lazy</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> \ </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">       <tt class="py-keyword">and</tt> <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-15" class="py-name"><a title="keybench.pre_processor.PreProcessorC" class="py-name" href="#" onclick="return doclink('link-15', 'PreProcessorC', 'link-4');">PreProcessorC</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method keybench.benchmark_component.BenchmarkComponent.is_cached()=keybench.benchmark_component.BenchmarkComponent-class.html#is_cached"><a title="keybench.benchmark_component.BenchmarkComponent.is_cached" class="py-name" href="#" onclick="return doclink('link-16', 'is_cached', 'link-16');">is_cached</a></tt><tt class="py-op">(</tt><tt class="py-name">lazy_filename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">      <tt class="py-comment"># lazy loading</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">      <tt id="link-17" class="py-name"><a title="keybench.pre_processed_file" class="py-name" href="#" onclick="return doclink('link-17', 'pre_processed_file', 'link-2');">pre_processed_file</a></tt> <tt class="py-op">=</tt> <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-18" class="py-name"><a title="keybench.pre_processor.PreProcessorC" class="py-name" href="#" onclick="return doclink('link-18', 'PreProcessorC', 'link-4');">PreProcessorC</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Method keybench.benchmark_component.BenchmarkComponent.load()=keybench.benchmark_component.BenchmarkComponent-class.html#load"><a title="keybench.benchmark_component.BenchmarkComponent.load" class="py-name" href="#" onclick="return doclink('link-19', 'load', 'link-19');">load</a></tt><tt class="py-op">(</tt><tt class="py-name">lazy_filename</tt><tt class="py-op">)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">      <tt class="py-comment"># open the file</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">      <tt id="link-20" class="py-name" targets="Method keybench.pre_processed_file.PreProcessedFile.title()=keybench.pre_processed_file.PreProcessedFile-class.html#title"><a title="keybench.pre_processed_file.PreProcessedFile.title" class="py-name" href="#" onclick="return doclink('link-20', 'title', 'link-20');">title</a></tt><tt class="py-op">,</tt> <tt id="link-21" class="py-name" targets="Method keybench.pre_processed_file.PreProcessedFile.abstract()=keybench.pre_processed_file.PreProcessedFile-class.html#abstract"><a title="keybench.pre_processed_file.PreProcessedFile.abstract" class="py-name" href="#" onclick="return doclink('link-21', 'abstract', 'link-21');">abstract</a></tt><tt class="py-op">,</tt> <tt id="link-22" class="py-name" targets="Method keybench.pre_processed_file.PreProcessedFile.body()=keybench.pre_processed_file.PreProcessedFile-class.html#body"><a title="keybench.pre_processed_file.PreProcessedFile.body" class="py-name" href="#" onclick="return doclink('link-22', 'body', 'link-22');">body</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name" targets="Method keybench.default.stanford_pre_processor.StanfordPreProcessor.parse_file()=keybench.default.stanford_pre_processor.StanfordPreProcessor-class.html#parse_file,Method keybench.pre_processor.PreProcessorC.parse_file()=keybench.pre_processor.PreProcessorC-class.html#parse_file"><a title="keybench.default.stanford_pre_processor.StanfordPreProcessor.parse_file
+keybench.pre_processor.PreProcessorC.parse_file" class="py-name" href="#" onclick="return doclink('link-23', 'parse_file', 'link-23');">parse_file</a></tt><tt class="py-op">(</tt><tt class="py-name">filepath</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_encoding</tt><tt class="py-op">)</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">      <tt class="py-comment"># sentence tokenization</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">      <tt class="py-name">title_sentences</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Method keybench.default.stanford_pre_processor.StanfordPreProcessor.sentence_tokenization()=keybench.default.stanford_pre_processor.StanfordPreProcessor-class.html#sentence_tokenization,Method keybench.pre_processor.PreProcessorC.sentence_tokenization()=keybench.pre_processor.PreProcessorC-class.html#sentence_tokenization"><a title="keybench.default.stanford_pre_processor.StanfordPreProcessor.sentence_tokenization
+keybench.pre_processor.PreProcessorC.sentence_tokenization" class="py-name" href="#" onclick="return doclink('link-24', 'sentence_tokenization', 'link-24');">sentence_tokenization</a></tt><tt class="py-op">(</tt><tt id="link-25" class="py-name"><a title="keybench.pre_processed_file.PreProcessedFile.title" class="py-name" href="#" onclick="return doclink('link-25', 'title', 'link-20');">title</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">      <tt class="py-name">abstract_sentences</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="keybench.default.stanford_pre_processor.StanfordPreProcessor.sentence_tokenization
+keybench.pre_processor.PreProcessorC.sentence_tokenization" class="py-name" href="#" onclick="return doclink('link-26', 'sentence_tokenization', 'link-24');">sentence_tokenization</a></tt><tt class="py-op">(</tt><tt id="link-27" class="py-name"><a title="keybench.pre_processed_file.PreProcessedFile.abstract" class="py-name" href="#" onclick="return doclink('link-27', 'abstract', 'link-21');">abstract</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">      <tt class="py-name">body_sentences</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="keybench.default.stanford_pre_processor.StanfordPreProcessor.sentence_tokenization
+keybench.pre_processor.PreProcessorC.sentence_tokenization" class="py-name" href="#" onclick="return doclink('link-28', 'sentence_tokenization', 'link-24');">sentence_tokenization</a></tt><tt class="py-op">(</tt><tt id="link-29" class="py-name"><a title="keybench.pre_processed_file.PreProcessedFile.body" class="py-name" href="#" onclick="return doclink('link-29', 'body', 'link-22');">body</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">      <tt class="py-comment"># word tokenization</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">      <tt class="py-name">tokenized_title_sentences</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name" targets="Method keybench.default.stanford_pre_processor.StanfordPreProcessor.word_tokenization()=keybench.default.stanford_pre_processor.StanfordPreProcessor-class.html#word_tokenization,Method keybench.pre_processor.PreProcessorC.word_tokenization()=keybench.pre_processor.PreProcessorC-class.html#word_tokenization"><a title="keybench.default.stanford_pre_processor.StanfordPreProcessor.word_tokenization
+keybench.pre_processor.PreProcessorC.word_tokenization" class="py-name" href="#" onclick="return doclink('link-30', 'word_tokenization', 'link-30');">word_tokenization</a></tt><tt class="py-op">(</tt><tt class="py-name">title_sentences</tt><tt class="py-op">)</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">      <tt class="py-name">tokenized_abstract_sentences</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="keybench.default.stanford_pre_processor.StanfordPreProcessor.word_tokenization
+keybench.pre_processor.PreProcessorC.word_tokenization" class="py-name" href="#" onclick="return doclink('link-31', 'word_tokenization', 'link-30');">word_tokenization</a></tt><tt class="py-op">(</tt><tt class="py-name">abstract_sentences</tt><tt class="py-op">)</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">      <tt class="py-name">tokenized_body_sentences</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="keybench.default.stanford_pre_processor.StanfordPreProcessor.word_tokenization
+keybench.pre_processor.PreProcessorC.word_tokenization" class="py-name" href="#" onclick="return doclink('link-32', 'word_tokenization', 'link-30');">word_tokenization</a></tt><tt class="py-op">(</tt><tt class="py-name">body_sentences</tt><tt class="py-op">)</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">      <tt class="py-comment"># pos tagging</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">      <tt class="py-name">pos_tagged_title_sentences</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name" targets="Method keybench.default.stanford_pre_processor.StanfordPreProcessor.pos_tagging()=keybench.default.stanford_pre_processor.StanfordPreProcessor-class.html#pos_tagging,Method keybench.pre_processor.PreProcessorC.pos_tagging()=keybench.pre_processor.PreProcessorC-class.html#pos_tagging"><a title="keybench.default.stanford_pre_processor.StanfordPreProcessor.pos_tagging
+keybench.pre_processor.PreProcessorC.pos_tagging" class="py-name" href="#" onclick="return doclink('link-33', 'pos_tagging', 'link-33');">pos_tagging</a></tt><tt class="py-op">(</tt><tt class="py-name">tokenized_title_sentences</tt><tt class="py-op">,</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">                                                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_tag_separator</tt><tt class="py-op">)</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">      <tt class="py-name">pos_tagged_abstract_sentences</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="keybench.default.stanford_pre_processor.StanfordPreProcessor.pos_tagging
+keybench.pre_processor.PreProcessorC.pos_tagging" class="py-name" href="#" onclick="return doclink('link-34', 'pos_tagging', 'link-33');">pos_tagging</a></tt><tt class="py-op">(</tt><tt class="py-name">tokenized_abstract_sentences</tt><tt class="py-op">,</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">                                                       <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_tag_separator</tt><tt class="py-op">)</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">      <tt class="py-name">pos_tagged_body_sentences</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="keybench.default.stanford_pre_processor.StanfordPreProcessor.pos_tagging
+keybench.pre_processor.PreProcessorC.pos_tagging" class="py-name" href="#" onclick="return doclink('link-35', 'pos_tagging', 'link-33');">pos_tagging</a></tt><tt class="py-op">(</tt><tt class="py-name">tokenized_body_sentences</tt><tt class="py-op">,</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">                                                  <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_tag_separator</tt><tt class="py-op">)</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">      <tt class="py-comment"># pre_processed_file creation</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">      <tt id="link-36" class="py-name"><a title="keybench.pre_processed_file" class="py-name" href="#" onclick="return doclink('link-36', 'pre_processed_file', 'link-2');">pre_processed_file</a></tt><tt class="py-op">.</tt><tt id="link-37" class="py-name" targets="Method keybench.pre_processed_file.PreProcessedFile.set_encoding()=keybench.pre_processed_file.PreProcessedFile-class.html#set_encoding,Method keybench.pre_processor.PreProcessorC.set_encoding()=keybench.pre_processor.PreProcessorC-class.html#set_encoding"><a title="keybench.pre_processed_file.PreProcessedFile.set_encoding
+keybench.pre_processor.PreProcessorC.set_encoding" class="py-name" href="#" onclick="return doclink('link-37', 'set_encoding', 'link-37');">set_encoding</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_encoding</tt><tt class="py-op">)</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">      <tt id="link-38" class="py-name"><a title="keybench.pre_processed_file" class="py-name" href="#" onclick="return doclink('link-38', 'pre_processed_file', 'link-2');">pre_processed_file</a></tt><tt class="py-op">.</tt><tt id="link-39" class="py-name" targets="Method keybench.pre_processed_file.PreProcessedFile.set_tag_separator()=keybench.pre_processed_file.PreProcessedFile-class.html#set_tag_separator,Method keybench.pre_processor.PreProcessorC.set_tag_separator()=keybench.pre_processor.PreProcessorC-class.html#set_tag_separator"><a title="keybench.pre_processed_file.PreProcessedFile.set_tag_separator
+keybench.pre_processor.PreProcessorC.set_tag_separator" class="py-name" href="#" onclick="return doclink('link-39', 'set_tag_separator', 'link-39');">set_tag_separator</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_tag_separator</tt><tt class="py-op">)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">      <tt id="link-40" class="py-name"><a title="keybench.pre_processed_file" class="py-name" href="#" onclick="return doclink('link-40', 'pre_processed_file', 'link-2');">pre_processed_file</a></tt><tt class="py-op">.</tt><tt id="link-41" class="py-name" targets="Method keybench.pre_processed_file.PreProcessedFile.set_title()=keybench.pre_processed_file.PreProcessedFile-class.html#set_title"><a title="keybench.pre_processed_file.PreProcessedFile.set_title" class="py-name" href="#" onclick="return doclink('link-41', 'set_title', 'link-41');">set_title</a></tt><tt class="py-op">(</tt><tt class="py-name">pos_tagged_title_sentences</tt><tt class="py-op">)</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">      <tt id="link-42" class="py-name"><a title="keybench.pre_processed_file" class="py-name" href="#" onclick="return doclink('link-42', 'pre_processed_file', 'link-2');">pre_processed_file</a></tt><tt class="py-op">.</tt><tt id="link-43" class="py-name" targets="Method keybench.pre_processed_file.PreProcessedFile.set_abstract()=keybench.pre_processed_file.PreProcessedFile-class.html#set_abstract"><a title="keybench.pre_processed_file.PreProcessedFile.set_abstract" class="py-name" href="#" onclick="return doclink('link-43', 'set_abstract', 'link-43');">set_abstract</a></tt><tt class="py-op">(</tt><tt class="py-name">pos_tagged_abstract_sentences</tt><tt class="py-op">)</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">      <tt id="link-44" class="py-name"><a title="keybench.pre_processed_file" class="py-name" href="#" onclick="return doclink('link-44', 'pre_processed_file', 'link-2');">pre_processed_file</a></tt><tt class="py-op">.</tt><tt id="link-45" class="py-name" targets="Method keybench.pre_processed_file.PreProcessedFile.set_body()=keybench.pre_processed_file.PreProcessedFile-class.html#set_body"><a title="keybench.pre_processed_file.PreProcessedFile.set_body" class="py-name" href="#" onclick="return doclink('link-45', 'set_body', 'link-45');">set_body</a></tt><tt class="py-op">(</tt><tt class="py-name">pos_tagged_body_sentences</tt><tt class="py-op">)</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">      <tt class="py-comment"># serialization</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">      <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-46" class="py-name"><a title="keybench.pre_processor.PreProcessorC" class="py-name" href="#" onclick="return doclink('link-46', 'PreProcessorC', 'link-4');">PreProcessorC</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name" targets="Method keybench.benchmark_component.BenchmarkComponent.store()=keybench.benchmark_component.BenchmarkComponent-class.html#store"><a title="keybench.benchmark_component.BenchmarkComponent.store" class="py-name" href="#" onclick="return doclink('link-47', 'store', 'link-47');">store</a></tt><tt class="py-op">(</tt><tt class="py-name">lazy_filename</tt><tt class="py-op">,</tt> <tt id="link-48" class="py-name"><a title="keybench.pre_processed_file" class="py-name" href="#" onclick="return doclink('link-48', 'pre_processed_file', 'link-2');">pre_processed_file</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-49" class="py-name"><a title="keybench.pre_processed_file" class="py-name" href="#" onclick="return doclink('link-49', 'pre_processed_file', 'link-2');">pre_processed_file</a></tt> </tt>
+</div><a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"> </tt>
+<a name="PreProcessorC.parse_file"></a><div id="PreProcessorC.parse_file-def"><a name="L131"></a><tt class="py-lineno">131</tt> <a class="py-toggle" href="#" id="PreProcessorC.parse_file-toggle" onclick="return toggle('PreProcessorC.parse_file');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="keybench.pre_processor.PreProcessorC-class.html#parse_file">parse_file</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">filepath</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PreProcessorC.parse_file-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PreProcessorC.parse_file-expanded"><a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-docstring">    Extract the title, the abstract and the body contained in a file.</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-docstring">    @param  filepath: The path of the file to analyse.</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-docstring">    @type   filepath: C{string}</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-docstring">    @return:  The title, the abstract and the body of the file's text.</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-docstring">    @rtype:   C{(string, string, string)}</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">    <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"> </tt>
+<a name="PreProcessorC.sentence_tokenization"></a><div id="PreProcessorC.sentence_tokenization-def"><a name="L144"></a><tt class="py-lineno">144</tt> <a class="py-toggle" href="#" id="PreProcessorC.sentence_tokenization-toggle" onclick="return toggle('PreProcessorC.sentence_tokenization');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="keybench.pre_processor.PreProcessorC-class.html#sentence_tokenization">sentence_tokenization</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">text</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PreProcessorC.sentence_tokenization-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PreProcessorC.sentence_tokenization-expanded"><a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"><tt class="py-docstring">    Takes a raw text and split it into a list of sentences.</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-docstring">    @param    text: The raw text to pre-processed.</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-docstring">    @type     text: C{string}</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-docstring">    @return:  A list of sentences contained in the text.</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-docstring">    @rtype:   C{list of string}</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">    <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"> </tt>
+<a name="PreProcessorC.word_tokenization"></a><div id="PreProcessorC.word_tokenization-def"><a name="L157"></a><tt class="py-lineno">157</tt> <a class="py-toggle" href="#" id="PreProcessorC.word_tokenization-toggle" onclick="return toggle('PreProcessorC.word_tokenization');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="keybench.pre_processor.PreProcessorC-class.html#word_tokenization">word_tokenization</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">sentences</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PreProcessorC.word_tokenization-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PreProcessorC.word_tokenization-expanded"><a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-docstring">    Takes a list of sentences and applies word tokenize on each.</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"><tt class="py-docstring">    @param    sentences: The sentences to tokenize.</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-docstring">    @type     sentences: C{list of string}</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-docstring">    @return:  A list of sentences which are tokenized.</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"><tt class="py-docstring">    @rtype:   C{list of string}</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">    <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"> </tt>
+<a name="PreProcessorC.pos_tagging"></a><div id="PreProcessorC.pos_tagging-def"><a name="L170"></a><tt class="py-lineno">170</tt> <a class="py-toggle" href="#" id="PreProcessorC.pos_tagging-toggle" onclick="return toggle('PreProcessorC.pos_tagging');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="keybench.pre_processor.PreProcessorC-class.html#pos_tagging">pos_tagging</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">tokenized_sentences</tt><tt class="py-op">,</tt> <tt class="py-param">tag_separator</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PreProcessorC.pos_tagging-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PreProcessorC.pos_tagging-expanded"><a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line"><tt class="py-docstring">    Takes a list of tokenized sentences and applies POS-tagging on each.</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"><tt class="py-docstring">    @param    tokenized_sentences: The tokenized sentences to POS-tag.</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"><tt class="py-docstring">    @type     tokenized_sentences: C{list of string}</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line"><tt class="py-docstring">    @return:  A list of sentences which are POS-tagged.</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line"><tt class="py-docstring">    @rtype:   C{list of string}</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line"> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">    <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="keybench-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Jan 22 19:02:18 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

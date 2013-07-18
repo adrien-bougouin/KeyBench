@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc id="0287">
+ <motscles>
+  <nombre>4</nombre>
+ </motscles>
+ <article>
+  <resume>
+   <p>Nous pouvons tous constater quotidiennement que l’importance d’Internet grandit sans cesse. De nombreux sites traitant de domaines spécialisés sont intéressants du point de vue du terminologue, mais n’ont pas encore fait l’objet d’un dépouillement terminologique. Certains domaines, comme celui de la réservation en ligne, dont les réalisations sont majoritairement électroniques, ne peuvent être dépouillés qu’en faisant appel à une batterie d’outils spécialisés. Dans l’élaboration d’un lexique portant sur le domaine de la « réservation en ligne », réalisé conjointement avec l’Office québécois de la langue française et Amex Canada Inc., nous avons adapté les méthodes de travail traditionnelles afin de pouvoir récupérer et exploiter les données contenues sur la Toile. Dans cet article, nous présenterons d’abord les particularités du domaine à l’étude et la méthodologie utilisée pour mener à bien notre démarche, puis nous analyserons les impacts qu’une telle démarche pourrait avoir sur le travail des terminologues.</p>
+  </resume>
+  <corps>
+   <p></p>
+  <p>(Sager 1990&amp;#x00A0;: 129)</p>
+  <p></p>
+  <p>La manipulation de données électroniques par le terminologue n.est pas chose nouvelle. En</p>
+  <p>effet, les banques de terminologie font partie du paysage depuis plus d.une quarantaine</p>
+  <p>d.années. Les premiers travaux sur l.informatisation des procédures de travail en</p>
+  <p>terminologie comportaient bien souvent une étape de numérisation des corpus (Auger et al.</p>
+  <p>1991) qui peut désormais être évitée étant donné le nombre sans cesse grandissant</p>
+  <p>d.ouvrages disponibles en format électronique. Avec l.arrivée sur le marché des logiciels</p>
+  <p>dédiés à l.extraction automatique des termes au début des années 1990, la gestion de corpus</p>
+  <p>en format électronique est elle aussi devenue une réalité du travail terminologique.</p>
+  <p>Malgré cette prise en charge des corpus électroniques par les outils terminologiques</p>
+  <p>et la diffusion de masse de documents spécialisés dans Internet, de nombreux domaines</p>
+  <p>n’ont pas encore fait l’objet d’un dépouillement terminologique puisque l.élaboration de</p>
+  <p>corpus volumineux pour ces domaines s.avère encore une tâche difficile. En effet, un</p>
+  <p>domaine comme celui de la réservation en ligne, dont les réalisations sont majoritairement</p>
+  <p>électroniques, mais ne se retrouvent pas sous la forme de documents traditionnels, ne</p>
+  <p>peuvent être dépouillés qu’en faisant appel à une batterie d’outils spécialisés.</p>
+  <p>Dans cet article, nous décrivons un projet, réalisé conjointement avec l.Office</p>
+  <p></p>
+  <p>terminologie de la «&amp;#x00A0;réservation en ligne&amp;#x00A0;». Nous décrivons succinctement le projet et les</p>
+  <p>particularités du domaine pour ensuite aborder la méthodologie utilisée afin de mener à bien</p>
+  <p>notre recherche. Finalement, nous analysons les impacts qu.une telle approche pourrait</p>
+  <p>avoir sur le travail des terminologues.</p>
+  <p></p>
+  <p>Le Comité de terminologie de la réservation en ligne (CTREL) a été mis sur pied par</p>
+  <p>l.Office québécois de la langue française afin de répondre à un besoin d.uniformisation</p>
+  <p>terminologique identifié par la société Amex Canada Inc. L.objectif du CTREL est de</p>
+  <p>mettre à la disposition des entreprises .uvrant dans le secteur du tourisme une terminologie</p>
+  <p>fiable et représentative de l.usage actuel.</p>
+  <p>Le premier mandant du CTREL consistait à produire soixante fiches</p>
+  <p>terminologiques qui ont été intégrées au Grand dictionnaire terminologique. Les fiches</p>
+  <p>feront aussi l.objet d.un signet terminologique qui sera diffusé sur le site de l.OQLF dès le</p>
+  <p>mois de novembre 2005.</p>
+  <p></p>
+  <p>Le domaine couvert possède quelques propriétés distinctives qui le rendent difficile à</p>
+  <p>manipuler d.un point de vue terminologique&amp;#x00A0;: la nature du corpus, l.aspect commercial du</p>
+  <p>domaine, l.importance de la variation terminologique et la forme des termes.</p>
+  <p>Nos efforts en vue d.assembler un corpus à partir de documentation traditionnelle</p>
+  <p>sur le sujet se sont butés à des problèmes importants. Les seuls documents trouvés portaient</p>
+  <p>sur l.impact des nouvelles technologies sur le domaine de la réservation plutôt que sur la</p>
+  <p>description de cette dernière. Ces documents sont d.un intérêt plus que limité pour le</p>
+  <p>terminologue puisque les notions y sont abordées de façon superficielle. Les réalisations</p>
+  <p>écrites du domaine de la réservation en ligne se retrouvent essentiellement dans Internet, ce</p>
+  <p>qui devrait théoriquement faciliter son analyse à l.aide d.outils informatiques. Cependant,</p>
+  <p>les termes ne se retrouvent pas au sein de documents électroniques traditionnels, ils sont</p>
+  <p>plutôt intégrés aux interfaces des divers systèmes consacrés à la réservation.</p>
+  <p>La diffusion dans Internet de la terminologie liée au domaine qui nous intéresse</p>
+  <p>n.est donc pas le résultat d.une simple transposition de contenu du support papier au</p>
+  <p>support électronique, contrairement à ce qu.on observe pour bien des domaines. Les</p>
+  <p>interfaces constituent, d.une certaine façon, l.environnement naturel de ces termes. Une</p>
+  <p>étape supplémentaire est donc nécessaire en vue d.élaborer le corpus électronique qui</p>
+  <p>servira de point de départ à la présente recherche.</p>
+  <p>L.aspect commercial du domaine de la réservation en ligne apparaît lui aussi de</p>
+  <p>façon importante dans le corpus assemblé&amp;#x00A0;: on y vante répétitivement les mérites de</p>
+  <p>certaines fonctions des outils de réservation en ligne (ORL) alors que d.autres, jugées trop</p>
+  <p>banales ou trop répandues, ne sont tout simplement pas documentées. Les notions ne sont</p>
+  <p>donc pas toutes mises en évidence, contrairement à ce qu.aimerait voir le terminologue. On</p>
+  <p>constate aussi très rapidement que le point de vue des utilisateurs de tels outils est rarement</p>
+  <p>abordé, alors que celui des transporteurs aériens, surtout l.aspect économique, est présent</p>
+  <p>dans la très grande majorité des textes.</p>
+  <p>Le domaine de la réservation est relativement récent et on peut considérer qu.il est</p>
+  <p>toujours en pleine émergence. Cet aspect novateur du domaine en influence grandement les</p>
+  <p>termes qui sont soit nouveaux et instables, soit très bien implantés. En effet, on observe une</p>
+  <p>variation importante dans les dénominations attribuées aux notions principales du domaine</p>
+  <p>puisque la terminologie ne s.est toujours pas stabilisée. De plus, les entreprises qui</p>
+  <p>conçoivent les ORL cherchent sans cesse à se démarquer de leur concurrence en innovant et</p>
+  <p>en proposant de nouvelles fonctions aux utilisateurs. Dans la documentation, ici des fichiers</p>
+  <p>d.aide en ligne ou des pages Web, cette course à la nouveauté a pour conséquence la</p>
+  <p>multiplication des dénominations pour une seule et unique notion. Par contre, une bonne</p>
+  <p>part de la terminologie utilisée dans le domaine fait appel à celle du domaine de la</p>
+  <p>réservation traditionnelle. Ce phénomène touche principalement les notions fondamentales</p>
+  <p>ayant trait aux données de réservation, comme l.heure de départ et la destination.</p>
+  <p>Notre travail a aussi fait ressortir une particularité souvent associée aux outils</p>
+  <p>informatiques, celle d.avoir recours à des termes courts et à des troncatures. Par exemple,</p>
+  <p>on retrouvera régulièrement dans les interfaces le terme type d.hôtel alors que la réalité</p>
+  <p>désignée est plus large et recouvre tous les types d.établissement d.hébergement (hôtel,</p>
+  <p></p>
+  <p></p>
+  <p>La méthodologie adoptée dans le cadre de ce projet découle de celle proposée dans</p>
+  <p>L.Homme (2004&amp;#x00A0;: 46). Selon l.auteure, le travail terminologique comporte les sept</p>
+  <p>étapes suivantes&amp;#x00A0;:</p>
+  <p>1) la mise en forme d.un corpus,</p>
+  <p>2) le repérage des termes,</p>
+  <p>3) la collecte de données,</p>
+  <p>4) l.analyse et la synthèse des données,</p>
+  <p>5) l.encodage des données,</p>
+  <p>6) l.organisation des données terminologiques,</p>
+  <p>7) la gestion des données terminologiques.</p>
+  <p>Les sections qui suivent se concentrent sur la méthodologie adoptée pour les trois premières</p>
+  <p>étapes. La nature essentiellement sémantique des étapes d.analyse et de synthèse des</p>
+  <p>données les rend difficilement informatisables. Puisque la présente recherche s.effectue en</p>
+  <p>partenariat avec l.OQLF, les trois dernières étapes s.appuient sur l.infrastructure</p>
+  <p>informatique de l.OQLF et son outil de gestion terminologique SAMI (Système</p>
+  <p></p>
+  <p>modifier des fiches terminologiques à distance. Le fonctionnement de cet outil est déjà bien</p>
+  <p>documenté (Bédard et Duchesne 2002) et ne fera pas l.objet d.une description détaillée</p>
+  <p>dans le cadre du présent article.</p>
+  <p></p>
+  <p>Nous l.avons mentionné précédemment, la terminologie du domaine de la réservation en</p>
+  <p>ligne ne se retrouve que dans les divers portails donnant accès à des ORL. Afin de mettre en</p>
+  <p>place le corpus électronique nécessaire à la présente recherche, nous avons dû faire appel à</p>
+  <p>une technologie permettant de constituer un corpus à partir de ces portails. Nous avons eu</p>
+  <p>recours à un aspirateur de sites Web pour récupérer une copie des ORL1 dont nous avions</p>
+  <p>besoin. Grâce à ce type de logiciel, il est désormais possible d.obtenir une image locale</p>
+  <p>d.un site Web et de l.ensemble des documents qui le composent. La récupération des sites</p>
+  <p>Web et le stockage des données sur le poste du terminologue permettent d.obtenir une</p>
+  <p>copie stable des documents du corpus à l.abri des mises à jour fréquentes dans Internet.</p>
+  <p>Les sites Web sont généralement constitués de documents en format HTML.</p>
+  <p>Cependant, les sites plus élaborés comme les portails dédiés au commerce électronique</p>
+  <p>comportent de nombreux fichiers dans des formats très variés (PDF, RTF, DOC, TXT, etc.).</p>
+  <p>Afin de pouvoir dépouiller ces documents à l.aide d.un extracteur de termes, une étape de</p>
+  <p>normalisation et de conversion de l.ensemble des fichiers vers un format texte facilement</p>
+  <p>exploitable est inévitable. Le volume important de données à manipuler pour ce projet</p>
+  <p>nécessitait la mise en place d.une conversion automatique. Pour ce faire, nous avons eu</p>
+  <p>recours aux logiciels ABC Amber Text Converter et ABC Amber PDF Converter2.</p>
+  <p>Afin de diversifier le type de documents composant le corpus et de ne pas nous</p>
+  <p>limiter strictement au dépouillement de portails, nous avons récupéré quelques articles, en</p>
+  <p>format électronique, portant sur la réservation en ligne. Les versions française et anglaise du</p>
+  <p></p>
+  <p></p>
+  <p>disposition par nos partenaires ont été numérisés. Ces documents, malgré le fait qu.ils se</p>
+  <p>trouvaient sur un support traditionnel, étaient à l.origine en format électronique puisqu.ils</p>
+  <p>correspondaient à des saisies d.écran de l.outil utilisé par Amex Canada Inc., Corporate</p>
+  <p></p>
+  <p></p>
+  <p>Afin de repérer les termes contenus dans notre corpus, nous avons fait appel à deux outils</p>
+  <p>de traitement automatique de la langue (TAL)&amp;#x00A0;: un étiqueteur morphosyntaxique et un</p>
+  <p>logiciel d.acquisition automatique de termes. L.étiquetage du corpus a été effectué à l.aide</p>
+  <p>du logiciel TreeTagger (Schmid 1994); ce dernier assigne automatiquement à l.ensemble</p>
+  <p>des formes d.un document une partie du discours (arrive/VER:pres) et procède à la</p>
+  <p>lemmatisation de ces mêmes formes (arrive/VER:pres/arriver). Cette étape est d.autant</p>
+  <p>plus intéressante en vue du repérage des termes qu.elle permet de regrouper les variantes</p>
+  <p>des termes du corpus sous une même entrée (fournisseur de service, fournisseur de</p>
+  <p></p>
+  <p>obtenues par l.extracteur sont donc plus représentatives de la réalité puisque les singuliers</p>
+  <p>et les pluriels, ou les verbes conjugués, sont regroupés sous la forme lemmatisée.</p>
+  <p>L.extraction des termes a été confiée au logiciel TermoStat (Drouin 2003). Ce</p>
+  <p>dernier a pour objectif l.identification de candidats termes3 propres à un domaine. L.outil</p>
+  <p>utilise une technologie hybride qui combine méthodes statistiques et linguistiques en vue de</p>
+  <p>l.extraction de candidats termes simples et complexes. Dans un premier temps, le logiciel</p>
+  <p>recense une première liste de candidats en identifiant dans le corpus des enchaînements qui</p>
+  <p>correspondent généralement aux structures de surface typique des unités terminologiques. Il</p>
+  <p>procède ensuite à une comparaison statistique de la fréquence à laquelle les candidats termes</p>
+  <p>apparaissent dans le corpus dépouillé et la compare avec la fréquence à laquelle ils</p>
+  <p>apparaissent dans un corpus non spécialisé nommé corpus de référence. La comparaison</p>
+  <p>repose sur un test statistique, proposé par Lafon (1980), qui permet de déterminer dans</p>
+  <p>quelle mesure un candidat terme est spécifique au corpus dépouillé. Lorsque la fréquence</p>
+  <p>d.un candidat terme diffère de façon significative entre les deux corpus, TermoStat le retient</p>
+  <p>à titre de terme potentiel. Pour le présent projet, nous avons mis à la disposition du logiciel</p>
+  <p>un corpus de référence constitué d.environ 30 millions d.occurrences tirées du journal Le</p>
+  <p></p>
+  <p>montréalais The Gazette pour l.anglais4.</p>
+  <p>La liste des candidats termes proposés par le logiciel comporte des informations</p>
+  <p>additionnelles sur les candidats termes dont la fréquence et les variantes orthographiques.</p>
+  <p>Le regroupement des formes non lemmatisées du candidat terme rend possible la</p>
+  <p>comparaison des variantes orthographiques. Par exemple, pour le terme «&amp;#x00A0;outil de</p>
+  <p>réservation en ligne&amp;#x00A0;», le logiciel a repéré les trois variantes suivantes&amp;#x00A0;: outil de réservation</p>
+  <p></p>
+  <p>permettre de consulter l.ensemble des contextes pour les diverses variantes du terme, ce</p>
+  <p>regroupement effectué par TermoStat met en évidence le fait que le pluriel de ce terme pose</p>
+  <p>problème à certains rédacteurs. Le terminologue peut donc déterminer que ce phénomène</p>
+  <p>doit faire l.objet d.une note linguistique sur la fiche terminologique.</p>
+  <p>Le logiciel attribut aussi un poids à chaque candidat. Ce dernier est établi lors de la</p>
+  <p>comparaison des fréquences. Plus le poids est élevé, plus l.extracteur considère que le</p>
+  <p>candidat terme est caractéristique du corpus5. L.interface du logiciel permet au terminologue</p>
+  <p>de consulter tous les contextes d.occurrence d.un candidat à l.aide d.un simple hyperlien.</p>
+  <p>Le terminologue peut ainsi valider l.intérêt de la proposition faite par TermoStat directement</p>
+  <p>dans l.outil, sans avoir à retourner au document original.</p>
+  <p>Comme l.extracteur peut analyser les documents en anglais et en français, il nous a</p>
+  <p>permis de comparer les termes recensés dans les deux langues et de les mettre en parallèle.</p>
+  <p>Afin de conserver toutes les données relevées et de réunir les candidats termes de tous les</p>
+  <p>sites Web et articles que nous avons dépouillés, nous avons consigné les informations</p>
+  <p>propres à chaque terme dans une base de données (Microsoft Access). Cette technique nous</p>
+  <p>a permis d.avoir rapidement accès à tous les renseignements nécessaires pour la collecte des</p>
+  <p>données.</p>
+  <p>Afin d.obtenir un panorama conceptuel du domaine de la réservation en ligne, nous</p>
+  <p>avons eu recours à un autre outil, le gestionnaire d.ontologie Protégé (Gennari et al. 2003).</p>
+  <p>Ce dernier, distribué gratuitement dans Internet, a été conçu à l.Université de Stanford. Il</p>
+  <p>s.agit d.un outil qui permet d.aller plus loin dans la description de la structure conceptuelle</p>
+  <p>d.un domaine que l.élaboration d.un simple arbre du domaine. En effet, il permet de relier</p>
+  <p>les concepts entre eux à l.aide de relations déterminées par l.utilisateur. Notre choix s.est</p>
+  <p>arrêté sur Protégé, car il nous permettait de gérer facilement notre nomenclature sous forme</p>
+  <p>arborescente, d.établir et de modifier les relations entre les concepts et d.obtenir une vue</p>
+  <p>d.ensemble de notre domaine rapidement. De plus, les données peuvent être exportées sous</p>
+  <p>divers formats dont le format HTML.</p>
+  <p></p>
+  <p>La collecte des données (contextes, définition, etc.) relatives à chacun des termes a été</p>
+  <p>principalement effectuée à l.aide du concordancier WordSmith. Ce dernier recense toutes</p>
+  <p>les occurrences des mots d.un texte et donne un accès instantané à leurs contextes. De plus,</p>
+  <p></p>
+  <p>ses fonctions sont aussi intéressantes pour le terminologue. Par exemple, l.outil permet de</p>
+  <p>trier les concordances en fonction des mots qui précèdent ou qui suivent le mot interrogé.</p>
+  <p>Cette façon d.accéder aux données facilite le dépistage des termes complexes et complète</p>
+  <p>bien le logiciel d.acquisition automatique de termes.</p>
+  <p>Les possibilités de tri offertes par WordSmith mettent aussi en lumière des</p>
+  <p>collocations liées aux termes de la nomenclature ou des familles de termes. Ainsi, l.analyse</p>
+  <p>des concordances du terme «&amp;#x00A0;réservation&amp;#x00A0;» avec une fenêtre de deux mots à gauche et d.un</p>
+  <p>mot à droite fait émerger la famille suivante&amp;#x00A0;: outil de réservation en ligne, portail de</p>
+  <p></p>
+  <p></p>
+  <p>Comme dans toute recherche terminologique, la couverture du corpus n.est parfois</p>
+  <p>pas suffisante et le terminologue doit chercher ailleurs les attestions pour certains termes.</p>
+  <p>Conservant notre objectif de maximiser les sources électroniques exploitées pour ce projet,</p>
+  <p>nous nous sommes orientés vers l.utilisation d.une bases de données spécialisées portant</p>
+  <p>sur le monde des affaires et de l.économie&amp;#x00A0;: ABI/INFORM Global (ProQuest 2005). Les</p>
+  <p>fonctions d.interrogation de cette base de données ne permettent cependant pas la</p>
+  <p>production de concordances et l.accès aux termes se trouve donc limité. En revanche,</p>
+  <p>comme elle met en place un mécanisme d.envoi d.articles à une boîte de courriel, nous</p>
+  <p>avons pu tirer profit de cette fonctionnalité et improviser un concordancier en exploitant le</p>
+  <p>service de courriel gratuit de la société Google, Gmail (Google 2005). En effet, grâce au</p>
+  <p>moteur de recherche bien connu de cette entreprise, le terminologue peut rechercher très</p>
+  <p>rapidement et facilement de l.information dans l.ensemble des documents transmis dans sa</p>
+  <p>boîte de réception.</p>
+  <p></p>
+  <p></p>
+  <p>Au cours de la présente recherche, nous avons adapté les méthodes de travail traditionnelles</p>
+  <p>en terminologie dans le but de prendre en charge un domaine dont l.information se situe</p>
+  <p>presque exclusivement dans Internet. La méthodologie proposée nous a aussi permis</p>
+  <p>d.augmenter la rapidité avec laquelle certaines étapes du travail terminologique sont</p>
+  <p>habituellement effectuées.</p>
+  <p>Les aspirateurs de sites Web favorisent l.élaboration de corpus électroniques</p>
+  <p>volumineux dans un très court laps de temps. Avec le traitement automatique, le</p>
+  <p>terminologue n.a plus à se soucier de la taille du corpus. Dans le cadre du présent projet,</p>
+  <p>nous avons pu constituer et dépouiller un corpus de plus de 2 200 000 mots, ce qui aurait</p>
+  <p>été impossible de réaliser dans le délai que nous nous sommes fixé, avec les méthodes</p>
+  <p>traditionnelles.</p>
+  <p>Grâce à un extracteur de termes, la période généralement consacrée à la</p>
+  <p>familiarisation avec le domaine est plus courte. En effet, l.affichage des candidats termes par</p>
+  <p>le logiciel d.acquisition automatique de termes selon leur fréquence ou leur spécificité par</p>
+  <p>rapport au domaine permet de prendre connaissance, par le biais des termes, des notions les</p>
+  <p>plus importantes d.un corpus. Cet accès aux termes pondéré par le logiciel donne, en</p>
+  <p>quelque sorte, un bref résumé de la thématique principale du corpus. Il est ainsi possible de</p>
+  <p>repérer rapidement les textes qui ne portent pas sur le sujet à l.étude et de les écarter du</p>
+  <p>corpus quand ils ont, par exemple, un contenu plus commercial qu.informatif.</p>
+  <p>L.aspiration des documents du corpus sur le poste du langagier offre un avantage</p>
+  <p>supplémentaire. Grâce à une telle approche, le terminologue obtient une image figée dans le</p>
+  <p>temps du contenu d.un site Web. Cette image se trouve ainsi à l.abri des mises à jour</p>
+  <p>potentielles qui ne permettraient pas au langagier de retrouver les contextes originaux ou les</p>
+  <p>attestations nécessaires à son travail. Le stockage des sites Web évite aussi de nombreuses</p>
+  <p>manipulations des corpus puisqu.il permet un retour rapide et quasi instantané au texte en</p>
+  <p>cas de besoin. Cet aspect passe bien souvent inaperçu, mais le terminologue n.a plus à</p>
+  <p>consigner toutes les informations relatives aux termes à l.étape de la collecte des données</p>
+  <p>puisqu.elles demeurent constamment accessibles.</p>
+  <p></p>
+  <p>Bien que la méthodologie utilisée accélère l.initiation au domaine, elle est bien souvent</p>
+  <p>légèrement désordonnée. La lecture d.articles, de manuels ou de monographies sur un sujet</p>
+  <p>précis facilite une entrée en matière logique, alors que la méthode que nous avons utilisée</p>
+  <p>donne tout simplement un aperçu immédiat des notions les plus importantes. Au surplus,</p>
+  <p>une telle entrée en matière ne permet pas de graduellement établir ou découvrir les relations</p>
+  <p>sémantiques entretenues par les notions (générique/spécifique, tout/partie, etc.) sans faire</p>
+  <p>appel aux contextes. Le terminologue doit donc invariablement pousser un peu plus loin sa</p>
+  <p>lecture afin pouvoir se faire une idée plus juste de la structure conceptuelle du domaine.</p>
+  <p></p>
+  <p>donne qu.un accès restreint aux contextes en limitant la consultation à une seule phrase.</p>
+  <p>Cette restriction oblige le terminologue à avoir recours à un autre outil pour accéder à un</p>
+  <p>contexte plus large ou à se référer au texte original afin de s.assurer de la validité d.un</p>
+  <p>terme. Cette difficulté est plus importante lorsque le terme à l.étude apparaît en fin de</p>
+  <p>phrase.</p>
+  <p>Un tel outil, qui tente de quantifier l.importance des candidats termes pour le corpus,</p>
+  <p>est également tributaire des phénomènes liés à la fréquence des unités recensées. Ainsi, si</p>
+  <p>un candidat est très fréquent dans le corpus dépouillé par rapport au corpus de référence, il</p>
+  <p>apparaîtra en tête de liste et un poids important lui sera accordé. Cette technique conduit</p>
+  <p>donc à l.inclusion de termes à la mode dans les résultats proposés par l.extracteur. Le</p>
+  <p>terminologue ne peut éliminer ces suggestions qu.après la consultation de plusieurs</p>
+  <p>contextes ou à la suite de recherches plus approfondies. Il faut cependant noter que cette</p>
+  <p>charge de travail supplémentaire, bien que parfois pénible, force tout de même le</p>
+  <p>terminologue à étudier les divers termes en concurrence et à évaluer leur implantation.</p>
+  <p>Afin d.éviter de présenter au langagier une liste de candidats termes beaucoup trop</p>
+  <p>longue, les logiciels d.acquisition automatique de termes ont aussi la fâcheuse tendance à</p>
+  <p>laisser de côté certains termes qui seraient jugés intéressants pour le terminologue. Comme</p>
+  <p>il est fastidieux de parcourir manuellement un corpus volumineux, le terminologue ne saura</p>
+  <p>donc jamais que ce terme se retrouve dans le corpus et ne pourra l.attester à moins d.avoir</p>
+  <p>recours à un concordancier et de le rechercher volontairement.</p>
+  <p>La multitude des types de documents trouvés dans Internet pose aussi un certain</p>
+  <p>problème. Comme nous l.avons mentionné précédemment, une étape d.uniformisation et de</p>
+  <p>conversion s.avère nécessaire si l.on veut manipuler tous les documents constituant les sites</p>
+  <p>Web avec l.extracteur de termes et les divers outils utilisés. Ce faisant, certains éléments</p>
+  <p>d.interface sont inévitablement omis. C.est le cas, par exemple, du texte des menus</p>
+  <p>déroulants, des entrées des listes déroulantes, des étiquettes des formulaires ainsi que du</p>
+  <p>texte des boutons ou des images qui n.ont pas toujours été extraits. Bien que certains</p>
+  <p>logiciels, comme les logiciels de localisation, permettent de récupérer une partie de ces</p>
+  <p>données, d.autres sont tout simplement perdues. Le texte qui se trouve dans les images en</p>
+  <p>mode point, le format le plus fréquent sur les sites Web, ne peut tout simplement pas être</p>
+  <p>pris en charge par ces outils.</p>
+  <p>Il est important de noter que, dans le cadre d.un projet comme celui décrit ici, la</p>
+  <p>dépendance à l.égard de la performance des outils de traitement automatique de la langue</p>
+  <p>est double. Nous sommes effectivement tributaires du dépouillement automatique et de la</p>
+  <p>qualité des résultats ainsi obtenus. De la même façon, les performances du logiciel</p>
+  <p>d.acquisition automatique de termes sont elles aussi dépendantes de celles de l.étiqueteur</p>
+  <p>morphosyntaxique et de sa capacité à lever les ambiguïtés et à lemmatiser le corpus</p>
+  <p>convenablement.</p>
+  <p></p>
+  <p>La collaboration mise en place par notre groupe de recherche et nos partenaires du CTREL</p>
+  <p>nous a permis de procéder au dépouillement assisté par ordinateur d.un domaine dont la</p>
+  <p>terminologie se rencontre essentiellement dans Internet. Nous avons mis sur pied une chaîne</p>
+  <p>de travail terminologique flexible grâce à des outils accessibles à très peu de frais ou</p>
+  <p>gratuitement. La méthodologie décrite peut donc être facilement adaptée par les</p>
+  <p>terminologues en substituant des outils semblables à ceux que nous avons utilisés et les</p>
+  <p>résultats obtenus seront comparables. L.approche nous a permis de d.élaborer rapidement</p>
+  <p>environ 60 dossiers terminologiques complexes à partir d.un corpus de taille importante (un</p>
+  <p>peu plus de 2 millions de mots).</p>
+  <p>Le recours à TermoStat pour l.identification des termes nous permet d.envisager</p>
+  <p>diverses pistes pour des recherches futures. En effet, puisque ce dernier met en opposition</p>
+  <p>un corpus de référence et un corpus spécialisé (celui où la terminologie est identifiée), nous</p>
+  <p>pouvons faire varier la nature de ces derniers en fonction de divers objectifs de</p>
+  <p>dépouillement terminologiques. Nous pourrions ainsi envisager de revisiter les sites Web</p>
+  <p>dépouillés pour cette étude de façon périodique et de comparer les anciennes copies du site</p>
+  <p>avec une version fraîchement aspirée. Cette technique permettrait la mise en place d.un</p>
+  <p>système de veille terminologique pour le domaine de la réservation en ligne.</p>
+  <p>Plutôt que de choisir un axe diachronique décrit au paragraphe précédent, il serait</p>
+  <p>envisageable d.aller de l.avant avec une comparaison de corpus élaborés à partir de sites</p>
+  <p>Web d.origines géographiques différentes. Ainsi, nous serions à même d.identifier les</p>
+  <p>particularités terminologiques d.un pays par rapport à un ou à plusieurs autres pays pour</p>
+  <p>mettre en lumière, de façon semi-automatique, des phénomènes de variation topolectale.</p>
+  <p>Les avenues de recherche apportées par la linguistique de corpus et par les nouveaux</p>
+  <p>outils issus des recherches en terminologie computationelle sont donc nombreuses. Par</p>
+  <p>contre, les corpus mis sur pied semi-automatiquement à partir d.Internet posent de</p>
+  <p>nouveaux défis dans le contexte des recherches terminologiques, tant du point de vue de leur</p>
+  <p>manipulation, puisqu.ils sont généralement volumineux, que de celui de leur contenu. En</p>
+  <p>effet, le style et la qualité de la langue qu.on y retrouve ne sont pas toujours adéquats pour</p>
+  <p>le traitement terminologique et l.utilisation de ce type de documents pour l.attestation de</p>
+  <p>termes est rarement bien perçue. Il reste donc beaucoup de chemin à parcourir avant que la</p>
+  <p>démarche terminologique et les langagiers soient en mesure d.exploiter à son maximum</p>
+  <p>cette mine d.informations qu.est Internet. En effet, cette source documentaire extraordinaire</p>
+  <p>tarde à être exploitée convenablement et à sa juste valeur.</p>
+  <p></p>
+  <p>Les auteurs tiennent à remercier Pierrette Vachon-L.Heureux de l.Office québécois de la</p>
+  <p></p>
+  <p>au CTREL et leurs conseils tout au long du travail d.élaboration des dossiers</p>
+  <p>terminologiques.</p>
+  <p></p>
+  <p>1. Dans le cadre de notre projet, nous avons utilisé le logiciel HTTrack Website Copier disponible</p>
+  <p>gratuitement dans Internet&amp;#x00A0;: http://www.httrack.com.</p>
+  <p>2. Ces logiciels sont distribués par la compagnie ABC Amber&amp;#x00A0;:</p>
+  <p>http://www.thebeatlesforever.com/processtext.</p>
+  <p>3. Puisque les outils informatiques ne peuvent, sans risquer de se tromper, distinguer les unités</p>
+  <p>terminologiques des autres unités, les chercheurs travaillant dans le domaine de l.acquisition automatique des</p>
+  <p>termes adoptent une terminologie prudente et parlent généralement de candidats termes. Cette notion, mise</p>
+  <p>de l.avant par Bourigault (1994) a été reprise par la majorité des chercheurs .uvrant dans le domaine&amp;#x00A0;:</p>
+  <p>Frantzi et Ananiadou (1997), Habert et al. (1997), Jacquemin (1997) et Daille (1999), etc.</p>
+  <p>4. Les auteurs tiennent à remercier André Clas d.avoir mis à leur disposition le corpus The Gazette pour ce</p>
+  <p>projet.</p>
+  <p>5. Cette notion de «&amp;#x00A0;poids&amp;#x00A0;» des candidats rejoint celle de termhood proposée par Kageura et Umino (1996)</p>
+  <p>que l.on pourrait traduire par potentiel terminologique des candidats termes.</p>
+   </corps>
+ </article>
+</doc>

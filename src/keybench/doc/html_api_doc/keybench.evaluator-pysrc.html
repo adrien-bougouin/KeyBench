@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>keybench.evaluator</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="keybench-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="keybench-module.html">Package&nbsp;keybench</a> ::
+        Module&nbsp;evaluator
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="keybench.evaluator-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="keybench.evaluator-module.html">Module keybench.evaluator</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># -*- encoding: utf-8 -*-</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module keybench.benchmark_component=keybench.benchmark_component-module.html"><a title="keybench.benchmark_component" class="py-name" href="#" onclick="return doclink('link-0', 'benchmark_component', 'link-0');">benchmark_component</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Class keybench.benchmark_component.BenchmarkComponent=keybench.benchmark_component.BenchmarkComponent-class.html"><a title="keybench.benchmark_component.BenchmarkComponent" class="py-name" href="#" onclick="return doclink('link-1', 'BenchmarkComponent', 'link-1');">BenchmarkComponent</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">exceptions</tt> <tt class="py-keyword">import</tt> <tt class="py-name">NotImplementedError</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="EvaluatorC"></a><div id="EvaluatorC-def"><a name="L7"></a><tt class="py-lineno"> 7</tt> <a class="py-toggle" href="#" id="EvaluatorC-toggle" onclick="return toggle('EvaluatorC');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="keybench.evaluator.EvaluatorC-class.html">EvaluatorC</a><tt class="py-op">(</tt><tt class="py-base-class">BenchmarkComponent</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EvaluatorC-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="EvaluatorC-expanded"><a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">  <tt class="py-docstring">"""</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">  Component responsible of the keyphrases evaluation, compared to reference</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">  keyphrases.</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="EvaluatorC.__init__"></a><div id="EvaluatorC.__init__-def"><a name="L13"></a><tt class="py-lineno">13</tt> <a class="py-toggle" href="#" id="EvaluatorC.__init__-toggle" onclick="return toggle('EvaluatorC.__init__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="keybench.evaluator.EvaluatorC-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">,</tt> <tt class="py-param">reference_file</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EvaluatorC.__init__-collapsed" style="display:none;" pad="++" indent="++++++"></div><div id="EvaluatorC.__init__-expanded"><a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring">    Constructor of the component.</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">    @param  name:           The name of the evaluator.</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">    @type   name:           C{string}</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">    @param  reference_file: The path of the file containing all the reference</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring">                            keyphrases of the analysed files.</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">    @type   reference_file: C{string}</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">    <tt class="py-name">super</tt><tt class="py-op">(</tt><tt class="py-name">EvaluatoC</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Method keybench.benchmark_component.BenchmarkComponent.__init__()=keybench.benchmark_component.BenchmarkComponent-class.html#__init__,Method keybench.candidate_extractor.CandidateExtractorC.__init__()=keybench.candidate_extractor.CandidateExtractorC-class.html#__init__,Method keybench.default.n_gram_extractor.NGramExtractor.__init__()=keybench.default.n_gram_extractor.NGramExtractor-class.html#__init__,Method keybench.default.prf_evaluator.PRFEvaluator.__init__()=keybench.default.prf_evaluator.PRFEvaluator-class.html#__init__,Method keybench.default.stanford_pre_processor.StanfordPreProcessor.__init__()=keybench.default.stanford_pre_processor.StanfordPreProcessor-class.html#__init__,Method keybench.default.tfidf_ranker.TFIDFRanker.__init__()=keybench.default.tfidf_ranker.TFIDFRanker-class.html#__init__,Method keybench.default.top_k_selector.TopKSelector.__init__()=keybench.default.top_k_selector.TopKSelector-class.html#__init__,Method keybench.evaluator.EvaluatorC.__init__()=keybench.evaluator.EvaluatorC-class.html#__init__,Method keybench.keybench_worker.KeyBenchWorker.__init__()=keybench.keybench_worker.KeyBenchWorker-class.html#__init__,Method keybench.keyphrase_extractor.KeyphraseExtractor.__init__()=keybench.keyphrase_extractor.KeyphraseExtractor-class.html#__init__,Method keybench.pre_processed_file.PreProcessedFile.__init__()=keybench.pre_processed_file.PreProcessedFile-class.html#__init__,Method keybench.pre_processor.PreProcessorC.__init__()=keybench.pre_processor.PreProcessorC-class.html#__init__,Method keybench.ranker.RankerC.__init__()=keybench.ranker.RankerC-class.html#__init__,Method keybench.selector.SelectorC.__init__()=keybench.selector.SelectorC-class.html#__init__"><a title="keybench.benchmark_component.BenchmarkComponent.__init__
+keybench.candidate_extractor.CandidateExtractorC.__init__
+keybench.default.n_gram_extractor.NGramExtractor.__init__
+keybench.default.prf_evaluator.PRFEvaluator.__init__
+keybench.default.stanford_pre_processor.StanfordPreProcessor.__init__
+keybench.default.tfidf_ranker.TFIDFRanker.__init__
+keybench.default.top_k_selector.TopKSelector.__init__
+keybench.evaluator.EvaluatorC.__init__
+keybench.keybench_worker.KeyBenchWorker.__init__
+keybench.keyphrase_extractor.KeyphraseExtractor.__init__
+keybench.pre_processed_file.PreProcessedFile.__init__
+keybench.pre_processor.PreProcessorC.__init__
+keybench.ranker.RankerC.__init__
+keybench.selector.SelectorC.__init__" class="py-name" href="#" onclick="return doclink('link-2', '__init__', 'link-2');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">name</tt><tt class="py-op">,</tt> <tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_reference_keyphrases</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">parse_reference_file</tt><tt class="py-op">(</tt><tt class="py-name">reference_file</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt>
+<a name="EvaluatorC.evaluate"></a><div id="EvaluatorC.evaluate-def"><a name="L28"></a><tt class="py-lineno">28</tt> <a class="py-toggle" href="#" id="EvaluatorC.evaluate-toggle" onclick="return toggle('EvaluatorC.evaluate');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="keybench.evaluator.EvaluatorC-class.html#evaluate">evaluate</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">keyphrases</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EvaluatorC.evaluate-collapsed" style="display:none;" pad="++" indent="++++++"></div><div id="EvaluatorC.evaluate-expanded"><a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-docstring">    Evaluate keyphrases extracted from various files (files and keyphrases are</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-docstring">    associated).</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt class="py-docstring">    @param    keyphrases: The files and their associated keyphrases.</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt class="py-docstring">    @type     keyphrases: C{list of (string, list of string)}</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">    <tt class="py-name">average_measures</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">label</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Method keybench.default.prf_evaluator.PRFEvaluator.measure_labels()=keybench.default.prf_evaluator.PRFEvaluator-class.html#measure_labels,Method keybench.evaluator.EvaluatorC.measure_labels()=keybench.evaluator.EvaluatorC-class.html#measure_labels"><a title="keybench.default.prf_evaluator.PRFEvaluator.measure_labels
+keybench.evaluator.EvaluatorC.measure_labels" class="py-name" href="#" onclick="return doclink('link-3', 'measure_labels', 'link-3');">measure_labels</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">      <tt class="py-name">average_measures</tt><tt class="py-op">[</tt><tt class="py-name">label</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-number">0.0</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">    <tt class="py-comment"># evaluate the keyphrases</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">filename</tt><tt class="py-op">,</tt> <tt class="py-name">keyphrase_list</tt> <tt class="py-keyword">in</tt> <tt class="py-name">keyphrases</tt><tt class="py-op">:</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">      <tt class="py-name">measures</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Method keybench.default.prf_evaluator.PRFEvaluator.single_evaluation()=keybench.default.prf_evaluator.PRFEvaluator-class.html#single_evaluation,Method keybench.evaluator.EvaluatorC.single_evaluation()=keybench.evaluator.EvaluatorC-class.html#single_evaluation"><a title="keybench.default.prf_evaluator.PRFEvaluator.single_evaluation
+keybench.evaluator.EvaluatorC.single_evaluation" class="py-name" href="#" onclick="return doclink('link-4', 'single_evaluation', 'link-4');">single_evaluation</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_references_keyphrases</tt><tt class="py-op">[</tt><tt class="py-name">filename</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">                                        <tt class="py-name">keyphrases</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">      <tt class="py-keyword">for</tt> <tt class="py-name">i</tt><tt class="py-op">,</tt> <tt class="py-name">measure</tt> <tt class="py-keyword">in</tt> <tt class="py-name">enumerate</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="keybench.default.prf_evaluator.PRFEvaluator.single_evaluation
+keybench.evaluator.EvaluatorC.single_evaluation" class="py-name" href="#" onclick="return doclink('link-5', 'single_evaluation', 'link-4');">single_evaluation</a></tt><tt class="py-op">(</tt><tt class="py-name">measures</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">        <tt class="py-name">average_measures</tt><tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="keybench.default.prf_evaluator.PRFEvaluator.measure_labels
+keybench.evaluator.EvaluatorC.measure_labels" class="py-name" href="#" onclick="return doclink('link-6', 'measure_labels', 'link-3');">measure_labels</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">]</tt> <tt class="py-op">+=</tt> <tt class="py-name">measure</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">    <tt class="py-comment"># compute the average of each measure</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">    <tt class="py-name">nb_value</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">keyphrases</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">label</tt> <tt class="py-keyword">in</tt> <tt class="py-name">average_measures</tt><tt class="py-op">:</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">      <tt class="py-name">average_measures</tt><tt class="py-op">[</tt><tt class="py-name">label</tt><tt class="py-op">]</tt> <tt class="py-op">/=</tt> <tt class="py-name">nb_value</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">    <tt class="py-comment"># save all the measures in one file</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">    <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-7" class="py-name" targets="Class keybench.evaluator.EvaluatorC=keybench.evaluator.EvaluatorC-class.html"><a title="keybench.evaluator.EvaluatorC" class="py-name" href="#" onclick="return doclink('link-7', 'EvaluatorC', 'link-7');">EvaluatorC</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method keybench.benchmark_component.BenchmarkComponent.store()=keybench.benchmark_component.BenchmarkComponent-class.html#store"><a title="keybench.benchmark_component.BenchmarkComponent.store" class="py-name" href="#" onclick="return doclink('link-8', 'store', 'link-8');">store</a></tt><tt class="py-op">(</tt><tt class="py-name">lazy_filename</tt><tt class="py-op">,</tt> <tt class="py-name">average_measures</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line"> </tt>
+<a name="EvaluatorC.single_evaluation"></a><div id="EvaluatorC.single_evaluation-def"><a name="L57"></a><tt class="py-lineno">57</tt> <a class="py-toggle" href="#" id="EvaluatorC.single_evaluation-toggle" onclick="return toggle('EvaluatorC.single_evaluation');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="keybench.evaluator.EvaluatorC-class.html#single_evaluation">single_evaluation</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">ref_keyphrases</tt><tt class="py-op">,</tt> <tt class="py-param">res_keyphrases</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EvaluatorC.single_evaluation-collapsed" style="display:none;" pad="++" indent="++++++"></div><div id="EvaluatorC.single_evaluation-expanded"><a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line"><tt class="py-docstring">    Compares two lists of keyphrases and gives comparison mesures.</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line"><tt class="py-docstring">    @param    ref_keyphrases: The list of keyphrases use as gold standard</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line"><tt class="py-docstring">                              keyphrases.</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line"><tt class="py-docstring">    @type     ref_keyphrases: C{list of string}</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line"><tt class="py-docstring">    @param    res_keyphrases: The list of extracted keyphrases.</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line"><tt class="py-docstring">    @type     res_keyphrases: C{list of string}</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line"><tt class="py-docstring">    @return:  One or more measures which results of the comparison of the two</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line"><tt class="py-docstring">              lists of keyphrases.</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line"><tt class="py-docstring">    @rtype:   C{list of float}</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line"> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">    <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line"> </tt>
+<a name="EvaluatorC.measure_labels"></a><div id="EvaluatorC.measure_labels-def"><a name="L74"></a><tt class="py-lineno">74</tt> <a class="py-toggle" href="#" id="EvaluatorC.measure_labels-toggle" onclick="return toggle('EvaluatorC.measure_labels');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="keybench.evaluator.EvaluatorC-class.html#measure_labels">measure_labels</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EvaluatorC.measure_labels-collapsed" style="display:none;" pad="++" indent="++++++"></div><div id="EvaluatorC.measure_labels-expanded"><a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line"><tt class="py-docstring">    Gives the labels for the evaluation measures. The labels must be in the same</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line"><tt class="py-docstring">    order than the measures given by C{single_evaluation()}.</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line"><tt class="py-docstring">    @return:  The labels of the given measures (returned by</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line"><tt class="py-docstring">              C{single_evaluation()}).</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line"><tt class="py-docstring">    @rtype:   C{list of string}</tt> </tt>
+<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line"> </tt>
+<a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line">    <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="keybench-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Jan 22 19:02:18 2013
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
