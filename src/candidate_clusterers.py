@@ -13,7 +13,7 @@ class HierarchicalClusterer(CandidateClustererC):
   """
   """
 
-  def __init__(self, name, is_lazy, lazy_directory, stemmer):
+  def __init__(self, name, is_lazy, lazy_directory, debug, stemmer):
     """
     Constructor of the component.
 
@@ -31,7 +31,8 @@ class HierarchicalClusterer(CandidateClustererC):
 
     super(HierarchicalClusterer, self).__init__(name,
                                                 is_lazy,
-                                                lazy_directory)
+                                                lazy_directory,
+                                                debug)
 
     self._stemmer = stemmer
 

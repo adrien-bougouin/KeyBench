@@ -19,7 +19,7 @@ class LongestNounPhraseExtractor(CandidateExtractorC):
   Component performing candidate terms extraction. It extracts 1..n-grams.
   """
 
-  def __init__(self, name, is_lazy, lazy_directory, noun_tags, adjective_tags):
+  def __init__(self, name, is_lazy, lazy_directory, debug, noun_tags, adjective_tags):
     """
     Constructor of the component.
 
@@ -39,7 +39,8 @@ class LongestNounPhraseExtractor(CandidateExtractorC):
 
     super(LongestNounPhraseExtractor, self).__init__(name,
                                                      is_lazy,
-                                                     lazy_directory)
+                                                     lazy_directory,
+                                                     debug)
 
     self._noun_tags = noun_tags
     self._adjective_tags = adjective_tags
@@ -88,6 +89,7 @@ class STFilteredNGramExtractor(NGramExtractor):
                name,
                is_lazy,
                lazy_directory,
+               debug,
                n,
                stop_words):
     """
@@ -110,6 +112,7 @@ class STFilteredNGramExtractor(NGramExtractor):
     super(STFilteredNGramExtractor, self).__init__(name,
                                                    is_lazy,
                                                    lazy_directory,
+                                                   debug,
                                                    n)
 
     self._stop_words = stop_words
@@ -150,6 +153,7 @@ class POSFilteredNGramExtractor(NGramExtractor):
                name,
                is_lazy,
                lazy_directory,
+               debug,
                n,
                noun_tags,
                adjective_tags):
@@ -175,6 +179,7 @@ class POSFilteredNGramExtractor(NGramExtractor):
     super(POSFilteredNGramExtractor, self).__init__(name,
                                                is_lazy,
                                                lazy_directory,
+                                               debug,
                                                n)
 
     self._noun_tags = noun_tags
@@ -211,8 +216,8 @@ class POSFilteredNGramExtractor(NGramExtractor):
         return False
 
       # semeval trick
-      #if (len(tagged_word) - (len(tag) + 1)) <= 2:
-      #  return False
+      if (len(tagged_word) - (len(tag) + 1)) <= 2:
+        return False
 
     return True
 
@@ -223,7 +228,7 @@ class NPChunkExtractor(CandidateExtractorC):
   Component performing candidate terms extraction. It extracts 1..n-grams.
   """
 
-  def __init__(self, name, is_lazy, lazy_directory, rule):
+  def __init__(self, name, is_lazy, lazy_directory, debug, rule):
     """
     Constructor of the component.
 
@@ -239,7 +244,7 @@ class NPChunkExtractor(CandidateExtractorC):
     @type   rule:
     """
 
-    super(NPChunkExtractor, self).__init__(name, is_lazy, lazy_directory)
+    super(NPChunkExtractor, self).__init__(name, is_lazy, lazy_directory, debug)
 
     self._np_chunker = RegexpParser("NP: " + rule)
 

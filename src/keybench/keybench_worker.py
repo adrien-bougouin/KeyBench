@@ -3,6 +3,8 @@
 
 from multiprocessing import Process
 
+##### Multi-processing #########################################################
+
 def keybench_worker(queue):
   """
   Executes one keyphrase extractor contained in a given queue.
@@ -15,10 +17,12 @@ def keybench_worker(queue):
 
   keyphrase_extractor.extract_keyphrases()
 
+################################################################################
+
 class KeyBenchWorker(Process):
   """
   Process launching the keyphrase extraction workflow. This class is used to
-  allow easy multiprocessing. The KeyBenchWorker execute the keyphrase extrator
+  allow easy multi-processing. The KeyBenchWorker execute the keyphrase extrator
   that are push into a given queue.
   """
 

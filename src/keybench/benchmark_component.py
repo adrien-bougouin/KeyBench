@@ -35,16 +35,16 @@ class BenchmarkComponent(object):
     super(BenchmarkComponent, self).__init__()
 
     self._name = name
-    self._is_lazy = is_lazy
     self._lazy_directory = path.join(lazy_directory, name)
-    self._string_directory = path.join(self._lazy_directory, "string")
+    self._string_directory = path.join(self.lazy_directory(), "string")
+    self._is_lazy = is_lazy
     self._debug = debug
 
     # create the directory if it does not exist
-    if not path.exists(self._lazy_directory):
-      makedirs(self._lazy_directory)
-    if not path.exists(self._string_directory):
-      makedirs(self._string_directory)
+    if not path.exists(self.lazy_directory()):
+      makedirs(self.lazy_directory())
+    if not path.exists(self.string_directory()):
+      makedirs(self.string_directory())
 
   def name(self):
     """
@@ -56,25 +56,6 @@ class BenchmarkComponent(object):
 
     return self._name
 
-  def set_name(self, name):
-    """
-    Setter of the name of the component.
-
-    @param  name: The new name of the component.
-    @type   name: C{string}
-    """
-
-    self._name = name
-    self._lazy_directory = path.join(path.split(self._lazy_directory)[0],
-                                     self._name)
-    self._string_directory = path.join(self._lazy_directory, "string")
-
-    # create the directory if it does not exist
-    if not path.exists(self._lazy_directory):
-      makedirs(self._lazy_directory)
-    if not path.exists(self._string_directory):
-      makedirs(self._string_directory)
-
   def is_lazy(self):
     """
     Getter of the lazyness property of the component.
@@ -84,18 +65,6 @@ class BenchmarkComponent(object):
     """
 
     return self._is_lazy
-
-  def set_is_lazy(self, is_lazy):
-    """
-    Setter of the lazyness property of the component.
-
-    @param  is_lazy: True if the component must load previous data, False if
-                     data must be computed tought they have already been
-                     computed.
-    @type   is_lazy: C{bool}
-    """
-
-    self._is_lazy = is_lazy
 
   def lazy_directory(self):
     """
@@ -108,23 +77,17 @@ class BenchmarkComponent(object):
 
     return self._lazy_directory
 
-  def _set_lazy_directory(self, lazy_directory):
+  def string_directory(self):
     """
-    Setter of the lazyness property of the component.
+    Getter of the directory path where the component stores the stringified
+    previously computed data.
 
-    @param  lazy_directory: The path of the new cache directory of the
-                            component.
-    @type   lazy_directory: C{string}
+    @return:  The path of the string version of the component's cache
+              directory.
+    @rtype:   C{string}
     """
 
-    self._lazy_directory = path.join(lazy_directory, self._name)
-    self._string_directory = path.join(self._lazy_directory, "string")
-
-    # create the directory if it does not exist
-    if not path.exists(self._lazy_directory):
-      makedirs(self._lazy_directory)
-    if not path.exists(self._string_directory):
-      makedirs(self._string_directory)
+    return self._string_directory
 
   def debug(self):
     """
@@ -153,7 +116,7 @@ class BenchmarkComponent(object):
     @rtype:   C{bool}
     """
 
-    filepath = path.join(self._lazy_directory, filename)
+    filepath = path.join(self.lazy_directory(), filename)
 
     return path.exists(filepath)
 
@@ -165,8 +128,8 @@ class BenchmarkComponent(object):
     @type   message: C{string}
     """
 
-    if self._debug:
-      print "%s >> %s"%(self._name, message)
+    if self.debug():
+      print "%s >> %s"%(self.name(), message)
 
   def load(self, filename):
     """
@@ -179,7 +142,7 @@ class BenchmarkComponent(object):
     @rtype:   C{object}
     """
 
-    filepath = path.join(self._lazy_directory, filename)
+    filepath = path.join(self.lazy_directory(), filename)
     cached_file = open(filepath, "r")
     cached_object = pickle.load(cached_file)
 
@@ -198,7 +161,7 @@ class BenchmarkComponent(object):
     @type   obj:      C{object}
     """
 
-    filepath = path.join(self._lazy_directory, filename)
+    filepath = path.join(self.lazy_directory(), filename)
     cache_file = open(filepath, "w")
 
     pickle.dump(obj, cache_file)
@@ -215,7 +178,7 @@ class BenchmarkComponent(object):
     @type   string_obj: C{object}
     """
 
-    filepath = path.join(self._string_directory, filename)
+    filepath = path.join(self.string_directory(), filename)
     string_file = codecs.open(filepath, "w", "utf-8")
 
     string_file.write(string_obj)

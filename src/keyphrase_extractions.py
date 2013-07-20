@@ -120,7 +120,7 @@ TEXTRANK_SE = "textrank"
 ##### runs #####################################################################
 
 CORPORA_RU = [WIKINEWS_CO]
-METHODS_RU = [TEXTRANK_ME, SINGLERANK_ME, TOPICRANK_ME, TOPICRANK_S_ME]
+METHODS_RU = [TEXTRANK_ME]
 NUMBERS_RU = [10]
 LENGTHS_RU = [4]
 CANDIDATES_RU = [POS_FILTERED_NGRAM_CA]
@@ -311,6 +311,7 @@ def main(argv):
                       c = STFilteredNGramExtractor(run_name,
                                                    LAZY_CANDIDATE_EXTRACTION,
                                                    RUNS_DIR,
+                                                   True,
                                                    length,
                                                    stop_words)
                   else:
@@ -318,6 +319,7 @@ def main(argv):
                       c = POSFilteredNGramExtractor(run_name,
                                                     LAZY_CANDIDATE_EXTRACTION,
                                                     RUNS_DIR,
+                                                    True,
                                                     length,
                                                     NOUN_TAGS,
                                                     ADJ_TAGS)
@@ -326,6 +328,7 @@ def main(argv):
                         c = LongestNounPhraseExtractor(run_name,
                                                        LAZY_CANDIDATE_EXTRACTION,
                                                        RUNS_DIR,
+                                                       True,
                                                        NOUN_TAGS,
                                                        ADJ_TAGS)
                       else:
@@ -333,17 +336,20 @@ def main(argv):
                           c = NPChunkExtractor(run_name,
                                                LAZY_CANDIDATE_EXTRACTION,
                                                RUNS_DIR,
+                                               True,
                                                np_chunk_rules)
                   ##### candidate clusterer ####################################
                   if cluster == NO_CLUSTER_CC:
                     cc = FakeClusterer(run_name,
                                        LAZY_CANDIDATE_CLUSTERING,
-                                       RUNS_DIR)
+                                       RUNS_DIR,
+                                       True)
                   else:
                     if cluster == HIERARCHICAL_CLUSTER_CC:
                       cc = HierarchicalClusterer(run_name,
                                                  LAZY_CANDIDATE_CLUSTERING,
                                                  RUNS_DIR,
+                                                 True,
                                                  stemmer)
                   ##### scoring ################################################
                   scoring_function = None
@@ -426,6 +432,7 @@ def main(argv):
                   ##### evaluator ##############################################
                   e = StandardPRFMEvaluator(run_name,
                                             RUNS_DIR,
+                                            True,
                                             refs,
                                             pre_processor.encoding(),
                                             ref_stemmer,

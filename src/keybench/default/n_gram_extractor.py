@@ -10,7 +10,7 @@ class NGramExtractor(CandidateExtractorC):
   Component performing candidate terms extraction. It extracts 1..n-grams.
   """
 
-  def __init__(self, name, is_lazy, lazy_directory, n):
+  def __init__(self, name, is_lazy, lazy_directory, debug, n):
     """
     Constructor of the component.
 
@@ -26,7 +26,7 @@ class NGramExtractor(CandidateExtractorC):
     @type   n:              C{int}
     """
 
-    super(NGramExtractor, self).__init__(name, is_lazy, lazy_directory)
+    super(NGramExtractor, self).__init__(name, is_lazy, lazy_directory, debug)
 
     self._n = n
 

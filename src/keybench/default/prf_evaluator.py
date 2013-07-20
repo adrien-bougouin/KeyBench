@@ -12,6 +12,7 @@ class PRFEvaluator(EvaluatorC):
   def __init__(self,
                name,
                lazy_directory,
+               debug,
                reference_file,
                encoding,
                ref_stemmer=None,
@@ -35,6 +36,7 @@ class PRFEvaluator(EvaluatorC):
 
     super(PRFEvaluator, self).__init__(name,
                                        lazy_directory,
+                                       debug,
                                        reference_file,
                                        encoding)
 

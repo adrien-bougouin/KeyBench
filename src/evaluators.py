@@ -19,6 +19,7 @@ class StandardPRFEvaluator(PRFEvaluator):
   def __init__(self,
                name,
                lazy_directory,
+               debug,
                reference_file,
                encoding,
                ref_stemmer=None,
@@ -42,6 +43,7 @@ class StandardPRFEvaluator(PRFEvaluator):
 
     super(StandardPRFEvaluator, self).__init__(name,
                                                lazy_directory,
+                                               debug,
                                                reference_file,
                                                encoding,
                                                ref_stemmer,
@@ -95,6 +97,7 @@ class StandardPRFMEvaluator(StandardPRFEvaluator):
   def __init__(self,
                name,
                lazy_directory,
+               debug,
                reference_file,
                encoding,
                ref_stemmer=None,
@@ -118,6 +121,7 @@ class StandardPRFMEvaluator(StandardPRFEvaluator):
 
     super(StandardPRFMEvaluator, self).__init__(name,
                                                 lazy_directory,
+                                                debug,
                                                 reference_file,
                                                 encoding,
                                                 ref_stemmer,
