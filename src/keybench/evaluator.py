@@ -24,12 +24,8 @@ class EvaluatorC(BenchmarkComponent):
 
   def __init__(self, name, lazy_directory, reference_file, encoding):
     """
-    Constructor of the component.
+    TODO
 
-    @param  name:           The name of the evaluator.
-    @type   name:           C{string}
-    @param  lazy_directory: The directory used for caching.
-    @type   lazy_directory: C{string}
     @param  reference_file: The path of the file containing all the reference
                             keyphrases of the analysed files.
     @type   reference_file: C{string}

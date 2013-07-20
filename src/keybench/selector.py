@@ -12,16 +12,6 @@ class SelectorC(BenchmarkComponent):
 
   def __init__(self, name, is_lazy, lazy_directory):
     """
-    Constructor of the component.
-
-    @param  name:     The name of the selector.
-    @type   name:     C{string}
-    @param  is_lazy:  True if the component can load previous datas, false if
-                      everything must be computed tought it has already been
-                      computed.
-    @type   is_lazy:  C{boolean}
-    @param  lazy_directory: The directory used for caching.
-    @type   lazy_directory: C{string}
     """
 
     super(SelectorC, self).__init__(name,

@@ -8,23 +8,28 @@ from os import path
 
 class BenchmarkComponent(object):
   """
-  Core component of all the keyphrase extractor system's components. This
-  component can be run in lazy mode, wich means that the previously computed
-  datas will be loaded instead of being computed again.
+  Core component of all the keyphrase extraction system. A benchmark component
+  can be run in lazy mode, i.e. the previously computed datas will be loaded
+  instead of being computed again (data are stored with C{pickle}).
   """
 
-  def __init__(self, name, is_lazy, lazy_directory):
+  def __init__(self, name, is_lazy, lazy_directory, debug=False):
     """
     Constructor of the component.
 
-    @param  name:           The concrete name of the component.
+    @param  name:           The name of the component.
     @type   name:           C{string}
-    @param  is_lazy:        True if the component can load previous datas, false
-                            if everything must be computed tought it as already
+    @param  is_lazy:        True if the component must load previous data, False
+                            if data must be computed tought they have already
                             been computed.
-    @type   is_lazy:        C{boolean}
-    @param  lazy_directory: The directory used for caching.
+    @type   is_lazy:        C{bool}
+    @param  lazy_directory: The directory used to store previously computed
+                            data.
     @type   lazy_directory: C{string}
+    @param  debug:          True if the component is in debug mode, else False.
+                            When the component is in debug mode, it will output
+                            each step of its processing.
+    @type   debug:          C{bool}
     """
 
     super(BenchmarkComponent, self).__init__()
@@ -33,6 +38,7 @@ class BenchmarkComponent(object):
     self._is_lazy = is_lazy
     self._lazy_directory = path.join(lazy_directory, name)
     self._string_directory = path.join(self._lazy_directory, "string")
+    self._debug = debug
 
     # create the directory if it does not exist
     if not path.exists(self._lazy_directory):
@@ -42,7 +48,7 @@ class BenchmarkComponent(object):
 
   def name(self):
     """
-    Gives the name of the component.
+    Getter of the name of the component.
 
     @return:  The name of the component.
     @rtype:   C{string}
@@ -50,19 +56,51 @@ class BenchmarkComponent(object):
 
     return self._name
 
+  def set_name(self, name):
+    """
+    Setter of the name of the component.
+
+    @param  name: The new name of the component.
+    @type   name: C{string}
+    """
+
+    self._name = name
+    self._lazy_directory = path.join(path.split(self._lazy_directory)[0],
+                                     self._name)
+    self._string_directory = path.join(self._lazy_directory, "string")
+
+    # create the directory if it does not exist
+    if not path.exists(self._lazy_directory):
+      makedirs(self._lazy_directory)
+    if not path.exists(self._string_directory):
+      makedirs(self._string_directory)
+
   def is_lazy(self):
     """
-    Says if the component uses lazy loading or not.
+    Getter of the lazyness property of the component.
 
-    @return:  True if the component uses lazy loading, else false.
-    @rtype:   C{boolean}
+    @return:  True if the component uses lazy loading, else False.
+    @rtype:   C{bool}
     """
 
     return self._is_lazy
 
+  def set_is_lazy(self, is_lazy):
+    """
+    Setter of the lazyness property of the component.
+
+    @param  is_lazy: True if the component must load previous data, False if
+                     data must be computed tought they have already been
+                     computed.
+    @type   is_lazy: C{bool}
+    """
+
+    self._is_lazy = is_lazy
+
   def lazy_directory(self):
     """
-    Gives the directory where the component stores its cached computations.
+    Getter of the directory path where the component stores the previously
+    computed data.
 
     @return:  The path of the cache directory of the component.
     @rtype:   C{string}
@@ -70,15 +108,49 @@ class BenchmarkComponent(object):
 
     return self._lazy_directory
 
+  def _set_lazy_directory(self, lazy_directory):
+    """
+    Setter of the lazyness property of the component.
+
+    @param  lazy_directory: The path of the new cache directory of the
+                            component.
+    @type   lazy_directory: C{string}
+    """
+
+    self._lazy_directory = path.join(lazy_directory, self._name)
+    self._string_directory = path.join(self._lazy_directory, "string")
+
+    # create the directory if it does not exist
+    if not path.exists(self._lazy_directory):
+      makedirs(self._lazy_directory)
+    if not path.exists(self._string_directory):
+      makedirs(self._string_directory)
+
+  def debug(self):
+    """
+    Getter of the debug mode of the document.
+
+    @return:  True if the component is in debug mode, else False.
+    @rtype:   C{bool}
+    """
+
+    return self._debug
+
+  def set_debug(self, debug):
+    """
+    """
+
+    self._debug = debug
+
   def is_cached(self, filename):
     """
-    Says if a given file exists in the cache directory.
+    Indicate if a given file exists in the cache directory.
 
     @param    filename: The name of the file to check.
     @type     filename: C{string}
 
     @return:  True if the file is already in cache, else False.
-    @rtype:   C{boolean}
+    @rtype:   C{bool}
     """
 
     filepath = path.join(self._lazy_directory, filename)
@@ -93,16 +165,17 @@ class BenchmarkComponent(object):
     @type   message: C{string}
     """
 
-    print "%s >> %s"%(self._name, message)
+    if self._debug:
+      print "%s >> %s"%(self._name, message)
 
   def load(self, filename):
     """
-    Load a already stored file representation object.
+    Load an already stored file.
 
     @param    filename: The name of the file to load.
     @type     filename: C{string}
 
-    @return:  The representation object of the file.
+    @return:  The object representing the file.
     @rtype:   C{object}
     """
 
@@ -116,11 +189,12 @@ class BenchmarkComponent(object):
 
   def store(self, filename, obj):
     """
-    Put the file representation object into the cache (for future lazy loading).
+    Stores the object, representing an analysed file, into the cache (for future
+    lazy loading).
 
-    @param  filename: The name of the file to store in cache.
+    @param  filename: The name of the file.
     @type   filename: C{string}
-    @param  obj:      The representation object of the file.
+    @param  obj:      The object which represents the file.
     @type   obj:      C{object}
     """
 
@@ -132,11 +206,12 @@ class BenchmarkComponent(object):
 
   def store_string(self, filename, string_obj):
     """
-    Put the representation string into the cache directory.
+    Stores the object, representing an analysed file, as a string into the
+    cache.
 
-    @param  filename:   The name of the file to store in cache.
+    @param  filename:   The name of the file.
     @type   filename:   C{string}
-    @param  string_obj: The representation string to store.
+    @param  string_obj: The string object which represents the file.
     @type   string_obj: C{object}
     """
 
