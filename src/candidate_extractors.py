@@ -31,6 +31,10 @@ class LongestNounPhraseExtractor(CandidateExtractorC):
     @type   is_lazy:        C{boolean}
     @param  lazy_directory: The directory used for caching.
     @type   lazy_directory: C{string}
+    @param  debug:          True if the component is in debug mode, else False.
+                            When the component is in debug mode, it will output
+                            each step of its processing.
+    @type   debug:          C{bool}
     @param  noun_tags:      The list of the noun tags of the POS tagger.
     @type   noun_tags:      C{list of string}
     @param  adjective_tags: The list of adjective tags of the POS tagger.

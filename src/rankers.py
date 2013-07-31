@@ -22,6 +22,7 @@ class TextRankRanker(RankerC):
                name,
                is_lazy,
                lazy_directory,
+               debug,
                strategy,
                scoring_function):
     """
@@ -35,6 +36,10 @@ class TextRankRanker(RankerC):
     @type   is_lazy:          C{boolean}
     @param  lazy_directory:   The directory used for caching.
     @type   lazy_directory:   C{string}
+    @param  debug:            True if the component is in debug mode, else
+                              False. When the component is in debug mode, it
+                              will output each step of its processing.
+    @type   debug:            C{bool}
     @param  strategy:         The strategy to use with the TextRank algorithm.
     @type   strategy:         C{textrank.TextRankStrategy}
     @param  scoring_function: Function wich gives a score to a
@@ -44,7 +49,7 @@ class TextRankRanker(RankerC):
                               tag_separator) : float}
     """
 
-    super(TextRankRanker, self).__init__(name, is_lazy, lazy_directory)
+    super(TextRankRanker, self).__init__(name, is_lazy, lazy_directory, debug)
 
     self._strategy = strategy
     self._textrank = TextRank(strategy,

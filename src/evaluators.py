@@ -31,6 +31,10 @@ class StandardPRFEvaluator(PRFEvaluator):
     @type   name:           C{string}
     @param  lazy_directory: The directory used for caching.
     @type   lazy_directory: C{string}
+    @param  debug:          True if the component is in debug mode, else False.
+                            When the component is in debug mode, it will output
+                            each step of its processing.
+    @type   debug:          C{bool}
     @param  reference_file: The path of the file containing all the reference
                             keyphrases of the analysed files.
     @type   reference_file: C{string}

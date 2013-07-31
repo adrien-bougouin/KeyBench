@@ -7,32 +7,48 @@ from os import path
 
 class RankerC(BenchmarkComponent):
   """
-  Component responsible of the candidates' ranking.
+  Component used to rank keyphrase candidates.
   """
 
-  def __init__(self, name, is_lazy, lazy_directory):
+  def __init__(self, name, is_lazy, lazy_directory, debug):
     """
+    Constructor of the component.
+
+    @param  name:           The name of the component.
+    @type   name:           C{string}
+    @param  is_lazy:        True if the component must load previous data, False
+                            if data must be computed tought they have already
+                            been computed.
+    @type   is_lazy:        C{bool}
+    @param  lazy_directory: The directory used to store previously computed
+                            data.
+    @type   lazy_directory: C{string}
+    @param  debug:          True if the component is in debug mode, else False.
+                            When the component is in debug mode, it will output
+                            each step of its processing.
+    @type   debug:          C{bool}
     """
 
     super(RankerC, self).__init__(name,
                                   is_lazy,
-                                  path.join(lazy_directory, "rankings"))
+                                  path.join(lazy_directory, "rankings"),
+                                  debug)
 
   def rank(self, filepath, pre_processed_file, candidates, clusters):
     """
-    Weights and ordered the terms of a pre-processed text.
+    Weights and ordered the candidates of a pre-processed text.
 
     @param    filepath:           The path of the analysed file.
     @type     filepath:           C{string}
     @param    pre_processed_file: The pre-processed file.
     @type     pre_processed_file: C{PreProcessedFile}
-    @param    candidates:         The candidates to be keyphrases.
-    @type     candidates:         C{list of string}
-    TODO clusters
-    TODO clusters
+    @param    candidates:         The keyphrase candidates.
+    @type     candidates:         C{list(string)}
+    @param    clusters:           The clustered candidates.
+    @type     clusters:           C{list(list(string))}
 
-    @return:  A list of terms and their weight (no more POS tags).
-    @rtype:   C{list of (string, float)}
+    @return:  A list of candidates and their weight (no more POS tags).
+    @rtype:   C{list(tuple(string, float))}
     """
 
     lazy_filename = path.split(filepath)[1] + ".rnk"
@@ -76,18 +92,18 @@ class RankerC(BenchmarkComponent):
 
   def weighting(self, pre_processed_file, candidates, clusters):
     """
-    Takes a pre-processed text (list of POS-tagged sentences) and give a weight
+    Takes a pre-processed text (list of POS-tagged sentences) and gives a weight
     to its candidates keyphrases.
 
     @param    pre_processed_file: The pre-processed file.
     @type     pre_processed_file: C{PreProcessedFile}
-    @param    candidates:         The candidates to be keyphrases.
-    @type     candidates:         C{list of string}
-    TODO clusters
-    TODO clusters
+    @param    candidates:         The keyphrase candidates.
+    @type     candidates:         C{list(string)}
+    @param    clusters:           The clustered candidates.
+    @type     clusters:           C{list(list(string))}
 
     @return:  A dictionary of terms as key and weight as value.
-    @rtype:   C{dict: string -> float}
+    @rtype:   C{dict(string, float)}
     """
 
     raise NotImplementedError()
@@ -97,13 +113,13 @@ class RankerC(BenchmarkComponent):
     Takes the weighted terms of the analysed text and ordered them such as the
     first termes are the one with the best weight.
 
-    @param    weights: A dictionary of weighted terms.
-    @type     weights: C{dict: string -> float}
-    TODO clusters
-    TODO clusters
+    @param    weights:  A dictionary of weighted candidates.
+    @type     weights:  C{dict(string, float)}
+    @param    clusters: The clustered candidates.
+    @type     clusters: C{list(list(string))}
 
     @return:  A ordered list of weighted terms.
-    @rtype:   C{list of (string, float)}
+    @rtype:   C{list(tuple(string, float))}
     """
 
     raise NotImplementedError()

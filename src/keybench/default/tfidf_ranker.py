@@ -16,6 +16,7 @@ class TFIDFRanker(RankerC):
                name,
                is_lazy,
                lazy_directory,
+               debug,
                inverse_document_frequencies,
                scoring_function):
     """
@@ -30,6 +31,11 @@ class TFIDFRanker(RankerC):
     @type   is_lazy:                      C{boolean}
     @param  lazy_directory:               The directory used for caching.
     @type   lazy_directory:               C{string}
+    @param  debug:                        True if the component is in debug
+                                          mode, else False. When the component
+                                          is in debug mode, it will output each
+                                          step of its processing.
+    @type   debug:                        C{bool}
     @param  inverse_document_frequencies: The inverse document frequencies of
                                           each word that can appear in a
                                           candidate term.
@@ -41,7 +47,7 @@ class TFIDFRanker(RankerC):
                                           tag_separator) : float}
     """
 
-    super(TFIDFRanker, self).__init__(name, is_lazy, lazy_directory)
+    super(TFIDFRanker, self).__init__(name, is_lazy, lazy_directory, debug)
 
     self._inverse_document_frequencies = inverse_document_frequencies
     self._scoring_function = scoring_function

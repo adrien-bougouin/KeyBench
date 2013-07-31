@@ -88,7 +88,7 @@ class UnredundantWholeSelector(WholeSelector):
   terms.
   """
 
-  def __init__(self, name, is_lazy, lazy_directory, stemmer):
+  def __init__(self, name, is_lazy, lazy_directory, debug, stemmer):
     """
     Constructor of the component.
 
@@ -100,6 +100,10 @@ class UnredundantWholeSelector(WholeSelector):
     @type   is_lazy:        C{boolean}
     @param  lazy_directory: The directory used for caching.
     @type   lazy_directory: C{string}
+    @param  debug:          True if the component is in debug mode, else False.
+                            When the component is in debug mode, it will output
+                            each step of its processing.
+    @type   debug:          C{bool}
     @param  stemmer:        Stemmer used to remove redundancies in the selected
                             candidates.
     @type   stemmer:        C{nltk.stem.api.StemmerI}
@@ -107,7 +111,8 @@ class UnredundantWholeSelector(WholeSelector):
 
     super(UnredundantWholeSelector, self).__init__(name,
                                                    is_lazy,
-                                                   lazy_directory)
+                                                   lazy_directory,
+                                                   debug)
 
     self._stemmer = stemmer
 
@@ -142,7 +147,7 @@ class UnredundantTopKSelector(TopKSelector):
   terms.
   """
 
-  def __init__(self, name, is_lazy, lazy_directory, k, stemmer):
+  def __init__(self, name, is_lazy, lazy_directory, debug, k, stemmer):
     """
     Constructor of the component.
 
@@ -154,6 +159,10 @@ class UnredundantTopKSelector(TopKSelector):
     @type   is_lazy:        C{boolean}
     @param  lazy_directory: The directory used for caching.
     @type   lazy_directory: C{string}
+    @param  debug:          True if the component is in debug mode, else False.
+                            When the component is in debug mode, it will output
+                            each step of its processing.
+    @type   debug:          C{bool}
     @param  k:              The number of best candidates to select.
     @type   k:              C{int}
     @param  stemmer:        Stemmer used to remove redundancies in the selected
@@ -164,6 +173,7 @@ class UnredundantTopKSelector(TopKSelector):
     super(UnredundantTopKSelector, self).__init__(name,
                                                   is_lazy,
                                                   lazy_directory,
+                                                  debug,
                                                   k)
 
     self._stemmer = stemmer
@@ -199,7 +209,7 @@ class UnredundantTextRankSelector(SelectorC):
   terms.
   """
 
-  def __init__(self, name, is_lazy, lazy_directory, k, stemmer):
+  def __init__(self, name, is_lazy, lazy_directory, debug, k, stemmer):
     """
     Constructor of the component.
 
@@ -211,6 +221,10 @@ class UnredundantTextRankSelector(SelectorC):
     @type   is_lazy:        C{boolean}
     @param  lazy_directory: The directory used for caching.
     @type   lazy_directory: C{string}
+    @param  debug:          True if the component is in debug mode, else False.
+                            When the component is in debug mode, it will output
+                            each step of its processing.
+    @type   debug:          C{bool}
     @param  k:              The number of keywords to use for the candidate
                             selection.
     @type   k:              C{int}
@@ -221,7 +235,8 @@ class UnredundantTextRankSelector(SelectorC):
 
     super(UnredundantTextRankSelector, self).__init__(name,
                                                       is_lazy,
-                                                      lazy_directory)
+                                                      lazy_directory,
+                                                      debug)
 
     self._k = k
     self._stemmer = stemmer

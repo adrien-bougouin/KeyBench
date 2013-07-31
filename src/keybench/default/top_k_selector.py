@@ -9,7 +9,7 @@ class TopKSelector(SelectorC):
   terms.
   """
 
-  def __init__(self, name, is_lazy, lazy_directory, k):
+  def __init__(self, name, is_lazy, lazy_directory, debug, k):
     """
     Constructor of the component.
 
@@ -21,11 +21,15 @@ class TopKSelector(SelectorC):
     @type   is_lazy:        C{boolean}
     @param  lazy_directory: The directory used for caching.
     @type   lazy_directory: C{string}
+    @param  debug:          True if the component is in debug mode, else False.
+                            When the component is in debug mode, it will output
+                            each step of its processing.
+    @type   debug:          C{bool}
     @param  k:              The number of best candidates to select.
     @type   k:              C{int}
     """
 
-    super(TopKSelector, self).__init__(name, is_lazy, lazy_directory)
+    super(TopKSelector, self).__init__(name, is_lazy, lazy_directory, debug)
 
     self._k = k
 

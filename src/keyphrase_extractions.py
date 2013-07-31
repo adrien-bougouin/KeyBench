@@ -196,6 +196,7 @@ def main(argv):
             pre_processor = FrenchPreProcessor("%s_pre_processor"%corpus,
                                                LAZY_PRE_PROCESSING,
                                                RUNS_DIR,
+                                               True,
                                                DEFTFileRep())
             language = FRENCH_LA
             # lazy loading of idfs
@@ -216,6 +217,7 @@ def main(argv):
               pre_processor = FrenchPreProcessor("%s_pre_processor"%corpus,
                                                  LAZY_PRE_PROCESSING,
                                                  RUNS_DIR,
+                                                 True,
                                                  WikiNewsFileRep())
               language = FRENCH_LA
               # lazy loading of idfs
@@ -236,6 +238,7 @@ def main(argv):
                 pre_processor = EnglishPreProcessor("%s_pre_processor"%corpus,
                                                     LAZY_PRE_PROCESSING,
                                                     RUNS_DIR,
+                                                    True,
                                                     "/",
                                                     SemEvalFileRep())
                 language = ENGLISH_LA
@@ -257,6 +260,7 @@ def main(argv):
                   pre_processor = EnglishPreProcessor("%s_pre_processor"%corpus,
                                                       LAZY_PRE_PROCESSING,
                                                       RUNS_DIR,
+                                                      True,
                                                       "/",
                                                       InspecFileRep())
                   language = ENGLISH_LA
@@ -277,6 +281,7 @@ def main(argv):
                     pre_processor = EnglishPreProcessor("%s_pre_processor"%corpus,
                                                         LAZY_PRE_PROCESSING,
                                                         RUNS_DIR,
+                                                        True,
                                                         "/",
                                                         PlainTextFileRep())
                     language = ENGLISH_LA
@@ -407,6 +412,7 @@ def main(argv):
                       r =  TextRankRanker(run_name,
                                           LAZY_RANKING,
                                           RUNS_DIR,
+                                          True,
                                           strategy,
                                           scoring_function)
                   ##### selector ###############################################
@@ -414,12 +420,14 @@ def main(argv):
                     s = UnredundantWholeSelector(run_name,
                                                  LAZY_SELECTION,
                                                  RUNS_DIR,
+                                                 True,
                                                  stemmer)
                   else:
                     if selection == TOP_K_SE:
                       s = UnredundantTopKSelector(run_name,
                                                   LAZY_SELECTION,
                                                   RUNS_DIR,
+                                                  True,
                                                   number,
                                                   stemmer)
                     else:
@@ -427,6 +435,7 @@ def main(argv):
                         s = UnredundantTextRankSelector(run_name,
                                                         LAZY_SELECTION,
                                                         RUNS_DIR,
+                                                        True,
                                                         number,
                                                         stemmer)
                   ##### evaluator ##############################################

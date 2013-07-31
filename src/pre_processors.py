@@ -43,25 +43,31 @@ class MEltPreProcessor(PreProcessorC):
                name,
                is_lazy,
                lazy_directory,
+               debug,
                encoding):
     """
     Constructor of the component.
 
-    @param  name:                 The name of the pre-processor.
-    @type   name:                 C{string}
-    @param  is_lazy:              True if the component can load previous datas,
-                                  false if everything must be computed tought it
-                                  has already been computed.
-    @type   is_lazy:              C{boolean}
-    @param  lazy_directory:       The directory used for caching.
-    @type   lazy_directory:       C{string}
-    @param  encoding:             The encoding of the files to pre-process.
-    @type   encoding:             C{string}
+    @param  name:           The name of the pre-processor.
+    @type   name:           C{string}
+    @param  is_lazy:        True if the component can load previous datas, false
+                            if everything must be computed tought it has already
+                            been computed.
+    @type   is_lazy:        C{boolean}
+    @param  lazy_directory: The directory used for caching.
+    @type   lazy_directory: C{string}
+    @param  debug:          True if the component is in debug mode, else False.
+                            When the component is in debug mode, it will output
+                            each step of its processing.
+    @type   debug:          C{bool}
+    @param  encoding:       The encoding of the files to pre-process.
+    @type   encoding:       C{string}
     """
 
     super(MEltPreProcessor, self).__init__(name,
                                                is_lazy,
                                                lazy_directory,
+                                               debug,
                                                encoding,
                                                "/")
 
@@ -121,6 +127,7 @@ class FrenchPreProcessor(MEltPreProcessor):
                name,
                is_lazy,
                lazy_directory,
+               debug,
                corpus_file):
     """
     Constructor of the component.
@@ -133,6 +140,10 @@ class FrenchPreProcessor(MEltPreProcessor):
     @type   is_lazy:        C{boolean}
     @param  lazy_directory: The directory used for caching.
     @type   lazy_directory: C{string}
+    @param  debug:          True if the component is in debug mode, else False.
+                            When the component is in debug mode, it will output
+                            each step of its processing.
+    @type   debug:          C{bool}
     @param  corpus_file:    The representation of a file (title, abstract,
                             content).
     @type   corpus_file:    C{CorpusFile}
@@ -141,6 +152,7 @@ class FrenchPreProcessor(MEltPreProcessor):
     super(FrenchPreProcessor, self).__init__(name,
                                              is_lazy,
                                              lazy_directory,
+                                             debug,
                                              FRENCH_ENCODING)
     self._corpus_file = corpus_file
 

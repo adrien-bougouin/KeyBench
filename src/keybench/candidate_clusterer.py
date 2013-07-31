@@ -90,7 +90,7 @@ class CandidateClustererC(BenchmarkComponent):
     @type     candidates:         C{list(string)}
 
     @return:  A list of clusters (lists of candidates).
-    @rtype:   C{list((string))}
+    @rtype:   C{list(list(string))}
     """
 
     raise NotImplementedError()

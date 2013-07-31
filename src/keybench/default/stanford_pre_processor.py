@@ -18,6 +18,7 @@ class StanfordPreProcessor(PreProcessorC):
                name,
                is_lazy,
                lazy_directory,
+               debug,
                encoding,
                tag_separator,
                stanford_jar_path,
@@ -33,6 +34,10 @@ class StanfordPreProcessor(PreProcessorC):
     @type   is_lazy:              C{boolean}
     @param  lazy_directory:       The directory used for caching.
     @type   lazy_directory:       C{string}
+    @param  debug:                True if the component is in debug mode, else
+                                  False. When the component is in debug mode, it
+                                  will output each step of its processing.
+    @type   debug:                C{bool}
     @param  encoding:             The encoding of the files to pre-process.
     @type   encoding:             C{string}
     @param  tag_separator:        The symbol to use as a separator between a
@@ -49,6 +54,7 @@ class StanfordPreProcessor(PreProcessorC):
     super(StanfordPreProcessor, self).__init__(name,
                                                is_lazy,
                                                lazy_directory,
+                                               debug,
                                                encoding,
                                                tag_separator)
 

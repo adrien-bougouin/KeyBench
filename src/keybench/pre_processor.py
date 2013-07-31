@@ -10,15 +10,34 @@ class PreProcessorC(BenchmarkComponent):
   """
   Component responsible of the document pre-processing. It pre-processed files
   in three steps:
-    1. Splitting of the text into sentences
-    2. Word tokenization of the sentences
-    3. Part of Speech tagging of the sentences' words
+    1. Sentence segmentation
+    2. Word tokenization
+    3. Part-of-Speech tagging (POS tagging)
   """
 
-  def __init__(self, name, is_lazy, lazy_directory, encoding, tag_separator):
+  def __init__(self,
+               name,
+               is_lazy,
+               lazy_directory,
+               debug,
+               encoding,
+               tag_separator):
     """
-    TODO
+    Constructor of the component.
 
+    @param  name:           The name of the component.
+    @type   name:           C{string}
+    @param  is_lazy:        True if the component must load previous data, False
+                            if data must be computed tought they have already
+                            been computed.
+    @type   is_lazy:        C{bool}
+    @param  lazy_directory: The directory used to store previously computed
+                            data.
+    @type   lazy_directory: C{string}
+    @param  debug:          True if the component is in debug mode, else False.
+                            When the component is in debug mode, it will output
+                            each step of its processing.
+    @type   debug:          C{bool}
     @param  encoding:       The encoding of the files to pre-process.
     @type   encoding:       C{string}
     @param  tag_separator:  The symbol to use as a separator between a word and
@@ -29,14 +48,15 @@ class PreProcessorC(BenchmarkComponent):
     super(PreProcessorC, self).__init__(name,
                                         is_lazy,
                                         path.join(lazy_directory,
-                                                  "pre_processings"))
+                                                  "pre_processings"),
+                                        debug)
 
-    self._encoding = encoding
-    self._tag_separator = tag_separator
+    self.set_encoding(encoding)
+    self.set_tag_separator(tag_separator)
 
   def encoding(self):
     """
-    Gives the encoding used by the pre-processor.
+    Getter of the encoding used by the pre-processor.
 
     @return:  The encoding of the files to pre-process.
     @rtype:   C{string}
@@ -46,17 +66,17 @@ class PreProcessorC(BenchmarkComponent):
 
   def set_encoding(self, encoding):
     """
-    Sets the encoding used by the pre-processor.
+    Setter of the encoding used by the pre-processor.
 
-    @param  encoding:       The encoding of the files to pre-process.
-    @type   encoding:       C{string}
+    @param  encoding: The new encoding of the files to pre-process.
+    @type   encoding: C{string}
     """
 
     self._encoding = encoding
 
   def tag_separator(self):
     """
-    Gives the tag separator used for the POS tagging.
+    Gitter of the tag separator used for the POS tagging.
 
     @return:  The symbol to use as a separator between a word and its tag.
     @rtype:   tag_separator:  C{string}
@@ -66,7 +86,7 @@ class PreProcessorC(BenchmarkComponent):
 
   def set_tag_separator(self, tag_separator):
     """
-    Sets the tag separator used for the POS tagging.
+    Setter of the tag separator used for the POS tagging.
 
     @param  tag_separator:  The symbol to use as a separator between a word and
                             its tag.
@@ -200,7 +220,7 @@ class PreProcessorC(BenchmarkComponent):
     @type   filepath: C{string}
 
     @return:  The title, the abstract and the body of the file's text.
-    @rtype:   C{(string, string, string)}
+    @rtype:   C{tuple(string, string, string)}
     """
 
     raise NotImplementedError()
@@ -213,7 +233,7 @@ class PreProcessorC(BenchmarkComponent):
     @type     text: C{string}
 
     @return:  A list of sentences contained in the text.
-    @rtype:   C{list of string}
+    @rtype:   C{list(string)}
     """
 
     raise NotImplementedError()
@@ -223,10 +243,10 @@ class PreProcessorC(BenchmarkComponent):
     Takes a list of sentences and applies word tokenize on each.
 
     @param    sentences: The sentences to tokenize.
-    @type     sentences: C{list of string}
+    @type     sentences: C{list(string)}
 
     @return:  A list of sentences which are tokenized.
-    @rtype:   C{list of string}
+    @rtype:   C{list(string)}
     """
 
     raise NotImplementedError()
@@ -236,10 +256,10 @@ class PreProcessorC(BenchmarkComponent):
     Takes a list of tokenized sentences and applies POS-tagging on each.
 
     @param    tokenized_sentences: The tokenized sentences to POS-tag.
-    @type     tokenized_sentences: C{list of string}
+    @type     tokenized_sentences: C{list(string)}
 
     @return:  A list of sentences which are POS-tagged.
-    @rtype:   C{list of string}
+    @rtype:   C{list(string)}
     """
 
     raise NotImplementedError()

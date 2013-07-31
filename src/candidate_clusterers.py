@@ -25,6 +25,10 @@ class HierarchicalClusterer(CandidateClustererC):
     @type   is_lazy:        C{boolean}
     @param  lazy_directory: The directory used for caching.
     @type   lazy_directory: C{string}
+    @param  debug:          True if the component is in debug mode, else False.
+                            When the component is in debug mode, it will output
+                            each step of its processing.
+    @type   debug:          C{bool}
     TODO stemmer
     TODO stemmer
     """
