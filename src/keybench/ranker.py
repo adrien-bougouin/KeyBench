@@ -110,8 +110,7 @@ class RankerC(BenchmarkComponent):
 
   def ordering(self, weights, clusters):
     """
-    Takes the weighted terms of the analysed text and ordered them such as the
-    first termes are the one with the best weight.
+    Takes the weighted terms of the analysed text and ordered them.
 
     @param    weights:  A dictionary of weighted candidates.
     @type     weights:  C{dict(string, float)}

@@ -6,7 +6,8 @@ from keybench.evaluator import EvaluatorC
 class PRFEvaluator(EvaluatorC):
   """
   Component performing keyphrases evaluation. It provides the three classical
-  measures (precision, recall, f1-measure).
+  measures (precision, recall, f1-measure). The parsing of the file containing
+  the reference keyphrases is not implemented.
   """
 
   def __init__(self,
@@ -20,13 +21,19 @@ class PRFEvaluator(EvaluatorC):
     """
     Constructor of the component.
 
-    @param  name:           The name of the evaluator.
+    @param  name:           The name of the component.
     @type   name:           C{string}
-    @param  lazy_directory: The directory used for caching.
+    @param  is_lazy:        True if the component must load previous data, False
+                            if data must be computed tought they have already
+                            been computed.
+    @type   is_lazy:        C{bool}
+    @param  lazy_directory: The directory used to store previously computed
+                            data.
     @type   lazy_directory: C{string}
-    @param  reference_file: The path of the file containing all the reference
-                            keyphrases of the analysed files.
-    @type   reference_file: C{string}
+    @param  debug:          True if the component is in debug mode, else False.
+                            When the component is in debug mode, it will output
+                            each step of its processing.
+    @type   debug:          C{bool}
     @param  encoding:       The encoding of the reference files.
     @type   encoding:       C{string}
     @param  stemmer:        The object used to stem words. If it is not defined,
@@ -40,8 +47,48 @@ class PRFEvaluator(EvaluatorC):
                                        reference_file,
                                        encoding)
 
+    self.set_ref_stemmer(ref_stemmer)
+    self.set_res_stemmer(res_stemmer)
+
+  def ref_stemmer(self):
+    """
+    Getter of the stemmer used to stem reference keyphrases.
+
+    @return:  The stemmer used to stem the reference keyphrases.
+    @rtype:   C{nltk.stem.api.StemmerI}
+    """
+
+    return self._ref_stemmer
+
+  def set_ref_stemmer(self, ref_stemmer):
+    """
+    Setter of the stemmer used to stem reference keyphrases.
+
+    @param  ref_stemmer: The new stemmer used to stem the reference keyphrases.
+    @type   ref_stemmer: C{nltk.stem.api.StemmerI}
+    """
+
     self._ref_stemmer = ref_stemmer
-    self._res_stemmer = res_stemmer
+
+  def res_stemmer(self):
+    """
+    Getter of the stemmer used to stem extracted keyphrases.
+
+    @return:  The stemmer used to stem the extracted keyphrases.
+    @rtype:   C{nltk.stem.api.StemmerI}
+    """
+
+    return self._res_stemmer
+
+  def set_res_stemmer(self, ref_stemmer):
+    """
+    Setter of the stemmer used to stem extracted keyphrases.
+
+    @param  ref_stemmer: The new stemmer used to stem the extracted keyphrases.
+    @type   ref_stemmer: C{nltk.stem.api.StemmerI}
+    """
+
+    self._res_stemmer = ref_stemmer
 
   def single_evaluation(self, ref_keyphrases, res_keyphrases):
     """
@@ -61,12 +108,12 @@ class PRFEvaluator(EvaluatorC):
     # stemming if needed
     ref_k = []
     res_k = []
-    if self._ref_stemmer:
-      ref_k = self.stem_keyphrases(ref_keyphrases, self._ref_stemmer)
+    if self.ref_stemmer():
+      ref_k = self.stem_keyphrases(ref_keyphrases, self.ref_stemmer())
     else:
       ref_k = ref_keyphrases
-    if self._res_stemmer:
-      res_k = self.stem_keyphrases(res_keyphrases, self._res_stemmer)
+    if self.res_stemmer():
+      res_k = self.stem_keyphrases(res_keyphrases, self.res_stemmer())
     else:
       res_k = res_keyphrases
 

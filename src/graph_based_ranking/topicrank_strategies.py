@@ -2,17 +2,27 @@
 # -*- encoding: utf-8 -*-
 
 import math
-from textrank_strategies import TextRankStrategyI
+from textrank_strategies import TextRankStrategy
 from util import term_clustering
 
 ID_TAG = "id"
 
-class CompleteGraphStrategy(TextRankStrategyI):
+class CompleteGraphStrategy(TextRankStrategy):
   """
+  Strategy to use with the TextRank graph-based ranking algorithm. This strategy
+  creates a complete graph and change the weigh computation of links.
   """
 
   def reset(self, tokens, context):
     """
+    Reinitializes the data structures according to the new given tokens and
+    context (it is safer to use this method than each setters one by one).
+
+    @param  tokens:   The new tokens to work with.
+    @type   tokens:   C{list(string)}
+    @param  context:  The context from which the new tokens are extracted (list
+                      of POS tagged sentences).
+    @type   context:  C{list(string)}
     """
 
     ##### Data structures ######################################################
@@ -90,12 +100,13 @@ class CompleteGraphStrategy(TextRankStrategyI):
 
 ################################################################################
 
-class TopicRankStrategy(TextRankStrategyI):
+class TopicRankStrategy(TextRankStrategy):
   """
-  Strategy to use with PyRank. This strategy is a decorator of the
-  C{pyrank.nlp.TextRankStrategyI} to add term clustering support for methods
-  which use words instead of terms [1][2]. In fact, it replaces the terms by an
-  one word identifiers, so the decorated strategy can work normally.
+  Strategy to use with the TextRank graph-based ranking algorithm. This strategy
+  is a decorator of the C{TextRankStrategy} to add candidate clustering support
+  for methods which use words instead of candidates [1][2]. In fact, it replaces
+  the candidates by one word identifiers, so the decorated strategy can work
+  normally.
 
   [1] Mihalcea, R. et Tarau, P (2004). Textrank : Bringing Order Into Texts. In
       Proceedings of the 2004 Conference on Empirical Methods in Natural
@@ -109,30 +120,26 @@ class TopicRankStrategy(TextRankStrategyI):
     """
     Constructor.
 
-    @param  strategy: The strategy modify to allow term clustering.
-    @type   strategy: C{pyrank.nlp.TextRankStrategyI}
+    @param  strategy: The strategy modified to allow candidate clusters ranking.
+    @type   strategy: C{TextRankStrategy}
     @param  stemmer:  Stemmer needed for the term clustering.
     @type   stemmer:  C{nltk.stem.StemmerI}
     """
 
+    self.set_strategy(strategy)
     super(TopicRankStrategy, self).__init__(strategy.window(),
                                             strategy.tag_separator(),
                                             [ID_TAG])
 
-    self._clusters = []
-    self._strategy = strategy
-    self._stemmer = stemmer
-    self._reverted_token_ids = None
-    self._cluster_frequencies = {}
-    self._sentence_frequencies = {}
-    self._cluster_sentence_coverages = {}
-    self._cluster_first_positions = {}
+    self.set_stemmer(stemmer)
+    self.set_clusters([])
+    self.set_reverted_token_ids(None)
 
-    self._strategy.set_accepted_tags([ID_TAG])
+    self.strategy().set_accepted_tags([ID_TAG])
 
   def window(self):
     """
-    Accessor to the size of the window to use for the co-occurrences between
+    Getter of the size of the window to use for the co-occurrences between
     words.
 
     @return:  The co-occrurrence window's size.
@@ -155,7 +162,7 @@ class TopicRankStrategy(TextRankStrategyI):
 
   def tag_separator(self):
     """
-    Accessor to the POS tag separator.
+    Getter of the POS tag separator.
 
     @return:  The tag used to devide a word and its POS tag
               (<words><separator><tag>).
@@ -178,11 +185,11 @@ class TopicRankStrategy(TextRankStrategyI):
 
   def accepeted_tags(self):
     """
-    Accessor to the POS tagged of the working words (only the words with the
+    Getter of the POS tagged of the working words (only the words with the
     given POS tags are ranked).
 
     @return:  The POS tagged used to filter the words to rank.
-    @rtype:   C{list of string}
+    @rtype:   C{list(string)}
     """
 
     return self.strategy().accepted_tags()
@@ -193,7 +200,7 @@ class TopicRankStrategy(TextRankStrategyI):
     given POS tags are ranked).
 
     @return:  The new POS tagged to use to filter the words to rank.
-    @rtype:   C{list of string}
+    @rtype:   C{list(string)}
     """
 
     self._accepted_tags = accepted_tags
@@ -201,12 +208,12 @@ class TopicRankStrategy(TextRankStrategyI):
 
   def indexed_sentences(self):
     """
-    Accessor to the indexed sentences. Each element of the list represent a
+    Getter of the indexed sentences. Each element of the list represent a
     sentence containing the tokens' id associated with its position(s) in the
     sentence.
 
     @return:  The indexed sentences.
-    @rtype:   C{list of dict: string -> list of int}
+    @rtype:   C{list(dict(string, list(int)))}
     """
 
     return self.strategy().indexed_sentences()
@@ -218,19 +225,19 @@ class TopicRankStrategy(TextRankStrategyI):
     sentence.
 
     @param  indexed_sentences:  The new indexed sentences.
-    @type   indexed_sentences:  C{list of dict: string -> list of int}
+    @type   indexed_sentences:  C{list(dict(string, list(int)))}
     """
 
     self.strategy().set_indexed_sentences(indexed_sentences)
 
   def indexed_token_ids(self):
     """
-    Accessor to the indexed token ids. A list of sentence index is associated to
+    Getter of the indexed token ids. A list of sentence index is associated to
     each token ids when one of the token represented by the id appeares in the
     sentences.
 
     @return:  The indexed token ids.
-    @rtype:   C{dict: string -> list of int}
+    @rtype:   C{dict(string, list(int))}
     """
 
     return self.strategy().indexed_token_ids()
@@ -242,17 +249,17 @@ class TopicRankStrategy(TextRankStrategyI):
     sentences.
 
     @param  indexed_token_ids:  The new indexed token ids.
-    @type   indexed_token_ids:  C{dict: string -> list of int}
+    @type   indexed_token_ids:  C{dict(string, list(int))}
     """
 
     self.strategy().set_indexed_token_ids(indexed_token_ids)
 
   def computed_weights(self):
     """
-    Accessor to the already computed recomendations.
+    Getter of the already computed recomendations.
 
     @return:  The already computed recomendations.
-    @rtype:   C{dict: string -> dict: string -> float}
+    @rtype:   C{dict(string, dict(string, float))}
     """
 
     return self.strategy().computed_weights()
@@ -262,17 +269,17 @@ class TopicRankStrategy(TextRankStrategyI):
     Setter of the already computed recomendations.
 
     @param  computed_weights: The new already computed recomendations.
-    @type   computed_weights: C{dict: string -> dict: string -> float}
+    @type   computed_weights: C{dict(string, dict(string, float))}
     """
 
     self.strategy().set_computed_weights(computed_weights)
 
   def strategy(self):
     """
-    Accessor to the decorated strategy.
+    Getter of the decorated strategy.
 
     @return:  The decorated strategy.
-    @rtype:   C{pyrank.nlp.TextRankStrategyI}
+    @rtype:   C{TextRankStrategy}
     """
 
     return self._strategy
@@ -282,14 +289,14 @@ class TopicRankStrategy(TextRankStrategyI):
     Setter of the decorated strategy.
 
     @return:  The new decorated strategy.
-    @rtype:   C{pyrank.nlp.TextRankStrategyI}
+    @rtype:   C{TextRankStrategy}
     """
 
     self._strategy = strategy
 
   def stemmer(self):
     """
-    Accessor to the stemmer used for the term clustering.
+    Getter of the stemmer used for the term clustering.
 
     @return:  The use stemmer.
     @rtype:   C{nltk.stem.StemmerI}
@@ -307,12 +314,32 @@ class TopicRankStrategy(TextRankStrategyI):
 
     self._stemmer = stemmer
 
+  def clusters(self):
+    """
+    Getter of the Strategies clusters.
+
+    @return:  The clusters of the strategy.
+    @rtype:   C{list(list(string))}
+    """
+
+    return self._clusters
+
+  def set_clusters(self, clusters):
+    """
+    Setter of the Strategies clusters.
+
+    @param  clusters: The new clusters of the strategy.
+    @type   clusters: C{list(list(string))}
+    """
+
+    self._clusters = clusters
+
   def reverted_token_ids(self):
     """
-    Accessor to the reverted vertion of the _token_ids attribute.
+    Getter of the reverted version of the _token_ids attribute.
 
     @return:  The reverted version of the _token_ids attribute.
-    @rtype:   C{dict: string -> string}
+    @rtype:   C{dict(string, string)}
     """
 
     return self._reverted_token_ids
@@ -322,90 +349,10 @@ class TopicRankStrategy(TextRankStrategyI):
     Setter of the reverted vertion of the _token_ids attribute.
 
     @return:  The new reverted version of the _token_ids attribute.
-    @rtype:   C{dict: string -> string}
+    @rtype:   C{dict(string, string)}
     """
 
     self._reverted_token_ids = reverted_token_ids
-
-  def cluster_frequencies(self):
-    """
-    Accessor to the document frequency of the clusters.
-
-    @return:  The frequencies associatated to the clusters.
-    @rtype:   C{dict: string -> float}
-    """
-
-    return self._cluster_frequencies
-
-  def set_cluster_frequencies(self, cluster_frequencies):
-    """
-    Setter of the document frequency of the clusters.
-
-    @return:  The new frequencies associatated to the clusters.
-    @rtype:   C{dict: string -> float}
-    """
-
-    self._cluster_frequencies = cluster_frequencies
-
-  def cluster_sentence_frequencies(self):
-    """
-    Accessor to the document frequency of the clusters.
-
-    @return:  The frequencies associatated to the clusters.
-    @rtype:   C{dict: string -> float}
-    """
-
-    return self._cluster_sentence_frequencies
-
-  def set_cluster_sentence_frequencies(self, cluster_sentence_frequencies):
-    """
-    Setter of the document frequency of the clusters.
-
-    @return:  The new frequencies associatated to the clusters.
-    @rtype:   C{dict: string -> float}
-    """
-
-    self._cluster_sentence_frequencies = cluster_sentence_frequencies
-
-  def cluster_sentence_coverages(self):
-    """
-    Accessor to the document frequency of the clusters.
-
-    @return:  The frequencies associatated to the clusters.
-    @rtype:   C{dict: string -> float}
-    """
-
-    return self._cluster_sentence_coverages
-
-  def set_cluster_sentence_coverages(self, cluster_sentence_coverages):
-    """
-    Setter of the document frequency of the clusters.
-
-    @return:  The new frequencies associatated to the clusters.
-    @rtype:   C{dict: string -> float}
-    """
-
-    self._cluster_sentence_coverages = cluster_sentence_coverages
-
-  def cluster_first_positions(self):
-    """
-    Accessor to the document frequency of the clusters.
-
-    @return:  The frequencies associatated to the clusters.
-    @rtype:   C{dict: string -> float}
-    """
-
-    return self._cluster_first_positions
-
-  def set_cluster_first_positions(self, cluster_first_positions):
-    """
-    Setter of the document frequency of the clusters.
-
-    @return:  The new frequencies associatated to the clusters.
-    @rtype:   C{dict: string -> float}
-    """
-
-    self._cluster_first_positions = cluster_first_positions
 
   def identifier(self, token):
     """
@@ -413,7 +360,7 @@ class TopicRankStrategy(TextRankStrategyI):
     identifier for each token (hash of the stringified token).
 
     @param  token: The token to get the identifier of.
-    @type   token: C{object}
+    @type   token: C{string}
 
     @return:  The identifier of the given token.
     @rtype:   C{string}
@@ -427,9 +374,10 @@ class TopicRankStrategy(TextRankStrategyI):
     context (it is safer to use this method than each setters one by one).
 
     @param  tokens:   The new tokens to work with.
-    @type   tokens:   C{list of object}
-    @param  context:  The context from which the new tokens are extracted.
-    @type   context:  C{object}
+    @type   tokens:   C{list(string)}
+    @param  context:  The context from which the new tokens are extracted (list
+                      of POS tagged sentences).
+    @type   context:  C{list(string)}
     """
 
     ##### Strategy's context adaptation ########################################
@@ -437,10 +385,6 @@ class TopicRankStrategy(TextRankStrategyI):
     modified_context = []
     token_ids = {}
     reverted_token_ids = {}
-    cluster_frequencies = {}
-    cluster_sentence_frequencies = {}
-    cluster_sentence_coverages = {}
-    cluster_first_positions = {}
 
     # modify the context for the decorated strategy
     # FIXME the replacement may remove some tokens because of overlapping from
@@ -449,7 +393,7 @@ class TopicRankStrategy(TextRankStrategyI):
       modified_sentence = sentence
 
       # replacement, starting with the smaller clusters
-      for index, cluster_tokens in sorted(enumerate(self._clusters),
+      for index, cluster_tokens in sorted(enumerate(self.clusters()),
                                           key=lambda (i, c): len(c)):
         # replacement, staring with the bigger terms
         for token in sorted(cluster_tokens,
@@ -467,7 +411,7 @@ class TopicRankStrategy(TextRankStrategyI):
     self.strategy().reset(tokens, modified_context)
 
     # create the correct token ids and reverted_token_ids
-    for index, cluster_tokens in enumerate(self._clusters):
+    for index, cluster_tokens in enumerate(self.clusters()):
       strategy_token = "%d%s%s"%(index,
                                  self.tag_separator(),
                                  ID_TAG)
@@ -477,63 +421,6 @@ class TopicRankStrategy(TextRankStrategyI):
       for token in cluster_tokens:
         reverted_token_ids[token] = identifier
 
-    # compute the clusters' frequencies
-    total_count = 0.0
-    nb_sentences = len(modified_context)
-    positions = {}
-
-    for i, sentence in enumerate(modified_context):
-      for index in range(len(self._clusters)):
-        strategy_token = "%d%s%s"%(index,
-                                   self.tag_separator(),
-                                   ID_TAG)
-        identifier = self.strategy().identifier(strategy_token)
-        count = float(sentence.count(strategy_token))
-
-        if not cluster_frequencies.has_key(identifier):
-          cluster_frequencies[identifier] = 0.0
-          cluster_sentence_frequencies[identifier] = 0.0
-          cluster_sentence_coverages[identifier] = 0.0
-          positions[identifier] = []
-
-        cluster_frequencies[identifier] += count
-        cluster_sentence_frequencies[identifier] += min(1.0, count)
-
-        if count > 0.0:
-          positions[identifier].append(float(i + 1))
-
-        total_count += count
-
-    for identifier, freq in cluster_frequencies.items():
-      cluster_frequencies[identifier] = freq / total_count
-
-    for identifier, freq in cluster_sentence_frequencies.items():
-      cluster_sentence_frequencies[identifier] = freq / nb_sentences
-
-    nb_sentences = float(len(positions))
-    for identifier, cluster_positions in positions.items():
-      nb_occurrences = float(len(cluster_positions))
-
-      if nb_occurrences > 0:
-        length = float((cluster_positions[-1] - cluster_positions[0]) + 1)
-        threshold = math.floor(length / nb_occurrences)
-        nb_loss = float(nb_sentences - length)
-
-        if nb_occurrences > 1:
-          for i, pos in enumerate(cluster_positions[1:]):
-            # because of sub list, i is the index of the previous one
-            gap_with_previous = float((pos - cluster_positions[i]) - 1)
-
-            if gap_with_previous > threshold:
-              nb_loss += gap_with_previous
-
-        cluster_sentence_coverages[identifier] = 1.0 - (nb_loss / nb_sentences)
-        cluster_first_positions[identifier] = 1.0 / cluster_positions[0]
-      else:
-        cluster_sentence_coverages[identifier] = 0.0
-        cluster_first_positions[identifier] = 0.0
-
-
     ##### Reset ################################################################
 
     # the PyRank algorithms sees the right datas but the strategy works on
@@ -542,10 +429,6 @@ class TopicRankStrategy(TextRankStrategyI):
     self.set_context(context)
     self.set_token_ids(token_ids)
     self.set_reverted_token_ids(reverted_token_ids)
-    self.set_cluster_frequencies(cluster_frequencies)
-    self.set_cluster_sentence_frequencies(cluster_sentence_frequencies)
-    self.set_cluster_sentence_coverages(cluster_sentence_coverages)
-    self.set_cluster_first_positions(cluster_first_positions)
 
   def recomendation(self, in_token_id, out_token_id):
     """

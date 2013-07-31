@@ -141,17 +141,17 @@ class PreProcessorC(BenchmarkComponent):
       super(PreProcessorC, self).log("POS tagging of %s..."%filepath)
       if len(tokenized_title_sentences) > 0:
         pos_tagged_title_sentences = self.pos_tagging(tokenized_title_sentences,
-                                                      self._tag_separator)
+                                                      self.tag_separator())
       else:
         pos_tagged_title_sentences = []
       if len(tokenized_abstract_sentences) > 0:
         pos_tagged_abstract_sentences = self.pos_tagging(tokenized_abstract_sentences,
-                                                         self._tag_separator)
+                                                         self.tag_separator())
       else:
         pos_tagged_abstract_sentences = []
       if len(tokenized_body_sentences) > 0:
         pos_tagged_body_sentences = self.pos_tagging(tokenized_body_sentences,
-                                                    self._tag_separator)
+                                                    self.tag_separator())
       else:
         pos_tagged_body_sentences = []
 
@@ -179,8 +179,8 @@ class PreProcessorC(BenchmarkComponent):
           index += 1
 
       # pre_processed_file creation
-      pre_processed_file.set_encoding(self._encoding)
-      pre_processed_file.set_tag_separator(self._tag_separator)
+      pre_processed_file.set_encoding(self.encoding())
+      pre_processed_file.set_tag_separator(self.tag_separator())
       pre_processed_file.set_title(pos_tagged_title_sentences)
       pre_processed_file.set_abstract(pos_tagged_abstract_sentences)
       pre_processed_file.set_body(pos_tagged_body_sentences)

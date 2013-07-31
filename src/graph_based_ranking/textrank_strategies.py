@@ -1,37 +1,53 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 
-from exceptions import NotImplementedError
-
-class TextRankStrategyI(object):
+class TextRankStrategy(object):
   """
+  Strategy to use with the TextRank graph-based ranking algorithm [1]. It allows
+  to define a new graph construction, to define a new link weighting and to
+  modify the PageRank formula [2].
+
+  [1] Rada Mihalcea and Paul Tarau. 2004. TextRank: Bringing Order Into Texts.
+      In Dekang Lin and Dekai Wu, editors, Proceedings of the 2004 Conference on
+      Empirical Methods in Natural Language Processing, pages 404–411,
+      Barcelona, Spain, July. Association for Computational Linguistics.
+  [2] Sergey Brin and Lawrence Page. 1998. The Anatomy of a Large-Scale
+      Hypertextual Web Search Engine. Computer Networks and ISDN Systems,
+      30(1):107-117.
   """
 
   def __init__(self, window, tag_separator, accepted_tags):
     """
     Constructor.
 
-    TODO
+    @param  window:         The window of words used to find word co-occurences.
+    @type   window:         C{int}
+    @param  tag_separator:  The character that separate the words and their POS
+                            tag.
+    @type   tag_separator:  C{string}
+    @param  accepted_tags:  The POS tags of the words to use as nodes of in the
+                            graph.
+    @type   accepted_tags:  C{list(string)}
     """
 
-    super(TextRankStrategyI, self).__init__()
+    super(TextRankStrategy, self).__init__()
 
-    self._tokens = []
-    self._context = None
-    self._token_ids = {}
-    self._window = window
-    self._tag_separator = tag_separator
-    self._accepted_tags = accepted_tags
-    self._indexed_sentences = []  # position of each token in each sentence
-    self._indexed_token_ids = {}  # sentence indexes in which each word appears
-    self._computed_weights = {}   # lazy loading to avoid recomputation
+    self.set_tokens([])
+    self.set_context(None)
+    self.set_token_ids({})
+    self.set_window(window)
+    self.set_tag_separator(tag_separator)
+    self.set_accepted_tags(accepted_tags)
+    self.set_indexed_sentences([])  # position of each token in each sentence
+    self.set_indexed_token_ids({})  # sentence indexes in which words appear
+    self.set_computed_weights({})   # lazy loading to avoid recomputation
 
   def tokens(self):
     """
-    Accessor to the tokens the strategy is working on.
+    Getter of the tokens the strategy is working on.
 
     @return:  The current tokens that can be analysed by the strategy.
-    @rtype:   C{list of object}
+    @rtype:   C{list(string)}
     """
 
     return self._tokens
@@ -41,18 +57,18 @@ class TextRankStrategyI(object):
     setter of the tokens the strategy is working on.
 
     @param  tokens: The new tokens to work on.
-    @type   tokens: C{list of object}
+    @type   tokens: C{list(string)}
     """
 
     self._tokens = tokens
 
   def context(self):
     """
-    Accessor to the context which can give clues, about the tokens
+    Getter of the context which can give clues, about the tokens
     relationships, to the strategy.
 
     @return:  The context used by the strategy.
-    @rtype:   C{object}
+    @rtype:   C{string}
     """
 
     return self._context
@@ -63,18 +79,18 @@ class TextRankStrategyI(object):
     the tokens relationships.
 
     @param  context: The new context to use.
-    @type   context:  C{object}
+    @type   context:  C{string}
     """
 
     self._context = context
 
   def token_ids(self):
     """
-    Accessor to tokens, organized by an identifier which can play the role of a
+    Getter of tokens, organized by an identifier which can play the role of a
     cluster identifier.
 
     @return:  The tokens used by the strategy, organized by identifier.
-    @rtype:   C{dict: string -> object}
+    @rtype:   C{dict(string, string)}
     """
 
     return self._token_ids
@@ -85,14 +101,14 @@ class TextRankStrategyI(object):
 
     @param  token_ids:  The new identifiers for the tokens the strategy is
                         working on.
-    @type   token_ids:  C{dict: string -> object}
+    @type   token_ids:  C{dict(string, string)}
     """
 
     self._token_ids = token_ids
 
   def window(self):
     """
-    Accessor to the size of the window to use for the co-occurrences between
+    Getter of the size of the window to use for the co-occurrences between
     words.
 
     @return:  The co-occrurrence window's size.
@@ -114,7 +130,7 @@ class TextRankStrategyI(object):
 
   def tag_separator(self):
     """
-    Accessor to the POS tag separator.
+    Getter of the POS tag separator.
 
     @return:  The tag used to devide a word and its POS tag
               (<words><separator><tag>).
@@ -136,11 +152,11 @@ class TextRankStrategyI(object):
 
   def accepted_tags(self):
     """
-    Accessor to the POS tagged of the working words (only the words with the
+    Getter of the POS tagged of the working words (only the words with the
     given POS tags are ranked).
 
     @return:  The POS tagged used to filter the words to rank.
-    @rtype:   C{list of string}
+    @rtype:   C{list(string)}
     """
 
     return self._accepted_tags
@@ -151,19 +167,19 @@ class TextRankStrategyI(object):
     given POS tags are ranked).
 
     @return:  The new POS tagged to use to filter the words to rank.
-    @rtype:   C{list of string}
+    @rtype:   C{list(string)}
     """
 
     self._accepted_tags = accepted_tags
 
   def indexed_sentences(self):
     """
-    Accessor to the indexed sentences. Each element of the list represent a
+    Getter of the indexed sentences. Each element of the list represent a
     sentence containing the tokens' id associated with its position(s) in the
     sentence.
 
     @return:  The indexed sentences.
-    @rtype:   C{list of dict: string -> list of int}
+    @rtype:   C{list(dict(string, list(int)))}
     """
 
     return self._indexed_sentences
@@ -175,19 +191,19 @@ class TextRankStrategyI(object):
     sentence.
 
     @param  indexed_sentences:  The new indexed sentences.
-    @type   indexed_sentences:  C{list of dict: string -> list of int}
+    @type   indexed_sentences:  C{list(dict(string, list(int)))}
     """
 
     self._indexed_sentences = indexed_sentences
 
   def indexed_token_ids(self):
     """
-    Accessor to the indexed token ids. A list of sentence index is associated to
+    Getter of the indexed token ids. A list of sentence index is associated to
     each token ids when one of the token represented by the id appeares in the
     sentences.
 
     @return:  The indexed token ids.
-    @rtype:   C{dict: string -> list of int}
+    @rtype:   C{dict(string, list(int))}
     """
 
     return self._indexed_token_ids
@@ -199,17 +215,17 @@ class TextRankStrategyI(object):
     sentences.
 
     @param  indexed_token_ids:  The new indexed token ids.
-    @type   indexed_token_ids:  C{dict: string -> list of int}
+    @type   indexed_token_ids:  C{dict(string, list(int))}
     """
 
     self._indexed_token_ids = indexed_token_ids
 
   def computed_weights(self):
     """
-    Accessor to the already computed recomendations.
+    Getter of the already computed recomendations.
 
     @return:  The already computed recomendations.
-    @rtype:   C{dict: string -> dict: string -> float}
+    @rtype:   C{dict(string, dict(string, float))}
     """
 
     return self._computed_weights
@@ -219,7 +235,7 @@ class TextRankStrategyI(object):
     Setter of the already computed recomendations.
 
     @param  computed_weights: The new already computed recomendations.
-    @type   computed_weights: C{dict: string -> dict: string -> float}
+    @type   computed_weights: C{dict(string, dict(string, float))}
     """
 
     self._computed_weights = computed_weights
@@ -253,10 +269,10 @@ class TextRankStrategyI(object):
     context (it is safer to use this method than each setters one by one).
 
     @param  tokens:   The new tokens to work with.
-    @type   tokens:   C{list of string}
+    @type   tokens:   C{list(string)}
     @param  context:  The context from which the new tokens are extracted (list
                       of POS tagged sentences).
-    @type   context:  C{list of string}
+    @type   context:  C{list(string)}
     """
 
     ##### Data structures ######################################################
@@ -321,7 +337,27 @@ class TextRankStrategyI(object):
     @rtype:   C{float}
     """
 
-    raise NotImplementedError
+    weight = 0.0
+
+    if not self.computed_weights()[in_token_id].has_key(out_token_id):
+      for i in self.indexed_token_ids()[in_token_id]:
+        s = self.indexed_sentences()[i]
+        if s.has_key(out_token_id):
+          for j in s[in_token_id]:
+            for k in s[out_token_id]:
+              if abs(j - k) < self._window:
+                weight = 1.0
+                break
+            if weight > 0.0:
+              break
+          if weight > 0.0:
+            break
+      self.computed_weights()[in_token_id][out_token_id] = weight
+      self.computed_weights()[out_token_id][in_token_id] = weight
+    else:
+      weight = self.computed_weights()[in_token_id][out_token_id]
+
+    return weight
 
   def random_walk(self, token_id):
     """
@@ -341,7 +377,7 @@ class TextRankStrategyI(object):
 
 ################################################################################
 
-class SingleRankStrategy(TextRankStrategyI):
+class SingleRankStrategy(TextRankStrategy):
   """
   SingleRank [1] strategy to use with the PyRank algorithm (the tokens must be
   POS tagged). The constructed graph is weighted and undirected.
@@ -380,42 +416,6 @@ class SingleRankStrategy(TextRankStrategyI):
       self.computed_weights()[out_token_id][in_token_id] = weight
     else:
       weight = self.computed_weights()[in_token_id][out_token_id]
-
-    return weight
-
-################################################################################
-
-class TextRankStrategy(SingleRankStrategy):
-  """
-  TextRank [1] strategy to use with the PyRank algorithm (the tokens must be POS
-  tagged). The constructed graph is unweighted and undirected.
-
-  [1] Mihalcea, R. et Tarau, P (2004). Textrank : Bringing Order Into Texts. In
-      Proceedings of the 2004 Conference on Empirical Methods in Natural
-      Language Processing.
-  """
-
-  def recomendation(self, in_token_id, out_token_id):
-    """
-    Computes the recomendation score beetween two groups of tokens (using the
-    tokens' identifier). The recomendation score is used to link two node in the
-    graph. The weight of the created edge is equal to the recomendation score.
-
-    @param  in_token_id:  The identifier of the source token.
-    @type   in_token_id:  C{string}
-    @param  out_token_id: The identifier of the target token.
-    @type   out_token_id: C{string}
-
-    @return:  The weight the the edge two create by recomendation.
-    @rtype:   C{float}
-    """
-
-    # would be more fast to recompute, but this avoid boilerplates
-    weight = super(TextRankStrategy, self).recomendation(in_token_id,
-                                                         out_token_id)
-
-    if weight > 0.0:
-      weight = 1.0
 
     return weight
 

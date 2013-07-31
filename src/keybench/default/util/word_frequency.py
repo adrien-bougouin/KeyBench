@@ -5,6 +5,8 @@ from multiprocessing import Pool
 from os import listdir
 from os import path
 
+##### Multi-processing #########################################################
+
 def word_bag_extraction_pool_worker(arguments):
   """
   """
@@ -19,9 +21,11 @@ def word_bag_extraction_pool_worker(arguments):
 
   return set(bag)
 
+################################################################################
+
 def document_frequencies(corpus_directory, extension, pre_processor):
   """
-  Gives the document frequency of all the words appearing in the corpus.
+  Gives the document frequency of all the words appearing in a given corpus.
 
   @param    corpus_directory: The path of the directory containing the corpus'
                               files.
@@ -33,8 +37,8 @@ def document_frequencies(corpus_directory, extension, pre_processor):
   @type     pre_processor:    C{keybench.PreProcessorC}
 
   @return:  All the lowercased (not POS tagged) words in the corpus associated
-            with their DF.
-  @rtype:   C{dict: string -> float}
+            with their document frequency.
+  @rtype:   C{dict(string, float)}
   """
 
 
@@ -77,8 +81,8 @@ def inverse_document_frequencies(corpus_directory,
   @type     pre_processor:    C{keybench.PreProcessorC}
 
   @return:  All the lowercased (not POS tagged) words in the corpus associated
-            with their IDFs.
-  @rtype:   C{dict: string -> float}
+            with their inverse document frequencies.
+  @rtype:   C{dict(string, float)}
   """
 
   dfs = document_frequencies(corpus_directory, extension, pre_processor)

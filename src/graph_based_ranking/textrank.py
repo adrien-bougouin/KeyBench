@@ -6,7 +6,26 @@ import math
 
 class TextRank(object):
   """
-  TODO
+  Implementaton of the TextRank ranking algorithm for Natural Language
+  Processing [1]. Only the ranking is implemented, not the keyphrase generation
+  based on the keywords. Therefore other methods such as SingleRank [2] can use
+  this algorithm. In the case of SingleRank, ascoring function must be defined
+  to compute a score to multi-word expressions based on the score of their
+  words. To allow the implementation of variants a strategy must be implemented.
+  It makes it easy to change the graph construction, change the link weighting
+  or to act on the PageRank formula [3].
+
+  [1] Rada Mihalcea and Paul Tarau. 2004. TextRank: Bringing Order Into Texts.
+      In Dekang Lin and Dekai Wu, editors, Proceedings of the 2004 Conference on
+      Empirical Methods in Natural Language Processing, pages 404–411,
+      Barcelona, Spain, July. Association for Computational Linguistics.
+  [2] Xiaojun Wan and Jianguo Xiao. 2008. Single Doc ument Keyphrase Extraction
+      Using Neighborhood Knowledge. In Proceedings of the 23rd National
+      Conference on Artificial Intelligence - Volume 2, pages 855–860. AAAI
+      Press.
+  [3] Sergey Brin and Lawrence Page. 1998. The Anatomy of a Large-Scale
+      Hypertextual Web Search Engine. Computer Networks and ISDN Systems,
+      30(1):107-117.
   """
 
   def __init__(self,
@@ -16,35 +35,53 @@ class TextRank(object):
                recomendation_weight=0.85,
                max_ranking_iterations=1000000):
     """
-    TODO
+    Constructor.
+
+    @param  strategy:               The strategy used to specialized the graph
+                                    construction and usage.
+    @type   strategy:               C{TextRankStrategy}
+    @param  scoring_function:       Function used to compute the scores of the
+                                    textual units, when the give candidates to
+                                    weight are not single words.
+    @type   scoring_function:       C{function(expression, word_weights): float}
+    @param  convergence_threshold:  The threshold under which the ranking is
+                                    stable.
+    @type   convergence_threshold:  C{float}
+    @param  recomendation_weight:   The value of the damping factor used in the
+                                    PageRank formula.
+    @type   recomendation_weight:   C{float}
+    @param  max_ranking_iteration:  The number of maximum iteration to do for
+                                    the weight computation, in case the ranking
+                                    does not reach a stable state.
+    @type   max_ranking_iteration:  C{int}
     """
 
     super(TextRank, self).__init__()
 
-    self._strategy = strategy
-    self._scoring_function = scoring_function
-    self._convergence_threshold = convergence_threshold
-    self._recomendation_weight = recomendation_weight
-    self._max_ranking_iterations = max_ranking_iterations
+    self.set_strategy(strategy)
+    self.set_scoring_function(scoring_function)
+    self.set_convergence_threshold(convergence_threshold)
+    self.set_recomendation_weight(recomendation_weight)
+    self.set_max_ranking_iterations(max_ranking_iterations)
 
   def strategy(self):
     """
-    Accessor to the used strategy.
+    Getter of the used strategy to create the graph and computes the weights.
 
-    @return:  The strategy used for the graph creation and the scores
+    @return:  The strategy used for the graph creation and the score
               computation.
-    @rtype:   C{pyrank.PyRankStrategyI}
+    @rtype:   C{TextRankStrategyI}
     """
 
     return self._strategy
 
   def set_strategy(self, strategy):
     """
-    Setter of the used strategy.
+    Setter of the used strategy to create the graph and computes the weights.
 
-    @param  strategy: The strategy to use for the graph creation
+    @param  strategy: The new strategy to use for the graph creation
                       and the scores computation.
-    @type   strategy: C{pyrank.PyRankStrategyI}
+    @type   strategy: C{TextRankStrategyI}
     """
 
     self._strategy = strategy
@@ -74,7 +111,7 @@ class TextRank(object):
 
   def convergence_threshold(self):
     """
-    Accessor to the convergence threshold for the scores computation.
+    Getter of the convergence threshold for the scores computation.
 
     @return:  The threshold used to decide weither the computed scores are
               stable or not, according to the previous values.
@@ -85,9 +122,9 @@ class TextRank(object):
 
   def set_convergence_threshold(self, convergence_threshold):
     """
-    Setter ot the convergence threshold.
+    Setter of the convergence threshold.
 
-    @param  convergence_threshold:  The threshold used to decide weither the
+    @param  convergence_threshold:  The new threshold used to decide weither the
                                     computed scores of each nodes are stable,
                                     according to the previous value.
     @type   convergence_threshold:  C{float}
@@ -97,7 +134,7 @@ class TextRank(object):
 
   def recomendation_weight(self):
     """
-    Accessor to the importance of the recomendation over the random walk.
+    Getter of the importance of the recomendation over the random walk.
 
     @return:  recomendation_weight: The importance value of the recomendation
                                     over the random walk.
@@ -110,8 +147,8 @@ class TextRank(object):
     """
     Setter of the the recomendation importance over the random walk.
 
-    @param  recomendation_weight: The importance value of the recomendation over
-                                  the random walk.
+    @param  recomendation_weight: The new importance value of the recomendation
+                                  over the random walk.
     @type   recomendation_weight: C{float}
     """
 
@@ -119,7 +156,7 @@ class TextRank(object):
 
   def max_ranking_iterations(self):
     """
-    Accessor to the limit number of computation iteration.
+    Getter of the limit number of computation iteration.
 
     @return:  max_ranking_iterations: The maximum number of iterations to
                                       compute the nodes' score in case that a
@@ -133,8 +170,8 @@ class TextRank(object):
     """
     Setter of the limit number of computation iteration.
 
-    @param  max_ranking_iterations: The maximum number of iterations to compute
-                                    the nodes' score in case that a
+    @param  max_ranking_iterations: The new maximum number of iterations to
+                                    compute the nodes' score in case that a
                                     stabilization can't be achieved.
     @type   max_ranking_iterations: C{int}
     """
@@ -143,7 +180,18 @@ class TextRank(object):
 
   def rank(self, tokens, context):
     """
-    TODO
+    TextRank graph-based ranking algorithm.
+
+    @param    tokens:   The textual units to rank. They can be different than
+                        the tokens used into the graph, but their score must be
+                        computed according to the graph tokens.
+    @type     tokens:   C{list(string)}
+    @param    context:  The text (POS tagged sentences) in wich the given tokens
+                        are extracted from.
+    @type     context:  C{list(string)}
+
+    @return:  The given tokens associated with there score.
+    @rtype:   C{List(tuple(string, float))}
     """
 
     ##### Strategy reinitialization ############################################
@@ -231,14 +279,14 @@ class TextRank(object):
     with the strategy scored tokens.
 
     @param  tokens:   The tokens to rank.
-    @type   tokens:   C{list of object}
+    @type   tokens:   C{list(string)}
     @param  context:  The context in which the tokens appeare.
-    @type   context:  C{object}
+    @type   context:  C{string}
     @param  scores:   The tokens associated with there score.
-    @type   scores:   C{List of (object, float)}
+    @type   scores:   C{list(tuple(string, float))}
 
     @return:  The correct scores.
-    @rtype:   C{list of (object, float)}.
+    @rtype:   C{list(tuple(string, float))}.
     """
 
     token_scores = scores

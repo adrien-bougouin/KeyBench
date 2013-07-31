@@ -74,8 +74,9 @@ class TextRankRanker(RankerC):
     @rtype:   C{dict: string -> float}
     """
 
+    # sheat to reset clusters for TopicRank
     if isinstance(self._textrank.strategy(), TopicRankStrategy):
-      self._strategy._clusters = clusters
+      self._strategy.set_clusters(clusters)
     ranking = self._textrank.rank(candidates, pre_processed_file.full_text())
     weighted_candidates = {}
 

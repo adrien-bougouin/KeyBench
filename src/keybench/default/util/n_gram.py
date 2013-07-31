@@ -5,13 +5,13 @@ def n_grams(tokens, n):
   """
   Extracts n-grams from a list of tokens.
 
-  @param    tokens: The tokens list to transforme into n-grams list.
-  @type     tokens: C{list of string}
+  @param    tokens: The tokens list to transform into n-grams list.
+  @type     tokens: C{list(string)}
   @param    n:      The number of tokens to put in each n-gram.
   @type     n:      C{int}
 
   @return:  A list of n-grams generated from the list of tokens.
-  @type:    C{list of string}
+  @type:    C{list(string)}
   """
 
   result = []
@@ -31,17 +31,17 @@ def n_grams(tokens, n):
 
 def n_to_m_grams(tokens, n, m):
   """
-  Constructs a list of n-grams with differente size.
+  Constructs a list of N-grams for N = n..m.
 
   @param    tokens: The tokenized text to represent with n-grams.
-  @type     tokens: C{list of string}
+  @type     tokens: C{list(string)}
   @param    n:      The minimum length of a n-gram.
   @type     n:      C{int}
   @param    m:      The maximum length of a n-gram.
   @type     m:      C{int}
 
   @return:  A list n..m-grams generated from the list of tokens.
-  @rtype:   C{list of string}
+  @rtype:   C{list(string)}
   """
   keyphrases = []
 

@@ -8,7 +8,7 @@ from keybench.default.util import inverse_document_frequencies
 
 class TFIDFRanker(RankerC):
   """
-  Component performing candidate terms ranking based on the TF-IDF weight of
+  Component performing keyphrase candidate ranking based on the TF-IDF weight of
   their words.
   """
 
@@ -22,14 +22,15 @@ class TFIDFRanker(RankerC):
     """
     Constructor of the component.
 
-    @param  name:                         The name of the ranker.
+    @param  name:                         The name of the component.
     @type   name:                         C{string}
-    @param  is_lazy:                      True if the component can load
-                                          previous datas, false if everything
-                                          must be computed tought it has already
-                                          been computed.
-    @type   is_lazy:                      C{boolean}
-    @param  lazy_directory:               The directory used for caching.
+    @param  is_lazy:                      True if the component must load
+                                          previous data, False if data must be
+                                          computed tought they have already been
+                                          computed.
+    @type   is_lazy:                      C{bool}
+    @param  lazy_directory:               The directory used to store previously
+                                          computed data.
     @type   lazy_directory:               C{string}
     @param  debug:                        True if the component is in debug
                                           mode, else False. When the component
@@ -40,32 +41,79 @@ class TFIDFRanker(RankerC):
                                           each word that can appear in a
                                           candidate term.
     @type   inverse_document_frequencies: C{dict: string -> float}
-    @param  scoring_function:             Function wich gives a score to a
+    @param  scoring_function:             Function that gives a score to a
                                           candidate according to its words.
-    @type   scoring_function:             C{func(string: term, dict(string ->
-                                          float): word_weights, string:
-                                          tag_separator) : float}
+    @type   scoring_function:             C{function(expression, word_weights,
+                                          tag_separator): float}
     """
 
     super(TFIDFRanker, self).__init__(name, is_lazy, lazy_directory, debug)
 
+    self.set_inverse_document_frequencies(inverse_document_frequencies)
+    self.set_scoring_function = scoring_function
+
+  def inverse_document_frequencies(self):
+    """
+    Getter of the inverse document frequencies of the words.
+
+    @return:  The inverse of the number of documents (in a particular corpus) in
+              which the words appear.
+    @rtype:   C{dict(string, float)}
+    """
+
+    return self._inverse_document_frequencies
+
+  def set_inverse_document_frequencies(self, inverse_document_frequencies):
+    """
+    Setter of the inverse document frequencies of the words.
+
+    @param  inverse_document_frequencies: The new inverse of the number of
+                                          documents (in a particular corpus) in
+                                          which the words appear.
+    @type   inverse_document_frequencies: C{dict(string, float)}
+    """
+
     self._inverse_document_frequencies = inverse_document_frequencies
+
+  def scoring_function(self):
+    """
+    Getter of the function used to compute the scores of the multi-word
+    expression, based on the single words TF-IDF weight.
+
+    @return:  The function that gives a score to a candidate according to its
+              words.
+    @rtype:   C{function(expression, word_weights, tag_separator): float}
+    """
+
+    return self._scoring_function
+
+  def set_scoring_function(self, scoring_function):
+    """
+    Setter of the function used to compute the scores of the multi-word
+    expression, based on the single words TF-IDF weight.
+
+    @param  scoring_function: The new function that gives a score to a candidate
+                              according to its words.
+    @type   scoring_function: C{function(expression, word_weights,
+                              tag_separator): float}
+    """
+
     self._scoring_function = scoring_function
 
   def weighting(self, pre_processed_file, candidates, clusters):
     """
     Takes a pre-processed text (list of POS-tagged sentences) and give a weight
-    to its candidates keyphrases.
+    to its keyphrase candidates.
 
     @param    pre_processed_file: The pre-processed file.
     @type     pre_processed_file: C{PreProcessedFile}
-    @param    candidates:         The candidates to be keyphrases.
-    @type     candidates:         C{list of string}
-    TODO clusters
-    TODO clusters
+    @param    candidates:         The keyphrase candidates.
+    @type     candidates:         C{list(string)}
+    @param    clusters:           The clustered candidates.
+    @type     clusters:           C{list(list(string))}
 
     @return:  A dictionary of terms as key and weight as value.
-    @rtype:   C{dict: string -> float}
+    @rtype:   C{dict(string, float)}
     """
 
     word_counts = {}
@@ -89,7 +137,7 @@ class TFIDFRanker(RankerC):
 
         if not weighted_words.has_key(w):
           tf = word_counts[w]
-          idf = self._inverse_document_frequencies[w]
+          idf = self.inverse_document_frequencies()[w]
           weighted_words[w] = tf * math.log10(idf)
 
     # compute the candidate scores
@@ -102,16 +150,16 @@ class TFIDFRanker(RankerC):
 
   def ordering(self, weights, clusters):
     """
-    Takes the weighted terms of the analysed text and ordered them such as the
-    first termes are the one with the best weight.
+    Takes the weighted candidates of the analysed text and ordered them such as
+    the first ones have the highest weight.
 
-    @param    weights: A dictionary of weighted terms.
-    @type     weights: C{dict: string -> float}
-    TODO clusters
-    TODO clusters
+    @param    weights:  A dictionary of weighted candidates.
+    @type     weights:  C{dict(string, float)}
+    @param    clusters: The clustered candidates.
+    @type     clusters: C{list(list(string))}
 
     @return:  A ordered list of weighted terms.
-    @rtype:   C{list of (string, float)}
+    @rtype:   C{list(tuple(string, float))}
     """
 
     return sorted(weights.items(), key=lambda row: row[1], reverse=True)

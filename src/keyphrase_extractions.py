@@ -120,13 +120,13 @@ TEXTRANK_SE = "textrank"
 ##### runs #####################################################################
 
 CORPORA_RU = [WIKINEWS_CO]
-METHODS_RU = [TEXTRANK_ME]
+METHODS_RU = [TOPICRANK_S_ME]
 NUMBERS_RU = [10]
 LENGTHS_RU = [4]
-CANDIDATES_RU = [POS_FILTERED_NGRAM_CA]
+CANDIDATES_RU = [LONGEST_NOUN_PHRASE_CA]
 CLUSTERING_RU = [NO_CLUSTER_CC]
 SCORINGS_RU = [SUM_SC]
-SELECTIONS_RU = [TEXTRANK_SE]
+SELECTIONS_RU = [WHOLE_SE]
 
 # used for the noun phrases extraction
 NOUN_TAGS = ["nn", "nns", "nnp", "nnps", "nc", "npp"]
