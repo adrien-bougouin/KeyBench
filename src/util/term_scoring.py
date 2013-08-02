@@ -8,7 +8,8 @@ def sum(term, word_weights, tag_separator=None):
   @param    term:           The POS tagged candidate.
   @type     term:           C{string}
   @param    word_weights:   The weights of all the words (POS tags or not).
-  @type     word_weights:   C{dict: string -> float} or C{list(string, float)}
+  @type     word_weights:   C{dict(string, float)} or C{list(tuple((string,
+                            float))}
   @param    tag_separator:  The character used to separate a words from its
                             tag.
   @type     tag_separator:  C{string}
@@ -46,7 +47,8 @@ def normalized(term, word_weights, tag_separator=None):
   @param    term:           The POS tagged candidate.
   @type     term:           C{string}
   @param    word_weights:   The weights of all the words (POS tags or not).
-  @type     word_weights:   C{dict: string -> float} or C{list(string, float)}
+  @type     word_weights:   C{dict(string, float)} or C{list(tuple((string,
+                            float))}
   @param    tag_separator:  The character used to separate a words from its
                             tag.
   @type     tag_separator:  C{string}
@@ -86,7 +88,8 @@ def normalized_left_significance(term, word_weights, tag_separator=None):
   @param    term:           The POS tagged candidate.
   @type     term:           C{string}
   @param    word_weights:   The weights of all the words (POS tags or not).
-  @type     word_weights:   C{dict: string -> float} or C{list(string, float)}
+  @type     word_weights:   C{dict(string, float)} or C{list(tuple((string,
+                            float))}
   @param    tag_separator:  The character used to separate a words from its
                             tag.
   @type     tag_separator:  C{string}
@@ -127,7 +130,8 @@ def normalized_right_significance(term, word_weights, tag_separator=None):
   @param    term:           The POS tagged candidate.
   @type     term:           C{string}
   @param    word_weights:   The weights of all the words (POS tags or not).
-  @type     word_weights:   C{dict: string -> float} or C{list(string, float)}
+  @type     word_weights:   C{dict(string, float)} or C{list(tuple((string,
+                            float))}
   @param    tag_separator:  The character used to separate a words from its
                             tag.
   @type     tag_separator:  C{string}

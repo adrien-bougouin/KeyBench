@@ -5,6 +5,7 @@ import math
 import sys
 from keybench import CandidateClustererC
 from util import hierarchical_clustering
+from util import LINKAGE_STRATEGY
 
 ################################################################################
 # HierarchicalClusterer
@@ -44,7 +45,9 @@ class HierarchicalClusterer(CandidateClustererC):
     """
     """
 
-    clusters = hierarchical_clustering(candidates,
+    clusters = hierarchical_clustering(LINKAGE_STRATEGY.AVERAGE,
+                                       0.25,
+                                       candidates,
                                        pre_processed_file.tag_separator(),
                                        self._stemmer)
 

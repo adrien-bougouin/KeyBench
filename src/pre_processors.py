@@ -167,7 +167,7 @@ class FrenchPreProcessor(MEltPreProcessor):
     @rtype:   C{(string, string, string)}
     """
 
-    self._corpus_file.set_file(filepath)
+    self._corpus_file.reset(filepath)
 
     return (self._corpus_file.title(),
             self._corpus_file.abstract(),
@@ -227,7 +227,7 @@ class EnglishPreProcessor(StanfordPreProcessor):
     @rtype:   C{(string, string, string)}
     """
 
-    self._corpus_file.set_file(filepath)
+    self._corpus_file.reset(filepath)
 
     return (self._corpus_file.title(),
             self._corpus_file.abstract(),

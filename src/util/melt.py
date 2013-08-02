@@ -14,7 +14,7 @@ def melt(sentences, encoding):
   Performs word tokenization and POS tagging on a list of sentences.
 
   @param    sentence: The list of the sentences to process.
-  @type     sentence: C{list of string}
+  @type     sentence: C{list(string)}
   @param    encoding: The encoding of the sentences.
   @type     encoding: C{string}
 

@@ -16,11 +16,71 @@ class CorpusFileRep(object):
 
     super(CorpusFileRep, self).__init__()
 
-    self._title = ""
-    self._abstract = ""
-    self._content = ""
+    self.set_title("")
+    self.set_abstract("")
+    self.set_content("")
 
-  def set_file(self, filepath):
+  def title(self):
+    """
+    Getter of the title of the text.
+
+    @return:  The title of the file.
+    @rtype:   C{string}
+    """
+
+    return self._title
+
+  def set_title(self, title):
+    """
+    Setter of the title of the text.
+
+    @param  title: The new title of the file.
+    @type   title: C{string}
+    """
+
+    self._title = title
+
+  def abstract(self):
+    """
+    Getter of the abstract of the text.
+
+    @return:  The abstract of the file.
+    @rtype:   C{string}
+    """
+
+    return self._abstract
+
+  def set_abstract(self, abstract):
+    """
+    Setter of the abstract of the text.
+
+    @param  abstract: The new abstract of the file.
+    @type   abstract: C{string}
+    """
+
+    self._abstract = abstract
+
+  def content(self):
+    """
+    Getter of the content of the text.
+
+    @return:  The content of the file.
+    @rtype:   C{string}
+    """
+
+    return self._content
+
+  def set_content(self, content):
+    """
+    Setter of the content of the text.
+
+    @param  content: The new content of the file.
+    @type   content: C{string}
+    """
+
+    self._content = content
+
+  def reset(self, filepath):
     """
     Parses a corpus file and initialize the object.
     
@@ -28,11 +88,9 @@ class CorpusFileRep(object):
     @type   filepath: C{string}
     """
 
-    super(CorpusFileRep, self).__init__()
-
-    self._title = ""
-    self._abstract = ""
-    self._content = ""
+    self.set_title("")
+    self.set_abstract("")
+    self.set_content("")
 
     self.parse_file(filepath)
 
@@ -45,64 +103,4 @@ class CorpusFileRep(object):
     """
 
     raise NotImplementedError()
-
-  def title(self):
-    """
-    Gives the title of the text.
-
-    @return:  The title of the file.
-    @rtype:   C{string}
-    """
-
-    return self._title
-
-  def set_title(self, title):
-    """
-    Changes the title of the text.
-
-    @param  title: The title of the file.
-    @type   title: C{string}
-    """
-
-    self._title = title
-
-  def abstract(self):
-    """
-    Gives the abstract of the text.
-
-    @return:  The abstract of the file.
-    @rtype:   C{string}
-    """
-
-    return self._abstract
-
-  def set_abstract(self, abstract):
-    """
-    Changes the abstract of the text.
-
-    @param  abstract: The abstract of the file.
-    @type   abstract: C{string}
-    """
-
-    self._abstract = abstract
-
-  def content(self):
-    """
-    Gives the content of the text.
-
-    @return:  The content of the file.
-    @rtype:   C{string}
-    """
-
-    return self._content
-
-  def set_content(self, content):
-    """
-    Changes the content of the text.
-
-    @param  content: The content of the file.
-    @type   content: C{string}
-    """
-
-    self._content = content
 

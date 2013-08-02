@@ -12,4 +12,5 @@ from wikinews2012 import WikiNewsFileRep
 from plain_text import PlainTextFileRep
 from term_clustering import hierarchical_clustering
 from term_clustering import cluster_centroid
+from term_clustering import LINKAGE_STRATEGY
 

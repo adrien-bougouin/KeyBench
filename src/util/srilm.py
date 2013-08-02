@@ -13,9 +13,9 @@ def ngram_model_logprobs(train, phrases, encoding, length=0):
   (log probabilities).
 
   @param    train:    The training test used to construct the language model.
-  @type     train:    C{list of string}
+  @type     train:    C{list(string)}
   @param    phrases:  The phrases to get the probabilities of.
-  @type     phrases:  C{list of string}
+  @type     phrases:  C{list(string)}
   @param    encoding: The encogind of the strings.
   @type     encoding: C{string}
   @param    length:   The length of the n-grams in the model. If the length is
@@ -24,7 +24,7 @@ def ngram_model_logprobs(train, phrases, encoding, length=0):
   @type     length:   C{int}
 
   @return:  The log probabilities of the candidates).
-  @rtype:   C{dict: string -> float}
+  @rtype:   C{dict(string, float)}
   """
 
   ##### preparation for srilm command line tool execution ######################
