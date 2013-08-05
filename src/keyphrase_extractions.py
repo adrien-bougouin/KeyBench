@@ -6,7 +6,8 @@ import codecs
 from candidate_extractors import STFilteredNGramExtractor
 from candidate_extractors import POSFilteredNGramExtractor
 from candidate_extractors import LongestNounPhraseExtractor
-from candidate_clusterers import HierarchicalClusterer
+from candidate_clusterers import StemOverlapHierarchicalClusterer
+from candidate_clusterers import LINKAGE_STRATEGY
 from evaluators import StandardPRFMEvaluator
 from keybench import KeyphraseExtractor
 from keybench import KeyBenchWorker
@@ -17,6 +18,7 @@ from multiprocessing import Queue
 from pre_processors import FrenchPreProcessor
 from pre_processors import EnglishPreProcessor
 from rankers import TextRankRanker
+from rankers import ORDERING_CRITERIA
 from selectors import UnredundantTextRankSelector
 from selectors import UnredundantTopKSelector
 from selectors import UnredundantWholeSelector
@@ -351,11 +353,13 @@ def main(argv):
                                        True)
                   else:
                     if cluster == HIERARCHICAL_CLUSTER_CC:
-                      cc = HierarchicalClusterer(run_name,
-                                                 LAZY_CANDIDATE_CLUSTERING,
-                                                 RUNS_DIR,
-                                                 True,
-                                                 stemmer)
+                      cc = StemOverlapHierarchicalClusterer(run_name,
+                                                            LAZY_CANDIDATE_CLUSTERING,
+                                                            RUNS_DIR,
+                                                            True,
+                                                            LINKAGE_STRATEGY.AVERAGE,
+                                                            0.25,
+                                                            stemmer)
                   ##### scoring ################################################
                   scoring_function = None
                   if scoring == SUM_SC:

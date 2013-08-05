@@ -5,16 +5,85 @@ import math
 from keybench import RankerC
 from graph_based_ranking import TextRank
 from graph_based_ranking import TopicRankStrategy
-from util import cluster_centroid
 
 ################################################################################
 # TextRankRanker
 
+# TODO remove
+def pos_tagged_term_stemming(pos_tagged_candidate, tag_separator, stemmer):
+  """
+  Provides the stemmed version of a POS tagged candidate.
+
+  @param    pos_tagged_candidate: The POS tagged candidate to stem.
+  @type     pos_tagged_candidate: C{string}
+  @param    tag_separator:        The symbol used to separate a words from its
+                                  POS tag.
+  @type     tag_separator:        C{string}
+
+  @return:  The stemmed version of the candidate.
+  @rtype:   C{string}
+  """
+
+  stem = ""
+
+  for wt in pos_tagged_candidate.split():
+    w = wt.rsplit(tag_separator, 1)[0]
+
+    if stem != "":
+      stem += " "
+    stem += stemmer.stem(w)
+
+  return stem
+
+# TODO include into the keybench processing
+def cluster_centroid(cluster, tag_separator, stemmer):
+  """
+  Computes the centroid of a cluster according to the overlap similarity between
+  its elements.
+
+  @param    cluster:        The cluster from which obtain the centroid.
+  @type     cluster:        C{list(list(string))}
+  @param    tag_separator:  The symbol used to separate a word from its POS tag.
+  @type     tag_separator:  C{string}
+  @param    stemmer:        The stemmer used to stem words.
+  @type     stemmer:        C{nltk.stem.api.StemmerI}
+
+  @return:  The centroid of the cluster.
+  @rtype:   C{string}
+  """
+
+  centroid = None
+  max_similarity = -1.0
+
+  for term1 in cluster:
+    stem1 = pos_tagged_term_stemming(term1, tag_separator, stemmer)
+    similarity = 0.0
+
+    for term2 in cluster:
+      stem2 = pos_tagged_term_stemming(term2, tag_separator, stemmer)
+
+      try:
+        similarity += simple_word_overlap_similarity(stem1)(stem2)
+      except:
+        similarity += 0.0
+    similarity /= float(len(cluster))
+
+    if similarity > max_similarity:
+      max_similarity = similarity
+      centroid = term1
+
+  return centroid
+
 ################################################################################
+
+class ORDERING_CRITERIA:
+  POSITION  = 0
+  FREQUENCY = 1
+  CENTROID  = 2
 
 class TextRankRanker(RankerC):
   """
-  Component performing candidate terms ranking based on the TextRank qcore of
+  Component performing candidate terms ranking based on the TextRank score of
   their words.
   """
 
@@ -24,29 +93,39 @@ class TextRankRanker(RankerC):
                lazy_directory,
                debug,
                strategy,
-               scoring_function):
+               scoring_function,
+               ordering_criteria=ORDERING_CRITERIA.POSITION):
     """
     Constructor of the component.
 
-    @param  name:             The name of the ranker.
-    @type   name:             C{string}
-    @param  is_lazy:          True if the component can load previous datas,
-                              false if everything must be computed tought it has
-                              already been computed.
-    @type   is_lazy:          C{boolean}
-    @param  lazy_directory:   The directory used for caching.
-    @type   lazy_directory:   C{string}
-    @param  debug:            True if the component is in debug mode, else
-                              False. When the component is in debug mode, it
-                              will output each step of its processing.
-    @type   debug:            C{bool}
-    @param  strategy:         The strategy to use with the TextRank algorithm.
-    @type   strategy:         C{textrank.TextRankStrategy}
-    @param  scoring_function: Function wich gives a score to a
-                              candidate according to its words.
-    @type   scoring_function: C{func(string: term, dict(string ->
-                              float): word_weights, string:
-                              tag_separator) : float}
+    @param  name:               The name of the component.
+    @type   name:               C{string}
+    @param  is_lazy:            True if the component must load previous data,
+                                False if data must be computed tought they have
+                                already been computed.
+    @type   is_lazy:            C{bool}
+    @param  lazy_directory:     The directory used to store previously computed
+                                data.
+    @type   lazy_directory:     C{string}
+    @param  debug:              True if the component is in debug mode, else
+                                False. When the component is in debug mode, it
+                                will output each step of its processing.
+    @type   debug:              C{bool}
+    @param  strategy:           The strategy used to specialized the graph
+                                construction and usage.
+    @type   strategy:           C{TextRankStrategy}
+    @param  scoring_function:   Function used to compute the scores of the
+                                textual units, when the give candidates to
+                                weight are not single words.
+    @type   scoring_function:   C{function(expression, word_weights): float}
+    @param  ordering_criteria:  The criteria to use to order the cluster.
+                                - Position: the first appearing candidate, in
+                                the document, is ranked first.
+                                - Frequency: the most frequent candidate, in the
+                                document, is ranked first.
+                                - Centroid: The centroid of the cluster is
+                                ranked first.
+    @type   ordering_criteria: C{ORDERING_CRITERIA}
     """
 
     super(TextRankRanker, self).__init__(name, is_lazy, lazy_directory, debug)
@@ -57,21 +136,22 @@ class TextRankRanker(RankerC):
                               0.0001,
                               0.85,
                               1000000)
+    self._ordering_criteria = ordering_criteria
 
   def weighting(self, pre_processed_file, candidates, clusters):
     """
-    Takes a pre-processed text (list of POS-tagged sentences) and give a weight
+    Takes a pre-processed text (list of POS-tagged sentences) and gives a weight
     to its candidates keyphrases.
 
     @param    pre_processed_file: The pre-processed file.
     @type     pre_processed_file: C{PreProcessedFile}
-    @param    candidates:         The candidates to be keyphrases.
-    @type     candidates:         C{list of string}
-    TODO clusters
-    TODO clusters
+    @param    candidates:         The keyphrase candidates.
+    @type     candidates:         C{list(string)}
+    @param    clusters:           The clustered candidates.
+    @type     clusters:           C{list(list(string))}
 
     @return:  A dictionary of terms as key and weight as value.
-    @rtype:   C{dict: string -> float}
+    @rtype:   C{dict(string, float)}
     """
 
     # sheat to reset clusters for TopicRank
@@ -87,16 +167,15 @@ class TextRankRanker(RankerC):
 
   def ordering(self, weights, clusters):
     """
-    Takes the weighted terms of the analysed text and ordered them such as the
-    first termes are the one with the best weight.
+    Takes the weighted terms of the analysed text and ordered them.
 
-    @param    weights: A dictionary of weighted terms.
-    @type     weights: C{dict: string -> float}
-    TODO clusters
-    TODO clusters
+    @param    weights:  A dictionary of weighted candidates.
+    @type     weights:  C{dict(string, float)}
+    @param    clusters: The clustered candidates.
+    @type     clusters: C{list(list(string))}
 
     @return:  A ordered list of weighted terms.
-    @rtype:   C{list of (string, float)}
+    @rtype:   C{list(tuple(string, float))}
     """
 
     ordered_terms = []
@@ -139,6 +218,13 @@ class TextRankRanker(RankerC):
 
   def cluster_ordering(self, cluster):
     """
+    Orders the elements of a cluster, based on a given criteria.
+
+    @param    cluster: The cluster to re-order.
+    @type     cluster: C{list(string)}
+
+    @return:  The re-ordered cluster. 
+    @rtype:   C{list{string}}
     """
 
     text = self._textrank.strategy().context()
@@ -146,7 +232,7 @@ class TextRankRanker(RankerC):
     first_positions = {}
     frequency = {}
 
-    #####
+    ##### centroid calculation #################################################
     fake_pos_tagged_cluster = []
     for term in cluster:
       tagged = ""
@@ -156,13 +242,15 @@ class TextRankRanker(RankerC):
           tagged += " "
         tagged += w + self._textrank.strategy().tag_separator() + "fk"
       fake_pos_tagged_cluster.append(tagged)
-    tagged_centroid = cluster_centroid(fake_pos_tagged_cluster, self._textrank.strategy().tag_separator(), self._textrank.strategy().stemmer())
+    tagged_centroid = cluster_centroid(fake_pos_tagged_cluster,
+                                       self._textrank.strategy().tag_separator(),
+                                       self._textrank.strategy().stemmer())
     centroid = ""
     for i, term in enumerate(fake_pos_tagged_cluster):
       if term == tagged_centroid:
         centroid = cluster[i]
-    #####
 
+    ##### first position and frequency calculation #############################
     for sentence in text:
       untagged_sentence = ""
 
@@ -186,10 +274,14 @@ class TextRankRanker(RankerC):
 
       sentence_length_accumulator += len(untagged_sentence)
 
-    return sorted(cluster, key=lambda (t): (first_positions[t],
-                                            -1 * len(t.split())))
-    #return sorted(cluster, key=lambda (t): (frequency[t],
-    #                                        -1 * len(t.split())))
-    #return sorted(cluster, key=lambda (t): (t != centroid,
-    #                                        -1 * len(t.split())))
+    if self._ordering_criteria == ORDERING_CRITERIA.POSITION:
+      return sorted(cluster, key=lambda (t): (first_positions[t],
+                                              -1 * len(t.split())))
+    else:
+      if self._ordering_criteria == ORDERING_CRITERIA.FREQUENCY:
+        return sorted(cluster, key=lambda (t): (frequency[t],
+                                                -1 * len(t.split())))
+      else:
+        return sorted(cluster, key=lambda (t): (t != centroid,
+                                                -1 * len(t.split())))
 

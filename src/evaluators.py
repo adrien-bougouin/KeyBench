@@ -27,17 +27,19 @@ class StandardPRFEvaluator(PRFEvaluator):
     """
     Constructor of the component.
 
-    @param  name:           The name of the evaluator.
+    @param  name:           The name of the component.
     @type   name:           C{string}
-    @param  lazy_directory: The directory used for caching.
+    @param  is_lazy:        True if the component must load previous data, False
+                            if data must be computed tought they have already
+                            been computed.
+    @type   is_lazy:        C{bool}
+    @param  lazy_directory: The directory used to store previously computed
+                            data.
     @type   lazy_directory: C{string}
     @param  debug:          True if the component is in debug mode, else False.
                             When the component is in debug mode, it will output
                             each step of its processing.
     @type   debug:          C{bool}
-    @param  reference_file: The path of the file containing all the reference
-                            keyphrases of the analysed files.
-    @type   reference_file: C{string}
     @param  encoding:       The encoding of the reference files.
     @type   encoding:       C{string}
     @param  stemmer:        The object used to stem words. If it is not defined,
@@ -64,7 +66,7 @@ class StandardPRFEvaluator(PRFEvaluator):
     @type     encoding:       C{string}
 
     @return:  The files associated with their reference keyphrases.
-    @rtype:   C{dict: string -> list of string}
+    @rtype:   C{dic(string, list(string))}
     """
 
     ref_file = codecs.open(reference_file, "r", encoding)
@@ -109,13 +111,19 @@ class StandardPRFMEvaluator(StandardPRFEvaluator):
     """
     Constructor of the component.
 
-    @param  name:           The name of the evaluator.
+    @param  name:           The name of the component.
     @type   name:           C{string}
-    @param  lazy_directory: The directory used for caching.
+    @param  is_lazy:        True if the component must load previous data, False
+                            if data must be computed tought they have already
+                            been computed.
+    @type   is_lazy:        C{bool}
+    @param  lazy_directory: The directory used to store previously computed
+                            data.
     @type   lazy_directory: C{string}
-    @param  reference_file: The path of the file containing all the reference
-                            keyphrases of the analysed files.
-    @type   reference_file: C{string}
+    @param  debug:          True if the component is in debug mode, else False.
+                            When the component is in debug mode, it will output
+                            each step of its processing.
+    @type   debug:          C{bool}
     @param  encoding:       The encoding of the reference files.
     @type   encoding:       C{string}
     @param  stemmer:        The object used to stem words. If it is not defined,
