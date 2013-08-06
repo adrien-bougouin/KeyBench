@@ -398,7 +398,7 @@ def main(argv):
                                                         TEXTRANK_TAGS)
                         else:
                           if method == COMPLETERANK_ME:
-                            strategy = FullConnectedStrategy(None,
+                            strategy = CompleteGraphStrategy(None,
                                                              pre_processor.tag_separator(),
                                                              TEXTRANK_TAGS)
                           else:
