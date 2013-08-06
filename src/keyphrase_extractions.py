@@ -376,6 +376,7 @@ def main(argv):
                     r = TFIDFRanker(run_name,
                                     LAZY_RANKING,
                                     RUNS_DIR,
+                                    True,
                                     idfs,
                                     scoring_function)
                   else:

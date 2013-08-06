@@ -71,7 +71,7 @@ class MEltPreProcessor(PreProcessorC):
                                                encoding,
                                                "/")
 
-    self.set_sentence_tokenizer = PunktSentenceTokenizer()
+    self.set_sentence_tokenizer(PunktSentenceTokenizer())
 
   def sentence_tokenizer(self):
     """
@@ -241,6 +241,7 @@ class EnglishPreProcessor(StanfordPreProcessor):
                name,
                is_lazy,
                lazy_directory,
+               debug
                tag_separator,
                corpus_file):
     """
@@ -270,14 +271,15 @@ class EnglishPreProcessor(StanfordPreProcessor):
     @param  language_model_path:  The path to the language-specific stafonrd's
                                   model.
     @type   language_model_path:  C{string}
-    @param  corpus_file:    The representation of a file (title, abstract,
-                            content).
-    @type   corpus_file:    C{CorpusFile}
+    @param  corpus_file:          The representation of a file (title, abstract,
+                                  content).
+    @type   corpus_file:          C{CorpusFile}
     """
 
     super(EnglishPreProcessor, self).__init__(name,
                                               is_lazy,
                                               lazy_directory,
+                                              debug,
                                               ENGLISH_ENCODING,
                                               tag_separator,
                                               STANFORD_JAR_PATH,

@@ -3,7 +3,6 @@
 
 import math
 from textrank_strategies import TextRankStrategy
-from util import term_clustering
 
 ID_TAG = "id"
 
