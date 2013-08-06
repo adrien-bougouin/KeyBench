@@ -241,7 +241,7 @@ class EnglishPreProcessor(StanfordPreProcessor):
                name,
                is_lazy,
                lazy_directory,
-               debug
+               debug,
                tag_separator,
                corpus_file):
     """
