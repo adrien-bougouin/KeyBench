@@ -50,7 +50,7 @@ class TFIDFRanker(RankerC):
     super(TFIDFRanker, self).__init__(name, is_lazy, lazy_directory, debug)
 
     self.set_inverse_document_frequencies(inverse_document_frequencies)
-    self.set_scoring_function = scoring_function
+    self.set_scoring_function(scoring_function)
 
   def inverse_document_frequencies(self):
     """
