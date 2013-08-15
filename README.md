@@ -72,6 +72,7 @@ containing one directory per processing step:
   each document of each dataset
 - <code>evaluations</code>: contains the results of the evaluation for each
   methods and each dataset
+
 These directories contain serialized files (<code>pickle</code>) used for lazy
 loading, as well as a readable version of them in a <code>string</code>
 directory.
