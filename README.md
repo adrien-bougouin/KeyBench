@@ -14,7 +14,7 @@ https://github.com/snkim/AutomaticKeyphraseExtraction;
 https://github.com/adrien-bougouin/WikinewsKeyphraseCorpus) are also included
 and used for evaluation purpose.
 
-The command line tool <code>ijcnlp\_2013.py</code> allows to either execute the
+The command line tool <code>src/ijcnlp\_2013.py</code> allows to either execute the
 experiments given in [1].
 
 Usage
@@ -35,13 +35,15 @@ tools:
 One can choose to execute TopicRank for either inspec, semeval, wikinews, deft
 or all of these datasets:
 
-    python ijcnlp_2013.py all|inspec|semeval|wikinews|deft
+    $ cd src
+    $ python ijcnlp_2013.py all|inspec|semeval|wikinews|deft
 
 ### Processing new evaluation datasets
 
 One can shoose to execute TopicRank for a new (english or french) dataset:
 
-    python ijcnlp_2013.py <corpus_directory> <reference_file> <language>
+    $ cd src/
+    $ python ijcnlp_2013.py <corpus_directory> <reference_file> <language>
 
 - <code>corpus\_directory</code> must contain the plain text ".txt" files
   composing the dataset
