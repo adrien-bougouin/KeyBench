@@ -24,7 +24,7 @@ Usage
 
 The project is developed in Python (2.6.6 or later) and makes use of third party
 tools:
-- NLTK \[2\] (python Natural Language Tool Kit)
+- NLTK \[2\] (python Natural Language Tool Kit -- not included)
 - Stanford POS tagger \[3\] (java software -- included)
 - Bonsai word tokenizer (perl command line tool used by the Bonsai PCFG-LA
   parser -- included)
