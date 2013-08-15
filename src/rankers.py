@@ -1,13 +1,18 @@
 #!/usr/bin/env python
 # -*- encoding utf-8 -*-
 
+import codecs
 import math
-from keybench import RankerC
 from graph_based_ranking import TextRank
 from graph_based_ranking import TopicRankStrategy
+from keybench import RankerC
+from os import listdir
+from os import path
+from nltk.classify.weka import WekaClassifier
 
 ################################################################################
 # TextRankRanker
+# KEARanker
 
 # TODO remove
 def pos_tagged_term_stemming(pos_tagged_candidate, tag_separator, stemmer):
@@ -284,4 +289,220 @@ class TextRankRanker(RankerC):
       else:
         return sorted(cluster, key=lambda (t): (t != centroid,
                                                 -1 * len(t.split())))
+
+################################################################################
+
+KEYPHRASE     = "keyphrase"
+NOT_KEYPHRASE = "not_keyphrase"
+
+def get_features(candidate, pre_processed_file, tfidf):
+  """
+  TODO
+  """
+
+  sentences = pre_processed_file.full_text()
+  total_length = 0.0
+  first_position = None
+
+  # look for the first position
+  for sentence in sentences:
+    if first_position == None:
+      if sentence.find(candidate) >= 0:
+        first_position = total_length
+
+        found = False
+        for word in sentence.replace(candidate, candidate.replace(" ", "_")).split():
+          if not found:
+            first_position += 1.0
+
+            if word == candidate.replace(" ", "_"):
+              found = True
+
+    total_length += float(len(sentence.split()))
+
+  return {"Position": (first_position / total_length), "TF-IDF": tfidf}
+
+def train_kea(model_name,
+              train_directory,
+              file_extension,
+              ref_extension,
+              pre_processor,
+              candidate_extractor,
+              candidate_clusterer,
+              tfidf_ranker):
+  """
+  TODO
+  """
+
+  feature_sets = []
+
+  for filename in listdir(train_directory):
+    if filename.rfind(file_extension) >= 0 \
+       and len(filename) - filename.rfind(file_extension) == len(file_extension):
+      filepath = path.join(train_directory, filename)
+      pre_processed_file = pre_processor.pre_process_file(filepath)
+      candidates = candidate_extractor.extract_candidates(filepath,
+                                                          pre_processed_file)
+      clusters = candidate_clusterer.cluster_candidates(filepath,
+                                                        pre_processed_file,
+                                                        candidates)
+      # use weighting to keep the dictionary (but there is no storage for lazy
+      # loading)
+      tfidfs = tfidf_ranker.weighting(pre_processed_file, candidates, clusters)
+
+      for candidate in candidates:
+        candidate_class = NOT_KEYPHRASE
+
+        # check if it is a keyphrase
+        ref_filepath = filepath[:filepath.rfind(file_extension)] + ref_extension
+        ref_file = codecs.open(ref_filepath, "r", pre_processed_file.encoding())
+
+        for keyphrase in ref_file.read().split(";"):
+          keyphrase = keyphrase.strip()
+          untagged_candidate = ""
+
+          for word in candidate.split():
+            if untagged_candidate != "":
+              untagged_candidate += " "
+            untagged_candidate += word.rsplit(pre_processor.tag_separator(), 1)[0]
+
+          if untagged_candidate == keyphrase:
+            candidate_class = KEYPHRASE
+
+        ref_file.close()
+
+        feature_sets.append((get_features(candidate,
+                                           pre_processed_file,
+                                           tfidfs[candidate]),
+                             candidate_class))
+
+  return WekaClassifier.train(model_name,
+                              feature_sets,
+                              "naivebayes",
+                              ["-D"])
+
+class KEARanker(RankerC):
+  """
+  Component used to rank keyphrase candidates using the KEA method [1].
+
+  [1] TODO
+  """
+
+  def __init__(self,
+               name,
+               is_lazy,
+               lazy_directory,
+               debug,
+               classifier,
+               tfidf_ranker):
+    """
+    Constructor of the component.
+
+    @param  name:           The name of the component.
+    @type   name:           C{string}
+    @param  is_lazy:        True if the component must load previous data, False
+                            if data must be computed tought they have already
+                            been computed.
+    @type   is_lazy:        C{bool}
+    @param  lazy_directory: The directory used to store previously computed
+                            data.
+    @type   lazy_directory: C{string}
+    @param  debug:          True if the component is in debug mode, else False.
+                            When the component is in debug mode, it will output
+                            each step of its processing.
+    @type   debug:          C{bool}
+    @param  classifier:     The trained naive bayes classifier to use by KEA.
+    @type   classifier:     C{nltk.classify.api.ClassifierI}
+    @param  tfidf_ranker:   The KeyBench component responsible of the TF-IDF
+                            weighting.
+    @type   tfidf_ranker:   C{TFIDFRanker}
+    """
+
+    super(KEARanker, self).__init__(name,
+                                    is_lazy,
+                                    lazy_directory,
+                                    debug)
+
+    self.set_classifier(classifier)
+    self.set_tfidf_ranker(tfidf_ranker)
+
+  def classifier(self):
+    """
+    Getter of the naive bayes classifier used by KEA.
+
+    @return:  The naive bayes classifier.
+    @rtype:   C{nltk.classify.api.ClassifierI}
+    """
+
+    return self._classifier
+
+  def set_classifier(self, classifier):
+    """
+    Setter of the naive bayes classifier used by KEA.
+
+    @param  classifier: The new naive bayes classifier.
+    @type   classifier: C{nltk.classify.api.ClassifierI}
+    """
+
+    self._classifier = classifier
+
+  def tfidf_ranker(self):
+    """
+    TODO
+    """
+
+    return self._tfidf_ranker
+
+  def set_tfidf_ranker(self, tfidf_ranker):
+    """
+    TODO
+    """
+
+    self._tfidf_ranker = tfidf_ranker
+
+  def weighting(self, pre_processed_file, candidates, clusters):
+    """
+    Takes a pre-processed text (list of POS-tagged sentences) and gives a weight
+    to its candidates keyphrases.
+
+    @param    pre_processed_file: The pre-processed file.
+    @type     pre_processed_file: C{PreProcessedFile}
+    @param    candidates:         The keyphrase candidates.
+    @type     candidates:         C{list(string)}
+    @param    clusters:           The clustered candidates.
+    @type     clusters:           C{list(list(string))}
+
+    @return:  A dictionary of terms as key and weight as value.
+    @rtype:   C{dict(string, float)}
+    """
+
+    weighted_candidates = {}
+    tfidfs = self.tfidf_ranker().weighting(pre_processed_file,
+                                           candidates,
+                                           clusters)
+
+    for candidate in candidates:
+      features = get_features(candidate, pre_processed_file, tfidfs[candidate])
+      feature_probabilities = self.classifier().prob_classify(features)
+      p_yes = feature_probabilities.prob(KEYPHRASE)
+      p_no  = feature_probabilities.prob(NOT_KEYPHRASE)
+
+      weighted_candidates[candidate] = (p_yes / (p_yes + p_no))
+
+    return weighted_candidates
+
+  def ordering(self, weights, clusters):
+    """
+    Takes the weighted terms of the analysed text and ordered them.
+
+    @param    weights:  A dictionary of weighted candidates.
+    @type     weights:  C{dict(string, float)}
+    @param    clusters: The clustered candidates.
+    @type     clusters: C{list(list(string))}
+
+    @return:  A ordered list of weighted terms.
+    @rtype:   C{list(tuple(string, float))}
+    """
+
+    return sorted(weights.items(), key=lambda row: row[1], reverse=True)
 

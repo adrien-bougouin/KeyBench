@@ -18,7 +18,9 @@ from multiprocessing import Queue
 from pre_processors import FrenchPreProcessor
 from pre_processors import EnglishPreProcessor
 from rankers import TextRankRanker
+from rankers import KEARanker
 from rankers import ORDERING_CRITERIA
+from rankers import train_kea
 from selectors import UnredundantTextRankSelector
 from selectors import UnredundantTopKSelector
 from selectors import UnredundantWholeSelector
@@ -63,6 +65,7 @@ SEMEVAL_CORPUS_DOCS_EXTENSION = ".txt"
 INSPEC_CORPUS_DIR = path.join(CORPORA_DIR, "inspec")
 INSPEC_CORPUS_DOCS = path.join(INSPEC_CORPUS_DIR, "documents")
 INSPEC_CORPUS_REFS = path.join(INSPEC_CORPUS_DIR, "ref")
+INSPEC_CORPUS_TRAIN_DOCS = path.join(INSPEC_CORPUS_DIR, "train")
 INSPEC_CORPUS_DOCS_EXTENSION = ".abstr"
 
 TEST_ENGLISH_CORPUS_DIR = path.join(CORPORA_DIR, "test_english")
@@ -78,8 +81,8 @@ ENGLISH_STOP_WORDS_FILEPATH = path.join(CORPORA_DIR, "english_unine_stop_words")
 ##### execution configurations #################################################
 
 LAZY_PRE_PROCESSING = True
-LAZY_CANDIDATE_EXTRACTION = False
-LAZY_CANDIDATE_CLUSTERING = False
+LAZY_CANDIDATE_EXTRACTION = True
+LAZY_CANDIDATE_CLUSTERING = True
 LAZY_RANKING = False
 LAZY_SELECTION = False
 
@@ -99,6 +102,7 @@ SINGLERANK_ME = "singlerank"
 COMPLETERANK_ME = "completerank"
 TOPICRANK_S_ME = "topicrank_s"
 TOPICRANK_ME = "topicrank"
+KEA_ME = "kea"
 
 # candidate names
 ST_FILTERED_NGRAM_CA = "st_filtered_ngram"
@@ -121,13 +125,13 @@ TEXTRANK_SE = "textrank"
 
 ##### runs #####################################################################
 
-CORPORA_RU = [WIKINEWS_CO]
-METHODS_RU = [TOPICRANK_ME]
+CORPORA_RU = [INSPEC_CO]
+METHODS_RU = [KEA_ME]
 NUMBERS_RU = [10]
-LENGTHS_RU = [4]
-CANDIDATES_RU = [LONGEST_NOUN_PHRASE_CA]
-CLUSTERING_RU = [HIERARCHICAL_CLUSTER_CC]
-SCORINGS_RU = [SUM_SC]
+LENGTHS_RU = [3]
+CANDIDATES_RU = [ST_FILTERED_NGRAM_CA]
+CLUSTERING_RU = [NO_CLUSTER_CC]
+SCORINGS_RU = [SUM_SC, WEIGHT_SC]
 SELECTIONS_RU = [WHOLE_SE]
 
 # used for the noun phrases extraction
@@ -180,6 +184,7 @@ def main(argv):
         for length in LENGTHS_RU:
           docs = None
           ext = None
+          train_docs = None
           refs = None
           stop_words = None
           stemmer = None
@@ -255,6 +260,7 @@ def main(argv):
                 if corpus == INSPEC_CO:
                   docs = INSPEC_CORPUS_DOCS
                   ext = INSPEC_CORPUS_DOCS_EXTENSION
+                  train_docs = INSPEC_CORPUS_TRAIN_DOCS
                   refs = INSPEC_CORPUS_REFS
                   stop_words = extract_stop_words(ENGLISH_STOP_WORDS_FILEPATH)
                   stemmer = PorterStemmer()
@@ -420,6 +426,36 @@ def main(argv):
                                           True,
                                           strategy,
                                           scoring_function)
+                    else:
+                      if method == KEA_ME:
+                        train_idfs = inverse_document_frequencies(train_docs,
+                                                                  ext,
+                                                                  pre_processor)
+                        train_tfidf_ranker = TFIDFRanker(run_name,
+                                                         LAZY_RANKING,
+                                                         RUNS_DIR,
+                                                         True,
+                                                         train_idfs,
+                                                         scoring_function)
+                        tfidf_ranker = TFIDFRanker(run_name,
+                                                   LAZY_RANKING,
+                                                   RUNS_DIR,
+                                                   True,
+                                                   idfs,
+                                                   scoring_function)
+                        r = KEARanker(run_name,
+                                      LAZY_RANKING,
+                                      RUNS_DIR,
+                                      True,
+                                      train_kea(path.join(RUNS_DIR, "kea_model_%s"%run_name),
+                                                train_docs,
+                                                ext,
+                                                ".key",
+                                                pre_processor,
+                                                c,
+                                                cc,
+                                                train_tfidf_ranker),
+                                      tfidf_ranker)
                   ##### selector ###############################################
                   if selection == WHOLE_SE:
                     s = UnredundantWholeSelector(run_name,
