@@ -1,4 +1,4 @@
-TopicRank: Graph-Based Topic Ranking fo Keyphrase Extraction [1]
+TopicRank: Graph-Based Topic Ranking for Keyphrase Extraction [1]
 ===========================================================================
 
 This is the work presented in the 6th International Joint
