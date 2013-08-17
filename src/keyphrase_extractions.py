@@ -60,6 +60,7 @@ SEMEVAL_CORPUS_DIR = path.join(CORPORA_DIR, "semeval_2010")
 SEMEVAL_CORPUS_DOCS = path.join(SEMEVAL_CORPUS_DIR, "documents")
 SEMEVAL_CORPUS_REFS = path.join(SEMEVAL_CORPUS_DIR,
                                 "ref_modified_stem_combined")
+SEMEVAL_CORPUS_TRAIN_DOCS = path.join(SEMEVAL_CORPUS_DIR, "train")
 SEMEVAL_CORPUS_DOCS_EXTENSION = ".txt"
 
 INSPEC_CORPUS_DIR = path.join(CORPORA_DIR, "inspec")
@@ -125,8 +126,8 @@ TEXTRANK_SE = "textrank"
 
 ##### runs #####################################################################
 
-CORPORA_RU = [INSPEC_CO]
-METHODS_RU = [KEA_ME]
+CORPORA_RU = [INSPEC_CO, SEMEVAL_CO]
+METHODS_RU = [TFIDF_ME, KEA_ME]
 NUMBERS_RU = [10]
 LENGTHS_RU = [3]
 CANDIDATES_RU = [ST_FILTERED_NGRAM_CA]
@@ -238,6 +239,7 @@ def main(argv):
               if corpus == SEMEVAL_CO:
                 docs = SEMEVAL_CORPUS_DOCS
                 ext = SEMEVAL_CORPUS_DOCS_EXTENSION
+                train_docs = SEMEVAL_CORPUS_TRAIN_DOCS
                 refs = SEMEVAL_CORPUS_REFS
                 stop_words = extract_stop_words(ENGLISH_STOP_WORDS_FILEPATH)
                 stemmer = PorterStemmer()

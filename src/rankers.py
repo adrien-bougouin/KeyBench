@@ -320,7 +320,10 @@ def get_features(candidate, pre_processed_file, tfidf):
 
     total_length += float(len(sentence.split()))
 
-  return {"Position": (first_position / total_length), "TF-IDF": tfidf}
+  try:
+    return {"Position": (first_position / total_length), "TF-IDF": tfidf}
+  except:
+    return {"Position": -1337.42, "TF-IDF": -1337.42}
 
 def train_kea(model_name,
               train_directory,
