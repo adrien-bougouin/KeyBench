@@ -49,6 +49,7 @@ CORPORA_DIR = path.join(path.dirname(sys.argv[0]), "..", "res", "corpora")
 DEFT_CORPUS_DIR = path.join(CORPORA_DIR, "deft_2012", "test_t2")
 DEFT_CORPUS_DOCS = path.join(DEFT_CORPUS_DIR, "documents")
 DEFT_CORPUS_REFS = path.join(DEFT_CORPUS_DIR, "ref_test_t2")
+DEFT_CORPUS_TRAIN_DOCS = path.join(DEFT_CORPUS_DIR, "train")
 DEFT_CORPUS_DOCS_EXTENSION = ".xml"
 
 WIKINEWS_CORPUS_DIR = path.join(CORPORA_DIR, "wikinews_2012")
@@ -126,7 +127,7 @@ TEXTRANK_SE = "textrank"
 
 ##### runs #####################################################################
 
-CORPORA_RU = [INSPEC_CO, SEMEVAL_CO]
+CORPORA_RU = [DEFT_CO]
 METHODS_RU = [TFIDF_ME, KEA_ME]
 NUMBERS_RU = [10]
 LENGTHS_RU = [3]
@@ -197,6 +198,7 @@ def main(argv):
           if corpus == DEFT_CO:
             docs = DEFT_CORPUS_DOCS
             ext = DEFT_CORPUS_DOCS_EXTENSION
+            train_docs = DEFT_CORPUS_TRAIN_DOCS
             refs = DEFT_CORPUS_REFS
             stop_words = extract_stop_words(FRENCH_STOP_WORDS_FILEPATH)
             stemmer = FrenchStemmer()
