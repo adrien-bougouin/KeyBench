@@ -3,6 +3,7 @@
 
 import codecs
 import math
+import pickle
 from graph_based_ranking import TextRank
 from graph_based_ranking import TopicRankStrategy
 from keybench import RankerC
@@ -325,7 +326,7 @@ def get_features(candidate, pre_processed_file, tfidf):
   except:
     return {"Position": -1337.42, "TF-IDF": -1337.42}
 
-def train_kea(model_name,
+def train_kea(model_filename,
               train_directory,
               file_extension,
               ref_extension,
@@ -337,52 +338,70 @@ def train_kea(model_name,
   TODO
   """
 
-  feature_sets = []
+  classifier = None
+  classifier_filename = model_filename + "_classifier"
 
-  for filename in listdir(train_directory):
-    if filename.rfind(file_extension) >= 0 \
-       and len(filename) - filename.rfind(file_extension) == len(file_extension):
-      filepath = path.join(train_directory, filename)
-      pre_processed_file = pre_processor.pre_process_file(filepath)
-      candidates = candidate_extractor.extract_candidates(filepath,
-                                                          pre_processed_file)
-      clusters = candidate_clusterer.cluster_candidates(filepath,
-                                                        pre_processed_file,
-                                                        candidates)
-      # use weighting to keep the dictionary (but there is no storage for lazy
-      # loading)
-      tfidfs = tfidf_ranker.weighting(pre_processed_file, candidates, clusters)
+  if not path.exists(model_filename)\
+     or not path.exists(classifier_filename):
+    feature_sets = []
 
-      for candidate in candidates:
-        candidate_class = NOT_KEYPHRASE
+    for filename in listdir(train_directory):
+      if filename.rfind(file_extension) >= 0 \
+         and len(filename) - filename.rfind(file_extension) == len(file_extension):
+        filepath = path.join(train_directory, filename)
+        pre_processed_file = pre_processor.pre_process_file(filepath)
+        candidates = candidate_extractor.extract_candidates(filepath,
+                                                            pre_processed_file)
+        clusters = candidate_clusterer.cluster_candidates(filepath,
+                                                          pre_processed_file,
+                                                          candidates)
+        # use weighting to keep the dictionary (but there is no storage for lazy
+        # loading)
+        tfidfs = tfidf_ranker.weighting(pre_processed_file, candidates, clusters)
 
-        # check if it is a keyphrase
-        ref_filepath = filepath[:filepath.rfind(file_extension)] + ref_extension
-        ref_file = codecs.open(ref_filepath, "r", pre_processed_file.encoding())
+        for candidate in candidates:
+          candidate_class = NOT_KEYPHRASE
 
-        for keyphrase in ref_file.read().split(";"):
-          keyphrase = keyphrase.strip()
-          untagged_candidate = ""
+          # check if it is a keyphrase
+          ref_filepath = filepath[:filepath.rfind(file_extension)] + ref_extension
+          ref_file = codecs.open(ref_filepath, "r", pre_processed_file.encoding())
 
-          for word in candidate.split():
-            if untagged_candidate != "":
-              untagged_candidate += " "
-            untagged_candidate += word.rsplit(pre_processor.tag_separator(), 1)[0]
+          for keyphrase in ref_file.read().split(";"):
+            keyphrase = keyphrase.strip()
+            untagged_candidate = ""
 
-          if untagged_candidate == keyphrase:
-            candidate_class = KEYPHRASE
+            for word in candidate.split():
+              if untagged_candidate != "":
+                untagged_candidate += " "
+              untagged_candidate += word.rsplit(pre_processor.tag_separator(), 1)[0]
 
-        ref_file.close()
+            if untagged_candidate == keyphrase:
+              candidate_class = KEYPHRASE
 
-        feature_sets.append((get_features(candidate,
-                                           pre_processed_file,
-                                           tfidfs[candidate]),
-                             candidate_class))
+          ref_file.close()
 
-  return WekaClassifier.train(model_name,
-                              feature_sets,
-                              "naivebayes",
-                              ["-D"])
+          feature_sets.append((get_features(candidate,
+                                             pre_processed_file,
+                                             tfidfs[candidate]),
+                               candidate_class))
+
+    classifier = WekaClassifier.train(model_filename,
+                                      feature_sets,
+                                      "naivebayes",
+                                      ["-D"])
+    # serialize the classifier
+    classifier_file = open(classifier_filename, "w")
+
+    pickle.dump(classifier, classifier_file)
+    classifier_file.close()
+  else:
+    # load the serialized classifier
+    classifier_file = open(classifier_filename, "r")
+    classifier = pickle.load(classifier_file)
+
+    classifier_file.close()
+
+  return classifier
 
 class KEARanker(RankerC):
   """

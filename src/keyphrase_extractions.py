@@ -36,6 +36,7 @@ from util import term_scoring
 from util import WikiNewsFileRep
 from nltk.stem import PorterStemmer
 from nltk.stem.snowball import FrenchStemmer
+from os import makedirs
 from os import path
 
 ################################################################################
@@ -70,11 +71,6 @@ INSPEC_CORPUS_REFS = path.join(INSPEC_CORPUS_DIR, "ref")
 INSPEC_CORPUS_TRAIN_DOCS = path.join(INSPEC_CORPUS_DIR, "train")
 INSPEC_CORPUS_DOCS_EXTENSION = ".abstr"
 
-TEST_ENGLISH_CORPUS_DIR = path.join(CORPORA_DIR, "test_english")
-TEST_ENGLISH_CORPUS_DOCS = path.join(TEST_ENGLISH_CORPUS_DIR, "documents")
-TEST_ENGLISH_CORPUS_REFS = path.join(TEST_ENGLISH_CORPUS_DIR, "ref")
-TEST_ENGLISH_CORPUS_DOCS_EXTENSION = ".txt"
-
 FRENCH_LA = "fr"
 FRENCH_STOP_WORDS_FILEPATH = path.join(CORPORA_DIR, "french_unine_stop_words")
 ENGLISH_LA = "en"
@@ -95,7 +91,6 @@ DEFT_CO = "deft"
 WIKINEWS_CO = "wikinews"
 SEMEVAL_CO = "semeval"
 INSPEC_CO = "inspec"
-TEST_ENGLISH_CO = "test_english"
 
 # method names
 TFIDF_ME = "tfidf"
@@ -127,10 +122,10 @@ TEXTRANK_SE = "textrank"
 
 ##### runs #####################################################################
 
-CORPORA_RU = [DEFT_CO]
-METHODS_RU = [TFIDF_ME, KEA_ME]
+CORPORA_RU = [SEMEVAL_CO]
+METHODS_RU = [KEA_ME, TFIDF_ME]
 NUMBERS_RU = [10]
-LENGTHS_RU = [3]
+LENGTHS_RU = [1, 2, 3, 4, 5]
 CANDIDATES_RU = [ST_FILTERED_NGRAM_CA]
 CLUSTERING_RU = [NO_CLUSTER_CC]
 SCORINGS_RU = [SUM_SC, WEIGHT_SC]
@@ -283,27 +278,6 @@ def main(argv):
                                                                pre_processor)
                   idfs = inspec_idfs
                   np_chunk_rules = english_np_chunk_rules
-                else:
-                  if corpus == TEST_ENGLISH_CO:
-                    docs = TEST_ENGLISH_CORPUS_DOCS
-                    ext = TEST_ENGLISH_CORPUS_DOCS_EXTENSION
-                    refs = TEST_ENGLISH_CORPUS_REFS
-                    stemmer = PorterStemmer()
-                    ref_stemmer = stemmer
-                    pre_processor = EnglishPreProcessor("%s_pre_processor"%corpus,
-                                                        LAZY_PRE_PROCESSING,
-                                                        RUNS_DIR,
-                                                        True,
-                                                        "/",
-                                                        PlainTextFileRep())
-                    language = ENGLISH_LA
-                    # lazy loading of idfs
-                    if test_idfs == None:
-                      test_idfs = inverse_document_frequencies(docs,
-                                                               ext,
-                                                               pre_processor)
-                    idfs = test_idfs
-                    np_chunk_rules = english_np_chunk_rules
 
           for candidate in CANDIDATES_RU:
             for cluster in CLUSTERING_RU:
@@ -432,6 +406,9 @@ def main(argv):
                                           scoring_function)
                     else:
                       if method == KEA_ME:
+                        kea_train_dir = path.join(RUNS_DIR, "kea_model_and_classifiers")
+                        if not path.exists(kea_train_dir):
+                          makedirs(kea_train_dir)
                         train_idfs = inverse_document_frequencies(train_docs,
                                                                   ext,
                                                                   pre_processor)
@@ -451,7 +428,7 @@ def main(argv):
                                       LAZY_RANKING,
                                       RUNS_DIR,
                                       True,
-                                      train_kea(path.join(RUNS_DIR, "kea_model_%s"%run_name),
+                                      train_kea(path.join(kea_train_dir, "kea_model_%s"%run_name),
                                                 train_docs,
                                                 ext,
                                                 ".key",
