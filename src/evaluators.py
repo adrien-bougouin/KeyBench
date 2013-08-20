@@ -107,7 +107,8 @@ class StandardPRFMEvaluator(StandardPRFEvaluator):
                reference_file,
                encoding,
                ref_stemmer=None,
-               res_stemmer=None):
+               res_stemmer=None,
+               tokenize_function=None):
     """
     Constructor of the component.
 
@@ -129,6 +130,8 @@ class StandardPRFMEvaluator(StandardPRFEvaluator):
     @param  stemmer:        The object used to stem words. If it is not defined,
                             there will be no stemming during the evaluation.
     @type   stemmer:        C{nltk.stem.api.StemmerI}
+    TODO
+    TODO
     """
 
     super(StandardPRFMEvaluator, self).__init__(name,
@@ -138,6 +141,22 @@ class StandardPRFMEvaluator(StandardPRFEvaluator):
                                                 encoding,
                                                 ref_stemmer,
                                                 res_stemmer)
+
+    self._tokenize_function = tokenize_function
+
+  def tokenize_keyphrases(self, keyphrases):
+    """
+    """
+
+    tokenized_keyphrases = []
+
+    if self._tokenize_function != None:
+      for keyphrase in keyphrases:
+        tokenized_keyphrases.append(self._tokenize_function(keyphrase))
+    else:
+      tokenized_keyphrases = keyphrases
+
+    return tokenized_keyphrases
 
   def single_evaluation(self, ref_keyphrases, res_keyphrases):
     """
@@ -154,9 +173,12 @@ class StandardPRFMEvaluator(StandardPRFEvaluator):
     @rtype:   C{list of float}
     """
 
+    # keyphrase tokenization
+    ref_k = self.tokenize_keyphrases(ref_keyphrases)
+
     # stemming if needed
     if self._ref_stemmer:
-      ref_k = self.stem_keyphrases(ref_keyphrases, self._ref_stemmer)
+      ref_k = self.stem_keyphrases(ref_k, self._ref_stemmer)
     else:
       ref_k = ref_keyphrases
     if self._res_stemmer:

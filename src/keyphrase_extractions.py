@@ -34,8 +34,10 @@ from util import PlainTextFileRep
 from util import SemEvalFileRep
 from util import term_scoring
 from util import WikiNewsFileRep
+from util import bonsai_tokenization
 from nltk.stem import PorterStemmer
 from nltk.stem.snowball import FrenchStemmer
+from nltk.tokenize.treebank import TreebankWordTokenizer
 from os import makedirs
 from os import path
 
@@ -123,12 +125,12 @@ TEXTRANK_SE = "textrank"
 ##### runs #####################################################################
 
 CORPORA_RU = [SEMEVAL_CO]
-METHODS_RU = [KEA_ME, TFIDF_ME]
+METHODS_RU = [TFIDF_ME]
 NUMBERS_RU = [10]
-LENGTHS_RU = [1, 2, 3, 4, 5]
-CANDIDATES_RU = [ST_FILTERED_NGRAM_CA]
+LENGTHS_RU = [4]
+CANDIDATES_RU = [LONGEST_NOUN_PHRASE_CA]
 CLUSTERING_RU = [NO_CLUSTER_CC]
-SCORINGS_RU = [SUM_SC, WEIGHT_SC]
+SCORINGS_RU = [WEIGHT_SC]
 SELECTIONS_RU = [WHOLE_SE]
 
 # used for the noun phrases extraction
@@ -149,6 +151,17 @@ def extract_stop_words(stop_words_filepath):
   st_file.close()
 
   return stop_words
+
+def english_tokenization(term):
+  word_tokenizer = TreebankWordTokenizer()
+  tokenized_term = ""
+
+  for word in word_tokenizer.tokenize(term):
+    if tokenized_term != "":
+      tokenized_term += " "
+    tokenized_term += word
+
+  return tokenized_term
 
 ################################################################################
 # Main
@@ -185,6 +198,8 @@ def main(argv):
           refs = None
           stop_words = None
           stemmer = None
+          ref_stemmer = None
+          tokenize = None
           pre_processor = None
           language = None
           idfs = None
@@ -198,6 +213,7 @@ def main(argv):
             stop_words = extract_stop_words(FRENCH_STOP_WORDS_FILEPATH)
             stemmer = FrenchStemmer()
             ref_stemmer = stemmer
+            tokenize = bonsai_tokenization
             pre_processor = FrenchPreProcessor("%s_pre_processor"%corpus,
                                                LAZY_PRE_PROCESSING,
                                                RUNS_DIR,
@@ -219,6 +235,7 @@ def main(argv):
               stop_words = extract_stop_words(FRENCH_STOP_WORDS_FILEPATH)
               stemmer = FrenchStemmer()
               ref_stemmer = stemmer
+              tokenize = bonsai_tokenization
               pre_processor = FrenchPreProcessor("%s_pre_processor"%corpus,
                                                  LAZY_PRE_PROCESSING,
                                                  RUNS_DIR,
@@ -241,6 +258,7 @@ def main(argv):
                 stop_words = extract_stop_words(ENGLISH_STOP_WORDS_FILEPATH)
                 stemmer = PorterStemmer()
                 ref_stemmer = None
+                tokenize = english_tokenization
                 pre_processor = EnglishPreProcessor("%s_pre_processor"%corpus,
                                                     LAZY_PRE_PROCESSING,
                                                     RUNS_DIR,
@@ -264,6 +282,7 @@ def main(argv):
                   stop_words = extract_stop_words(ENGLISH_STOP_WORDS_FILEPATH)
                   stemmer = PorterStemmer()
                   ref_stemmer = stemmer
+                  tokenize = english_tokenization
                   pre_processor = EnglishPreProcessor("%s_pre_processor"%corpus,
                                                       LAZY_PRE_PROCESSING,
                                                       RUNS_DIR,
@@ -467,7 +486,8 @@ def main(argv):
                                             refs,
                                             pre_processor.encoding(),
                                             ref_stemmer,
-                                            stemmer)
+                                            stemmer,
+                                            tokenize)
 
                   runs.append(KeyphraseExtractor(docs,
                                                  ext,

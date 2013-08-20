@@ -15,7 +15,7 @@ BONSAI_TOKENIZER_PATH = path.join(path.dirname(sys.argv[0]),
                                   "tools",
                                   "bonsai_tokenizer.pl")
 
-def bonsai_tokenization(sentence, encoding):
+def bonsai_tokenization(sentence, encoding="utf-8"):
   """
   Performs word tokenization on a sentence.
 
