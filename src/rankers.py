@@ -9,6 +9,8 @@ from graph_based_ranking import TopicRankStrategy
 from keybench import RankerC
 from os import listdir
 from os import path
+#from sklearn.naive_bayes import MultinomialNB
+#from sklearn.preprocessing import MinMaxScaler
 from nltk.classify.weka import WekaClassifier
 
 ################################################################################
@@ -296,40 +298,109 @@ class TextRankRanker(RankerC):
 KEYPHRASE     = "keyphrase"
 NOT_KEYPHRASE = "not_keyphrase"
 
+#class DiscreteMultinomialNB(MultinomialNB):
+#  """
+#  """
+#
+#  def __init__(self):
+#    """
+#    """
+#
+#    super(DiscreteMultinomialNB, self).__init__(alpha=0.0, fit_prior=False)
+#
+#    self._discretizer = MinMaxScaler()
+#
+#  def fit(self, X, y, sample_weight=None, class_prior=None):
+#    """
+#    """
+#
+#    return super(DiscreteMultinomialNB, self).fit(self._discretizer.fit_transform(X, y),
+#                                                  y,
+#                                                  sample_weight,
+#                                                  class_prior)
+#
+#  def partial_fit(self, X, y, classes=None, sample_weight=None):
+#    """
+#    """
+#
+#    return super(DiscreteMultinomialNB, self).partial_fit(self._discretizer.fit_transform(X, y),
+#                                                          y,
+#                                                          classes,
+#                                                          sample_weight)
+#
+#  def predict(self, X):
+#    """
+#    """
+#
+#    return super(DiscreteMultinomialNB, self).predict(self._discretizer.transform(X))
+#
+#  def predict_logproba(self, X):
+#    """
+#    """
+#
+#    return super(DiscreteMultinomialNB, self).predict_log_proba(self._discretizer.transform(X))
+#
+#  def predict_proba(self, X):
+#    """
+#    """
+#
+#    return super(DiscreteMultinomialNB, self).predict_proba(self._discretizer.transform(X))
+#
+#  def score(self, X, y):
+#    """
+#    """
+#
+#    return super(DiscreteMultinomialNB, self).score(self._discretizer.transform(X),
+#                                                    y)
+
 def get_features(candidate, pre_processed_file, tfidf):
   """
   TODO
   """
 
+  untagged_candidate = ""
   sentences = pre_processed_file.full_text()
   total_length = 0.0
   first_position = None
 
+  # untag the candidate
+  for word in candidate.split():
+    if untagged_candidate != "":
+      untagged_candidate += " "
+    untagged_candidate += word.rsplit(pre_processed_file.tag_separator(), 1)[0]
+
   # look for the first position
   for sentence in sentences:
     if first_position == None:
-      if sentence.find(candidate) >= 0:
+      untagged_sentence = ""
+
+      # untag the sentence
+      for word in sentence.split():
+        if untagged_sentence != "":
+          untagged_sentence += " "
+        untagged_sentence += word.rsplit(pre_processed_file.tag_separator(), 1)[0]
+
+      if untagged_sentence.find(untagged_candidate) >= 0:
         first_position = total_length
 
         found = False
-        for word in sentence.replace(candidate, candidate.replace(" ", "_")).split():
+        for word in untagged_sentence.replace(untagged_candidate, untagged_candidate.replace(" ", "_")).split():
           if not found:
             first_position += 1.0
 
-            if word == candidate.replace(" ", "_"):
+            if word == untagged_candidate.replace(" ", "_"):
               found = True
 
     total_length += float(len(sentence.split()))
 
-  try:
-    return {"Position": (first_position / total_length), "TF-IDF": tfidf}
-  except:
-    return {"Position": -1337.42, "TF-IDF": -1337.42}
+  #return [(first_position / total_length), tfidf]
+  return {"position": (first_position / total_length), "tf-idf": tfidf}
 
 def train_kea(model_filename,
               train_directory,
               file_extension,
               ref_extension,
+              ref_tokenization_function,
               pre_processor,
               candidate_extractor,
               candidate_clusterer,
@@ -338,12 +409,14 @@ def train_kea(model_filename,
   TODO
   """
 
+  #classifier = DiscreteMultinomialNB()
   classifier = None
   classifier_filename = model_filename + "_classifier"
 
   if not path.exists(model_filename)\
      or not path.exists(classifier_filename):
     feature_sets = []
+    targets = []
 
     for filename in listdir(train_directory):
       if filename.rfind(file_extension) >= 0 \
@@ -367,7 +440,7 @@ def train_kea(model_filename,
           ref_file = codecs.open(ref_filepath, "r", pre_processed_file.encoding())
 
           for keyphrase in ref_file.read().split(";"):
-            keyphrase = keyphrase.strip()
+            keyphrase = ref_tokenization_function(keyphrase.strip())
             untagged_candidate = ""
 
             for word in candidate.split():
@@ -380,22 +453,31 @@ def train_kea(model_filename,
 
           ref_file.close()
 
+          #features = get_features(candidate,
+          #                        pre_processed_file,
+          #                        tfidfs[candidate])
+          #feature_sets.append(features)
+          #targets.append(candidate_class)
           feature_sets.append((get_features(candidate,
-                                             pre_processed_file,
-                                             tfidfs[candidate]),
+                                            pre_processed_file,
+                                            tfidfs[candidate]),
                                candidate_class))
 
+    # classifier training
+    #classifier.fit(feature_sets, targets)
     classifier = WekaClassifier.train(model_filename,
                                       feature_sets,
                                       "naivebayes",
                                       ["-D"])
     # serialize the classifier
+    #classifier_file = open(model_filename, "w")
     classifier_file = open(classifier_filename, "w")
 
     pickle.dump(classifier, classifier_file)
     classifier_file.close()
   else:
     # load the serialized classifier
+    #classifier_file = open(model_filename, "r")
     classifier_file = open(classifier_filename, "r")
     classifier = pickle.load(classifier_file)
 
@@ -505,11 +587,18 @@ class KEARanker(RankerC):
 
     for candidate in candidates:
       features = get_features(candidate, pre_processed_file, tfidfs[candidate])
-      feature_probabilities = self.classifier().prob_classify(features)
-      p_yes = feature_probabilities.prob(KEYPHRASE)
-      p_no  = feature_probabilities.prob(NOT_KEYPHRASE)
 
-      weighted_candidates[candidate] = (p_yes / (p_yes + p_no))
+      if features != None:
+        #feature_probabilities = self.classifier().predict_proba([features])
+        #p_yes = feature_probabilities[0][KEYPHRASE]
+        #p_no  = feature_probabilities[0][NOT_KEYPHRASE]
+        feature_probabilities = self.classifier().prob_classify(features)
+        p_yes = feature_probabilities.prob(KEYPHRASE)
+        p_no  = feature_probabilities.prob(NOT_KEYPHRASE)
+
+        weighted_candidates[candidate] = (p_yes / (p_yes + p_no))
+      else:
+        weighted_candidates[candidate] = 0.0
 
     return weighted_candidates
 

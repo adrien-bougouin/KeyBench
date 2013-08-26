@@ -68,12 +68,14 @@ class NGramExtractor(CandidateExtractorC):
     @rtype:   C{list(string)}
     """
 
-    words = pre_processed_file.full_text_words()
     candidates = []
-    
-    for term in n_to_m_grams(words, 1, self.n()):
-      if self.filtering(term, pre_processed_file.tag_separator()):
-        candidates.append(term)
+
+    for sentence in pre_processed_file.full_text():
+      words = sentence.split()
+      
+      for term in n_to_m_grams(words, 1, self.n()):
+        if self.filtering(term, pre_processed_file.tag_separator()):
+          candidates.append(term)
 
     return candidates
 

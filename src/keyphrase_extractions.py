@@ -124,11 +124,11 @@ TEXTRANK_SE = "textrank"
 
 ##### runs #####################################################################
 
-CORPORA_RU = [SEMEVAL_CO]
-METHODS_RU = [TFIDF_ME]
+CORPORA_RU = [INSPEC_CO]
+METHODS_RU = [KEA_ME]
 NUMBERS_RU = [10]
-LENGTHS_RU = [4]
-CANDIDATES_RU = [LONGEST_NOUN_PHRASE_CA]
+LENGTHS_RU = [3]
+CANDIDATES_RU = [ST_FILTERED_NGRAM_CA]
 CLUSTERING_RU = [NO_CLUSTER_CC]
 SCORINGS_RU = [WEIGHT_SC]
 SELECTIONS_RU = [WHOLE_SE]
@@ -149,6 +149,11 @@ def extract_stop_words(stop_words_filepath):
   stop_words = st_file.read().split("\n")
 
   st_file.close()
+
+  stop_words.append(",")
+  stop_words.append(".")
+  stop_words.append("!")
+  stop_words.append("?")
 
   return stop_words
 
@@ -425,7 +430,7 @@ def main(argv):
                                           scoring_function)
                     else:
                       if method == KEA_ME:
-                        kea_train_dir = path.join(RUNS_DIR, "kea_model_and_classifiers")
+                        kea_train_dir = path.join(RUNS_DIR, "kea_models")
                         if not path.exists(kea_train_dir):
                           makedirs(kea_train_dir)
                         train_idfs = inverse_document_frequencies(train_docs,
@@ -451,6 +456,7 @@ def main(argv):
                                                 train_docs,
                                                 ext,
                                                 ".key",
+                                                tokenize,
                                                 pre_processor,
                                                 c,
                                                 cc,

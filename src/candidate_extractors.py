@@ -210,8 +210,8 @@ class STFilteredNGramExtractor(NGramExtractor):
         return False
 
       # FIXME semeval trick
-      if len(word) <= 2:
-        return False
+      #if len(word) <= 2:
+      #  return False
 
     return True
 
@@ -337,8 +337,8 @@ class POSFilteredNGramExtractor(NGramExtractor):
         return False
 
       # FIXME semeval trick
-      if (len(tagged_word) - (len(tag) + 1)) <= 2:
-        return False
+      #if (len(tagged_word) - (len(tag) + 1)) <= 2:
+      #  return False
 
     return True
 
@@ -451,7 +451,7 @@ class LongestNounPhraseExtractor(CandidateExtractorC):
         word = tagged_word.rsplit(pre_processed_file.tag_separator(), 1)[0]
         tag = tagged_word.rsplit(pre_processed_file.tag_separator(), 1)[1]
 
-        if filters.count(tag) > 0 and len(word) > 2 : # FIXME semeval trick
+        if filters.count(tag) > 0:# and len(word) > 2 : # FIXME semeval trick
           if candidate != "":
             candidate += " "
           candidate += tagged_word
