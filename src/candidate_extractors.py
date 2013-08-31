@@ -202,16 +202,18 @@ class STFilteredNGramExtractor(NGramExtractor):
 
     tagged_words = term.split()
 
-    for tagged_word in tagged_words:
+    for i, tagged_word in enumerate(tagged_words):
       word = tagged_word.lower().rsplit(tag_separator, 1)[0]
 
-      # only words not included into the stop word list
-      if self.stop_words().count(word) > 0:
-        return False
+      # only candidate with first and last words not included into the stop word
+      # list are accepted
+      if i == 0 or i == (len(tagged_words) - 1):
+        if self.stop_words().count(word) > 0:
+          return False
 
       # FIXME semeval trick
-      #if len(word) <= 2:
-      #  return False
+      if len(word) <= 2:
+        return False
 
     return True
 

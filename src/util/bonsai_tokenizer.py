@@ -53,5 +53,5 @@ def bonsai_tokenization(sentence, encoding="utf-8"):
   remove(input_filename)
   remove(output_filename)
 
-  return output.split()
+  return output.strip()
 
