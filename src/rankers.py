@@ -12,7 +12,6 @@ from os import listdir
 from os import path
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.preprocessing import MinMaxScaler
-#from nltk.classify.weka import WekaClassifier
 
 ################################################################################
 # TextRankRanker
@@ -298,8 +297,6 @@ class TextRankRanker(RankerC):
 
 KEYPHRASE     = 0
 NOT_KEYPHRASE = 1
-#KEYPHRASE     = "keyphrase"
-#NOT_KEYPHRASE = "not_keyphrase"
 
 class DiscreteMultinomialNB(MultinomialNB):
   """
@@ -378,7 +375,7 @@ def get_features(candidate, pre_processed_file, tfidf):
       untagged_sentence = ""
 
       # untag the sentence
-      for word in sentence.split():
+      for word in sentence.lower().split():
         if untagged_sentence != "":
           untagged_sentence += " "
         untagged_sentence += word.rsplit(pre_processed_file.tag_separator(), 1)[0]
@@ -387,15 +384,14 @@ def get_features(candidate, pre_processed_file, tfidf):
         first_position = total_length
 
         for word in untagged_sentence.replace(untagged_candidate, untagged_candidate.replace(" ", "_")).split():
-          first_position += 1.0
-
           if word == untagged_candidate.replace(" ", "_"):
             break
+          else:
+            first_position += 1.0
 
     total_length += float(len(sentence.split()))
 
   return [(first_position / total_length), tfidf]
-#  return {"position": (first_position / total_length), "tf-idf": tfidf}
 
 ##### Multi-processing #########################################################
 
@@ -420,9 +416,9 @@ def feature_class_extraction_pool_worker(arguments):
   targets = []
 
   # keyphrase stemming
-  stemmed_keyphrases = []
+  stemmed_keyphrases = {}
   for keyphrase in ref_file.read().split(";"):
-    keyphrase = ref_tokenization_function(keyphrase.strip())
+    keyphrase = ref_tokenization_function(keyphrase.lower().strip())
     stemmed_keyphrase = ""
 
     for word in keyphrase.split():
@@ -430,7 +426,7 @@ def feature_class_extraction_pool_worker(arguments):
         stemmed_keyphrase += " "
       stemmed_keyphrase += stemmer.stem(word)
 
-    stemmed_keyphrases.append(stemmed_keyphrase)
+    stemmed_keyphrases[stemmed_keyphrase] = True
 
   for candidate in candidates:
     candidate_class = NOT_KEYPHRASE
@@ -441,9 +437,8 @@ def feature_class_extraction_pool_worker(arguments):
         stemmed_candidate += " "
       stemmed_candidate += stemmer.stem(word.rsplit(pre_processor.tag_separator(), 1)[0])
 
-    for keyphrase in stemmed_keyphrases:
-      if stemmed_candidate == stemmed_keyphrase:
-        candidate_class = KEYPHRASE
+    if stemmed_keyphrases.has_key(stemmed_candidate):
+      candidate_class = KEYPHRASE
 
     ref_file.close()
 
@@ -472,12 +467,8 @@ def train_kea(model_filename,
   """
 
   classifier = DiscreteMultinomialNB()
-#  classifier = None
-#  classifier_filename = model_filename + "_classifier"
 
   if not path.exists(model_filename):
-#  if not path.exists(model_filename)\
-#     or not path.exists(classifier_filename):
     feature_sets = []
     target_sets = []
 
@@ -506,20 +497,14 @@ def train_kea(model_filename,
 
     # classifier training
     classifier.fit(feature_sets, target_sets)
-#    classifier = WekaClassifier.train(model_filename,
-#                                      feature_sets,
-#                                      "naivebayes",
-#                                      ["-D"])
     # serialize the classifier
     classifier_file = open(model_filename, "w")
-#    classifier_file = open(classifier_filename, "w")
 
     pickle.dump(classifier, classifier_file)
     classifier_file.close()
   else:
     # load the serialized classifier
     classifier_file = open(model_filename, "r")
-#    classifier_file = open(classifier_filename, "r")
     classifier = pickle.load(classifier_file)
 
     classifier_file.close()
@@ -631,11 +616,8 @@ class KEARanker(RankerC):
       feature_sets.append(get_features(candidate, pre_processed_file, tfidfs[candidate]))
 
     for i, feature_probabilities in enumerate(self.classifier().predict_proba(feature_sets)):
-#    for i, feature_probabilities in enumerate(self.classifier().batch_prob_classify(feature_sets)):
       p_yes = feature_probabilities[KEYPHRASE]
       p_no  = feature_probabilities[NOT_KEYPHRASE]
-#      p_yes = feature_probabilities.prob(KEYPHRASE)
-#      p_no  = feature_probabilities.prob(NOT_KEYPHRASE)
       weighted_candidates[candidates[i]] = (p_yes / (p_yes + p_no))
 
     return weighted_candidates

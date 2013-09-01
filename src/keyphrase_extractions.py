@@ -124,7 +124,7 @@ TEXTRANK_SE = "textrank"
 
 ##### runs #####################################################################
 
-CORPORA_RU = [DEFT_CO]
+CORPORA_RU = [SEMEVAL_CO]
 METHODS_RU = [KEA_ME]
 NUMBERS_RU = [10]
 LENGTHS_RU = [3]
@@ -225,12 +225,6 @@ def main(argv):
                                                True,
                                                DEFTFileRep())
             language = FRENCH_LA
-            # lazy loading of idfs
-            if deft_idfs == None:
-              deft_idfs = inverse_document_frequencies(docs,
-                                                       ext,
-                                                       pre_processor)
-            idfs = deft_idfs
             np_chunk_rules = french_np_chunk_rules
           else:
             if corpus == WIKINEWS_CO:
@@ -247,12 +241,6 @@ def main(argv):
                                                  True,
                                                  WikiNewsFileRep())
               language = FRENCH_LA
-              # lazy loading of idfs
-              if wikinews_idfs == None:
-                wikinews_idfs = inverse_document_frequencies(docs,
-                                                             ext,
-                                                             pre_processor)
-              idfs = wikinews_idfs
               np_chunk_rules = french_np_chunk_rules
             else:
               if corpus == SEMEVAL_CO:
@@ -271,12 +259,6 @@ def main(argv):
                                                     "/",
                                                     SemEvalFileRep())
                 language = ENGLISH_LA
-                # lazy loading of idfs
-                if semeval_idfs == None:
-                  semeval_idfs = inverse_document_frequencies(docs,
-                                                              ext,
-                                                              pre_processor)
-                idfs = semeval_idfs
                 np_chunk_rules = english_np_chunk_rules
               else:
                 if corpus == INSPEC_CO:
@@ -295,12 +277,6 @@ def main(argv):
                                                       "/",
                                                       InspecFileRep())
                   language = ENGLISH_LA
-                  # lazy loading of idfs
-                  if inspec_idfs == None:
-                    inspec_idfs = inverse_document_frequencies(docs,
-                                                               ext,
-                                                               pre_processor)
-                  idfs = inspec_idfs
                   np_chunk_rules = english_np_chunk_rules
 
           for candidate in CANDIDATES_RU:
@@ -308,13 +284,13 @@ def main(argv):
               for scoring in SCORINGS_RU:
                 for selection in SELECTIONS_RU:
                   run_name = "%s_%s_%d_%d_%s_%s_%s_%s"%(corpus,
-                                                     method,
-                                                     number,
-                                                     length,
-                                                     candidate,
-                                                     cluster,
-                                                     scoring,
-                                                     selection)
+                                                        method,
+                                                        number,
+                                                        length,
+                                                        candidate,
+                                                        cluster,
+                                                        scoring,
+                                                        selection)
                   c = None # candidate_extractor
                   cc = None # candidate_clusterer
                   r = None # ranker
@@ -381,12 +357,62 @@ def main(argv):
                             scoring_function = term_scoring.normalized
                   ##### ranker #################################################
                   if method == TFIDF_ME:
+                    ##### TF-IDF computation ###################################
+                    if corpus == DEFT_CO:
+                      # lazy loading of idfs
+                      if deft_idfs == None:
+                        deft_idfs = inverse_document_frequencies(docs,
+                                                                 ext,
+                                                                 # no candidate
+                                                                 # means word
+                                                                 # TF-IDF
+                                                                 pre_processor,
+                                                                 c)
+                      idfs = deft_idfs
+                    else:
+                      if corpus == WIKINEWS_CO:
+                        # lazy loading of idfs
+                        if wikinews_idfs == None:
+                          wikinews_idfs = inverse_document_frequencies(docs,
+                                                                       ext,
+                                                                       # no candidate
+                                                                       # means word
+                                                                       # TF-IDF
+                                                                       pre_processor,
+                                                                       c)
+                        idfs = wikinews_idfs
+                      else:
+                        if corpus == SEMEVAL_CO:
+                          # lazy loading of idfs
+                          if semeval_idfs == None:
+                            semeval_idfs = inverse_document_frequencies(docs,
+                                                                        ext,
+                                                                        # no candidate
+                                                                        # means word
+                                                                        # TF-IDF
+                                                                        pre_processor,
+                                                                        c)
+                          idfs = semeval_idfs
+                        else:
+                          if corpus == INSPEC_CO:
+                            # lazy loading of idfs
+                            if inspec_idfs == None:
+                              inspec_idfs = inverse_document_frequencies(docs,
+                                                                         ext,
+                                                                         # no candidate
+                                                                         # means word
+                                                                         # TF-IDF
+                                                                         pre_processor,
+                                                                         c)
+                            idfs = inspec_idfs
+                    ############################################################
                     r = TFIDFRanker(run_name,
                                     LAZY_RANKING,
                                     RUNS_DIR,
                                     True,
-                                    idfs,
-                                    scoring_function)
+                                    # no scoring function means n-gram TF-IDF
+                                    idfs)#,
+                                    #scoring_function)
                   else:
                     if method == TEXTRANK_ME \
                        or method == SINGLERANK_ME \
@@ -433,35 +459,40 @@ def main(argv):
                         kea_train_dir = path.join(RUNS_DIR, "kea_models")
                         if not path.exists(kea_train_dir):
                           makedirs(kea_train_dir)
+                        # TF-IDFs are computed based on n-gram counts
                         train_idfs = inverse_document_frequencies(train_docs,
                                                                   ext,
-                                                                  pre_processor)
+                                                                  pre_processor,
+                                                                  c)
                         train_tfidf_ranker = TFIDFRanker(run_name,
                                                          LAZY_RANKING,
                                                          RUNS_DIR,
                                                          True,
-                                                         train_idfs,
-                                                         scoring_function)
+                                                         train_idfs)
+                        classifier = train_kea(path.join(kea_train_dir, "kea_model_%s"%run_name),
+                                               train_docs,
+                                               ext,
+                                               ".key",
+                                               tokenize,
+                                               stemmer,
+                                               pre_processor,
+                                               c,
+                                               cc,
+                                               train_tfidf_ranker)
+                        test_idfs = inverse_document_frequencies(docs,
+                                                                 ext,
+                                                                 pre_processor,
+                                                                 c)
                         tfidf_ranker = TFIDFRanker(run_name,
                                                    LAZY_RANKING,
                                                    RUNS_DIR,
                                                    True,
-                                                   idfs,
-                                                   scoring_function)
+                                                   test_idfs)
                         r = KEARanker(run_name,
                                       LAZY_RANKING,
                                       RUNS_DIR,
                                       True,
-                                      train_kea(path.join(kea_train_dir, "kea_model_%s"%run_name),
-                                                train_docs,
-                                                ext,
-                                                ".key",
-                                                tokenize,
-                                                stemmer,
-                                                pre_processor,
-                                                c,
-                                                cc,
-                                                train_tfidf_ranker),
+                                      classifier,
                                       tfidf_ranker)
                   ##### selector ###############################################
                   if selection == WHOLE_SE:

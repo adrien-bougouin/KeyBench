@@ -5,6 +5,7 @@ import math
 from keybench.ranker import RankerC
 from keybench.default.util import document_frequencies
 from keybench.default.util import inverse_document_frequencies
+from keybench.default.util import n_to_m_grams
 
 class TFIDFRanker(RankerC):
   """
@@ -18,7 +19,7 @@ class TFIDFRanker(RankerC):
                lazy_directory,
                debug,
                inverse_document_frequencies,
-               scoring_function):
+               scoring_function=None):
     """
     Constructor of the component.
 
@@ -116,35 +117,75 @@ class TFIDFRanker(RankerC):
     @rtype:   C{dict(string, float)}
     """
 
-    word_counts = {}
-    weighted_words = {}
     weighted_candidates = {}
 
-    # get the words counts
-    for w in pre_processed_file.full_text_words():
-      # no tags in the weights
-      w = w.lower().rsplit(pre_processed_file.tag_separator(), 1)[0]
+    # scoring function (WARNING: idfs must be extracted for words)
+    if self.scoring_function() != None:
+      word_counts = {}
+      weighted_words = {}
 
-      if not word_counts.has_key(w):
-        word_counts[w] = 0.0
-      word_counts[w] += 1.0
-
-    # compute only the needed words' tf*idf
-    for c in candidates:
-      for w in c.split():
+      # get the words counts
+      for w in pre_processed_file.full_text_words():
         # no tags in the weights
         w = w.lower().rsplit(pre_processed_file.tag_separator(), 1)[0]
 
-        if not weighted_words.has_key(w):
-          tf = word_counts[w]
-          idf = self.inverse_document_frequencies()[w]
-          weighted_words[w] = tf * math.log10(idf)
+        if not word_counts.has_key(w):
+          word_counts[w] = 0.0
+        word_counts[w] += 1.0
 
-    # compute the candidate scores
-    for c in candidates:
-      weighted_candidates[c] = self._scoring_function(c,
-                                                      weighted_words,
-                                                      pre_processed_file.tag_separator())
+      # compute only the needed words' tf*idf
+      for c in candidates:
+        for w in c.split():
+          # no tags in the weights
+          w = w.lower().rsplit(pre_processed_file.tag_separator(), 1)[0]
+
+          if not weighted_words.has_key(w):
+            tf = word_counts[w]
+            idf = self.inverse_document_frequencies()[w]
+            weighted_words[w] = tf * math.log10(idf)
+
+      # compute the candidate scores
+      for c in candidates:
+        weighted_candidates[c] = self.scoring_function()(c,
+                                                         weighted_words,
+                                                         pre_processed_file.tag_separator())
+    # no scoring function (WARNING: idfs must be extracted for candidates)
+    else:
+      doc_len = len(pre_processed_file.full_text_words())
+      sentences = pre_processed_file.full_text()
+      term_counts = {}
+      max_candidate_length = 0
+
+      # compute the maximum length of a candidate
+      for candidate in candidates:
+        max_candidate_length = max(max_candidate_length, len(candidate.split()))
+
+      # count all possible terms occurrences
+      for sentence in sentences:
+        for term in n_to_m_grams(sentence.split(), 1, max_candidate_length):
+          normalized_term = ""
+
+          for word in term.split():
+            if normalized_term != "":
+              normalized_term += " "
+            normalized_term += word.lower().rsplit(pre_processed_file.tag_separator(), 1)[0]
+
+          if not term_counts.has_key(normalized_term):
+            term_counts[normalized_term] = 0.0
+          term_counts[normalized_term] += 1.0
+
+      # compute TF-IDFs
+      for candidate in candidates:
+        untagged_candidate = ""
+
+        for word in candidate.split():
+          if untagged_candidate != "":
+            untagged_candidate += " "
+          untagged_candidate += word.rsplit(pre_processed_file.tag_separator(), 1)[0]
+
+        tf = term_counts[untagged_candidate]
+        idf = self.inverse_document_frequencies()[untagged_candidate]
+        weighted_candidates[candidate] = (tf / doc_len) * -math.log(1.0 / idf, 2)
 
     return weighted_candidates
 
