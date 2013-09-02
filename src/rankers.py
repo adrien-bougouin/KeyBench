@@ -12,6 +12,7 @@ from os import listdir
 from os import path
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.preprocessing import MinMaxScaler
+#from nltk.classify.weka import WekaClassifier
 
 ################################################################################
 # TextRankRanker
@@ -297,6 +298,8 @@ class TextRankRanker(RankerC):
 
 KEYPHRASE     = 0
 NOT_KEYPHRASE = 1
+#KEYPHRASE     = "keyphrase"
+#NOT_KEYPHRASE = "not_keyphrase"
 
 class DiscreteMultinomialNB(MultinomialNB):
   """
@@ -392,6 +395,7 @@ def get_features(candidate, pre_processed_file, tfidf):
     total_length += float(len(sentence.split()))
 
   return [(first_position / total_length), tfidf]
+  #return {"Position": (first_position / total_length), "TF-IDF": tfidf}
 
 ##### Multi-processing #########################################################
 
@@ -467,6 +471,8 @@ def train_kea(model_filename,
   """
 
   classifier = DiscreteMultinomialNB()
+  #classifier = MultinomialNB()
+  #classifier = None
 
   if not path.exists(model_filename):
     feature_sets = []
@@ -494,9 +500,14 @@ def train_kea(model_filename,
       for i, features in enumerate(feature_set):
         feature_sets.append(features)
         target_sets.append(target_set[i])
+        #feature_sets.append((features, target_set[i]))
 
     # classifier training
     classifier.fit(feature_sets, target_sets)
+    #WekaClassifier._CLASSIFIER_CLASS["naivebayessimple"] = "weka.classifiers.bayes.NaiveBayesSimple"
+    #classifier = WekaClassifier.train(model_filename + "_train",
+    #                                  feature_sets,
+    #                                  "naivebayessimple")
     # serialize the classifier
     classifier_file = open(model_filename, "w")
 
@@ -616,8 +627,11 @@ class KEARanker(RankerC):
       feature_sets.append(get_features(candidate, pre_processed_file, tfidfs[candidate]))
 
     for i, feature_probabilities in enumerate(self.classifier().predict_proba(feature_sets)):
+    #for i, feature_probabilities in enumerate(self.classifier().batch_prob_classify(feature_sets)):
       p_yes = feature_probabilities[KEYPHRASE]
       p_no  = feature_probabilities[NOT_KEYPHRASE]
+      #p_yes = feature_probabilities.prob(KEYPHRASE)
+      #p_no  = feature_probabilities.prob(NOT_KEYPHRASE)
       weighted_candidates[candidates[i]] = (p_yes / (p_yes + p_no))
 
     return weighted_candidates
