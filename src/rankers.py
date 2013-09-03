@@ -11,7 +11,6 @@ from multiprocessing import Pool
 from os import listdir
 from os import path
 from sklearn.naive_bayes import MultinomialNB
-from sklearn.preprocessing import MinMaxScaler
 #from nltk.classify.weka import WekaClassifier
 
 ################################################################################
@@ -301,61 +300,6 @@ NOT_KEYPHRASE = 1
 #KEYPHRASE     = "keyphrase"
 #NOT_KEYPHRASE = "not_keyphrase"
 
-class DiscreteMultinomialNB(MultinomialNB):
-  """
-  """
-
-  def __init__(self):
-    """
-    """
-
-    super(DiscreteMultinomialNB, self).__init__(alpha=0.0, fit_prior=False)
-
-    self._discretizer = MinMaxScaler()
-
-  def fit(self, X, y, sample_weight=None, class_prior=None):
-    """
-    """
-
-    return super(DiscreteMultinomialNB, self).fit(self._discretizer.fit_transform(X, y),
-                                                  y,
-                                                  sample_weight,
-                                                  class_prior)
-
-  def partial_fit(self, X, y, classes=None, sample_weight=None):
-    """
-    """
-
-    return super(DiscreteMultinomialNB, self).partial_fit(self._discretizer.fit_transform(X, y),
-                                                          y,
-                                                          classes,
-                                                          sample_weight)
-
-  def predict(self, X):
-    """
-    """
-
-    return super(DiscreteMultinomialNB, self).predict(self._discretizer.transform(X))
-
-  def predict_logproba(self, X):
-    """
-    """
-
-    return super(DiscreteMultinomialNB, self).predict_log_proba(self._discretizer.transform(X))
-
-  def predict_proba(self, X):
-    """
-    """
-
-    return super(DiscreteMultinomialNB, self).predict_proba(self._discretizer.transform(X))
-
-  def score(self, X, y):
-    """
-    """
-
-    return super(DiscreteMultinomialNB, self).score(self._discretizer.transform(X),
-                                                    y)
-
 def get_features(candidate, pre_processed_file, tfidf):
   """
   TODO
@@ -470,8 +414,7 @@ def train_kea(model_filename,
   TODO
   """
 
-  classifier = DiscreteMultinomialNB()
-  #classifier = MultinomialNB()
+  classifier = MultinomialNB()
   #classifier = None
 
   if not path.exists(model_filename):

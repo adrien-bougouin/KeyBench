@@ -124,7 +124,7 @@ TEXTRANK_SE = "textrank"
 
 ##### runs #####################################################################
 
-CORPORA_RU = [INSPEC_CO]
+CORPORA_RU = [DEFT_CO]
 METHODS_RU = [KEA_ME]
 NUMBERS_RU = [10]
 LENGTHS_RU = [3]
