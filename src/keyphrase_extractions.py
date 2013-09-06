@@ -6,6 +6,7 @@ import codecs
 from candidate_extractors import NPChunkExtractor
 from candidate_extractors import STFilteredNGramExtractor
 from candidate_extractors import PatternMatchingExtractor
+from candidate_extractors import CLARIT96Extractor
 from candidate_clusterers import StemOverlapHierarchicalClusterer
 from candidate_clusterers import LINKAGE_STRATEGY
 from evaluators import StandardPRFMEvaluator
