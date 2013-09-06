@@ -290,7 +290,7 @@ class PatternMatchingExtractor(CandidateExtractorC):
       # pattern matching
       for pattern in self.patterns():
         for match in re.finditer(pattern, sentence):
-          candidate = match.group(0)
+          candidate = match.group(0).strip()
           accepted = True
           
           if candidate != "":

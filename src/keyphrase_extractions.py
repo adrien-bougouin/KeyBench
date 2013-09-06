@@ -3,6 +3,7 @@
 
 import sys
 import codecs
+from candidate_extractors import NPChunkExtractor
 from candidate_extractors import STFilteredNGramExtractor
 from candidate_extractors import PatternMatchingExtractor
 from candidate_clusterers import StemOverlapHierarchicalClusterer
@@ -126,7 +127,7 @@ CORPORA_RU = [WIKINEWS_CO]
 METHODS_RU = [TFIDF_ME]
 NUMBERS_RU = [10]
 LENGTHS_RU = [4]
-CANDIDATES_RU = [LONGEST_NOUN_PHRASE_CA]
+CANDIDATES_RU = [NP_CHUNK_CA]
 CLUSTERING_RU = [NO_CLUSTER_CC]
 SCORINGS_RU = [WEIGHT_SC]
 SELECTIONS_RU = [WHOLE_SE]
@@ -137,11 +138,11 @@ ADJ_TAGS = ["jj", "adj"]
 # used for tokens filtering in ****Rank methods
 TEXTRANK_TAGS = ["nn", "nns", "nnp", "nnps", "jj", "nc", "npp", "adj"]
 # rules for NP chunking
-english_np_chunk_rules = "{(<nnp|nnps>+)|(<nn|nns>+)|(<jj>*<nn|nns>)}"
-french_np_chunk_rules = "{(<npp>+)|(<nc>+)|(<adj>?<nc><adj>*)}"
+english_np_chunk_rules = "{(<nnp|nnps>+)|(<jj>+<nn|nns>)|(<nn|nns>+)}"
+french_np_chunk_rules = "{(<npp>+)|(<adj><nc><adj>*)|(<nc><adj>*)|(<nc>+)}"
 # pattern matching rules
-english_lnp_patterns = ["[^\ ]+\/((jj)|(nnps)|(nnp)|(nns)|(nn))(( [^\ ]+\/((jj)|(nnp)|(nnps)|(nns)|(nn)))*|( |$))"]
-french_lnp_patterns = ["[^/ ]+/((adj)|(npp)|(nc))(( [^/ ]+/((adj)|(npp)|(nc)))*|( |$))"]
+english_lnp_patterns = ["([^ ]+\/((jj)|(nnps)|(nnp)|(nns)|(nn))( |$))+"]
+french_lnp_patterns = ["([^ ]+\/((adj)|(npp)|(nc))( |$))+"]
 
 ################################################################################
 
