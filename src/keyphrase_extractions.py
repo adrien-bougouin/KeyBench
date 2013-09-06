@@ -12,7 +12,7 @@ from evaluators import StandardPRFMEvaluator
 from keybench import KeyphraseExtractor
 from keybench import KeyBenchWorker
 from keybench.default import FakeClusterer
-from keybench.default.util import inverse_document_frequencies
+from keybench.default.util import document_frequencies
 from keybench.default import TFIDFRanker
 from multiprocessing import Queue
 from pre_processors import FrenchPreProcessor
@@ -124,7 +124,7 @@ TEXTRANK_SE = "textrank"
 
 ##### runs #####################################################################
 
-CORPORA_RU = [DEFT_CO]
+CORPORA_RU = [SEMEVAL_CO]
 METHODS_RU = [KEA_ME]
 NUMBERS_RU = [10]
 LENGTHS_RU = [3]
@@ -187,11 +187,14 @@ def main(argv):
   ##### runs' creation #########################################################
 
   # lazy loading of idfs
-  deft_idfs = None
-  wikinews_idfs = None
-  semeval_idfs = None
-  inspec_idfs = None
-  test_idfs = None
+  deft_dfs = None
+  deft_nb_documents = None
+  wikinews_dfs = None
+  wikinews_nb_documents = None
+  semeval_dfs = None
+  semeval_nb_documents = None
+  inspec_dfs = None
+  inspec_nb_documents = None
 
   for corpus in CORPORA_RU:
     for method in METHODS_RU:
@@ -207,7 +210,8 @@ def main(argv):
           tokenize = None
           pre_processor = None
           language = None
-          idfs = None
+          dfs = None
+          nb_documents = None
           np_chunk_rules = None
 
           if corpus == DEFT_CO:
@@ -357,61 +361,66 @@ def main(argv):
                             scoring_function = term_scoring.normalized
                   ##### ranker #################################################
                   if method == TFIDF_ME:
-                    ##### TF-IDF computation ###################################
+                    ##### DF computation ###################################
                     if corpus == DEFT_CO:
-                      # lazy loading of idfs
-                      if deft_idfs == None:
-                        deft_idfs = inverse_document_frequencies(docs,
-                                                                 ext,
-                                                                 # no candidate
-                                                                 # means word
-                                                                 # TF-IDF
-                                                                 pre_processor,
-                                                                 c)
-                      idfs = deft_idfs
+                      # lazy loading of dfs
+                      if deft_dfs == None:
+                        deft_nb_documents, deft_dfs = document_frequencies(train_docs,
+                                                                           ext,
+                                                                           # no candidate
+                                                                           # means word
+                                                                           # TF-IDF
+                                                                           pre_processor,
+                                                                           c)
+                      dfs = deft_dfs
+                      nb_documents = deft_nb_documents
                     else:
                       if corpus == WIKINEWS_CO:
-                        # lazy loading of idfs
-                        if wikinews_idfs == None:
-                          wikinews_idfs = inverse_document_frequencies(docs,
-                                                                       ext,
-                                                                       # no candidate
-                                                                       # means word
-                                                                       # TF-IDF
-                                                                       pre_processor,
-                                                                       c)
-                        idfs = wikinews_idfs
+                        # lazy loading of dfs
+                        if wikinews_dfs == None:
+                          wikinews_nb_documents, wikinews_dfs = document_frequencies(docs,
+                                                                                     ext,
+                                                                                     # no candidate
+                                                                                     # means word
+                                                                                     # TF-IDF
+                                                                                     pre_processor,
+                                                                                     c)
+                        dfs = wikinews_dfs
+                        nb_documents = wikinews_nb_documents
                       else:
                         if corpus == SEMEVAL_CO:
-                          # lazy loading of idfs
-                          if semeval_idfs == None:
-                            semeval_idfs = inverse_document_frequencies(docs,
-                                                                        ext,
-                                                                        # no candidate
-                                                                        # means word
-                                                                        # TF-IDF
-                                                                        pre_processor,
-                                                                        c)
-                          idfs = semeval_idfs
+                          # lazy loading of dfs
+                          if semeval_dfs == None:
+                            semeval_nb_documents, semeval_dfs = document_frequencies(train_docs,
+                                                                                     ext,
+                                                                                     # no candidate
+                                                                                     # means word
+                                                                                     # TF-IDF
+                                                                                     pre_processor,
+                                                                                     c)
+                          dfs = semeval_dfs
+                          nb_documents = semeval_nb_documents
                         else:
                           if corpus == INSPEC_CO:
-                            # lazy loading of idfs
-                            if inspec_idfs == None:
-                              inspec_idfs = inverse_document_frequencies(docs,
-                                                                         ext,
-                                                                         # no candidate
-                                                                         # means word
-                                                                         # TF-IDF
-                                                                         pre_processor,
-                                                                         c)
-                            idfs = inspec_idfs
+                            # lazy loading of dfs
+                            if inspec_dfs == None:
+                              inspec_nb_documents, inspec_dfs = document_frequencies(train_docs,
+                                                                                     ext,
+                                                                                     # no candidate
+                                                                                     # means word
+                                                                                     # TF-IDF
+                                                                                     pre_processor,
+                                                                                     c)
+                            dfs = inspec_dfs
+                            nb_documents = inspec_nb_documents
                     ############################################################
                     r = TFIDFRanker(run_name,
                                     LAZY_RANKING,
                                     RUNS_DIR,
                                     True,
                                     # no scoring function means n-gram TF-IDF
-                                    idfs)#,
+                                    dfs,
+                                    nb_documents)#,
                                     #scoring_function)
                   else:
                     if method == TEXTRANK_ME \
@@ -460,15 +469,16 @@ def main(argv):
                         if not path.exists(kea_train_dir):
                           makedirs(kea_train_dir)
                         # TF-IDFs are computed based on n-gram counts
-                        train_idfs = inverse_document_frequencies(train_docs,
-                                                                  ext,
-                                                                  pre_processor,
-                                                                  c)
+                        train_nb_documents, train_dfs = document_frequencies(train_docs,
+                                                                             ext,
+                                                                             pre_processor,
+                                                                             c)
                         train_tfidf_ranker = TFIDFRanker(run_name,
                                                          LAZY_RANKING,
                                                          RUNS_DIR,
                                                          True,
-                                                         train_idfs)
+                                                         train_dfs,
+                                                         train_nb_documents)
                         classifier = train_kea(path.join(kea_train_dir, "kea_model_%s"%run_name),
                                                train_docs,
                                                ext,
@@ -479,21 +489,12 @@ def main(argv):
                                                c,
                                                cc,
                                                train_tfidf_ranker)
-                        test_idfs = inverse_document_frequencies(docs,
-                                                                 ext,
-                                                                 pre_processor,
-                                                                 c)
-                        tfidf_ranker = TFIDFRanker(run_name,
-                                                   LAZY_RANKING,
-                                                   RUNS_DIR,
-                                                   True,
-                                                   test_idfs)
                         r = KEARanker(run_name,
                                       LAZY_RANKING,
                                       RUNS_DIR,
                                       True,
                                       classifier,
-                                      tfidf_ranker)
+                                      train_tfidf_ranker)
                   ##### selector ###############################################
                   if selection == WHOLE_SE:
                     s = UnredundantWholeSelector(run_name,

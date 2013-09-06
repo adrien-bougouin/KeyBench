@@ -4,7 +4,6 @@
 import math
 from keybench.ranker import RankerC
 from keybench.default.util import document_frequencies
-from keybench.default.util import inverse_document_frequencies
 from keybench.default.util import n_to_m_grams
 
 class TFIDFRanker(RankerC):
@@ -18,7 +17,8 @@ class TFIDFRanker(RankerC):
                is_lazy,
                lazy_directory,
                debug,
-               inverse_document_frequencies,
+               document_frequencies,
+               nb_documents,
                scoring_function=None):
     """
     Constructor of the component.
@@ -38,10 +38,10 @@ class TFIDFRanker(RankerC):
                                           is in debug mode, it will output each
                                           step of its processing.
     @type   debug:                        C{bool}
-    @param  inverse_document_frequencies: The inverse document frequencies of
-                                          each word that can appear in a
-                                          candidate term.
-    @type   inverse_document_frequencies: C{dict: string -> float}
+    TODO
+    TODO
+    TODO
+    TODO
     @param  scoring_function:             Function that gives a score to a
                                           candidate according to its words.
     @type   scoring_function:             C{function(expression, word_weights,
@@ -50,31 +50,33 @@ class TFIDFRanker(RankerC):
 
     super(TFIDFRanker, self).__init__(name, is_lazy, lazy_directory, debug)
 
-    self.set_inverse_document_frequencies(inverse_document_frequencies)
+    self.set_document_frequencies(document_frequencies)
+    self.set_nb_documents(nb_documents)
     self.set_scoring_function(scoring_function)
 
-  def inverse_document_frequencies(self):
+  def document_frequencies(self):
     """
-    Getter of the inverse document frequencies of the words.
-
-    @return:  The inverse of the number of documents (in a particular corpus) in
-              which the words appear.
-    @rtype:   C{dict(string, float)}
     """
 
-    return self._inverse_document_frequencies
+    return self._document_frequencies
 
-  def set_inverse_document_frequencies(self, inverse_document_frequencies):
+  def set_document_frequencies(self, document_frequencies):
     """
-    Setter of the inverse document frequencies of the words.
-
-    @param  inverse_document_frequencies: The new inverse of the number of
-                                          documents (in a particular corpus) in
-                                          which the words appear.
-    @type   inverse_document_frequencies: C{dict(string, float)}
     """
 
-    self._inverse_document_frequencies = inverse_document_frequencies
+    self._document_frequencies = document_frequencies
+
+  def nb_documents(self):
+    """
+    """
+
+    return self._nb_documents
+
+  def set_nb_documents(self, nb_documents):
+    """
+    """
+    
+    self._nb_documents = nb_documents
 
   def scoring_function(self):
     """
@@ -121,6 +123,7 @@ class TFIDFRanker(RankerC):
 
     # scoring function (WARNING: idfs must be extracted for words)
     if self.scoring_function() != None:
+      doc_len = len(pre_processed_file.full_text_words())
       word_counts = {}
       weighted_words = {}
 
@@ -140,9 +143,12 @@ class TFIDFRanker(RankerC):
           w = w.lower().rsplit(pre_processed_file.tag_separator(), 1)[0]
 
           if not weighted_words.has_key(w):
-            tf = word_counts[w]
-            idf = self.inverse_document_frequencies()[w]
-            weighted_words[w] = tf * math.log10(idf)
+            tf = word_counts[w] / doc_len
+            try:
+              idf = -math.log((self.document_frequencies()[w] + 1.0) / (self.nb_documents() + 1.0), 2)
+            except:
+              idf = -math.log(1.0 / (self.nb_documents() + 1.0), 2)
+            weighted_words[w] = tf * idf
 
       # compute the candidate scores
       for c in candidates:
@@ -183,9 +189,12 @@ class TFIDFRanker(RankerC):
             untagged_candidate += " "
           untagged_candidate += word.rsplit(pre_processed_file.tag_separator(), 1)[0]
 
-        tf = term_counts[untagged_candidate]
-        idf = self.inverse_document_frequencies()[untagged_candidate]
-        weighted_candidates[candidate] = (tf / doc_len) * -math.log(1.0 / idf, 2)
+        tf = term_counts[untagged_candidate] / doc_len
+        try:
+          idf = -math.log((self.document_frequencies()[untagged_candidate] + 1.0) / (self.nb_documents() + 1.0), 2)
+        except:
+          idf = -math.log(1.0 / (self.nb_documents() + 1.0), 2)
+        weighted_candidates[candidate] = tf * idf
 
     return weighted_candidates
 
