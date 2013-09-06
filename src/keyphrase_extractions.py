@@ -4,8 +4,7 @@
 import sys
 import codecs
 from candidate_extractors import STFilteredNGramExtractor
-from candidate_extractors import POSFilteredNGramExtractor
-from candidate_extractors import LongestNounPhraseExtractor
+from candidate_extractors import PatternMatchingExtractor
 from candidate_clusterers import StemOverlapHierarchicalClusterer
 from candidate_clusterers import LINKAGE_STRATEGY
 from evaluators import StandardPRFMEvaluator
@@ -81,8 +80,8 @@ ENGLISH_STOP_WORDS_FILEPATH = path.join(CORPORA_DIR, "english_unine_stop_words")
 ##### execution configurations #################################################
 
 LAZY_PRE_PROCESSING = True
-LAZY_CANDIDATE_EXTRACTION = True
-LAZY_CANDIDATE_CLUSTERING = True
+LAZY_CANDIDATE_EXTRACTION = False
+LAZY_CANDIDATE_CLUSTERING = False
 LAZY_RANKING = False
 LAZY_SELECTION = False
 
@@ -105,9 +104,8 @@ KEA_ME = "kea"
 
 # candidate names
 ST_FILTERED_NGRAM_CA = "st_filtered_ngram"
-POS_FILTERED_NGRAM_CA = "noun_phrase"
-LONGEST_NOUN_PHRASE_CA = "longest_noun_phrase"
 NP_CHUNK_CA = "np_chunk"
+LONGEST_NOUN_PHRASE_CA = "longest_noun_phrase"
 
 # clustering names
 NO_CLUSTER_CC = "no_cluster"
@@ -124,11 +122,11 @@ TEXTRANK_SE = "textrank"
 
 ##### runs #####################################################################
 
-CORPORA_RU = [SEMEVAL_CO]
-METHODS_RU = [KEA_ME]
+CORPORA_RU = [WIKINEWS_CO]
+METHODS_RU = [TFIDF_ME]
 NUMBERS_RU = [10]
-LENGTHS_RU = [3]
-CANDIDATES_RU = [ST_FILTERED_NGRAM_CA]
+LENGTHS_RU = [4]
+CANDIDATES_RU = [LONGEST_NOUN_PHRASE_CA]
 CLUSTERING_RU = [NO_CLUSTER_CC]
 SCORINGS_RU = [WEIGHT_SC]
 SELECTIONS_RU = [WHOLE_SE]
@@ -141,6 +139,9 @@ TEXTRANK_TAGS = ["nn", "nns", "nnp", "nnps", "jj", "nc", "npp", "adj"]
 # rules for NP chunking
 english_np_chunk_rules = "{(<nnp|nnps>+)|(<nn|nns>+)|(<jj>*<nn|nns>)}"
 french_np_chunk_rules = "{(<npp>+)|(<nc>+)|(<adj>?<nc><adj>*)}"
+# pattern matching rules
+english_lnp_patterns = ["[^\ ]+\/((jj)|(nnps)|(nnp)|(nns)|(nn))(( [^\ ]+\/((jj)|(nnp)|(nnps)|(nns)|(nn)))*|( |$))"]
+french_lnp_patterns = ["[^/ ]+/((adj)|(npp)|(nc))(( [^/ ]+/((adj)|(npp)|(nc)))*|( |$))"]
 
 ################################################################################
 
@@ -213,6 +214,7 @@ def main(argv):
           dfs = None
           nb_documents = None
           np_chunk_rules = None
+          lnp_patterns = None
 
           if corpus == DEFT_CO:
             docs = DEFT_CORPUS_DOCS
@@ -230,6 +232,7 @@ def main(argv):
                                                DEFTFileRep())
             language = FRENCH_LA
             np_chunk_rules = french_np_chunk_rules
+            lnp_patterns = french_lnp_patterns
           else:
             if corpus == WIKINEWS_CO:
               docs = WIKINEWS_CORPUS_DOCS
@@ -246,6 +249,7 @@ def main(argv):
                                                  WikiNewsFileRep())
               language = FRENCH_LA
               np_chunk_rules = french_np_chunk_rules
+              lnp_patterns = french_lnp_patterns
             else:
               if corpus == SEMEVAL_CO:
                 docs = SEMEVAL_CORPUS_DOCS
@@ -264,6 +268,7 @@ def main(argv):
                                                     SemEvalFileRep())
                 language = ENGLISH_LA
                 np_chunk_rules = english_np_chunk_rules
+                lnp_patterns = english_lnp_patterns
               else:
                 if corpus == INSPEC_CO:
                   docs = INSPEC_CORPUS_DOCS
@@ -282,6 +287,7 @@ def main(argv):
                                                       InspecFileRep())
                   language = ENGLISH_LA
                   np_chunk_rules = english_np_chunk_rules
+                  lnp_patterns = english_lnp_patterns
 
           for candidate in CANDIDATES_RU:
             for cluster in CLUSTERING_RU:
@@ -310,29 +316,19 @@ def main(argv):
                                                    length,
                                                    stop_words)
                   else:
-                    if candidate == POS_FILTERED_NGRAM_CA:
-                      c = POSFilteredNGramExtractor(run_name,
-                                                    LAZY_CANDIDATE_EXTRACTION,
-                                                    RUNS_DIR,
-                                                    True,
-                                                    length,
-                                                    NOUN_TAGS,
-                                                    ADJ_TAGS)
+                    if candidate == LONGEST_NOUN_PHRASE_CA:
+                      c = PatternMatchingExtractor(run_name,
+                                                   LAZY_CANDIDATE_EXTRACTION,
+                                                   RUNS_DIR,
+                                                   True,
+                                                   lnp_patterns)
                     else:
-                      if candidate == LONGEST_NOUN_PHRASE_CA:
-                        c = LongestNounPhraseExtractor(run_name,
-                                                       LAZY_CANDIDATE_EXTRACTION,
-                                                       RUNS_DIR,
-                                                       True,
-                                                       NOUN_TAGS,
-                                                       ADJ_TAGS)
-                      else:
-                        if candidate == NP_CHUNK_CA:
-                          c = NPChunkExtractor(run_name,
-                                               LAZY_CANDIDATE_EXTRACTION,
-                                               RUNS_DIR,
-                                               True,
-                                               np_chunk_rules)
+                      if candidate == NP_CHUNK_CA:
+                        c = NPChunkExtractor(run_name,
+                                             LAZY_CANDIDATE_EXTRACTION,
+                                             RUNS_DIR,
+                                             True,
+                                             np_chunk_rules)
                   ##### candidate clusterer ####################################
                   if cluster == NO_CLUSTER_CC:
                     cc = FakeClusterer(run_name,
@@ -383,8 +379,8 @@ def main(argv):
                                                                                      # no candidate
                                                                                      # means word
                                                                                      # TF-IDF
-                                                                                     pre_processor,
-                                                                                     c)
+                                                                                     pre_processor)#,
+                                                                                     #c)
                         dfs = wikinews_dfs
                         nb_documents = wikinews_nb_documents
                       else:
@@ -420,8 +416,8 @@ def main(argv):
                                     True,
                                     # no scoring function means n-gram TF-IDF
                                     dfs,
-                                    nb_documents)#,
-                                    #scoring_function)
+                                    nb_documents,
+                                    scoring_function)
                   else:
                     if method == TEXTRANK_ME \
                        or method == SINGLERANK_ME \
