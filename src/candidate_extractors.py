@@ -5,8 +5,11 @@ import re
 from keybench import CandidateExtractorC
 from keybench.default import NGramExtractor
 from keybench.default.util import n_to_m_grams
+from multiprocessing import Pool
 from nltk import Tree
 from nltk.chunk.regexp import RegexpParser
+from os import path
+from os import listdir
 
 ################################################################################
 # NPChunkExtractor
@@ -311,9 +314,12 @@ class PatternMatchingExtractor(CandidateExtractorC):
             if accepted:
               candidates.append(candidate)
 
-    return list(set(candidates))
+    return candidates
 
 ################################################################################
+
+CLARIT96_LEXATOM_TAG = "lexatom"
+CLARIT96_INNER_GROUP_SEPARATOR = "__CLARIT'96_GROUP__"
 
 ##### Multi-processing #########################################################
 
@@ -346,7 +352,7 @@ def train_clarit(train_directory,
   noun_phrase_sets = working_pool.map(noun_phrase_extraction_pool_worker,
                                       pool_args)
 
-  for noun_phrases in noun_phrase_set:
+  for noun_phrases in noun_phrase_sets:
     for noun_phrase in noun_phrases:
       nps.append(noun_phrase)
 
@@ -360,7 +366,16 @@ class CLARIT96Extractor(PatternMatchingExtractor):
   TODO supose that patterns extracts noun phrases
   """
 
-  def __init__(self, name, is_lazy, lazy_directory, debug, train_noun_phrases, patterns):
+  def __init__(self,
+               name,
+               is_lazy,
+               lazy_directory,
+               debug,
+               noun_phrase_patterns,
+               lexical_atom_patterns,
+               special_phrase_patterns,
+               impossible_phrase_patterns,
+               train_noun_phrases):
     """
     Constructor of the component.
 
@@ -377,19 +392,64 @@ class CLARIT96Extractor(PatternMatchingExtractor):
                             When the component is in debug mode, it will output
                             each step of its processing.
     @type   debug:          C{bool}
-    TODO patterns
-    TODO patterns
     TODO train_noun_phrases
     TODO train_noun_phrases
+    TODO noun_phrase_patterns
+    TODO noun_phrase_patterns
+    TODO
+    TODO
+    TODO
+    TODO
+    TODO
+    TODO
     """
 
     super(CLARIT96Extractor, self).__init__(name,
                                             is_lazy,
                                             lazy_directory,
                                             debug,
-                                            patterns)
+                                            noun_phrase_patterns)
 
+    self.set_lexical_atom_patterns(lexical_atom_patterns)
+    self.set_special_phrase_patterns(special_phrase_patterns)
+    self.set_impossible_phrase_patterns(impossible_phrase_patterns)
     self.set_train_noun_phrases(train_noun_phrases)
+
+  def lexical_atom_patterns(self):
+    """
+    """
+
+    return self._lexical_atom_patterns
+
+  def set_lexical_atom_patterns(self, lexical_atom_patterns):
+    """
+    """
+
+    self._lexical_atom_patterns = lexical_atom_patterns
+
+  def special_phrase_patterns(self):
+    """
+    """
+
+    return self._special_phrase_patterns
+
+  def set_special_phrase_patterns(self, special_phrase_patterns):
+    """
+    """
+
+    self._special_phrase_patterns = special_phrase_patterns
+
+  def impossible_phrase_patterns(self):
+    """
+    """
+
+    return self._impossible_phrase_patterns
+
+  def set_impossible_phrase_patterns(self, impossible_phrase_patterns):
+    """
+    """
+
+    self._impossible_phrase_patterns = impossible_phrase_patterns
 
   def train_noun_phrases(self):
     """
@@ -403,6 +463,333 @@ class CLARIT96Extractor(PatternMatchingExtractor):
 
     self._train_noun_phrases = train_noun_phrases
 
+  def continuous_frequencies(self):
+    """
+    """
+
+    return self._continuous_frequencies
+
+  def set_continuous_frequencies(self, continuous_frequencies):
+    """
+    """
+
+    self._continuous_frequencies = continuous_frequencies
+
+  def discontinuous_frequencies(self):
+    """
+    """
+
+    return self._discontinuous_frequencies
+
+  def set_discontinuous_frequencies(self, discontinuous_frequencies):
+    """
+    """
+
+    self._discontinuous_frequencies = discontinuous_frequencies
+
+  def is_possible_lexical_atom(self, pair, lexical_atoms, tag_separator):
+    """
+    """
+    phrase1, phrase2 = pair
+    # mark lexatoms
+    if lexical_atoms.count(phrase1):
+      phrase1 = phrase1 + tag_separator + CLARIT96_LEXATOM_TAG
+    else:
+      phrase1 = phrase1.replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+    if lexical_atoms.count(phrase2):
+      phrase2 = phrase2 + tag_separator + CLARIT96_LEXATOM_TAG
+    else:
+      phrase2 = phrase2.replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+    pair_phrase = "%s %s"%(phrase1, phrase2)
+
+    if len(pair_phrase.split()) == 2:
+      for pattern in self.lexical_atom_patterns():
+        if pattern != "":
+          # ensure a match on the whole phrase
+          if pattern[0] != "^":
+            pattern = "^" + pattern
+          if pattern[-1] != "$":
+            pattern += "$"
+
+          if re.match(pattern, pair_phrase) != None:
+            return True
+
+    return False
+
+  def is_special_pair(self, pair):
+    """
+    """
+
+    phrase1 = pair[0].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+    phrase2 = pair[1].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+    pair_phrase = "%s %s"%(phrase1, phrase2)
+
+    if len(pair_phrase.split()) == 2:
+      for pattern in self.special_phrase_patterns():
+        if pattern != "":
+          # ensure a match on the whole phrase
+          if pattern[0] != "^":
+            pattern = "^" + pattern
+          if pattern[-1] != "$":
+            pattern += "$"
+
+          if re.match(pattern, pair_phrase) != None:
+            return True
+
+    return False
+
+  def is_impossible_pair(self, pair):
+    """
+    """
+
+    phrase1 = pair[0].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+    phrase2 = pair[1].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+    pair_phrase = "%s %s"%(phrase1, phrase2)
+
+    if len(pair_phrase.split()) == 2:
+      for pattern in self.impossible_phrase_patterns():
+        if pattern != "":
+          # ensure a match on the whole phrase
+          if pattern[0] != "^":
+            pattern = "^" + pattern
+          if pattern[-1] != "$":
+            pattern += "$"
+
+          if re.match(pattern, pair_phrase) != None:
+            return True
+
+    return False
+
+  def frequency(self, phrase, noun_phrases, lazy_dic):
+    """
+    """
+
+    if phrase not in lazy_dic:
+      phrase_count = 0.0
+
+      for noun_phrase in noun_phrases:
+        phrase_count += float(noun_phrase.count(phrase))
+      lazy_dic[phrase] = phrase_count
+
+      return phrase_count
+    else:
+      return lazy_dic[phrase]
+
+  def continuous_frequency(self, pair, noun_phrases, sub_lazy_dic):
+    """
+    """
+
+    phrase1 = pair[0].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+    phrase2 = pair[1].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+    pair_phrase = "%s %s"%(phrase1, phrase2)
+
+    return self.frequency(pair_phrase, noun_phrases, sub_lazy_dic)
+
+  def discontinuous_frequency(self, pair, noun_phrases, lazy_dic):
+    """
+    """
+
+    if str(pair) not in lazy_dic:
+      discontinuous_count = 0.0
+      phrase1 = pair[0].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+      phrase2 = pair[1].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+
+      for noun_phrase in noun_phrases:
+        discontinuous_count += float(len(re.findall("%s .*? %s"%(re.escape(phrase1),
+                                                                 re.escape(phrase2)),
+                                                    noun_phrase)))
+      lazy_dic[str(pair)] = discontinuous_count
+
+      return discontinuous_count
+    else:
+      return lazy_dic[str(pair)]
+
+  def left_discontinuous_frequency(self, w, p1, p2, noun_phrases, cf_lazy_dic, df_lazy_dic):
+    """
+    """
+
+    f_w_p1 = self.continuous_frequency((w, p1), noun_phrases, cf_lazy_dic)
+    df_w_p2 = self.discontinuous_frequency((w, p2), noun_phrases, df_lazy_dic)
+
+    return min(f_w_p1, df_w_p2)
+
+  def right_discontinuous_frequency(self, p1, p2, w, noun_phrases, cf_lazy_dic, df_lazy_dic):
+    """
+    """
+
+    df_p1_w = self.discontinuous_frequency((p1, w), noun_phrases, df_lazy_dic)
+    f_p2_w = self.continuous_frequency((p2, w), noun_phrases, cf_lazy_dic)
+
+    return min(df_p1_w, f_p2_w)
+
+  def maximum_left_discontinuous_frequency(self, pair, word_noun_phrases, word_bag, cf_lazy_dic, df_lazy_dic, lazy_dic):
+    """
+    """
+
+    if str(pair) not in lazy_dic:
+      max_ldf = 0.0
+      phrase1 = pair[0].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+      phrase2 = pair[1].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+
+      # compute max_lfd
+      for word in word_bag:
+        if word != phrase1 and word != phrase2:
+          ldf = self.left_discontinuous_frequency(word, phrase1, phrase2, word_noun_phrases[word], cf_lazy_dic, df_lazy_dic)
+
+          max_ldf = max(max_ldf, ldf)
+      lazy_dic[str(pair)] = max_ldf
+
+      return max_ldf
+    else:
+      return lazy_dic[str(pair)]
+
+  def maximum_right_discontinuous_frequency(self, pair, word_noun_phrases, word_bag, cf_lazy_dic, df_lazy_dic, lazy_dic):
+    """
+    """
+
+    if str(pair) not in lazy_dic:
+      max_rdf = 0.0
+      phrase1 = pair[0].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+      phrase2 = pair[1].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+
+      # compute max_rfd
+      for word in word_bag:
+        if word != phrase1 and word != phrase2:
+          rdf = self.right_discontinuous_frequency(phrase1, phrase2, word, word_noun_phrases[word], cf_lazy_dic, df_lazy_dic)
+
+          max_rdf = max(max_rdf, rdf)
+      lazy_dic[str(pair)] = max_rdf
+
+      return max_rdf
+    else:
+      return lazy_dic[str(pair)]
+
+  def average_left_discontinuous_frequency(self, pair, word_noun_phrases, word_bag, cf_lazy_dic, df_lazy_dic, lazy_dic):
+    """
+    """
+
+    if str(pair) not in lazy_dic:
+      max_ldf = 0.0
+      ld = 1.0
+      phrase1 = pair[0].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+      phrase2 = pair[1].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+
+      # compute max_lfd
+      for word in word_bag:
+        if word != phrase1 and word != phrase2:
+          ldf = self.left_discontinuous_frequency(word, phrase1, phrase2, word_noun_phrases[word], cf_lazy_dic, df_lazy_dic)
+
+          if ldf != 0.0:
+            ld += 1.0
+
+          max_ldf = max(max_ldf, ldf)
+      lazy_dic[str(pair)] = max_ldf / ld
+
+      return max_ldf / ld
+    else:
+      return lazy_dic[str(pair)]
+
+  def average_right_discontinuous_frequency(self, pair, word_noun_phrases, word_bag, cf_lazy_dic, df_lazy_dic, lazy_dic):
+    """
+    """
+
+    if str(pair) not in lazy_dic:
+      max_rdf = 0.0
+      rd = 1.0
+      phrase1 = pair[0].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+      phrase2 = pair[1].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+
+      # compute max_rfd
+      for word in word_bag:
+        if word != phrase1 and word != phrase2:
+          rdf = self.right_discontinuous_frequency(phrase1, phrase2, word, word_noun_phrases[word], cf_lazy_dic, df_lazy_dic)
+
+          if rdf != 0.0:
+            rd += 1.0
+
+          max_rdf = max(max_rdf, rdf)
+      lazy_dic[str(pair)] = max_rdf / rd
+
+      return max_rdf / rd
+    else:
+      return lazy_dic[str(pair)]
+
+  def association(self, pair, noun_phrases, cf_lazy_dic, df_lazy_dic):
+    """
+    """
+
+    phrase1 = pair[0].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+    phrase2 = pair[1].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+    lambda2 = 1000.0 # FIXME this is the default threshold
+    frequency1 = self.frequency(phrase1, noun_phrases, cf_lazy_dic)
+    frequency2 = self.frequency(phrase2, noun_phrases, cf_lazy_dic)
+    frequency12 = self.continuous_frequency(pair, noun_phrases, cf_lazy_dic)
+
+    return (lambda2 / (frequency1 + frequency2 - (2.0 * frequency12) + lambda2))
+
+  def association_score(self, pair, noun_phrases, word_noun_phrases, word_bag, cf_lazy_dic, df_lazy_dic, avg_ldf_lazy_dic, avg_rdf_lazy_dic):
+    """
+    """
+
+    lambda1 = 5.0 # FIXME this is the default threshold
+    avg_ldf = self.average_left_discontinuous_frequency(pair, word_noun_phrases, word_bag, cf_lazy_dic, df_lazy_dic, avg_ldf_lazy_dic)
+    avg_rdf = self.average_right_discontinuous_frequency(pair, word_noun_phrases, word_bag, cf_lazy_dic, df_lazy_dic, avg_rdf_lazy_dic)
+    f = self.continuous_frequency(pair, noun_phrases, cf_lazy_dic)
+    df = self.discontinuous_frequency(pair, noun_phrases, df_lazy_dic)
+    a = self.association(pair, noun_phrases, cf_lazy_dic, df_lazy_dic)
+
+    return (((lambda1 + avg_ldf + avg_rdf) / ((lambda1 * f) + df )) * a)
+
+  def locally_dominant_count(self, pair, noun_phrases, word_noun_phrases, word_bag, cf_lazy_dic, df_lazy_dic, avg_ldf_lazy_dic, avg_rdf_lazy_dic, lazy_dic):
+    if str(pair) not in lazy_dic:
+      dominant_count = 0.0
+      phrase1 = pair[0].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+      phrase2 = pair[1].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
+      pair_phrase = "%s %s"%(phrase1, phrase2)
+      association_score = self.association_score(pair,
+                                                 noun_phrases,
+                                                 word_noun_phrases,
+                                                 word_bag,
+                                                 cf_lazy_dic,
+                                                 df_lazy_dic,
+                                                 avg_ldf_lazy_dic,
+                                                 avg_rdf_lazy_dic)
+
+      for noun_phrase in noun_phrases:
+        if noun_phrase.count(pair_phrase) > 0:
+          max_score = association_score
+
+          for i, wt in enumerate(noun_phrase.split()[:-1]):
+            p = (wt, noun_phrase.split()[i + 1])
+            max_score = max(max_score, self.association_score(p,
+                                                              noun_phrases,
+                                                              word_noun_phrases,
+                                                              word_bag,
+                                                              cf_lazy_dic,
+                                                              df_lazy_dic,
+                                                              avg_ldf_lazy_dic,
+                                                              avg_rdf_lazy_dic))
+
+            if max_score != association_score:
+              break
+
+          if max_score == association_score:
+            dominant_count += 1.0
+      lazy_dic[str(pair)] = dominant_count
+
+      return dominant_count
+    else:
+      return lazy_dic[str(pair)]
+
+  def preference_score(self, pair, noun_phrases, word_noun_phrases, word_bag, cf_lazy_dic, df_lazy_dic, avg_ldf_lazy_dic, avg_rdf_lazy_dic, ldc_lazy_dic):
+    """
+    """
+
+    ldc = self.locally_dominant_count(pair, noun_phrases, word_noun_phrases, word_bag, cf_lazy_dic, df_lazy_dic, avg_ldf_lazy_dic, avg_rdf_lazy_dic, ldc_lazy_dic)
+    f = self.continuous_frequency(pair, noun_phrases, cf_lazy_dic)
+
+    return (ldc / f)
+
   def candidate_extraction(self, pre_processed_file):
     """
     Extracts the candidates from a pre-processed file.
@@ -414,99 +801,139 @@ class CLARIT96Extractor(PatternMatchingExtractor):
     @rtype:   C{list(string)}
     """
 
-    # noun phrases
+    noun_phrases = list(self.train_noun_phrases())
     candidates = []
-    for candidate in super(CLARIT96Extractor, self).candidate_extraction(self, pre_processed_file):
-      if filtering(candidate, pre_processed_file.tag_separator()):
-        candidates.append(candidate)
+    word_bag = []
+    word_noun_phrases = {}
+    # 'lazy loading' structures
+    continuous_frequencies = {}
+    discontinuous_frequencies = {}
+    maximum_left_discontinuous_frequencies = {}
+    maximum_right_discontinuous_frequencies = {}
+    average_left_discontinuous_frequencies = {}
+    average_right_discontinuous_frequencies = {}
+    locally_dominant_counts = {}
 
-    # add noun phrases' subcompound
-    for noun_phrase in candidates:
-      lexical_atoms = []
-      previous_groups = None
-      current_groups = []
-      s_ips = {}
+    # extract candidates and add them to the whole noun phrases
+    for candidate in super(CLARIT96Extractor, self).candidate_extraction(pre_processed_file):
+      noun_phrases.append(candidate)
+      candidates.append(candidate)
 
-      while current_groups != previous_groups:
-        previous_groups = current_groups.copy()
-        pairs = []
-        possible_groupings = []
+    # create the bag of words
+    for noun_phrase in noun_phrases:
+      for word in set(noun_phrase.split()):
+        if word not in word_noun_phrases:
+          word_noun_phrases[word] = []
+        word_noun_phrases[word].append(noun_phrase)
+        word_bag.append(word)
+    word_bag = list(set(word_bag))
 
-        # create pairs
-        for i, wt in enumerate(noun_phrase[:-1]):
-          pairs.append((wt, noun_phrase[i + 1]))
+    # add noun phrases' subcompounds
+    candidate_set = list(set(candidates))
+    for noun_phrase in candidate_set:
+      if len(noun_phrase.split()) > 2:
+        lexical_atoms = []
+        previous_groups = None
+        current_groups = []
+        s_ips = {}
 
-        # find lexical atoms
-        for pair in pairs:
-          continuous_frequency = 1.0    # TODO
-          discontinuous_frequency = 1.0 # TODO
-          max_ldf = 1.0                 # TODO
-          max_rdf = 1.0                 # TODO
-          heuristique_1 = (freq > max_ldf) and (freq > max_rdf)
-          heuristique_2 = (continuous_frequency - discontinuous_frequency) > 0.0 # FIXME must be a threshold
+        while current_groups != previous_groups:
+          previous_groups = list(current_groups)
+          pairs = []
+          possible_groupings = []
 
-          if heuristique_1 and heuristique_2:
-            lexical_atoms.append(pair)
+          # create pairs
+          for i, wt in enumerate(noun_phrase.split()[:-1]):
+            pairs.append((wt, noun_phrase.split()[i + 1]))
 
-        # compute S and PS scores of each pair, keep the possible groupings and
-        # order them pairs
-        for pair in pairs:
-          s, ips = (None, None)
+          # find lexical atoms
+          for pair in pairs:
+            continuous_frequency = self.continuous_frequency(pair,
+                                                             noun_phrases,
+                                                             continuous_frequencies)
+            discontinuous_frequency = self.discontinuous_frequency(pair,
+                                                                   noun_phrases,
+                                                                   discontinuous_frequencies)
+            max_ldf = self.maximum_left_discontinuous_frequency(pair,
+                                                                word_noun_phrases,
+                                                                word_bag,
+                                                                continuous_frequencies,
+                                                                discontinuous_frequencies,
+                                                                maximum_left_discontinuous_frequencies)
+            max_rdf = self.maximum_right_discontinuous_frequency(pair,
+                                                                 word_noun_phrases,
+                                                                 word_bag,
+                                                                 continuous_frequencies,
+                                                                 discontinuous_frequencies,
+                                                                 maximum_right_discontinuous_frequencies)
+            heuristique_1 = (continuous_frequency > max_ldf) and (continuous_frequency > max_rdf)
+            heuristique_2 = (continuous_frequency - discontinuous_frequency) > 0.0 # FIXME must be a threshold
 
-          if str(pair) not in s_ips:
-            if lexical_atoms.count(pair) > 0:
-              s = 0.0
-            #elif self.is_special_pair(pair):    # TODO
-              s = 10.0
-            #elif self.is_impossible_pair(pair): # TODO
-              s = 100.0
+            if self.is_possible_lexical_atom(pair,
+                                             lexical_atoms,
+                                             pre_processed_file.tag_separator())\
+               and heuristique_1\
+               and heuristique_2:
+              lexical_atoms.append(pair)
+
+          # compute S and PS scores of each pair, keep the possible groupings and
+          # order them pairs
+          for pair in pairs:
+            s = None
+            ips = None
+
+            if str(pair) not in s_ips:
+              if self.is_impossible_pair(pair):
+                s = 100.0
+              elif self.is_special_pair(pair):
+                s = 10.0
+              elif lexical_atoms.count(pair) > 0:
+                s = 0.0
+              else:
+                s = self.association_score(pair,
+                                           noun_phrases,
+                                           word_noun_phrases,
+                                           word_bag,
+                                           continuous_frequencies,
+                                           discontinuous_frequencies,
+                                           average_left_discontinuous_frequencies,
+                                           average_right_discontinuous_frequencies)
+              ips = 0.0
+              ps = self.preference_score(pair,
+                                         noun_phrases,
+                                         word_noun_phrases,
+                                         word_bag,
+                                         continuous_frequencies,
+                                         discontinuous_frequencies,
+                                         average_left_discontinuous_frequencies,
+                                         average_right_discontinuous_frequencies,
+                                         locally_dominant_counts)
+              if ps != 0.0:
+                ips = 1.0 / ps
+
+              s_ips[str(pair)] = (s, ips)
             else:
-              s = 1.0       # TODO
-            ips = 1.0 / 1.0 # TODO
+              s, ips = s_ips[str(pair)]
 
-            s_ips[str(pair)] = (s, ips)
-          else:
-            s, ips = s_ips[str(pair)]
+            # filter by PS
+            if ips != 0.0:
+              if s != 100.0 and (1.0 / ips) >= 0.5: # FIXME this is a test threshold (default is 0.7)
+                possible_groupings.append(pair)
+          # order by S then PS
+          possible_groupings = sorted(possible_groupings,
+                                      key=lambda p: s_ips[str(p)])
 
-          # filter by PS
-          if s != 100.0 and ps >= 0.7: # FIXME must be a threshold
-            possible_groupings.append(pair)
-        # order by S then PS
-        possible_groupings = sorted(possible_groupings,
-                                    key=lambda p: s_ips[str(p)])
+          # the best pair is now one unit into the processed noun phrase
+          # => (a, b) -> a__CLARIT'96_GROUP__b
+          if len(possible_groupings) > 0:
+            left, right = possible_groupings[0]
 
-        # the best pair is now one unit into the processed noun phrase => (a, b) -> a__CLARIT'96_GROUP__b
-        if len(possible_groupings) > 0:
-          left, right = possible_groupings[0]
+            noun_phrase = noun_phrase.replace("%s %s"%(left, right),
+                                              "%s%s%s"%(left, CLARIT96_INNER_GROUP_SEPARATOR, right))
+            current_groups.append((left, right))
+            # the pair is added as a candidate
+            candidates.append("%s %s"%(left.replace(CLARIT96_INNER_GROUP_SEPARATOR, " "),
+                                       right.replace(CLARIT96_INNER_GROUP_SEPARATOR, " ")))
 
-          noun_phrase.replace("%s %s"%(left, right),
-                              "%s__CLARIT'96_GROUP__%s"%(left, right))
-          current_groups.append((left, right))
-          # the pair is added as a candidate
-          candidates.append("%s %s"%(left.replace("__CLARIT'96_GROUP__", " "),
-                                     right.replace("__CLARIT'96_GROUP__", " ")))
-
-    return list(set(candidates))
-
-  def filtering(self, term, tag_separator):
-    """
-    Indicates if a candidate can be concidered as a keyphrase candidate or not.
-
-    @param    candidate:      The POS tagged candidate.
-    @type     candidate:      C{string}
-    @param    tag_separator:  The character used to separate a words from its
-                              tag.
-    @type     tag_separator:  C{string}
-
-    @return:  True if the candidate is a keyphrase candidate, else False.
-    @rtype:   C{bool}
-    """
-
-    for wt in term.split():
-      w = wt.rsplit(tag_separator, 1)[0]
-
-      if len(w) <= 2: # FIXME semeval trick
-        return False
-
-    return True
+    return candidates
 

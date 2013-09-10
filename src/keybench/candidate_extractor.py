@@ -59,7 +59,7 @@ class CandidateExtractorC(BenchmarkComponent):
       # extraction
       super(CandidateExtractorC,
             self).log("Extracting candidates of %s..."%filepath)
-      candidates = self.candidate_extraction(pre_processed_file)
+      candidates = list(set(self.candidate_extraction(pre_processed_file)))
 
       # serialization
       super(CandidateExtractorC,

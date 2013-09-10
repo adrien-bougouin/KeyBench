@@ -7,6 +7,8 @@ from candidate_extractors import NPChunkExtractor
 from candidate_extractors import STFilteredNGramExtractor
 from candidate_extractors import PatternMatchingExtractor
 from candidate_extractors import CLARIT96Extractor
+from candidate_extractors import CLARIT96_LEXATOM_TAG
+from candidate_extractors import train_clarit
 from candidate_clusterers import StemOverlapHierarchicalClusterer
 from candidate_clusterers import LINKAGE_STRATEGY
 from evaluators import StandardPRFMEvaluator
@@ -108,6 +110,7 @@ KEA_ME = "kea"
 ST_FILTERED_NGRAM_CA = "st_filtered_ngram"
 NP_CHUNK_CA = "np_chunk"
 LONGEST_NOUN_PHRASE_CA = "longest_noun_phrase"
+CLARIT96_CA = "clarit96"
 
 # clustering names
 NO_CLUSTER_CC = "no_cluster"
@@ -124,11 +127,11 @@ TEXTRANK_SE = "textrank"
 
 ##### runs #####################################################################
 
-CORPORA_RU = [WIKINEWS_CO]
+CORPORA_RU = [INSPEC_CO]
 METHODS_RU = [TFIDF_ME]
 NUMBERS_RU = [10]
 LENGTHS_RU = [4]
-CANDIDATES_RU = [NP_CHUNK_CA]
+CANDIDATES_RU = [CLARIT96_CA]
 CLUSTERING_RU = [NO_CLUSTER_CC]
 SCORINGS_RU = [WEIGHT_SC]
 SELECTIONS_RU = [WHOLE_SE]
@@ -139,11 +142,34 @@ ADJ_TAGS = ["jj", "adj"]
 # used for tokens filtering in ****Rank methods
 TEXTRANK_TAGS = ["nn", "nns", "nnp", "nnps", "jj", "nc", "npp", "adj"]
 # rules for NP chunking
-english_np_chunk_rules = "{(<nnp|nnps>+)|(<jj>+<nn|nns>)|(<nn|nns>+)}"
+english_np_chunk_rules = "{(<nnp|nnps>+)|(<jj>+<nn|nns>)|(<nn|nns>+)}" # FIXME tag order (nnp before nnps???)
 french_np_chunk_rules = "{(<npp>+)|(<adj><nc><adj>*)|(<nc><adj>*)|(<nc>+)}"
 # pattern matching rules
-english_lnp_patterns = ["([^ ]+\/((jj)|(nnps)|(nnp)|(nns)|(nn))( |$))+"]
-french_lnp_patterns = ["([^ ]+\/((adj)|(npp)|(nc))( |$))+"]
+tagged_word_pattern = "([^ ]+\/%s( |$))" # WARNING space or end line delimiter is in the pattern
+english_lnp_tags = "(jj|nnps|nnp|nns|nn)"
+french_lnp_tags = "(adj|npp|nc)"
+english_lnp_patterns = ["%s+"%(tagged_word_pattern%english_lnp_tags)]
+french_lnp_patterns = ["%s+"%(tagged_word_pattern%french_lnp_tags)]
+english_clarit_np_patterns = english_lnp_patterns
+french_clarit_np_patterns = french_lnp_patterns
+english_clarit_lexatom_patterns = ["%s%s"%(tagged_word_pattern%("(nnps|nnp|nns|nn|%s)"%CLARIT96_LEXATOM_TAG),
+                                           tagged_word_pattern%("(nnps|nnp|nns|nn|%s)"%CLARIT96_LEXATOM_TAG)),
+                                   "%s%s"%(tagged_word_pattern%"(jjr|jjs|jj)",
+                                           tagged_word_pattern%("(nnps|nnp|nns|nn|%s)"%CLARIT96_LEXATOM_TAG))]
+french_clarit_lexatom_patterns = ["%s%s"%(tagged_word_pattern%("(nc|npp|%s)"%CLARIT96_LEXATOM_TAG),
+                                          tagged_word_pattern%"(adj)")]
+english_clarit_special_patterns = ["%s%s"%(tagged_word_pattern%"(rbr|rbs|rb)",
+                                           tagged_word_pattern%"(rbr|rbs|rb|jjr|jjs|jj|vbg|vbn)")]
+french_clarit_special_patterns = ["%s%s"%(tagged_word_pattern%"(advwh|adv|adjwh|adj|vpp|vpr)",
+                                          tagged_word_pattern%"(advwh|adv|adjwh|adj|vpp|vpr)")]
+english_clarit_impossible_patterns = ["%s%s"%(tagged_word_pattern%"(nnps|nnp|nns|nn|vpp|vpr)",
+                                              tagged_word_pattern%"(rbr|rbs|rb|jjr|jjs|jj)"),
+                                      "%s%s"%(tagged_word_pattern%"(jjr|jjs|jj)",
+                                              tagged_word_pattern%"(jjr|jjs|jj)")]
+french_clarit_impossible_patterns = ["%s%s"%(tagged_word_pattern%"(advwh|adv)",
+                                             tagged_word_pattern%"(npp|nc)"),
+                                     "%s%s"%(tagged_word_pattern%"(adjwh|adj)",
+                                             tagged_word_pattern%"(advwh|adv|adjwh|adj)")]
 
 ################################################################################
 
@@ -190,15 +216,6 @@ def main(argv):
   ##### runs' creation #########################################################
 
   # lazy loading of idfs
-  deft_dfs = None
-  deft_nb_documents = None
-  wikinews_dfs = None
-  wikinews_nb_documents = None
-  semeval_dfs = None
-  semeval_nb_documents = None
-  inspec_dfs = None
-  inspec_nb_documents = None
-
   for corpus in CORPORA_RU:
     for method in METHODS_RU:
       for number in NUMBERS_RU:
@@ -217,6 +234,10 @@ def main(argv):
           nb_documents = None
           np_chunk_rules = None
           lnp_patterns = None
+          clarit_np_patterns = None
+          clarit_lexatom_patterns = None
+          clarit_special_patterns = None
+          clarit_impossible_patterns = None
 
           if corpus == DEFT_CO:
             docs = DEFT_CORPUS_DOCS
@@ -235,6 +256,10 @@ def main(argv):
             language = FRENCH_LA
             np_chunk_rules = french_np_chunk_rules
             lnp_patterns = french_lnp_patterns
+            clarit_np_patterns = french_clarit_np_patterns
+            clarit_lexatom_patterns = french_clarit_lexatom_patterns
+            clarit_special_patterns = french_clarit_special_patterns
+            clarit_impossible_patterns = french_clarit_impossible_patterns
           else:
             if corpus == WIKINEWS_CO:
               docs = WIKINEWS_CORPUS_DOCS
@@ -252,6 +277,10 @@ def main(argv):
               language = FRENCH_LA
               np_chunk_rules = french_np_chunk_rules
               lnp_patterns = french_lnp_patterns
+              clarit_np_patterns = french_clarit_np_patterns
+              clarit_lexatom_patterns = french_clarit_lexatom_patterns
+              clarit_special_patterns = french_clarit_special_patterns
+              clarit_impossible_patterns = french_clarit_impossible_patterns
             else:
               if corpus == SEMEVAL_CO:
                 docs = SEMEVAL_CORPUS_DOCS
@@ -271,6 +300,10 @@ def main(argv):
                 language = ENGLISH_LA
                 np_chunk_rules = english_np_chunk_rules
                 lnp_patterns = english_lnp_patterns
+                clarit_np_patterns = english_clarit_np_patterns
+                clarit_lexatom_patterns = english_clarit_lexatom_patterns
+                clarit_special_patterns = english_clarit_special_patterns
+                clarit_impossible_patterns = english_clarit_impossible_patterns
               else:
                 if corpus == INSPEC_CO:
                   docs = INSPEC_CORPUS_DOCS
@@ -290,6 +323,10 @@ def main(argv):
                   language = ENGLISH_LA
                   np_chunk_rules = english_np_chunk_rules
                   lnp_patterns = english_lnp_patterns
+                  clarit_np_patterns = english_clarit_np_patterns
+                  clarit_lexatom_patterns = english_clarit_lexatom_patterns
+                  clarit_special_patterns = english_clarit_special_patterns
+                  clarit_impossible_patterns = english_clarit_impossible_patterns
 
           for candidate in CANDIDATES_RU:
             for cluster in CLUSTERING_RU:
@@ -331,6 +368,24 @@ def main(argv):
                                              RUNS_DIR,
                                              True,
                                              np_chunk_rules)
+                      else:
+                        if candidate == CLARIT96_CA:
+                          c = CLARIT96Extractor(run_name,
+                                                LAZY_CANDIDATE_EXTRACTION,
+                                                RUNS_DIR,
+                                                True,
+                                                clarit_np_patterns,
+                                                clarit_lexatom_patterns,
+                                                clarit_special_patterns,
+                                                clarit_impossible_patterns,
+                                                train_clarit(train_docs,
+                                                             ext,
+                                                             pre_processor,
+                                                             PatternMatchingExtractor(run_name + "_pre",
+                                                                                      LAZY_CANDIDATE_EXTRACTION,
+                                                                                      RUNS_DIR,
+                                                                                      True,
+                                                                                      clarit_np_patterns)))
                   ##### candidate clusterer ####################################
                   if cluster == NO_CLUSTER_CC:
                     cc = FakeClusterer(run_name,
@@ -361,56 +416,40 @@ def main(argv):
                   if method == TFIDF_ME:
                     ##### DF computation ###################################
                     if corpus == DEFT_CO:
-                      # lazy loading of dfs
-                      if deft_dfs == None:
-                        deft_nb_documents, deft_dfs = document_frequencies(train_docs,
-                                                                           ext,
-                                                                           # no candidate
-                                                                           # means word
-                                                                           # TF-IDF
-                                                                           pre_processor,
-                                                                           c)
-                      dfs = deft_dfs
-                      nb_documents = deft_nb_documents
+                      nb_documents, dfs = document_frequencies(train_docs,
+                                                               ext,
+                                                               # no candidate
+                                                               # means word
+                                                               # TF-IDF
+                                                               pre_processor,
+                                                               c)
                     else:
                       if corpus == WIKINEWS_CO:
-                        # lazy loading of dfs
-                        if wikinews_dfs == None:
-                          wikinews_nb_documents, wikinews_dfs = document_frequencies(docs,
-                                                                                     ext,
-                                                                                     # no candidate
-                                                                                     # means word
-                                                                                     # TF-IDF
-                                                                                     pre_processor)#,
-                                                                                     #c)
-                        dfs = wikinews_dfs
-                        nb_documents = wikinews_nb_documents
+                        nb_documents, dfs = document_frequencies(docs,
+                                                                 ext,
+                                                                 # no candidate
+                                                                 # means word
+                                                                 # TF-IDF
+                                                                 pre_processor,
+                                                                 c)
                       else:
                         if corpus == SEMEVAL_CO:
-                          # lazy loading of dfs
-                          if semeval_dfs == None:
-                            semeval_nb_documents, semeval_dfs = document_frequencies(train_docs,
-                                                                                     ext,
-                                                                                     # no candidate
-                                                                                     # means word
-                                                                                     # TF-IDF
-                                                                                     pre_processor,
-                                                                                     c)
-                          dfs = semeval_dfs
-                          nb_documents = semeval_nb_documents
+                          nb_documents, dfs = document_frequencies(train_docs,
+                                                                   ext,
+                                                                   # no candidate
+                                                                   # means word
+                                                                   # TF-IDF
+                                                                   pre_processor,
+                                                                   c)
                         else:
                           if corpus == INSPEC_CO:
-                            # lazy loading of dfs
-                            if inspec_dfs == None:
-                              inspec_nb_documents, inspec_dfs = document_frequencies(train_docs,
-                                                                                     ext,
-                                                                                     # no candidate
-                                                                                     # means word
-                                                                                     # TF-IDF
-                                                                                     pre_processor,
-                                                                                     c)
-                            dfs = inspec_dfs
-                            nb_documents = inspec_nb_documents
+                            nb_documents, dfs = document_frequencies(train_docs,
+                                                                     ext,
+                                                                     # no candidate
+                                                                     # means word
+                                                                     # TF-IDF
+                                                                     pre_processor,
+                                                                     c)
                     ############################################################
                     r = TFIDFRanker(run_name,
                                     LAZY_RANKING,
@@ -418,8 +457,8 @@ def main(argv):
                                     True,
                                     # no scoring function means n-gram TF-IDF
                                     dfs,
-                                    nb_documents,
-                                    scoring_function)
+                                    nb_documents)#,
+                                    #scoring_function)
                   else:
                     if method == TEXTRANK_ME \
                        or method == SINGLERANK_ME \
