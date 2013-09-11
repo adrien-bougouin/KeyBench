@@ -746,6 +746,7 @@ class CLARIT96Extractor(PatternMatchingExtractor):
       phrase1 = pair[0].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
       phrase2 = pair[1].replace(CLARIT96_INNER_GROUP_SEPARATOR, " ").strip()
       pair_phrase = "%s %s"%(phrase1, phrase2)
+      pair_word_bag = list(set(phrase1.split()) | set(phrase2.split()))
       association_score = self.association_score(pair,
                                                  noun_phrases,
                                                  word_noun_phrases,
@@ -755,7 +756,7 @@ class CLARIT96Extractor(PatternMatchingExtractor):
                                                  avg_ldf_lazy_dic,
                                                  avg_rdf_lazy_dic)
 
-      for noun_phrase in noun_phrases:
+      for noun_phrase in word_noun_phrases[pair_word_bag[0]]: # reduce the amount of phrase to browse
         if noun_phrase.count(pair_phrase) > 0:
           max_score = association_score
 
