@@ -4,6 +4,7 @@
 from bonsai_tokenizer import bonsai_tokenization
 from corpus_file import CorpusFileRep
 from deft2012 import DEFTFileRep
+from duc2001 import DUCFileRep
 from inspec import InspecFileRep
 from melt import melt
 from semeval2010 import SemEvalFileRep
