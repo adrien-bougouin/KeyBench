@@ -35,6 +35,7 @@ from util import DEFTFileRep
 from util import InspecFileRep
 from util import PlainTextFileRep
 from util import SemEvalFileRep
+from util import DUCFileRep
 from util import term_scoring
 from util import WikiNewsFileRep
 from util import bonsai_tokenization
@@ -70,6 +71,13 @@ SEMEVAL_CORPUS_REFS = path.join(SEMEVAL_CORPUS_DIR,
 SEMEVAL_CORPUS_TRAIN_DOCS = path.join(SEMEVAL_CORPUS_DIR, "train")
 SEMEVAL_CORPUS_DOCS_EXTENSION = ".txt"
 
+DUC_CORPUS_DIR = path.join(CORPORA_DIR, "duc_2001")
+DUC_CORPUS_DOCS = path.join(DUC_CORPUS_DIR, "documents")
+DUC_CORPUS_REFS = path.join(DUC_CORPUS_DIR,
+                            "ref")
+DUC_CORPUS_TRAIN_DOCS = path.join(DUC_CORPUS_DIR, "train")
+DUC_CORPUS_DOCS_EXTENSION = ".xml"
+
 INSPEC_CORPUS_DIR = path.join(CORPORA_DIR, "inspec")
 INSPEC_CORPUS_DOCS = path.join(INSPEC_CORPUS_DIR, "documents")
 INSPEC_CORPUS_REFS = path.join(INSPEC_CORPUS_DIR, "ref")
@@ -95,6 +103,7 @@ LAZY_SELECTION = False
 DEFT_CO = "deft"
 WIKINEWS_CO = "wikinews"
 SEMEVAL_CO = "semeval"
+DUC_CO = "duc"
 INSPEC_CO = "inspec"
 
 # method names
@@ -127,11 +136,11 @@ TEXTRANK_SE = "textrank"
 
 ##### runs #####################################################################
 
-CORPORA_RU = [INSPEC_CO]
+CORPORA_RU = [DUC_CO]
 METHODS_RU = [TFIDF_ME]
 NUMBERS_RU = [10]
-LENGTHS_RU = [4]
-CANDIDATES_RU = [CLARIT96_CA]
+LENGTHS_RU = [3]
+CANDIDATES_RU = [ST_FILTERED_NGRAM_CA]
 CLUSTERING_RU = [NO_CLUSTER_CC]
 SCORINGS_RU = [WEIGHT_SC]
 SELECTIONS_RU = [WHOLE_SE]
@@ -263,6 +272,7 @@ def main(argv):
           else:
             if corpus == WIKINEWS_CO:
               docs = WIKINEWS_CORPUS_DOCS
+              train_docs = docs # FIXME
               ext = WIKINEWS_CORPUS_DOCS_EXTENSION
               refs = WIKINEWS_CORPUS_REFS
               stop_words = extract_stop_words(FRENCH_STOP_WORDS_FILEPATH)
@@ -305,21 +315,21 @@ def main(argv):
                 clarit_special_patterns = english_clarit_special_patterns
                 clarit_impossible_patterns = english_clarit_impossible_patterns
               else:
-                if corpus == INSPEC_CO:
-                  docs = INSPEC_CORPUS_DOCS
-                  ext = INSPEC_CORPUS_DOCS_EXTENSION
-                  train_docs = INSPEC_CORPUS_TRAIN_DOCS
-                  refs = INSPEC_CORPUS_REFS
+                if corpus == DUC_CO:
+                  docs = DUC_CORPUS_DOCS
+                  ext = DUC_CORPUS_DOCS_EXTENSION
+                  train_docs = DUC_CORPUS_TRAIN_DOCS
+                  refs = DUC_CORPUS_REFS
                   stop_words = extract_stop_words(ENGLISH_STOP_WORDS_FILEPATH)
                   stemmer = PorterStemmer()
-                  ref_stemmer = stemmer
+                  ref_stemmer = PorterStemmer()
                   tokenize = english_tokenization
                   pre_processor = EnglishPreProcessor("%s_pre_processor"%corpus,
                                                       LAZY_PRE_PROCESSING,
                                                       RUNS_DIR,
                                                       True,
                                                       "/",
-                                                      InspecFileRep())
+                                                      DUCFileRep())
                   language = ENGLISH_LA
                   np_chunk_rules = english_np_chunk_rules
                   lnp_patterns = english_lnp_patterns
@@ -327,6 +337,29 @@ def main(argv):
                   clarit_lexatom_patterns = english_clarit_lexatom_patterns
                   clarit_special_patterns = english_clarit_special_patterns
                   clarit_impossible_patterns = english_clarit_impossible_patterns
+                else:
+                  if corpus == INSPEC_CO:
+                    docs = INSPEC_CORPUS_DOCS
+                    ext = INSPEC_CORPUS_DOCS_EXTENSION
+                    train_docs = INSPEC_CORPUS_TRAIN_DOCS
+                    refs = INSPEC_CORPUS_REFS
+                    stop_words = extract_stop_words(ENGLISH_STOP_WORDS_FILEPATH)
+                    stemmer = PorterStemmer()
+                    ref_stemmer = stemmer
+                    tokenize = english_tokenization
+                    pre_processor = EnglishPreProcessor("%s_pre_processor"%corpus,
+                                                        LAZY_PRE_PROCESSING,
+                                                        RUNS_DIR,
+                                                        True,
+                                                        "/",
+                                                        InspecFileRep())
+                    language = ENGLISH_LA
+                    np_chunk_rules = english_np_chunk_rules
+                    lnp_patterns = english_lnp_patterns
+                    clarit_np_patterns = english_clarit_np_patterns
+                    clarit_lexatom_patterns = english_clarit_lexatom_patterns
+                    clarit_special_patterns = english_clarit_special_patterns
+                    clarit_impossible_patterns = english_clarit_impossible_patterns
 
           for candidate in CANDIDATES_RU:
             for cluster in CLUSTERING_RU:
@@ -415,41 +448,13 @@ def main(argv):
                   ##### ranker #################################################
                   if method == TFIDF_ME:
                     ##### DF computation ###################################
-                    if corpus == DEFT_CO:
-                      nb_documents, dfs = document_frequencies(train_docs,
-                                                               ext,
-                                                               # no candidate
-                                                               # means word
-                                                               # TF-IDF
-                                                               pre_processor,
-                                                               c)
-                    else:
-                      if corpus == WIKINEWS_CO:
-                        nb_documents, dfs = document_frequencies(docs,
-                                                                 ext,
-                                                                 # no candidate
-                                                                 # means word
-                                                                 # TF-IDF
-                                                                 pre_processor,
-                                                                 c)
-                      else:
-                        if corpus == SEMEVAL_CO:
-                          nb_documents, dfs = document_frequencies(train_docs,
-                                                                   ext,
-                                                                   # no candidate
-                                                                   # means word
-                                                                   # TF-IDF
-                                                                   pre_processor,
-                                                                   c)
-                        else:
-                          if corpus == INSPEC_CO:
-                            nb_documents, dfs = document_frequencies(train_docs,
-                                                                     ext,
-                                                                     # no candidate
-                                                                     # means word
-                                                                     # TF-IDF
-                                                                     pre_processor,
-                                                                     c)
+                    nb_documents, dfs = document_frequencies(train_docs,
+                                                             ext,
+                                                             # no candidate
+                                                             # means word
+                                                             # TF-IDF
+                                                             pre_processor,
+                                                             c)
                     ############################################################
                     r = TFIDFRanker(run_name,
                                     LAZY_RANKING,
