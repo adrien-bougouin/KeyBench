@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 
+import re
 from corpus_file import CorpusFileRep
-from lxml import etree
 
 class DUCFileRep(CorpusFileRep):
   """
@@ -25,18 +25,12 @@ class DUCFileRep(CorpusFileRep):
 
     xml_file = open(filepath, "r")
     xml = xml_file.read()
-    xml_file.close()
-    doc = etree.fromstring(xml)
-
-    # parse the content
     content = ""
-    for p in doc.find("TEXT").findall("P"):
+
+    xml_file.close()
+
+    for line in xml.replace("&amp;", "&").split("\n"):
       if content != "":
         content += " "
-      content += p.text.strip()
-    if content == "":
-      for line in doc.find("TEXT").text.split("\n"):
-        if content != "":
-          content += " "
-        content += line.strip()
-    self.set_content(content)
+      content += line.strip()
+    self.set_content(re.sub("(.*<LP>)|(<\\/LP>.*<TEXT>)|(<\\/LP>.*)|(.*<TEXT>)|(<\\/TEXT>.*)", "", content))
