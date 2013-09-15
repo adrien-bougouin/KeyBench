@@ -32,5 +32,16 @@ class DUCFileRep(CorpusFileRep):
     for line in xml.replace("&amp;", "&").split("\n"):
       if content != "":
         content += " "
-      content += line.strip()
-    self.set_content(re.sub("(.*<LP>)|(<\\/LP>.*<TEXT>)|(<\\/LP>.*)|(.*<TEXT>)|(<\\/TEXT>.*)", "", content))
+      content += re.sub("(<(P|F).*?>)|(<\\/P>)", "", line).strip()
+    # XML cleanning
+
+    start_offset = "<START_OFFSET_DUCFileRep>"
+    content = start_offset + content
+    content = content.replace("</LP>", "</LP>%s"%start_offset)
+    content = content.replace("</TEXT>", "</TEXT>%s"%start_offset)
+    content = re.sub("%s.*?<LP>(.*?)<\\/LP>"%start_offset, "\\1", content)
+    content = re.sub("%s.*?<TEXT>(.*?)<\\/TEXT>"%start_offset, "\\1", content)
+    content = re.sub("%s.*"%start_offset, "", content)
+
+    self.set_content(content)
+
