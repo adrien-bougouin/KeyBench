@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 
+import codecs
 import re
 from keybench import CandidateExtractorC
 from keybench.default import NGramExtractor
@@ -16,6 +17,7 @@ from os import listdir
 # STFilteredNGramExtractor
 # PatternMatchingExtractor
 # CLARIT96Extractor
+# FromTerminologyExtractor
 
 ################################################################################
 
@@ -935,6 +937,90 @@ class CLARIT96Extractor(PatternMatchingExtractor):
             # the pair is added as a candidate
             candidates.append("%s %s"%(left.replace(CLARIT96_INNER_GROUP_SEPARATOR, " "),
                                        right.replace(CLARIT96_INNER_GROUP_SEPARATOR, " ")))
+
+    return candidates
+
+################################################################################
+
+class FromTerminologyExtractor(CandidateExtractorC):
+  """
+  """
+
+  def __init__(self, name, is_lazy, lazy_directory, debug, terminology_filepath, encoding, tokenize_function):
+    """
+    Constructor of the component.
+
+    @param  name:           The name of the component.
+    @type   name:           C{string}
+    @param  is_lazy:        True if the component must load previous data, False
+                            if data must be computed tought they have already
+                            been computed.
+    @type   is_lazy:        C{bool}
+    @param  lazy_directory: The directory used to store previously computed
+                            data.
+    @type   lazy_directory: C{string}
+    @param  debug:          True if the component is in debug mode, else False.
+                            When the component is in debug mode, it will output
+                            each step of its processing.
+    @type   debug:          C{bool}
+    TODO
+    TODO
+    TODO
+    TODO
+    """
+
+    super(FromTerminologyExtractor, self).__init__(name, is_lazy, lazy_directory, debug)
+
+    terminology = {}
+    terminology_file = codecs.open(terminology_filepath, "r", encoding)
+
+    for term in terminology_file.read().split("\n"):
+      term = term.strip()
+
+      if term != "":
+        terminology[tokenize_function(term)] = True
+
+    terminology_file.close()
+
+    self.set_terminology(terminology)
+
+  def terminology(self):
+    """
+    """
+
+    return self._terminology
+
+  def set_terminology(self, terminology):
+    """
+    """
+
+    self._terminology = terminology
+
+  def candidate_extraction(self, pre_processed_file):
+    """
+    Extracts the candidates from a pre-processed file.
+
+    @param    pre_processed_file: The pre-processed analysed file.
+    @type     pre_processed_file: C{PreProcessedFile}
+
+    @return:  A list of candidates.
+    @rtype:   C{list(string)}
+    """
+
+    candidates = []
+    sentences = pre_processed_file.full_text()
+
+    for sentence in sentences:
+      for candidate in n_to_m_grams(sentence.split(), 1, len(sentence.split())):
+        untagged_candidate = ""
+
+        for word in candidate.split():
+          if untagged_candidate != "":
+            untagged_candidate += " "
+          untagged_candidate += word.rsplit(pre_processed_file.tag_separator(), 1)[0]
+
+        if untagged_candidate in self.terminology():
+          candidates.append(candidate)
 
     return candidates
 
