@@ -124,11 +124,11 @@ class NPChunkExtractor(CandidateExtractorC):
     @rtype:   C{bool}
     """
 
-    for wt in term.split():
-      w = wt.rsplit(tag_separator, 1)[0]
-
-      if len(w) <= 2: # FIXME semeval trick
-        return False
+#    for wt in term.split():
+#      w = wt.rsplit(tag_separator, 1)[0]
+#
+#      if len(w) <= 2: # FIXME semeval trick
+#        return False
 
     return True
 
@@ -226,8 +226,8 @@ class STFilteredNGramExtractor(NGramExtractor):
           return False
 
       # FIXME semeval trick
-      if len(word) <= 2:
-        return False
+#      if len(word) <= 2:
+#        return False
 
     return True
 
@@ -310,8 +310,8 @@ class PatternMatchingExtractor(CandidateExtractorC):
             for wt in candidate.split():
               w = wt.rsplit(pre_processed_file.tag_separator(), 1)[0]
 
-              if len(w) <= 2: # FIXME semeval trick
-                accepted = False
+#              if len(w) <= 2: # FIXME semeval trick
+#                accepted = False
 
             if accepted:
               candidates.append(candidate)

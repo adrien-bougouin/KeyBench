@@ -57,7 +57,7 @@ CORPORA_DIR = path.join(path.dirname(sys.argv[0]), "..", "res", "corpora")
 DEFT_CORPUS_DIR = path.join(CORPORA_DIR, "deft_2012", "test_t2")
 DEFT_CORPUS_DOCS = path.join(DEFT_CORPUS_DIR, "documents")
 DEFT_CORPUS_REFS = path.join(DEFT_CORPUS_DIR, "ref_test_t2")
-DEFT_CORPUS_TERMINOLOGY = path.join(DEFT_CORPUS_DIR, "specificity_terminology_t2")
+DEFT_CORPUS_TERMINOLOGY = path.join(DEFT_CORPUS_DIR, "full_terminology_t2")
 DEFT_CORPUS_TRAIN_DOCS = path.join(DEFT_CORPUS_DIR, "train")
 DEFT_CORPUS_DOCS_EXTENSION = ".xml"
 
@@ -70,14 +70,14 @@ SEMEVAL_CORPUS_DIR = path.join(CORPORA_DIR, "semeval_2010")
 SEMEVAL_CORPUS_DOCS = path.join(SEMEVAL_CORPUS_DIR, "documents")
 SEMEVAL_CORPUS_REFS = path.join(SEMEVAL_CORPUS_DIR,
                                 "ref_modified_stem_combined")
-SEMEVAL_CORPUS_TERMINOLOGY = path.join(SEMEVAL_CORPUS_DIR, "specificity_terminology")
+SEMEVAL_CORPUS_TERMINOLOGY = path.join(SEMEVAL_CORPUS_DIR, "full_terminology")
 SEMEVAL_CORPUS_TRAIN_DOCS = path.join(SEMEVAL_CORPUS_DIR, "train")
 SEMEVAL_CORPUS_DOCS_EXTENSION = ".txt"
 
 DUC_CORPUS_DIR = path.join(CORPORA_DIR, "duc_2001")
 DUC_CORPUS_DOCS = path.join(DUC_CORPUS_DIR, "documents")
 DUC_CORPUS_REFS = path.join(DUC_CORPUS_DIR, "ref")
-DUC_CORPUS_TERMINOLOGY = path.join(DUC_CORPUS_DIR, "specificity_terminology")
+DUC_CORPUS_TERMINOLOGY = path.join(DUC_CORPUS_DIR, "full_terminology")
 DUC_CORPUS_TRAIN_DOCS = path.join(DUC_CORPUS_DIR, "train")
 DUC_CORPUS_DOCS_EXTENSION = ".xml"
 
@@ -95,8 +95,8 @@ ENGLISH_STOP_WORDS_FILEPATH = path.join(CORPORA_DIR, "english_unine_stop_words")
 ##### execution configurations #################################################
 
 LAZY_PRE_PROCESSING = True
-LAZY_CANDIDATE_EXTRACTION = False
-LAZY_CANDIDATE_CLUSTERING = False
+LAZY_CANDIDATE_EXTRACTION = True
+LAZY_CANDIDATE_CLUSTERING = True
 LAZY_RANKING = False
 LAZY_SELECTION = False
 
@@ -144,8 +144,8 @@ TEXTRANK_SE = "textrank"
 CORPORA_RU = [DUC_CO, SEMEVAL_CO, DEFT_CO]
 METHODS_RU = [TFIDF_ME]
 NUMBERS_RU = [10]
-LENGTHS_RU = [0]
-CANDIDATES_RU = [BEST_PATTERN_CA, NP_CHUNK_CA]
+LENGTHS_RU = [2, 3, 4]
+CANDIDATES_RU = [ST_FILTERED_NGRAM_CA]
 CLUSTERING_RU = [NO_CLUSTER_CC]
 SCORINGS_RU = [WEIGHT_SC]
 SELECTIONS_RU = [WHOLE_SE]
@@ -225,6 +225,9 @@ def extract_stop_words(stop_words_filepath):
   stop_words = st_file.read().split("\n")
 
   st_file.close()
+
+  for i, st in enumerate(stop_words):
+    stop_words[i] = st.replace("\r", "")
 
   stop_words.append(",")
   stop_words.append(".")
