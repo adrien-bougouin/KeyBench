@@ -3,6 +3,7 @@
 
 import sys
 import codecs
+from candidate_extractors import POSSequenceExtractor
 from candidate_extractors import FromTerminologyExtractor
 from candidate_extractors import NPChunkExtractor
 from candidate_extractors import STFilteredNGramExtractor
@@ -17,6 +18,7 @@ from keybench import KeyphraseExtractor
 from keybench import KeyBenchWorker
 from keybench.default import FakeClusterer
 from keybench.default.util import document_frequencies
+from keybench.default.util import n_to_m_grams
 from keybench.default import TFIDFRanker
 from multiprocessing import Queue
 from pre_processors import FrenchPreProcessor
@@ -45,6 +47,7 @@ from nltk.stem.snowball import FrenchStemmer
 from nltk.tokenize.treebank import TreebankWordTokenizer
 from os import makedirs
 from os import path
+from os import listdir
 
 ################################################################################
 
@@ -57,7 +60,8 @@ CORPORA_DIR = path.join(path.dirname(sys.argv[0]), "..", "res", "corpora")
 DEFT_CORPUS_DIR = path.join(CORPORA_DIR, "deft_2012", "test_t2")
 DEFT_CORPUS_DOCS = path.join(DEFT_CORPUS_DIR, "documents")
 DEFT_CORPUS_REFS = path.join(DEFT_CORPUS_DIR, "ref_test_t2")
-DEFT_CORPUS_TERMINOLOGY = path.join(DEFT_CORPUS_DIR, "full_terminology_t2")
+DEFT_CORPUS_TERM_SUITE_TERMINOLOGY = path.join(DEFT_CORPUS_DIR, "term_suite_terminology_t2")
+DEFT_CORPUS_ACABIT_TERMINOLOGY = path.join(DEFT_CORPUS_DIR, "acabit_terminology_t2")
 DEFT_CORPUS_TRAIN_DOCS = path.join(DEFT_CORPUS_DIR, "train")
 DEFT_CORPUS_DOCS_EXTENSION = ".xml"
 
@@ -70,14 +74,16 @@ SEMEVAL_CORPUS_DIR = path.join(CORPORA_DIR, "semeval_2010")
 SEMEVAL_CORPUS_DOCS = path.join(SEMEVAL_CORPUS_DIR, "documents")
 SEMEVAL_CORPUS_REFS = path.join(SEMEVAL_CORPUS_DIR,
                                 "ref_modified_stem_combined")
-SEMEVAL_CORPUS_TERMINOLOGY = path.join(SEMEVAL_CORPUS_DIR, "full_terminology")
+SEMEVAL_CORPUS_TERM_SUITE_TERMINOLOGY = path.join(SEMEVAL_CORPUS_DIR, "term_suite_terminology")
+SEMEVAL_CORPUS_ACABIT_TERMINOLOGY = path.join(SEMEVAL_CORPUS_DIR, "acabit_terminology")
 SEMEVAL_CORPUS_TRAIN_DOCS = path.join(SEMEVAL_CORPUS_DIR, "train")
 SEMEVAL_CORPUS_DOCS_EXTENSION = ".txt"
 
 DUC_CORPUS_DIR = path.join(CORPORA_DIR, "duc_2001")
 DUC_CORPUS_DOCS = path.join(DUC_CORPUS_DIR, "documents")
 DUC_CORPUS_REFS = path.join(DUC_CORPUS_DIR, "ref")
-DUC_CORPUS_TERMINOLOGY = path.join(DUC_CORPUS_DIR, "full_terminology")
+DUC_CORPUS_TERM_SUITE_TERMINOLOGY = path.join(DUC_CORPUS_DIR, "term_suite_terminology")
+DUC_CORPUS_ACABIT_TERMINOLOGY = path.join(DUC_CORPUS_DIR, "acabit_terminology")
 DUC_CORPUS_TRAIN_DOCS = path.join(DUC_CORPUS_DIR, "train")
 DUC_CORPUS_DOCS_EXTENSION = ".xml"
 
@@ -124,7 +130,8 @@ NP_CHUNK_CA = "np_chunk"
 LONGEST_NOUN_PHRASE_CA = "longest_noun_phrase"
 BEST_PATTERN_CA = "best_pattern"
 CLARIT96_CA = "clarit96"
-TERMINOLOGY_CA = "term_suite"
+TERM_SUITE_TERMINOLOGY_CA = "term_suite"
+ACABIT_TERMINOLOGY_CA = "acabit"
 
 # clustering names
 NO_CLUSTER_CC = "no_cluster"
@@ -144,8 +151,8 @@ TEXTRANK_SE = "textrank"
 CORPORA_RU = [DUC_CO, SEMEVAL_CO, DEFT_CO]
 METHODS_RU = [TFIDF_ME]
 NUMBERS_RU = [10]
-LENGTHS_RU = [2, 3, 4]
-CANDIDATES_RU = [ST_FILTERED_NGRAM_CA]
+LENGTHS_RU = [0]
+CANDIDATES_RU = [ACABIT_TERMINOLOGY_CA]
 CLUSTERING_RU = [NO_CLUSTER_CC]
 SCORINGS_RU = [WEIGHT_SC]
 SELECTIONS_RU = [WHOLE_SE]
@@ -164,27 +171,6 @@ english_lnp_tags = "(jj|nnps|nnp|nns|nn)"
 french_lnp_tags = "(adj|npp|nc)"
 english_lnp_patterns = ["%s+"%(tagged_word_pattern%english_lnp_tags)]
 french_lnp_patterns = ["%s+"%(tagged_word_pattern%french_lnp_tags)]
-english_best_patterns = [
-  "(%s{1,3})|(%s %s{1,2})|((%s|%s) %s %s)(%s (%s|%s)?)"%(tagged_word_pattern%"(nns|nn)",
-                                                         tagged_word_pattern%"(jj)",
-                                                         tagged_word_pattern%"(nns|nn)",
-                                                         tagged_word_pattern%"(nns|nn)",
-                                                         tagged_word_pattern%"(jj)",
-                                                         tagged_word_pattern%"(jj)",
-                                                         tagged_word_pattern%"(nns|nn)",
-                                                         tagged_word_pattern%"(nnps|nnp)",
-                                                         tagged_word_pattern%"(nnps|nnp)",
-                                                         tagged_word_pattern%"(nns|nn)")
-]
-french_best_patterns = [
-  "(%s (((%s %s?)|%s) %s)? %s?)|(%s+)"%(tagged_word_pattern%"(nc)",
-                                        tagged_word_pattern%"(p)",
-                                        tagged_word_pattern%"(det|detw)",
-                                        tagged_word_pattern%"(p+d)",
-                                        tagged_word_pattern%"(nc)",
-                                        tagged_word_pattern%"(adj)",
-                                        tagged_word_pattern%"(npp)")
-]
 # rules for CLARIT'96 subcompounding
 english_clarit_np_patterns = english_lnp_patterns
 french_clarit_np_patterns = french_lnp_patterns
@@ -247,6 +233,56 @@ def english_tokenization(term):
 
   return tokenized_term
 
+def learn_tag_sequences(train_docs,
+                        ext,
+                        pre_processor,
+                        tokenize):
+  tag_sequences = {}
+
+# FIXME not needed when candidates are extracted
+#  for filename in listdir(train_docs):
+#    if filename.rfind(ext) >= 0 \
+#       and len(filename) - filename.rfind(ext) == len(ext):
+#      filepath = path.join(train_docs, filename)
+#      keyphrase_path = path.join(train_docs, filename.replace(ext, ".key"))
+#      pre_processed_file = pre_processor.pre_process_file(filepath)
+#      sentences = pre_processed_file.full_text()
+#      keyphrase_file = codecs.open(keyphrase_path,
+#                                   "r",
+#                                   pre_processed_file.encoding())
+#      keyphrases = keyphrase_file.read().split(";")
+#      tokenized_keyphrases = {}
+#
+#      # tokenize keyphrases
+#      for keyphrase in keyphrases:
+#        tokenized_keyphrases[tokenize(keyphrase.lower().strip())] = True
+#
+#      # parse n-grams
+#      for sentence in sentences:
+#        sentence = sentence.strip()
+#
+#        for tagged_candidate in n_to_m_grams(sentence.split(), 1, len(sentence.split())):
+#          untagged_candidate = ""
+#          tag_sequence = ""
+#
+#          for wt in tagged_candidate.split():
+#            if untagged_candidate != "":
+#              untagged_candidate += " "
+#            untagged_candidate += wt.rsplit(pre_processed_file.tag_separator(),
+#                                            1)[0]
+#
+#            if tag_sequence != "":
+#              tag_sequence += " "
+#            tag_sequence += wt.rsplit(pre_processed_file.tag_separator(), 1)[1]
+#
+#          # add tag sequence if it is a keyphrase
+#          if untagged_candidate in tokenized_keyphrases:
+#            tag_sequences[tag_sequence] = True
+#
+#      keyphrase_file.close()
+
+  return tag_sequences
+
 ################################################################################
 # Main
 ################################################################################
@@ -272,7 +308,8 @@ def main(argv):
         for length in LENGTHS_RU:
           docs = None
           ext = None
-          terms = None
+          term_suite_terms = None
+          acabit_terms = None
           train_docs = None
           refs = None
           stop_words = None
@@ -285,7 +322,6 @@ def main(argv):
           nb_documents = None
           np_chunk_rules = None
           lnp_patterns = None
-          best_patterns = None
           clarit_np_patterns = None
           clarit_lexatom_patterns = None
           clarit_special_patterns = None
@@ -294,7 +330,8 @@ def main(argv):
           if corpus == DEFT_CO:
             docs = DEFT_CORPUS_DOCS
             ext = DEFT_CORPUS_DOCS_EXTENSION
-            terms = DEFT_CORPUS_TERMINOLOGY
+            term_suite_terms = DEFT_CORPUS_TERM_SUITE_TERMINOLOGY
+            acabit_terms = DEFT_CORPUS_ACABIT_TERMINOLOGY
             train_docs = DEFT_CORPUS_TRAIN_DOCS
             refs = DEFT_CORPUS_REFS
             stop_words = extract_stop_words(FRENCH_STOP_WORDS_FILEPATH)
@@ -309,7 +346,6 @@ def main(argv):
             language = FRENCH_LA
             np_chunk_rules = french_np_chunk_rules
             lnp_patterns = french_lnp_patterns
-            best_patterns = french_best_patterns
             clarit_np_patterns = french_clarit_np_patterns
             clarit_lexatom_patterns = french_clarit_lexatom_patterns
             clarit_special_patterns = french_clarit_special_patterns
@@ -332,7 +368,6 @@ def main(argv):
               language = FRENCH_LA
               np_chunk_rules = french_np_chunk_rules
               lnp_patterns = french_lnp_patterns
-              best_patterns = french_best_patterns
               clarit_np_patterns = french_clarit_np_patterns
               clarit_lexatom_patterns = french_clarit_lexatom_patterns
               clarit_special_patterns = french_clarit_special_patterns
@@ -341,7 +376,8 @@ def main(argv):
               if corpus == SEMEVAL_CO:
                 docs = SEMEVAL_CORPUS_DOCS
                 ext = SEMEVAL_CORPUS_DOCS_EXTENSION
-                terms = SEMEVAL_CORPUS_TERMINOLOGY
+                term_suite_terms = SEMEVAL_CORPUS_TERM_SUITE_TERMINOLOGY
+                acabit_terms = SEMEVAL_CORPUS_ACABIT_TERMINOLOGY
                 train_docs = SEMEVAL_CORPUS_TRAIN_DOCS
                 refs = SEMEVAL_CORPUS_REFS
                 stop_words = extract_stop_words(ENGLISH_STOP_WORDS_FILEPATH)
@@ -357,7 +393,6 @@ def main(argv):
                 language = ENGLISH_LA
                 np_chunk_rules = english_np_chunk_rules
                 lnp_patterns = english_lnp_patterns
-                best_patterns = english_best_patterns
                 clarit_np_patterns = english_clarit_np_patterns
                 clarit_lexatom_patterns = english_clarit_lexatom_patterns
                 clarit_special_patterns = english_clarit_special_patterns
@@ -366,7 +401,8 @@ def main(argv):
                 if corpus == DUC_CO:
                   docs = DUC_CORPUS_DOCS
                   ext = DUC_CORPUS_DOCS_EXTENSION
-                  terms = DUC_CORPUS_TERMINOLOGY
+                  term_suite_terms = DUC_CORPUS_TERM_SUITE_TERMINOLOGY
+                  acabit_terms = DUC_CORPUS_ACABIT_TERMINOLOGY
                   train_docs = DUC_CORPUS_TRAIN_DOCS
                   refs = DUC_CORPUS_REFS
                   stop_words = extract_stop_words(ENGLISH_STOP_WORDS_FILEPATH)
@@ -382,7 +418,6 @@ def main(argv):
                   language = ENGLISH_LA
                   np_chunk_rules = english_np_chunk_rules
                   lnp_patterns = english_lnp_patterns
-                  best_patterns = english_best_patterns
                   clarit_np_patterns = english_clarit_np_patterns
                   clarit_lexatom_patterns = english_clarit_lexatom_patterns
                   clarit_special_patterns = english_clarit_special_patterns
@@ -406,7 +441,6 @@ def main(argv):
                     language = ENGLISH_LA
                     np_chunk_rules = english_np_chunk_rules
                     lnp_patterns = english_lnp_patterns
-                    best_patterns = english_best_patterns
                     clarit_np_patterns = english_clarit_np_patterns
                     clarit_lexatom_patterns = english_clarit_lexatom_patterns
                     clarit_special_patterns = english_clarit_special_patterns
@@ -447,11 +481,14 @@ def main(argv):
                                                    lnp_patterns)
                     else:
                       if candidate == BEST_PATTERN_CA:
-                        c = PatternMatchingExtractor(run_name,
-                                                     LAZY_CANDIDATE_EXTRACTION,
-                                                     RUNS_DIR,
-                                                     True,
-                                                     best_patterns)
+                        c = POSSequenceExtractor(run_name,
+                                                 LAZY_CANDIDATE_EXTRACTION,
+                                                 RUNS_DIR,
+                                                 True,
+                                                 learn_tag_sequences(train_docs,
+                                                                     ext,
+                                                                     pre_processor,
+                                                                     tokenize))
                       else:
                         if candidate == NP_CHUNK_CA:
                           c = NPChunkExtractor(run_name,
@@ -478,14 +515,23 @@ def main(argv):
                                                                                         True,
                                                                                         clarit_np_patterns)))
                           else:
-                            if candidate == TERMINOLOGY_CA:
+                            if candidate == TERM_SUITE_TERMINOLOGY_CA:
                               c = FromTerminologyExtractor(run_name,
                                                            LAZY_CANDIDATE_EXTRACTION,
                                                            RUNS_DIR,
                                                            True,
-                                                           terms,
+                                                           term_suite_terms,
                                                            "utf-8", # FIXME
                                                            tokenize)
+                            else:
+                              if candidate == ACABIT_TERMINOLOGY_CA:
+                                c = FromTerminologyExtractor(run_name,
+                                                             LAZY_CANDIDATE_EXTRACTION,
+                                                             RUNS_DIR,
+                                                             True,
+                                                             acabit_terms,
+                                                             "utf-8", # FIXME
+                                                             tokenize)
                   ##### candidate clusterer ####################################
                   if cluster == NO_CLUSTER_CC:
                     cc = FakeClusterer(run_name,
@@ -520,8 +566,8 @@ def main(argv):
                                                              # no candidate
                                                              # means word
                                                              # TF-IDF
-                                                             pre_processor)#,
-                                                             #c)
+                                                             pre_processor,
+                                                             c)
                     ############################################################
                     r = TFIDFRanker(run_name,
                                     LAZY_RANKING,
@@ -529,8 +575,8 @@ def main(argv):
                                     True,
                                     # no scoring function means n-gram TF-IDF
                                     dfs,
-                                    nb_documents,
-                                    scoring_function)
+                                    nb_documents)#,
+                                    #scoring_function)
                   else:
                     if method == TEXTRANK_ME \
                        or method == SINGLERANK_ME \

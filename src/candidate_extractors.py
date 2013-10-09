@@ -18,6 +18,7 @@ from os import listdir
 # PatternMatchingExtractor
 # CLARIT96Extractor
 # FromTerminologyExtractor
+# POSSequenceExtractor
 
 ################################################################################
 
@@ -1023,4 +1024,103 @@ class FromTerminologyExtractor(CandidateExtractorC):
           candidates.append(candidate)
 
     return candidates
+
+################################################################################
+
+class POSSequenceExtractor(CandidateExtractorC):
+  """
+  Component performing candidate terms extraction. It extracts NP chunks (based
+  on a given rule).
+  """
+
+  def __init__(self, name, is_lazy, lazy_directory, debug, pos_sequences):
+    """
+    Constructor of the component.
+
+    @param  name:           The name of the component.
+    @type   name:           C{string}
+    @param  is_lazy:        True if the component must load previous data, False
+                            if data must be computed tought they have already
+                            been computed.
+    @type   is_lazy:        C{bool}
+    @param  lazy_directory: The directory used to store previously computed
+                            data.
+    @type   lazy_directory: C{string}
+    @param  debug:          True if the component is in debug mode, else False.
+                            When the component is in debug mode, it will output
+                            each step of its processing.
+    @type   debug:          C{bool}
+    TODO pos_sequences
+    TODO pos_sequences
+    """
+
+    super(POSSequenceExtractor, self).__init__(name,
+                                               is_lazy,
+                                               lazy_directory,
+                                               debug)
+
+    self.set_pos_sequences(pos_sequences)
+
+  def pos_sequences(self):
+    """
+    """
+
+    return self._pos_sequences
+
+  def set_pos_sequences(self, pos_sequences):
+    """
+    """
+
+    self._pos_sequences = pos_sequences
+
+  def candidate_extraction(self, pre_processed_file):
+    """
+    Extracts the candidates from a pre-processed file.
+
+    @param    pre_processed_file: The pre-processed analysed file.
+    @type     pre_processed_file: C{PreProcessedFile}
+
+    @return:  A list of candidates.
+    @rtype:   C{list(string)}
+    """
+
+    sentences = pre_processed_file.full_text()
+    candidates = []
+    
+    for sentence in sentences:
+      for candidate in n_to_m_grams(sentence.split(), 1, len(sentence.split())):
+        tag_sequence = ""
+
+        for wt in candidate.split(" "):
+          if tag_sequence != "":
+            tag_sequence += " "
+          tag_sequence += wt.rsplit(pre_processed_file.tag_separator(), 1)[1]
+
+        if tag_sequence in self.pos_sequences():
+          if self.filtering(candidate, pre_processed_file.tag_separator()):
+            candidates.append(candidate)
+
+    return candidates
+
+  def filtering(self, term, tag_separator):
+    """
+    Indicates if a candidate can be concidered as a keyphrase candidate or not.
+
+    @param    candidate:      The POS tagged candidate.
+    @type     candidate:      C{string}
+    @param    tag_separator:  The character used to separate a words from its
+                              tag.
+    @type     tag_separator:  C{string}
+
+    @return:  True if the candidate is a keyphrase candidate, else False.
+    @rtype:   C{bool}
+    """
+
+#    for wt in term.split():
+#      w = wt.rsplit(tag_separator, 1)[0]
+#
+#      if len(w) <= 2: # FIXME semeval trick
+#        return False
+
+    return True
 
