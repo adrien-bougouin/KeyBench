@@ -269,6 +269,8 @@ class TextRankRanker(RankerC):
           untagged_sentence += " "
         untagged_sentence += w
 
+      # FIXME do not select the position as first if it is already the first
+      # position of a greater term
       for term in cluster:
         pos = untagged_sentence.find(term)
 

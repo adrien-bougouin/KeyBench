@@ -269,7 +269,7 @@ class KeyphraseExtractor(object):
     """
 
     ext = self.input_extension()
-    working_pool = Pool()
+    working_pool = Pool(8)
     pool_args = []
     pool_results = []
     extracted_keyphrases = {}

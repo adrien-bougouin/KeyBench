@@ -1033,7 +1033,7 @@ class POSSequenceExtractor(CandidateExtractorC):
   on a given rule).
   """
 
-  def __init__(self, name, is_lazy, lazy_directory, debug, pos_sequences):
+  def __init__(self, name, is_lazy, lazy_directory, debug, pos_sequences, stop_words):
     """
     Constructor of the component.
 
@@ -1059,7 +1059,28 @@ class POSSequenceExtractor(CandidateExtractorC):
                                                lazy_directory,
                                                debug)
 
+    self.set_stop_words(stop_words)
     self.set_pos_sequences(pos_sequences)
+
+  def stop_words(self):
+    """
+    Getter of the list of stop words.
+
+    @return:  The list of stop words used to filter the n-grams.
+    @rtype:   C{list(string)}
+    """
+
+    return self._stop_words
+
+  def set_stop_words(self, stop_words):
+    """
+    Setter of the list of stop words.
+
+    @param  stop_words: The new list of stop words used to filter the n-grams.
+    @type   stop_words: C{list(string)}
+    """
+
+    self._stop_words = stop_words
 
   def pos_sequences(self):
     """
@@ -1116,10 +1137,19 @@ class POSSequenceExtractor(CandidateExtractorC):
     @rtype:   C{bool}
     """
 
-#    for wt in term.split():
-#      w = wt.rsplit(tag_separator, 1)[0]
-#
-#      if len(w) <= 2: # FIXME semeval trick
+    tagged_words = term.split()
+
+    for i, tagged_word in enumerate(tagged_words):
+      word = tagged_word.lower().rsplit(tag_separator, 1)[0]
+
+      # only candidate with first and last words not included into the stop word
+      # list are accepted
+      if i == 0 or i == (len(tagged_words) - 1):
+        if self.stop_words().count(word) > 0:
+          return False
+
+      # FIXME semeval trick
+#      if len(word) <= 2:
 #        return False
 
     return True

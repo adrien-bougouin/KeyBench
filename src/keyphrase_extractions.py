@@ -152,7 +152,7 @@ CORPORA_RU = [DUC_CO, SEMEVAL_CO, DEFT_CO]
 METHODS_RU = [TFIDF_ME]
 NUMBERS_RU = [10]
 LENGTHS_RU = [0]
-CANDIDATES_RU = [ACABIT_TERMINOLOGY_CA]
+CANDIDATES_RU = [TERM_SUITE_TERMINOLOGY_CA, BEST_PATTERN_CA]
 CLUSTERING_RU = [NO_CLUSTER_CC]
 SCORINGS_RU = [WEIGHT_SC]
 SELECTIONS_RU = [WHOLE_SE]
@@ -239,47 +239,47 @@ def learn_tag_sequences(train_docs,
                         tokenize):
   tag_sequences = {}
 
-# FIXME not needed when candidates are extracted
-#  for filename in listdir(train_docs):
-#    if filename.rfind(ext) >= 0 \
-#       and len(filename) - filename.rfind(ext) == len(ext):
-#      filepath = path.join(train_docs, filename)
-#      keyphrase_path = path.join(train_docs, filename.replace(ext, ".key"))
-#      pre_processed_file = pre_processor.pre_process_file(filepath)
-#      sentences = pre_processed_file.full_text()
-#      keyphrase_file = codecs.open(keyphrase_path,
-#                                   "r",
-#                                   pre_processed_file.encoding())
-#      keyphrases = keyphrase_file.read().split(";")
-#      tokenized_keyphrases = {}
-#
-#      # tokenize keyphrases
-#      for keyphrase in keyphrases:
-#        tokenized_keyphrases[tokenize(keyphrase.lower().strip())] = True
-#
-#      # parse n-grams
-#      for sentence in sentences:
-#        sentence = sentence.strip()
-#
-#        for tagged_candidate in n_to_m_grams(sentence.split(), 1, len(sentence.split())):
-#          untagged_candidate = ""
-#          tag_sequence = ""
-#
-#          for wt in tagged_candidate.split():
-#            if untagged_candidate != "":
-#              untagged_candidate += " "
-#            untagged_candidate += wt.rsplit(pre_processed_file.tag_separator(),
-#                                            1)[0]
-#
-#            if tag_sequence != "":
-#              tag_sequence += " "
-#            tag_sequence += wt.rsplit(pre_processed_file.tag_separator(), 1)[1]
-#
-#          # add tag sequence if it is a keyphrase
-#          if untagged_candidate in tokenized_keyphrases:
-#            tag_sequences[tag_sequence] = True
-#
-#      keyphrase_file.close()
+  # FIXME not needed when candidates are extracted
+  for filename in listdir(train_docs):
+    if filename.rfind(ext) >= 0 \
+       and len(filename) - filename.rfind(ext) == len(ext):
+      filepath = path.join(train_docs, filename)
+      keyphrase_path = path.join(train_docs, filename.replace(ext, ".key"))
+      pre_processed_file = pre_processor.pre_process_file(filepath)
+      sentences = pre_processed_file.full_text()
+      keyphrase_file = codecs.open(keyphrase_path,
+                                   "r",
+                                   pre_processed_file.encoding())
+      keyphrases = keyphrase_file.read().split(";")
+      tokenized_keyphrases = {}
+
+      # tokenize keyphrases
+      for keyphrase in keyphrases:
+        tokenized_keyphrases[tokenize(keyphrase.lower().strip())] = True
+
+      # parse n-grams
+      for sentence in sentences:
+        sentence = sentence.strip()
+
+        for tagged_candidate in n_to_m_grams(sentence.split(), 1, len(sentence.split())):
+          untagged_candidate = ""
+          tag_sequence = ""
+
+          for wt in tagged_candidate.split():
+            if untagged_candidate != "":
+              untagged_candidate += " "
+            untagged_candidate += wt.rsplit(pre_processed_file.tag_separator(),
+                                            1)[0]
+
+            if tag_sequence != "":
+              tag_sequence += " "
+            tag_sequence += wt.rsplit(pre_processed_file.tag_separator(), 1)[1]
+
+          # add tag sequence if it is a keyphrase
+          if untagged_candidate in tokenized_keyphrases:
+            tag_sequences[tag_sequence] = True
+
+      keyphrase_file.close()
 
   return tag_sequences
 
@@ -488,7 +488,8 @@ def main(argv):
                                                  learn_tag_sequences(train_docs,
                                                                      ext,
                                                                      pre_processor,
-                                                                     tokenize))
+                                                                     tokenize),
+                                                 stop_words)
                       else:
                         if candidate == NP_CHUNK_CA:
                           c = NPChunkExtractor(run_name,
@@ -566,8 +567,8 @@ def main(argv):
                                                              # no candidate
                                                              # means word
                                                              # TF-IDF
-                                                             pre_processor,
-                                                             c)
+                                                             pre_processor)#,
+                                                             #c)
                     ############################################################
                     r = TFIDFRanker(run_name,
                                     LAZY_RANKING,
@@ -575,8 +576,8 @@ def main(argv):
                                     True,
                                     # no scoring function means n-gram TF-IDF
                                     dfs,
-                                    nb_documents)#,
-                                    #scoring_function)
+                                    nb_documents,
+                                    scoring_function)
                   else:
                     if method == TEXTRANK_ME \
                        or method == SINGLERANK_ME \
