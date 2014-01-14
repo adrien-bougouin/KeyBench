@@ -1,12 +1,157 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 
+import codecs
 import math
 import sys
 from keybench import CandidateClustererC
 
 ################################################################################
 # HierarchicalClusterer
+# TermVariantClusterer
+
+################################################################################
+
+def create_terminology_clusters(terminology_clusters_filepath,
+                                encoding,
+                                tokenize_function):
+  """
+  """
+
+  terminology_clusters = []
+  terminology_clusters_file = codecs.open(terminology_clusters_filepath,
+                                          "r",
+                                          encoding)
+
+  # parsing of the term variant grouping
+  tv_clusters = []
+  current_cluster = []
+  for line in terminology_clusters_file.read().split("\n"):
+    line = line.strip()
+
+    if line != "":
+      if line[0] == "T":
+        tv_clusters.append(current_cluster)
+        current_cluster = []
+
+      current_cluster.append(tokenize_function(line[1:]))
+
+  # grouping of clusters having common variants
+  deprecated_clusters = []
+  for i, i_cluster in enumerate(tv_clusters[:-1]):
+    for j, j_cluster in enumerate(tv_clusters[i + 1:]):
+      if len(list(set() & set())) > 0:
+        tv_clusters[j] = list(set(i_cluster) | set(j_cluster))
+
+        deprecated_clusters.append(i)
+
+  # clustering
+  for i, cluster in enumerate(tv_clusters):
+    if i not in deprecated_clusters:
+      terminology_clusters.append(cluster)
+
+  terminology_clusters_file.close()
+
+  return terminology_clusters
+
+class TermVariantClusterer(CandidateClustererC):
+  """
+  Component responsible of the candidate clustering.
+  """
+
+  def __init__(self,
+               name,
+               is_lazy,
+               lazy_directory,
+               debug,
+               terminology_clusters_filepath,
+               encoding,
+               tokenize_function):
+    """
+    Constructor of the component.
+
+    @param  name:           The name of the component.
+    @type   name:           C{string}
+    @param  is_lazy:        True if the component must load previous data, False
+                            if data must be computed tought they have already
+                            been computed.
+    @type   is_lazy:        C{bool}
+    @param  lazy_directory: The directory used to store previously computed
+                            data.
+    @type   lazy_directory: C{string}
+    @param  debug:          True if the component is in debug mode, else False.
+                            When the component is in debug mode, it will output
+                            each step of its processing.
+    @type   debug:          C{bool}
+    TODO
+    TODO
+    TODO
+    TODO
+    TODO
+    TODO
+    """
+
+    super(TermVariantClusterer, self).__init__(name,
+                                               is_lazy,
+                                               lazy_directory,
+                                               debug)
+
+    self.set_terminology_clusters(create_terminology_clusters(terminology_clusters_filepath,
+                                                              encoding,
+                                                              tokenize_function))
+
+  def terminology_clusters(self):
+    """
+    """
+
+    return self._terminology_clusters
+
+  def set_terminology_clusters(self, terminology_clusters):
+    """
+    """
+
+    self._terminology_clusters = terminology_clusters
+
+  def candidate_clustering(self, pre_processed_file, candidates):
+    """
+    Clusters the candidates that have been extracted from an analysed file.
+
+    @param    pre_processed_file: The pre-processed analysed file.
+    @type     pre_processed_file: C{PreProcessedFile}
+    @param    candidates:         The candidates to cluster.
+    @type     candidates:         C{list(string)}
+
+    @return:  A list of clusters (lists of candidates).
+    @rtype:   C{list(list(string))}
+    """
+
+    clusters = []
+    untagged_candidates = {}
+
+    for candidate in candidates:
+      untagged_candidate = ""
+
+      for wt in candidate.split():
+        if untagged_candidate != "":
+          untagged_candidate += " "
+        untagged_candidate += wt.rsplit(pre_processed_file.tag_separator(), 1)[0]
+
+      if untagged_candidate not in untagged_candidates:
+        untagged_candidates[untagged_candidate] = []
+      untagged_candidates[untagged_candidate].append(candidate)
+
+    for terminology_cluster in self.terminology_clusters():
+      cluster = list(set(terminology_cluster) & set(untagged_candidates.keys()))
+
+      if len(cluster) > 0:
+        full_cluster = []
+
+        for untagged_candidate in cluster:
+          for candidate in untagged_candidates[untagged_candidate]:
+            full_cluster.append(candidate)
+        clusters.append(full_cluster)
+
+    return clusters
 
 ################################################################################
 
@@ -324,42 +469,4 @@ class StemOverlapHierarchicalClusterer(CandidateClustererC):
     # reordered so the first nodes are the last created
     nodes.reverse()
     return nodes
-
-#  def cluster_centroid(cluster, tag_separator, stemmer):
-#    """
-#    Computes the centroid of a cluster according to the overlap similarity between
-#    its elements.
-#
-#    @param    cluster:        The cluster from which obtain the centroid.
-#    @type     cluster:        C{list(list(string))}
-#    @param    tag_separator:  The symbol used to separate a word from its POS tag.
-#    @type     tag_separator:  C{string}
-#    @param    stemmer:        The stemmer used to stem words.
-#    @type     stemmer:        C{nltk.stem.api.StemmerI}
-#
-#    @return:  The centroid of the cluster.
-#    @rtype:   C{string}
-#    """
-#
-#    centroid = None
-#    max_similarity = -1.0
-#
-#    for term1 in cluster:
-#      stem1 = pos_tagged_term_stemming(term1, tag_separator, stemmer)
-#      similarity = 0.0
-#
-#      for term2 in cluster:
-#        stem2 = pos_tagged_term_stemming(term2, tag_separator, stemmer)
-#
-#        try:
-#          similarity += simple_word_overlap_similarity(stem1)(stem2)
-#        except:
-#          similarity += 0.0
-#      similarity /= float(len(cluster))
-#
-#      if similarity > max_similarity:
-#        max_similarity = similarity
-#        centroid = term1
-#
-#    return centroid
 

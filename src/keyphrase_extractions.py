@@ -12,6 +12,7 @@ from candidate_extractors import CLARIT96Extractor
 from candidate_extractors import CLARIT96_LEXATOM_TAG
 from candidate_extractors import train_clarit
 from candidate_clusterers import StemOverlapHierarchicalClusterer
+from candidate_clusterers import TermVariantClusterer
 from candidate_clusterers import LINKAGE_STRATEGY
 from evaluators import StandardPRFMEvaluator
 from keybench import KeyphraseExtractor
@@ -61,6 +62,7 @@ DEFT_CORPUS_DIR = path.join(CORPORA_DIR, "deft_2012", "test_t2")
 DEFT_CORPUS_DOCS = path.join(DEFT_CORPUS_DIR, "documents")
 DEFT_CORPUS_REFS = path.join(DEFT_CORPUS_DIR, "ref_test_t2")
 DEFT_CORPUS_TERM_SUITE_TERMINOLOGY = path.join(DEFT_CORPUS_DIR, "term_suite_terminology_t2")
+DEFT_CORPUS_TERM_SUITE_CLUSTERS = path.join(DEFT_CORPUS_DIR, "term_suite_clusters_t2")
 DEFT_CORPUS_ACABIT_TERMINOLOGY = path.join(DEFT_CORPUS_DIR, "acabit_terminology_t2")
 DEFT_CORPUS_TRAIN_DOCS = path.join(DEFT_CORPUS_DIR, "train")
 DEFT_CORPUS_DOCS_EXTENSION = ".xml"
@@ -75,6 +77,7 @@ SEMEVAL_CORPUS_DOCS = path.join(SEMEVAL_CORPUS_DIR, "documents")
 SEMEVAL_CORPUS_REFS = path.join(SEMEVAL_CORPUS_DIR,
                                 "ref_modified_stem_combined")
 SEMEVAL_CORPUS_TERM_SUITE_TERMINOLOGY = path.join(SEMEVAL_CORPUS_DIR, "term_suite_terminology")
+SEMEVAL_CORPUS_TERM_SUITE_CLUSTERS = path.join(SEMEVAL_CORPUS_DIR, "term_suite_clusters")
 SEMEVAL_CORPUS_ACABIT_TERMINOLOGY = path.join(SEMEVAL_CORPUS_DIR, "acabit_terminology")
 SEMEVAL_CORPUS_TRAIN_DOCS = path.join(SEMEVAL_CORPUS_DIR, "train")
 SEMEVAL_CORPUS_DOCS_EXTENSION = ".txt"
@@ -83,6 +86,7 @@ DUC_CORPUS_DIR = path.join(CORPORA_DIR, "duc_2001")
 DUC_CORPUS_DOCS = path.join(DUC_CORPUS_DIR, "documents")
 DUC_CORPUS_REFS = path.join(DUC_CORPUS_DIR, "ref")
 DUC_CORPUS_TERM_SUITE_TERMINOLOGY = path.join(DUC_CORPUS_DIR, "term_suite_terminology")
+DUC_CORPUS_TERM_SUITE_CLUSTERS = path.join(DUC_CORPUS_DIR, "term_suite_clusters")
 DUC_CORPUS_ACABIT_TERMINOLOGY = path.join(DUC_CORPUS_DIR, "acabit_terminology")
 DUC_CORPUS_TRAIN_DOCS = path.join(DUC_CORPUS_DIR, "train")
 DUC_CORPUS_DOCS_EXTENSION = ".xml"
@@ -102,7 +106,7 @@ ENGLISH_STOP_WORDS_FILEPATH = path.join(CORPORA_DIR, "english_unine_stop_words")
 
 LAZY_PRE_PROCESSING = True
 LAZY_CANDIDATE_EXTRACTION = True
-LAZY_CANDIDATE_CLUSTERING = True
+LAZY_CANDIDATE_CLUSTERING = False
 LAZY_RANKING = False
 LAZY_SELECTION = False
 
@@ -136,6 +140,7 @@ ACABIT_TERMINOLOGY_CA = "acabit"
 # clustering names
 NO_CLUSTER_CC = "no_cluster"
 HIERARCHICAL_CLUSTER_CC = "hierarchical"
+TERM_VARIANT_CLUSTER_CC = "term_variant_cluster"
 
 # scoring names
 SUM_SC = "sum"
@@ -149,11 +154,11 @@ TEXTRANK_SE = "textrank"
 ##### runs #####################################################################
 
 CORPORA_RU = [DUC_CO, SEMEVAL_CO, DEFT_CO]
-METHODS_RU = [TFIDF_ME]
+METHODS_RU = [TOPICRANK_ME]
 NUMBERS_RU = [10]
 LENGTHS_RU = [0]
-CANDIDATES_RU = [TERM_SUITE_TERMINOLOGY_CA, BEST_PATTERN_CA]
-CLUSTERING_RU = [NO_CLUSTER_CC]
+CANDIDATES_RU = [TERM_SUITE_TERMINOLOGY_CA]
+CLUSTERING_RU = [TERM_VARIANT_CLUSTER_CC]
 SCORINGS_RU = [WEIGHT_SC]
 SELECTIONS_RU = [WHOLE_SE]
 
@@ -309,6 +314,7 @@ def main(argv):
           docs = None
           ext = None
           term_suite_terms = None
+          term_suite_clusters = None
           acabit_terms = None
           train_docs = None
           refs = None
@@ -331,6 +337,7 @@ def main(argv):
             docs = DEFT_CORPUS_DOCS
             ext = DEFT_CORPUS_DOCS_EXTENSION
             term_suite_terms = DEFT_CORPUS_TERM_SUITE_TERMINOLOGY
+            term_suite_clusters = DEFT_CORPUS_TERM_SUITE_CLUSTERS
             acabit_terms = DEFT_CORPUS_ACABIT_TERMINOLOGY
             train_docs = DEFT_CORPUS_TRAIN_DOCS
             refs = DEFT_CORPUS_REFS
@@ -377,6 +384,7 @@ def main(argv):
                 docs = SEMEVAL_CORPUS_DOCS
                 ext = SEMEVAL_CORPUS_DOCS_EXTENSION
                 term_suite_terms = SEMEVAL_CORPUS_TERM_SUITE_TERMINOLOGY
+                term_suite_clusters = SEMEVAL_CORPUS_TERM_SUITE_CLUSTERS
                 acabit_terms = SEMEVAL_CORPUS_ACABIT_TERMINOLOGY
                 train_docs = SEMEVAL_CORPUS_TRAIN_DOCS
                 refs = SEMEVAL_CORPUS_REFS
@@ -402,6 +410,7 @@ def main(argv):
                   docs = DUC_CORPUS_DOCS
                   ext = DUC_CORPUS_DOCS_EXTENSION
                   term_suite_terms = DUC_CORPUS_TERM_SUITE_TERMINOLOGY
+                  term_suite_clusters = DUC_CORPUS_TERM_SUITE_CLUSTERS
                   acabit_terms = DUC_CORPUS_ACABIT_TERMINOLOGY
                   train_docs = DUC_CORPUS_TRAIN_DOCS
                   refs = DUC_CORPUS_REFS
@@ -548,6 +557,15 @@ def main(argv):
                                                             LINKAGE_STRATEGY.AVERAGE,
                                                             0.25,
                                                             stemmer)
+                    else:
+                      if cluster == TERM_VARIANT_CLUSTER_CC:
+                        cc = TermVariantClusterer(run_name,
+                                                  LAZY_CANDIDATE_CLUSTERING,
+                                                  RUNS_DIR,
+                                                  True,
+                                                  term_suite_clusters,
+                                                  "utf-8",
+                                                  tokenize)
                   ##### scoring ################################################
                   scoring_function = None
                   if scoring == SUM_SC:
