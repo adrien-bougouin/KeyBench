@@ -1,0 +1,146 @@
+19	c est	c' est
+8	il ni	il n' y
+7	n est	n' est
+6	ce n	ce n'
+6	a dire	à dire
+5	a vous	à vous
+4	mes regles	mes règles
+4	j' etai	j' étais
+4	j ai	j' ai
+4	bonjour a	bonjour à
+4	C est	C' est
+4	, j	, j'
+4	, ca	, ça
+3	que ca	que ça
+3	pas a	pas à
+3	mé c	mais c' est
+3	la je	là je
+3	de liscense	de license
+3	chu de	CHU de
+3	a toi	à toi
+3	a me	à me
+3	J ai	J' ai
+0	d' etre	d' être
+0	apprendre a	apprendre à
+0	c t	c' était
+0	je nen	je n' en
+0	ne c	ne sais
+0	des le	dès le
+0	cho	chaud
+0	sa ne	ça ne
+0	sa fé	ça fait
+0	en fesan	en faisant
+0	tou ka	tout cas
+0	premiere foi	première fois
+0	première foi	première fois
+0	il fo	il faut
+0	rapport o	rapport au
+0	en fet	en fait
+0	sa fesé	ça faisait
+0	el son	elles sont
+0	elle son	elles sont
+0	elles son	elles sont
+0	el sont	elles sont
+0	elle sont	elles sont
+0	c pareil	c' est pareil
+0	c mon	c' est mon
+0	c nul	c' est nul
+0	nous somme	nous sommes
+0	nou sommes	nous sommes
+0	nou somme	nous sommes
+0	jen é	j'en ai
+0	chaque foi	chaque fois
+0	o moin	au moins
+0	o moins	au moins
+0	sais plu	sais plus
+0	plu quoi	plus quoi
+0	plu koi	plus quoi
+0	koi fer	quoi faire
+0	des foi	des fois
+0	les foi	des fois
+0	c' etais	c' était
+0	c etais	c' était
+0	([A-Z]) / ([DL])	$1 / $2
+0	pourquoit u	pourquoi tu
+0	tu pourra	tu pourras
+0	a chier	à chier
+0	faut ([^ ]{2,})é	faut $1er
+0	dois ([^ ]{2,})é	dois $1er
+0	doit ([^ ]{2,})é	doit $1er
+0	peux ([^ ]{2,})é	peux $1er
+0	peut ([^ ]{2,})é	peut $1er
+0	qui na	qui n' a
+0	ki na	qui n' a
+0	il na	il n' a
+0	([2-9]|[1-9][0-9]+) an	$1 ans
+0	([1-9][0-9]*) moi	$1 mois
+0	g t	j' étais
+0	il ([^ ]{2,})é	il $1ait
+0	pas bel	pas belle
+0	sa sera	ça sera
+0	il yen	il y en
+0	lfére ([^ ]{2,})é	le faire $1er
+0	come dab	comme d' habitude
+0	comme dab	comme d' habitude
+0	come dhab	comme d' habitude
+0	comme dhab	comme d' habitude
+0	t le	tu es le
+0	t la	tu es la
+0	une foi	une fois
+0	come moi	comme moi
+0	come toi	comme toi
+0	come lui	comme lui
+0	come elle	comme elle
+0	come nous	comme nous
+0	come vous	comme vous
+0	come eux	comme eux
+0	come elles	comme elles
+0	oci	aussi
+0	mentende	m' entende
+0	tu conai	tu connais
+0	je conai	je connais
+0	etait	était
+0	(touches?) a tout	$1 à tout
+0	suis ([^ ]{2,})er	suis $1é
+0	a link	a link
+0	orjd	aujourd'_hui
+0	teubé	bête
+0	la elle	là elle
+0	tjs	toujours
+0	pécho	choppé
+0	PÉCHO	choppé
+0	maline	maligne
+0	tpx	tu peux
+0	mm	même
+0	c mm	c' est même
+0	sareter	s' arrêter
+0	pck	parce_que
+0	sont co '	sont connectés
+0	est co '	est connecté
+0	Si y ' a	Si il y a
+0	si y ' a	si il y a
+0	jpari	je parie
+0	chvx	cheveux
+0	sa fais	ça fait
+0	jusqu' a	jusqu' à
+0	deten	détend
+0	pr	pour
+0	parcequ '	parce_qu'
+0	jla	je la
+0	krément	carrément
+0	kréman	carrément
+0	à bon porc	à bon port
+0	sa me	ça me
+0	mes il	mais il
+0	mes il es	mais il est
+0	il es	il est
+0	é	et
+0	jvais	je vais
+0	tfaçon	toute façon
+0	canap '	canapé
+0	quécho	choqué
+0	&	et
+0	(joues?) a	$1 à
+0	sa mplait	ça me plaît
+0	vais ([^ ]{2,})é	vais $1er
+0	yen a	y en a

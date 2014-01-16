@@ -1,0 +1,138 @@
+19	d	d'
+15	pa	pas
+13	l	l'
+12	qe	que
+12	n	n'
+12	j	j'
+12	etre	être
+10	qil	qu' il
+10	ca	ça
+9	apres	après
+8	meme	même
+7	nou	nous
+7	deja	déjà
+6	t	t'
+6	mé	mais
+5	regles	règles
+5	qu	qu'
+5	medecin	médecin
+5	m	m'
+5	fé	fait
+5	ete	été
+5	etai	était
+4	tres	très
+4	symptomes	symptômes
+4	surement	sûrement
+4	jai	j' ai
+4	coute	coûte
+4	ci	-ci
+4	celà	cela
+3	tré	très
+3	tete	tête
+3	s	s'
+3	liscense	license
+3	ke	que
+3	inquiete	inquiète
+3	etais	étais
+3	déja	déjà
+3	com	comme
+3	J	J'
+2	vré	vrais
+2	trés	très
+2	tou	tout
+2	smaine	semaine
+2	senté	sentait
+2	revien	reviens
+2	resultats	résultats
+2	repondre	répondre
+2	probleme	problème
+2	premiere	première
+2	pillule	pilule
+2	pere	père
+2	maitrisée	maîtrisée
+2	legumes	légumes
+2	lamour	l' amour
+2	jen	j' en
+2	javou	j' avoue
+2	jamé	jamais
+2	hopital	hôpital
+2	ds	dans
+2	desir	désir
+2	desactiver	désactiver
+2	derniere	dernière
+2	decembre	décembre
+2	creer	créer
+2	copin	copain
+2	connaitre	connaître
+2	cd	CD
+2	bjr	bonjour
+2	bientot	bientôt
+2	biensur	bien_sûr
+2	arreté	arrêté
+2	arret	arrêt
+2	aprés	après
+2	amèliorer	améliorer
+2	L	L'
+2	D	D'
+0	g	j' ai
+0	voila	voilà
+0	cété	c' était
+0	qoi	quoi
+0	fo	il faut
+0	qon	qu' on
+0	avé	avait
+0	devé	devait
+0	tt	tout
+0	qi	qui
+0	dailleur	d'ailleurs
+0	mar	marre
+0	succés	succès
+0	navon	n' avons
+0	qesa	que ça
+0	qa	qu' à
+0	moin	moins
+0	vrémen	vraiment
+0	koi	quoi
+0	avanse	avance
+0	vacs	vacances
+0	([A-Za-z]+) ' s	$1's
+0	ailleur	ailleurs
+0	d' ailleur	d'_ailleurs
+3	c a dire	c'est-à-dire
+0	envi	envie
+0	tjr	toujours
+0	tjrs	toujours
+0	grd	grand
+0	ariv	arrive
+0	chui	je suis
+0	chuis	je suis
+0	chépa	je sais pas
+0	chépas	je sais pas
+0	tora	tu auras
+0	tkt	ne t' inquiète pas
+0	grace	grâce
+0	p ' tite	petite
+0	p ' tit	petite
+0	jvé	je vais
+0	lfére	le faire
+0	veus	veux
+0	cest	c' est
+0	t´es	tu es
+0	jte	je te
+0	ki	qui
+0	Jsuis	Je suis
+0	Jsui	Je suis
+0	jsuis	je suis
+0	jsui	je suis
+0	…	...
+0	yaller	y aller
+0	aek (les?|la)	avec $1
+0	Pdnt	Pendant
+0	pdnt	pendant
+0	vi	oui
+0	Jte	Je te
+0	jmetrai	je mettrai
+0	(mplait?)	me plaît
+0	cmme	comme
+0	svp	s'il_vous_plaît
+0	stp	s'il_te_plaît

@@ -1,0 +1,178 @@
+0	& gt ;	>
+0	& lt ;	<
+0	ezine	e-zine
+0	ezines	e-zines
+0	> ([^ {}]+)	$1
+0	\ n	\n
+0	\ r	\r
+0	\ t	\t
+0	\ l	\l
+0	$ ([a-z])	$$1
+0	= >	=>
+0	' n '	and
+0	n '	and
+0	commaand	command
+0	kinda	approximately
+0	cuz	because
+0	mebbe	maybe
+0	im	I 'm
+0	= 01,s	's
+0	darlin	darling
+0	n ' t	n't
+978	dth	dth
+849	mw	mw
+489	dont	do n't
+456	alot	a lot
+426	pls	please
+408	ng	ng
+382	gon	gon
+328	rly	rly
+326	mmbtu	mmbtu
+279	mws	mws
+263	approx.	approximately
+261	df	df
+251	calc	calc
+247	ing	ing
+229	ckm	ckm
+227	msgs	messages
+227	msg	message
+221	undercollection	collection
+205	tha	that
+197	y'all	you
+176	non-public	public
+167	yo	yes
+158	thats	that is
+150	citygate	gate
+146	wil	will
+136	nite	night
+129	thx	thanks
+127	im	I 'm
+126	baseload	load
+124	non-core	core
+123	enpower	empower
+122	o.k	OK
+120	reg	reg
+119	p.	page
+119	p.s	PS
+116	definately	definitely
+114	peaker	peaker
+113	accomodate	accommodate
+112	ie.	i.e.
+110	didnt	did n't
+110	gty	gty
+107	wh = en	when
+105	recieved	recieved
+104	thurs	thursday
+103	tommorrow	tomorrow
+100	passcode	code
+99	a = ny	any
+99	dept.	department
+99	repo = rt	report
+98	mid-year	mid-year
+98	appt	appartment
+96	ratemaking	rate making
+94	peakers	peakers
+93	([^ {}]+) = tion	$1tion
+93	pathed	pathed
+89	sat.	Saturday
+89	rep.	report
+88	bidweek	week
+87	havent	have n't
+86	whats	what 's
+85	executables	executables
+85	foward	forward
+82	ent	ent
+81	([^ {}]+)i = ze	$1ize
+81	mid-	mid-
+79	recieve	recieve
+79	([^ {}]+) = ry	$1ry
+78	conf.	conf.
+78	rebook	rebook
+78	non-compete	non-compete
+77	wa	wa
+76	doesnt	does n't
+76	thi	this
+75	co-operation	cooperation
+73	cashout	cash-out
+72	mistransmission	transmission
+70	plc	plc
+69	chnages	changes
+69	non-refundable	refundable
+67	username	name
+66	over-the	over the
+66	mmcf	mmcf
+65	http://im.yahoo.com	http://im.yahoo.com
+65	akatz@eei.org	akatz@eei.org
+65	ees	ees
+65	demarc	demarc
+64	re-send	re-send
+64	non-binding	non-binding
+63	http://xms.enron.com	http://xms.enron.com
+63	tx	tx
+62	seperate	seperate
+62	post-id	post-id
+62	plz	plz
+61	undercollections	collections
+60	taht	that
+60	pre-petition	petition
+60	occured	occurred
+59	cgy	cgy
+59	signoff	signoff
+58	eMail	email
+58	yall	you
+58	reorg	reorganization
+55	cuz	because
+55	occuring	occurring
+54	tommorow	tommorrow
+53	i.e	i.e.
+53	st.	st.
+53	intra-day	intra-day
+52	teh	the
+52	inbox	box
+51	initialled	initialized
+51	socal	social
+51	mid-January	January
+50	focussed	focused
+50	ould	would
+49	roundtrip	trip
+47	intramonth	intramonth
+47	municipals	municipals
+46	powe	power
+46	goin	going
+45	non-regulated	regulated
+45	cross-default	cross-default
+45	i. e.	i.e.
+44	ive	I 've
+44	couldnt	could n't
+43	autorisation	authorisation
+43	([^ {}]+) = ation	$1ation
+43	transfered	transferred
+42	transitioning	transitioning
+42	pkgs	packages
+42	tks	thanks
+41	non-performance	performance
+41	nron	Enron
+41	non-discriminatory	discriminatory
+41	apt.	appartment
+41	non-payment	payment
+41	underscheduling	scheduling
+41	non-standard	standard
+41	committment	commitment
+40	p.m	PM
+40	eze	eze
+40	rebooked	booked
+40	webcast	webcast
+40	untill	until
+39	blacklines	lines
+39	nce	nce
+39	woul	would
+39	intra-month	intra-month
+39	bln	billion
+38	calcing	calcing
+38	usd	dollars
+38	calcs	calcs
+38	tomarrow	tomorrow
+38	s	's
+38	(\?+)(\!+)	?!
+38	(\?+)	?
+38	(\!+)	!

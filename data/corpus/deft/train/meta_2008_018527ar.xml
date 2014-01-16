@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc id="0349">
+ <motscles>
+  <nombre>5</nombre>
+  <mots>architecture lexicographique;multilinguisme;projets européens;terminographie;vocabulaire combinatoire</mots>
+ </motscles>
+ <article>
+  <resume>
+   <p>La concordance interlinguale de termes polylexicaux et syntagmatiques, communément appelés expressions, linguistiquement nommés collocations, phrasèmes terminologiques, termes phraséologiques ou encore phraséotermes, reste un problème crucial et bien connu de la traduction en langue de spécialité. Les sciences du risque se révèlent être un point de rencontre interdisciplinaire, de sorte que de hautes instances nationales (ministères) et des institutions internationales (l’Union européenne, le Conseil de l’Europe) s’investissent dans l’information, la formation et les interventions dans ce domaine. WIN (Wide Information Network for Risk Management) est l’un des trois projets intégrés soutenus par la Commission européenne (2004-2007), le multilinguisme restant sa priorité. La proposition linguistique ici présentée concerne un glossaire multilingue, dont l’architecture combine termino- et lexicographie : macrostructure onomasiologique, microstructure sémasiologique, médiostructure grammaticale et sémantique, ainsi que des définitions multiples de termes clés avec leurs collocations semi-automatiquement extraites d’un important corpus textuel, scientifique, administratif et journalistique. La législation de l’Europe et du globe privilégiant l’harmonisation terminologique, la découverte et la création de concordances interlinguales deviennent l’objectif majeur pour garantir la sécurité des vies, des biens et de l’environnement dans le monde. Pour cette raison, une extension à d’autres langues, d’autres pays et d’autres continents devient une nécessité afin de promouvoir autant la diffusion du savoir que les spécificités culturelles.</p>
+  </resume>
+  <corps>
+   <p>Que ce néologisme nous soit permis en réminiscence de l’article consacré aux collocations rythmologiques dans Meta 42-1 et ceci non seulement pour une raison de métrique. Depuis 1997, les recherches phraséologiques ont bien avancé dans le domaine des langues de spécialité où la médecine, les droits nationaux et européens, l’administration et l’économie ont revelé des aspects intéressants et innovants. C’est sans surprise que l’on constate que la perspective comparative reste le meilleur détecteur des phénomènes polylexicaux, figés et plus ou moins figurés, puisque, depuis Bar Hillel (1955), ce vocabulaire combinatoire figé se heurte à la traduction, de sorte qu’on trouve rarement par le transfert mot à mot hors situ des concordances plutôt que des équivalences interlangagières qui exigent l’extraction de textes authentiques. Sur les plans législatif et politique, la gestion du risque prend conscience de la dimension linguistique (Conseil d’État 2005) et, sur le plan international, les problèmes du risque réclament des solutions non seulement communicationnelles mais aussi traductologiques.</p>
+  <p>Hautement actuelles, les sciences du risque se dévoilent comme un domaine-carrefour. Les institutions européennes ouvrent la brèche au Conseil de l’Europe à Strasbourg, pionnier à travers ses réflexions et ses actions consacrées aux Accords des Risques Majeurs, signés par 25 pays du Sud, Ouest, Nord et Est européen, avec un fort ancrage méditerranéen. En 2004, la Commission européenne s’engage dans cette voie en soutenant dans son 6e programme de recherche-cadre les trois projets OASIS, ORCHESTRA et WIN, tous consacrés à la gestion du risque. Au coeur d’un seul projet (WIN : Wide Information Network for Risk Management) se situe un module linguistique qui, de ce fait, est souhaité fédérateur entre les trois projets en cours. Le linguiste se voit confirmé dans sa conviction de la nécessité de la formation et de l’information linguistiques pour les acteurs du monde. Le risque, tout comme la sécurité, des phénomènes particulièrement complexes, sujets d’étude des sciences exactes et humaines, transgressant les frontières entre sociétés, langues et pays, devastant ou protégeant les environnements, propriétés et vies humaines, se nichant dans l’incertitude mutant en probabilité, ces deux phéonomènes réclament une réflexion intellectuelle, une information civile, des équipements et opérations d’interventions dont l’exigence de perfection s’adresse aussi à la gestion linguistique du risque. Après les événements tragiques de l’Erika et de l’AFTZ, la prise de conscience en France est particulièrement aiguë. Ainsi, le Conseil d’État consacre les considérations générales de son Rapport public 2005 à « La responsabilité et socialisation du risque » et le ministère de l’Éducation nationale met la question du risque au programme du CAPES et de l’agrégation de géographie pour l’année 2005/2006.</p>
+  <p>Face à l’engouement scientifique et public ambiant en faveur du risque, on ne peut que regretter l’inadéquation terminologique des dictionnaires papier et électroniques de langue générale, d’une part, et l’adéquation lexicographique toute relative des nombreux glossaires électroniques du risque existants, d’autre part. En effet, si l’impact de la technologie est remarquable sur les méthodes de la gestion du risque en général (cf. SIG, télédétection) et sur les possibilités de la présentation lexico- et terminographique en particulier, p. ex. les logiciels d’extraction et de formatage, les glossaires résultants ne portent que rarement les traces des avancées théoriques des sciences du langage. Ainsi, convaincus par la nécessaire harmonisation interdisciplinaire des savoirs, un groupe de lexicographes, terminologues et textologues des Universités Strasbourg, Vienne, Chemnitz et Duisburg-Essen, ayant une expérience dans le traitement linguistique du risque, réunit depuis 2003 les actuels acquis des sciences du langage afin de capter dans son glossaire MULTH les résultats pertinents des sciences du risque.</p>
+  <p>Si la plupart des glossaires informatiques internationaux du risque restent au monolinguisme de l’anglais :</p>
+  <p>Risk : The propability of harmful consequences, or expected losses (deaths, injuries, property, livelihoods, economic activity disrupted or environment damaged) resulting from interactions between natural or human-induced hazards and vulnerable conditions » ;</p>
+  <p>Risk : The estimated probability that damage will occur to life, property, or the environment if a specified dangerous event occurs ;</p>
+  <p>et si, sur le plan national, les glossaires des institutions, des universités et des centres de recherche se produisent dans la langue de leur pays</p>
+  <p>Risiko : bezeichnet das Maß für die gefährdung, die von einer Tätigkeit oder einem Vorgang ausgeht. Das Risiko für eine Tätigkeit wird duch die Eintrittswahrscheinlichkeiten der möglichen Schadensereignbisse und der jeweiligen zugehörigen Schadensumfänge bestimmt ;</p>
+  <p>et joignent parfois les équivalents anglais pour devenir bilingues :</p>
+  <p>Risikomanagement : das systematische Management von Verwaltungsentscheidun- gen, Organisationen, operationalen Kompetenzen und Fähigkeiten, um politische Prozesse, Strategien und Bewältigungskapazitäten einer Gesellschaft oder Gemeinschaft zu implementieren, um die Auswirkung von Naturgefahren und ähnlichen Umwelt- und technologischen Katastrophen zu verringern. Dies beinhaltet alle Arten von Aktivitäten einschließlich technischen und nicht-technischen Maßnahmen, um negative Effekte von Gefahren zu vemeiden (vorbeugung) oder zu begrenzen (Schadenminderung und Vorbereitung auf Katastrophenfall)</p>
+  <p>Risk management : The systematic management of administrative decisions, organizations, operational skills and abilities, to implement policies, strategies and coping capacities of the societies and communities to lesson the impacts of natural hazards and related environmental and tchnological disasters. This comprises all forms of activities including structural and non-structural measures to avoid (prevention) or to limit (mitigation and preparedness) adverse effects of hazards),</p>
+  <p>MULTH défend une visée multilingue, actuellement cinq langues (anglais/ français/allemand/espagnol/roumain) pour la micro- et médiostructure des articles (entrée, definitions, termes et expressions en réseau) et souhaite l’extension au plus grand nombre de langues possible. De ce point de vue, MULTH était annonciateur des revendications publiques françaises et européennes actuelles en faveur de la diversité des langues et des cultures :</p>
+  <p></p>
+  <p>numérotée selon sa place dans la macrostructure conceptuelle</p>
+  <p></p>
+  <p></p>
+  <p>Graminfo</p>
+  <p>&lt;noun, sg, pl&gt;</p>
+  <p></p>
+  <p></p>
+  <p>Graminfo</p>
+  <p>&lt;nom, m, sg, pl&gt;</p>
+  <p></p>
+  <p></p>
+  <p>Graminfo</p>
+  <p>&lt;Nomen, N, Sg, Pl -en&gt;</p>
+  <p>Definition En</p>
+  <p>probability and extent of damage due to a particular cf. hazard (Loat et Meier 2003)</p>
+  <p>the estimated probability that damage will occur to life, property, or the environment if a specified dangerous event occurs (TESEC-EUR-OPA 2001)</p>
+  <p>the probability of harmful consequences, or expected losses (deaths, injuries, property, livelihoods, economic activity disrupted or environment damaged) resulting from interactions between natural or human-induced cf. hazards and vulnerable conditions (ISDR 2004)</p>
+  <p>Comment</p>
+  <p>1. the two definitions from ISDR (2004) and TESEC-EUR-OPA (2001) differ to a limited extent</p>
+  <p>2. conventionally risk is expressed by the notation</p>
+  <p>Risk = Hazards x Vulnerability of people, property, and the surrounding area ; some disciplines also include the concept of exposure to refer particularly to the physical aspects of cf. vulnerability</p>
+  <p>Beyond expressing a possibility of physical harm, it is crucial to recognize that risks are inherent or can be created or exist within social systems. It is important to consider the social contexts in which risks occur and that people therefore do not necessarily share the same perceptions of risk and their underlying causes</p>
+  <p>Definition Fr</p>
+  <p>Au sens large : Possibilité de survenance d’un dommage. Au sens restreint : Grandeur et probabilité d’occurrence d’un dommage possible.</p>
+  <p>EXP : exprimé comme le produit de l’aléa et de la vulnérabilité ; prend parfois la signification de « danger » dans certains termes complexes ou dans le langage courant. (Loat et Meier 2003)</p>
+  <p>Risque = aléa x vulnérabilité des personnes, des biens et de l’environnement</p>
+  <p>un risque est un péril mesurable dans son occurrence, menaçant des personnes, des biens, des activités ou l’environnement. Il survient généralement de façon inopinée. (PF)</p>
+  <p>Le risque est une mesure de l’occurrence d’un événement indésirable et/ou la mesure associée à ses effets et conséquences. (ASR)</p>
+  <p>Definition Ge</p>
+  <p>Risiko = Gefahr x Schadensanfâlligkeit von Personen, Gütern und der Umgebung.</p>
+  <p>Im weiteren Sinn : Möglichkeit, dass aus einem Zustand, Umstand oder Vorgang ein Schaden entstehen kann. Im engeren Sinn : Grösse und Wahrscheinlichkeit eines möglichen Schadens. (Loat/Meier2003)</p>
+  <p>Seminfo</p>
+  <p>risk (R)</p>
+  <p>BE [DANGER [DAMAGE [SOURCE=], DEGREE=], TARGET=], COSTS=] ]]</p>
+  <p>Si, par ailleurs, des définitions sont données par plusieurs des glossaires examinés, celles-ci se restreignent à une langue et une seule, sans tenir compte des diversités textuelles et culturelles qui témoignent de dégrés de specificité, de mentalités et de législations différents. MULTH, conscient de la vocation profondément sémantique de la définition, vise là encore des définitions multiples, propres aux communautés linguistiques représentées, suivies d’une synthèse comparative et explicative des idiosyncrasies rencontrées.</p>
+  <p>La spécification conceptuelle amorcée par la définition est complétée par la prise en compte de termes et d’expressions en réseau. Cet élargissement, loin d’être révolutionnaire en lexicographie générale, où la médiostructure des dictionnaires mono- et bilingues représentatifs se termine par les locutions relatives aux lemmata d’entrée, est néanmoins novateur pour la terminographie. Par ailleurs, les termes et expressions, qui représentent des collocations nominales, verbales, des énoncés figés et des instructions stéréotypées couvrent des liens conceptuels divers (syno-, homo-, hypero- et hyponymie) et constituent des réseaux notionnels en complément des définitions multiples et multilingues, toujours autour de risk / risque / Risiko :</p>
+  <p>&lt;nouns, noun phrases&gt;</p>
+  <p></p>
+  <p>cf risk awareness&lt;sg&gt; / cf perception&lt;f, sg&gt;, conscience&lt;f, sg&gt;du risque / cf</p>
+  <p></p>
+  <p>&lt;verb phrases&gt;</p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p>Quant aux termes mêmes, ils ne sont pas le résultat de réécritures, copies de dictionnaires existants, mais résultent de leur fréquence et de leur rôle clé, saisis par l’extraction de tri-corpora authentiques selon des estimations lexicométriques. Il s’agit d’une centaine de termes sur la gestion du risque en général et d’une centaine de termes propres aux domaines d’application et études de cas : le feu, les crues et la pollution d’hydrocarbures. Les publications scientifiques, juridiques et administratives révèlent le mot juste à travers l’usage. Les termes, extraits de leurs situations énonciatives sont saisis dans leur emploi vivant et, à la différence de la plupart des glossaires existants, sont loin de se limiter à des radicaux monolexicaux. Au contraire, la terminologie du risque est en très grande majorité le résultat de formations de mots et de nature polylexicale. Les termes recueillis dépassent la moyenne des 80 % de termes composés, que Goffin (1992) attribue aux langues de spécialité en général. La polymorphologie de cette terminologie s’étend des composés aux phrases au fort pouvoir pragmatique, lequel transforme les instructions figées en actes de parole. De ce fait, MULTH devient nécessairement un glossaire syntagmatique et phraséologique, et évoluera sur le chemin tracé par les intéressants travaux canadiens pionniers sur le vocabulaire combinatoire (Pavel et Boileau 1994 ; Mel’čuk 1996), afin de capter lexicographiquement les termes et les expressions du risque.</p>
+  <p>L’intégration des positions terminographiques dans l’architecture lexicographique de MULTH peut être considérée comme l’un des premiers objectifs atteints.</p>
+  <p>La macrostructure (cf. schéma 3) détermine la succession des articles et des chapitres du glossaire. Elle suit les phases décisives de la gestion du risque, définies dans les textes scientifiques et administratifs de référence dépouillés, et retenues dans le modèle-cadre de trois projets européens (WIN, ORCHESTRA, OASIS). Fil conducteur pour le travail des terminographes, elle peut passer inaperçue de l’usager, tout comme elle peut l’aider à la compréhension des événements et des opérations. Elle enrichit les connaissances en la matière et satisfaisait les attentes d’information de la part des usagers envers un dictionnaire actif autant que passif. Elle révèle des champs notionnels, des réseaux plus que des dépendances hiérarchiques, une organisation cognitive où la conceptualisation se fait par spécification progressive langagière, les éléments collocataires déterminant les collocateurs.</p>
+  <p>Pre-Event</p>
+  <p>A.</p>
+  <p>Risk assessment and Technology / évaluation du risque et technologie / Risikoabschätzung und Technologie</p>
+  <p>B.</p>
+  <p>Public awareness, planning, forecast and warning / conscience publique, planification, prévision et avertissement / öffentliches, allgemeines Bewußtsein, Planung, Vorhersage und Warnung</p>
+  <p>In-Events and response : equipments and operations</p>
+  <p>C0.</p>
+  <p>Events general / événements en général / Ereignisse allgemein</p>
+  <p>C1.</p>
+  <p>Fire and Firefighting / Incendies et Secours Incendie / Brand und Brandbekämpfung Feuerbekämpfung</p>
+  <p>C2.</p>
+  <p>Flood and flood rescue / Crue, inondation et protection contre les crues, inondations / Hochwasser und Hochwasserschutz</p>
+  <p>C3.</p>
+  <p>Oil spill and emergency equipments and operations / pollution d’hydrocarbure et équipements et opérations d’urgence / Ölverschmutzung, Noteinsatz und -geräte</p>
+  <p>Post-event</p>
+  <p>D.</p>
+  <p>Damamage assessment and recovery / analyse des dommages et réhabilitation / Schadensanalyse, -feststellung und Wiederherstellung</p>
+  <p>La microstructure (cf. Schémas 1 et 4) de chaque article énonce le terme en anglais, français et allemand, joint les informations grammaticales (graminfo) indispensables à l’emploi. Les catégorisations sont pragmatiquement orientées, non pas selon les classes de mots, mais selon les parties de discours, phrasèmes et actes de paroles. Les annotations morphosyntaxiques renseignent sur les limites du figement. Suivent des définitions plurielles du terme référencées dans les trois langues. Dans les cas intéressants, surtout divergeants au sein d’une langue ou entre les langues concernées, on introduit un commentaire comparatif. Les définitions dégagent bien les traits spécifiques qui contribuent à formuler en métalangue anglaise les informations sémantiques (seminfo) qui amorçent la médiostructure (cf. schéma 1 et 4). Cette configuration s’inspire de la valence logique propositionnelle, formalise le scénario en prédicats/foncteurs et arguments (Greciano 1991) et règle la compatibilité entre les arguments selon leurs rôles sémantiques respectifs. Cette analyse sémantique est la base pour deux extensions du glossaire annoncées, à savoir les visualisations ontologiques et hypertextuelles.</p>
+  <p>En médiostructure, la dimension sémantique est complétée encore par l’ajout de termes et d’expressions en ressemblance de famille, des synonymes parfois larges et des variantes, en liens rarement hiérarchiques, mais en réseaux avec le terme vedette (cf. Schéma 2). Sous le paragraphe « expressions du risque » s’ajoute toute la phraséologie relevée dans les textes thématiques vérifiés, regroupée selon les parties du discours plutôt que des classes de mots : les phrasèmes nominaux au service de la dénomination abondent, suivis des phrasèmes verbaux pour exprimer des états, procès et actions et des phrases, voire énoncés figés, des formules toutes faites servant d’actes de parole et d’instructions. La médiostructure reproduit le terme clé complété par ses solidarités lexicales, par d’autres termes et expressions (quasi) synonymes et variantes, de termes monolexicaux à des expressions polylexicales et des énoncés figés, dont l’usage est automatique et idiomatiques en situations de risque ; d’un point de vue sémantique, c’est la ressemblance de famille qui lie ces termes et collocations en complétant l’information sémantique définitoire et en contribuant à l’architecture conceptuelle. La prise en compte des termes en co(n)textes permet de jeter un pont vers le texte, ce qui rend ce glossaire combinatoire. L’intérêt de cette médiostructure pragmasémantique réside dans sa finalité pratique : aide à la communication, elle voue ce glossaire à être dictionnaire actif, destiné à la production de texte, à la rédaction dans chacune des langues et à la traduction de l’une à l’autre.</p>
+  <p>Le glossaire du risque dans son ensemble suit une structure d’information (cf. Schéma 4) qui réunit les parties index et glossaire. Dans l’index, chaque terme est présenté en ordre alphabétique, donc sémasiologique et numéroté selon sa place conceptuelle, donc onomasiologique dans le cycle de la gestion du risque, qui a fourni la macrostructure du glossaire dans son ensemble.</p>
+  <p>Le mutlilinguisme étant une priorité pour la gestion du risque, dont la langue s’épanouit dans la combinatoire qui, à son tour, pose les problèmes bien connus à la traduction, un effort particulier est demandé pour les résoudre. À ce propos, une digression s’impose, car le développement de la traduction avec ses exigences de qualité (Hermans 1995) est en relation étroite avec l’évolution des institutions européennes. Si le traité de Paris (1951) se contentait du monolinguisme francophone, le traité de Rome (1957) imposait le plurilinguisme et une réflexion sur la répartition entre langues officielles, langues pivot et langues de travail, qui ne fait que s’affiner depuis cette époque pionnière. Concernée par les contentieux internationaux dans les divers domaines de la vie professionnelle et privée, la Cour européenne de Justice a tout particulièrement contribué à la prise de conscience linguistique du problème. En effet, les conflits internationaux restent ancrés dans des lois rédigées dans des langues nationales, leurs termes et définitions notionelles et culturelles. De ce fait, l’arbitrage et l’harmonisation supranationale réclament nécessairement des interprétations et explications basées sur une linguistique comparée et une traductologie. Depuis 20 ans, Pescatore (1984 : 1001) exclut la prise en compte d’une version unilingue pour l’interprétation et l’application des droits européens et réclame les versions plurilingues comme base pour la méthode interprétative : « Les textes du Droit communautaire sont rédigés en plusieurs langues et toutes les versions plurilingues ont la même valeur juridique ; l’interprétation des décisions communautaires présuppose la comparaison entre versions plurilingues » (trad. de l’allemand GG).</p>
+  <p>La traductologie, branche contemporaine scientifique de la traduction, pratiquée en pays francophones, notamment en Belgique, au Canada, à Paris, en Suisse et en Tunisie, mise fort sur la réflexion et l’évolution autant philosophique (Ladmiral 2003) que pragmatique et technologique, combinant les dimensions cognitive et textuelle. MULTH, en tant que glossaire du risque, ses index et ses structures réunissant sémasiologie et onomasiologie s’inscrivent dans ce même mouvement. Le trait commun de la terminologie du risque dans les trois langues est sa combinatoire, dont l’impact conceptuel, pragmatique et contrastif a déjà été traité dans d’autres corpora de spécialité (Greciano 2002 ; 2004 ; 2005 ; 2006). On se concentrera ici, fidèle au sujet du présent recueil, sur le comportement d’une combinatoire figée dans le domaine du risque et on l’éclairera à travers la traduction. Le risque, à l’exemple des catastrophes naturelles, sanitaires et sociales d’une part, des solidarités et responsabilités d’autre part, transgressant les frontières des pays, des continents et des communautés linguistiques, la nature plurilingue de ses termes, textes et discours est l’une des priorités de la communication afférente.</p>
+  <p>Le texte constituant dorénavant la source première pour la dictionnairique (Auger et L’Homme 1994 ; Machova 1994), la terminologie multilingue a été extraite de textes des domaines scientifique, institutionnel et administratif. La traduction technique s’avère tout particulièrement tributaire de la dimension textuelle de la terminologie (Bühler 1993), de sa co(n)textualisation dans des communautés linguistiques et cultures différentes (Gerzymisch-Arbogast 1996). Les collocations alias phrasèmes terminologiques résultant de l’imbrication contextuelle ne se satisfont plus des équivalences et équations traditionnelles, mais appellent des compétences et interactions variées et multiples. Le risque s’avérant inhérent aux phénomènes naturels et à l’activité humaine, sa perception est devenue universelle et son expression langagière atteste un facteur de multiplication et une capacité d’adaptation extrêmes sur les plans du vocabulaire et des types de texte. Quant au corpus textuel, la méthode des bitextes (Hartmann 1994) a permis de compléter :</p>
+  <p>les textes parallèles où les concordances interlangagières sont relevées dans les textes portant sur le même thème et ayant la même fonction, à l’exemple des sciences et de la presse ; et</p>
+  <p>les textes paires, qui sont des textes couples créés par traduction, surtout des institutions et de l’administration.</p>
+  <p>Le corpus terminologique du risque frappe par sa polylexicalité qui dépasse les 80 % que Goffin (1992) reconnaît aux langues de spécialité en général. On peut emprunter au philosophe Habermas (1985) un outil conceptuel fort, le connexionisme, pour expliquer le phénomène : par contiguïté, les termes forment des composés, syntagmes, phrasèmes et énoncés pour dénommer des notions de plus en plus complexes et différenciées, enrichies par le progrès des connaissances et du savoir. Ainsi les termes clés, par exemple risk / risque/ Risiko, constituent la tête / la base / le collocateur d’un certain nombre de membres / les collocataires qui, en satellites, gravitent autour :</p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p>La tête resprésente le phénomène événementiel réel ou virtuel, les collocataires les procès, actions, états, localisations et propriétés qui spécifient, identifient et déterminent la base, la quantifient, la qualifient ; indépendamment de leurs différentes classes de mots, leur fonction est prédicative. Cette combinatoire contribue à la conceptualisation des termes clés par perspectivation, selon des informations de plus en plus précises. Le figement confirme leur normalisation à travers l’acceptation par une communauté de locuteurs experts et ordinaires. Bien qu’il s’agisse d’une contrainte pour l’apprentissage et l’usage, la combinatoire terminologique respecte les principes centrifuges vs centripètes des langues respectives et le figement garantit l’univocité et une compréhension à moindre coût pour la langue technique. La traduction de la combinatoire figée relève incontournablement du savoir linguistique. La phraséologie des langues de spécialité est actuellement le plus grand défi de la terminographie.</p>
+  <p>Les comparaisons interlangagières sont particulièrement intéressantes. Le corpus confirme les observations faites sans d’autres domaines de spécialité (Greciano 1996 ; 1997) : la distribution des constituants correspond fidèlement aux principes syntaxiques de chaque langue :</p>
+  <p>syntagmes en graphie discontinue avec collocateur anté- vs postposé en anglais et français : risk acceptance / acceptation du risque ; risk management / gestion du risque ;</p>
+  <p>compositions en graphie continue avec collocateur antéposé en allemand, tel l’anglais : Risikoakzeptanz, Risikomanagement.</p>
+  <p>Par ailleurs, la comparaison interlangagière relève une intéressante particularité de la combinatoire figée, à savoir des équivalences différentes entre les termes monolexicaux, et les collocations où ces têtes / bases sont constitutives de termes polylexicaux. Ainsi, on peut constater des concordances différentes entre les monotermes et les polytermes :</p>
+  <p></p>
+  <p></p>
+  <p>alors que catastrophe / Katastrophe représentent les concordants de disaster. Si les équivalences entre risque / risk / Risiko ne posent pas de problème, hazard, très idiomatique en anglais, correspond assez systématiquement à Gefahr en allemand et partage son emploi en français entre danger, aléa et risque. La terminologie du risque confirme aussi l’étymologie des langues respectives, la filiation lexicale entre le français et l’anglais facilite en retour les emprunts et laisse l’allemand à ses formations de mots du fonds germanique :</p>
+  <p>dégradation environmentale / environmental degradation / Umweltzerstörung</p>
+  <p>vulnérabilité / vulnerability / Anfälligkeit</p>
+  <p>analyse de vulnérabilité / vulnerability analysis / Verletzbarkeitsbewertung</p>
+  <p>Dans les trois langues se confirme le caractère actionniste, pragmatique de la terminologie combinatoire du risque, que le glossaire respecte dans sa catégorisation et ses annotations. Dans 75 % des phrasèmes nominaux, des noms prédicatifs sont figés au sein des syntagmes nominaux :</p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p>Des phrasèmes verbaux qui par définition expriment des procès et des actions représentent un nombre particulièrement important des collocations du risque que le glossaire regroupe sous l’appelation « expressions en réseaux » à la fin des articles respectifs :</p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p>Le figement le plus pertinent concerne les énoncés mêmes : définitions, routines, formules, moules avec fonction d’actes de parole, énoncés performatifs, instructions normatives et règles pragmatiques qui attendent compréhension et réaction immédiates et, de ce fait, ne tolèrent ni variantes ni transformations, et qui font que l’efficacité de l’aide d’urgence dépend de la tournure pertinente à l’heure H. Le glossaire les répertorie parmi les expressions figées à la fin des articles respectifs :</p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p></p>
+  <p>La « promotion des dictionnaires » et la « protection devant les catastrophes » étant deux engagements européens (OSCD, Helsinki 1975, projet de la Convention européenne, Bruxelles 2003), MULTH en appelle aux sciences du langage appliquées, travaille sur l’interaction entre langue, cognition et technologie pour pouvoir procéder au transfert multilingue de l’information sur la base d’une terminologie en contexte et en contraste au bénéfice de la compréhension entre experts, décideurs et citoyens. La traduction théorique et pratique y intervient doublement : elle y est à l’origine et elle en est le but. En absence de sources parallèles, elle génère le terme et le texte paire afin de permettre un transfert idiomatique dans les langues cibles recherchées. La linguistique de corpus, la lexicographie spécialisée et l’informatique permettent de créer un dictionnaire alternatif, conçu pour la compréhension, la rédaction et la traduction de textes spécialisés dans le domaine du risque, afin d’aider efficacement à la protection de la vie, de l’environnement et de la propriété de l’homme ; il s’agit bien d’un glossaire alternatif qui, quant à la combinatoire figée, ne réclame point la propriété intellectuelle, puisque selon Fonagy (1997, 157), spécialiste de la combinatoire en langue générale : « En guise d’encouragement, j’aimerais rappeler qu’on a rédigé des « formulaires » (glossaires de formules) bilingues à l’époque carolingienne (formulae marculfi) et des dictionnaires de « phrases » multilingues en Mésopotamie dès le deuxième millénaire avant notre ère. Il est plus que probable que les dictionnaires d’énoncés ont précédé les premières grammaires. » Pour conclure, il faut rappeler que, vu l’universalité du risque, il y a une contrainte réelle, voire une obligation morale, à l’extension du glossaire au plus grand nombre de langues possible. Depuis la perspective de la Grande Europe, l’aide à la communication du risque ne peut se limiter à trois communautés linguistiques de l’Europe de l’Ouest, mais l’intégration des langues de l’est et du sud de l’Europe s’impose. Une réorientation européenne en vue d’une plus grande sécurité et d’une plus grande protection des citoyens, des environnements et des patrimoines à travers la gestion mulitlingue du risque s’inscrit dans la vision ambitieuse pour la Grande Europe de M. Delors (2003, 9) :</p>
+  <p>Nous avons devant nous un projet exemplaire. Tout d’abord, cet élargissement vers l’Est doit être complété parallèlement par un renforcement des relations vers le Sud. L’Europe a deux grands voisins en dehors des États-Unis, au-delà de l’Atlantique ; ce sont, à l’Est, la Russie et ses voisins, et au Sud, la région méditerranéenne […]. La politique méditerranéenne de l’Europe revêt donc une importance extrême […]. C’est absolument nécessaire pour le devenir de ce large espace qui va de l’Irlande au Moyen-Orient. Nous ne devons pas oublier notre Sud.</p>
+  <p>Les auteurs de MULTH restent ouverts à tout projet d’élargissement terminographique.</p>
+   </corps>
+ </article>
+</doc>

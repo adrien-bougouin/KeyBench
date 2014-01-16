@@ -1,0 +1,41 @@
+6	n est pas	n' est pas
+6	il ni a	il n' y a
+6	ce n est	ce n' est
+4	ni a pas	n' y a pas
+4	c est bien	c' est bien
+4	a vous tous	à vous tous
+4	, c est	, c' est
+2	pour celà que	pour cela que
+2	pas envi de	pas envie de
+2	par le chu	par le CHU
+2	ni en a	n' y en a
+2	mé c vré	mais c' est vrai
+2	moi s' est	moi c' est
+2	j' ai ete	j' ai été
+2	il ni en	il n' y en
+2	et ce n	et ce n'
+2	et c est	et c' est
+2	cas ne ce	cas ne se
+2	au cas ou	au cas où
+0	ce coté la	ce côté là
+0	a se point	à ce point
+0	plu koi fer	plus quoi faire
+0	" j "	" j "
+0	" n "	" n "
+0	" l "	" l "
+0	" t "	" t "
+0	" d "	" d "
+0	" m "	" m "
+0	" D "	" D "
+0	" L "	" L "
+0	C' est ce	C' est ce
+0	c' est ce	c' est ce
+0	ça va ([^ ]{2,})é	ça va $1er
+0	des fois ou	des fois où
+0	(\d+) moi	des mois
+0	pourquoit u veu	pourquoi tu veux
+0	pourquoit u veut	pourquoi tu veux
+0	le faire ([^ ]{2,})é	le faire $1er
+0	comme d' hab	comme d' habitude
+0	come d' hab	comme d' habitude
+4	ni a pa	n' y a pas

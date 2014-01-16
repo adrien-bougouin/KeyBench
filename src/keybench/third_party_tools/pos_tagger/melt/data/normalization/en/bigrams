@@ -1,0 +1,18 @@
+0	\ n ''	\n ''
+0	wan na	want to
+0	i 've	I 've
+0	i 'm	I 'm
+0	i 'll	I 'll
+0	i 'd	I 'd
+0	with u	with you
+0	u will	you will
+0	It ; s	It 's
+0	gon na	going to
+0	ai n't	is n't
+0	Gon na	Going to
+0	Wan na	Want to
+0	Best Rgds	Best Regards
+0	best rgds	best regards
+0	([{}]{2,}) ([A-Za-z0-9\.]+) = 20	$1 $2
+0	([^=]) ([A-Za-z0-9\.]+) = 20	$1 $2
+0	i	I
