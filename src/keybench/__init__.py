@@ -1,3 +1,5 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
+import main
+import test
+
+from test import runTests
 

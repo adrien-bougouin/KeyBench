@@ -1,3 +1,3 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
+from keybench.main import model
+from keybench.main import exception
 

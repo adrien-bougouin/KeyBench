@@ -1,3 +1,2 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
+from keybench.main.model.textual_unit import KBTextualUnit
 
