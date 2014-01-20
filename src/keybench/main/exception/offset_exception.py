@@ -4,17 +4,18 @@ class KBOffsetException(Exception):
   unit within a given document.
   """
 
-  def __init__(self, message, document, textual_unit, offset):
-    """Constructor.
-
-    Args:
-      message: A C{string} message describing the occured error.
-      document: The C{string} identifier of the document for which the error
-        occured.
-      textual_unit: The C{string} representation of the textual unit for which
-        the error occured.
-      offset: The offset value (C{int)}) for which the error occured.
+  def __init__(self, offset, textual_unit, document, message):
     """
+    Args:
+      offset: The offset value (C{int)}) for which the exception occurred.
+      textual_unit: The C{string} representation of the textual unit for which
+        the exception occurred.
+      document: The C{string} identifier of the document for which the exception
+        occurred.
+      message: A C{string} message describing the occurred exception.
+    """
+
+    super(KBOffsetException, self).__init__()
 
     self._message = "Error with offset %d of '%s' from '%s': %s"%(offset,
                                                                  textual_unit,

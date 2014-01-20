@@ -23,7 +23,9 @@ class KBTextualUnit(object):
                tokens,
                lemmas,
                stems,
-               pos_tags,):
+               pos_tags):
+    super(KBTextualUnit, self).__init__()
+
     self._language = language
     self._normalized_form = normalized_form
     self._tokens = tokens
@@ -32,6 +34,18 @@ class KBTextualUnit(object):
     self._pos_tags = pos_tags
     self._seen_forms = {}
     self._offsets = {}
+
+  def __eq__(self, other):
+    return self._language == other._language \
+           and self._normalized_form == other._normalized_form \
+           and self._tokens == other._tokens \
+           and self._lemmas == other._lemmas \
+           and self._pos_tags == other._pos_tags \
+           and self._seen_forms == other._seen_forms \
+           and self._offsets == other._offsets
+
+  def __ne__(self, other):
+    return not self.__eq__(other)
 
   @property
   def language(self):
@@ -96,6 +110,10 @@ class KBTextualUnit(object):
         from the C{normalized_form} (case, spelling, abbreviation, etc.).
       document: The C{string} identifier of the document it appears in.
       offset: The C{int} position of the C{seen_form} within the C{document}.
+
+    Raises:
+      KBOffsetException: An exception occurred when the offset is already
+        recorded for the given document.
     """
 
     if document not in self._offsets:
@@ -109,10 +127,10 @@ class KBTextualUnit(object):
         self._seen_forms[document][seen_form] = []
       self._seen_forms[document][seen_form].append(offset)
     else:
-      raise exception.KBOffsetException("Already exists!",
-                                        document,
+      raise exception.KBOffsetException(offset,
                                         self._normalized_form,
-                                        offset)
+                                        document,
+                                        "Already exists!")
 
   def numberOfOccurrences(self, document):
     """Gives the number of time the textual unit appears within a given

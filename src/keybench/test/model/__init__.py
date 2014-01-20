@@ -1,1 +1,3 @@
-from keybench.test.model.textual_unit_test import KBTextualUnitTests
+from keybench.test.model.textual_unit_cluster_tests import KBTextualUnitClusterTests
+from keybench.test.model.textual_unit_tests import KBTextualUnitTests
+
