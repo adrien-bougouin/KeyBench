@@ -16,18 +16,20 @@ class KBTextualUnitClusterTests(unittest.TestCase):
     self.failUnless(self._tuc.centroid == None)
 
   def testAddTextualUnit(self):
-    tu1 = model.KBTextualUnit("fr",     # language
-                              "test",   # normalized form
-                              ["test"], # tokens
-                              ["test"], # lemmas
-                              ["test"], # stems
-                              ["N"])    # POS tags
-    tu2 = model.KBTextualUnit("fr",       # language
-                              "test2",    # normalized form
-                              ["test 2"], # tokens
-                              ["test 2"], # lemmas
-                              ["test 2"], # stems
-                              ["N"])      # POS tags
+    tu1 = model.KBTextualUnit("test-corpus",  # corpus name
+                              "fr",           # language
+                              "test",         # normalized form
+                              ["test"],       # tokens
+                              ["test"],       # lemmas
+                              ["test"],       # stems
+                              ["N"])          # POS tags
+    tu2 = model.KBTextualUnit("test-corpus",  # corpus name
+                              "fr",           # language
+                              "test2",        # normalized form
+                              ["test 2"],     # tokens
+                              ["test 2"],     # lemmas
+                              ["test 2"],     # stems
+                              ["N"])          # POS tags
 
     self._tuc.addTextualUnit(tu1)
     self._tuc.addTextualUnit(tu2)
@@ -36,18 +38,20 @@ class KBTextualUnitClusterTests(unittest.TestCase):
     self.failUnless(self._tuc.textual_units == [tu1, tu2])
 
   def testAddExistingTextualUnit(self):
-    tu1 = model.KBTextualUnit("fr",     # language
-                              "test",   # normalized form
-                              ["test"], # tokens
-                              ["test"], # lemmas
-                              ["test"], # stems
-                              ["N"])    # POS tags
-    tu2 = model.KBTextualUnit("fr",     # language
-                              "test",   # normalized form
-                              ["test"], # tokens
-                              ["test"], # lemmas
-                              ["test"], # stems
-                              ["N"])    # POS tags
+    tu1 = model.KBTextualUnit("test-corpus",  # corpus name
+                              "fr",           # language
+                              "test",         # normalized form
+                              ["test"],       # tokens
+                              ["test"],       # lemmas
+                              ["test"],       # stems
+                              ["N"])          # POS tags
+    tu2 = model.KBTextualUnit("test-corpus",  # corpus name
+                              "fr",           # language
+                              "test",         # normalized form
+                              ["test"],       # tokens
+                              ["test"],       # lemmas
+                              ["test"],       # stems
+                              ["N"])          # POS tags
 
     self._tuc.addTextualUnit(tu1)
 
@@ -55,12 +59,13 @@ class KBTextualUnitClusterTests(unittest.TestCase):
       self._tuc.addTextualUnit(tu2)
 
   def testSetCentroid(self):
-    tu = model.KBTextualUnit("fr",      # language
-                             "test",    # normalized form
-                             ["test"],  # tokens
-                             ["test"],  # lemmas
-                             ["test"],  # stems
-                             ["N"])     # POS tags
+    tu = model.KBTextualUnit("test-corpus",  # corpus name
+                             "fr",           # language
+                             "test",         # normalized form
+                             ["test"],       # tokens
+                             ["test"],       # lemmas
+                             ["test"],       # stems
+                             ["N"])          # POS tags
 
     self._tuc.addTextualUnit(tu)
     self._tuc.centroid = tu
@@ -68,12 +73,13 @@ class KBTextualUnitClusterTests(unittest.TestCase):
     self.failUnless(self._tuc.centroid == tu)
 
   def testSetWrongCentroid(self):
-    tu = model.KBTextualUnit("fr",      # language
-                             "test",    # normalized form
-                             ["test"],  # tokens
-                             ["test"],  # lemmas
-                             ["test"],  # stems
-                             ["N"])     # POS tags
+    tu = model.KBTextualUnit("test-corpus",  # corpus name
+                             "fr",           # language
+                             "test",         # normalized form
+                             ["test"],       # tokens
+                             ["test"],       # lemmas
+                             ["test"],       # stems
+                             ["N"])          # POS tags
 
     with self.assertRaises(exception.KBTextualUnitClusterException):
       self._tuc.centroid = tu
@@ -82,24 +88,27 @@ class KBTextualUnitClusterTests(unittest.TestCase):
     tuc1 = model.KBTextualUnitCluster()
     tuc2 = model.KBTextualUnitCluster()
     tuc3 = model.KBTextualUnitCluster()
-    tu1 = model.KBTextualUnit("fr",     # language
-                              "test",   # normalized form
-                              ["test"], # tokens
-                              ["test"], # lemmas
-                              ["test"], # stems
-                              ["N"])    # POS tags
-    tu2 = model.KBTextualUnit("fr",       # language
-                              "test2",    # normalized form
-                              ["test 2"], # tokens
-                              ["test 2"], # lemmas
-                              ["test 2"], # stems
-                              ["N"])      # POS tags
-    tu3 = model.KBTextualUnit("en",     # language
-                              "test",   # normalized form
-                              ["test"], # tokens
-                              ["test"], # lemmas
-                              ["test"], # stems
-                              ["N"])    # POS tags
+    tu1 = model.KBTextualUnit("test-corpus",  # corpus name
+                              "fr",           # language
+                              "test",         # normalized form
+                              ["test"],       # tokens
+                              ["test"],       # lemmas
+                              ["test"],       # stems
+                              ["N"])          # POS tags
+    tu2 = model.KBTextualUnit("test-corpus",  # corpus name
+                              "fr",           # language
+                              "test2",        # normalized form
+                              ["test 2"],     # tokens
+                              ["test 2"],     # lemmas
+                              ["test 2"],     # stems
+                              ["N"])          # POS tags
+    tu3 = model.KBTextualUnit("test-corpus2", # corpus name
+                              "fr",           # language
+                              "test",         # normalized form
+                              ["test"],       # tokens
+                              ["test"],       # lemmas
+                              ["test"],       # stems
+                              ["N"])          # POS tags
 
     self._tuc.addTextualUnit(tu1)
     self._tuc.addTextualUnit(tu2)
@@ -121,24 +130,27 @@ class KBTextualUnitClusterTests(unittest.TestCase):
     tuc1 = model.KBTextualUnitCluster()
     tuc2 = model.KBTextualUnitCluster()
     tuc3 = model.KBTextualUnitCluster()
-    tu1 = model.KBTextualUnit("fr",     # language
-                              "test",   # normalized form
-                              ["test"], # tokens
-                              ["test"], # lemmas
-                              ["test"], # stems
-                              ["N"])    # POS tags
-    tu2 = model.KBTextualUnit("fr",       # language
-                              "test2",    # normalized form
-                              ["test 2"], # tokens
-                              ["test 2"], # lemmas
-                              ["test 2"], # stems
-                              ["N"])      # POS tags
-    tu3 = model.KBTextualUnit("en",     # language
-                              "test",   # normalized form
-                              ["test"], # tokens
-                              ["test"], # lemmas
-                              ["test"], # stems
-                              ["N"])    # POS tags
+    tu1 = model.KBTextualUnit("test-corpus",  # corpus name
+                              "fr",           # language
+                              "test",         # normalized form
+                              ["test"],       # tokens
+                              ["test"],       # lemmas
+                              ["test"],       # stems
+                              ["N"])          # POS tags
+    tu2 = model.KBTextualUnit("test-corpus",  # corpus name
+                              "fr",           # language
+                              "test2",        # normalized form
+                              ["test 2"],     # tokens
+                              ["test 2"],     # lemmas
+                              ["test 2"],     # stems
+                              ["N"])          # POS tags
+    tu3 = model.KBTextualUnit("test-corpus2", # corpus name
+                              "fr",           # language
+                              "test",         # normalized form
+                              ["test"],       # tokens
+                              ["test"],       # lemmas
+                              ["test"],       # stems
+                              ["N"])          # POS tags
 
     self._tuc.addTextualUnit(tu1)
     self._tuc.addTextualUnit(tu2)

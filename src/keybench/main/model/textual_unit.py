@@ -9,6 +9,8 @@ class KBTextualUnit(object):
   which the textual unit appears.
 
   Attributes:
+    corpus_name; The C{string} name of the corpus from which the textual unit is
+      extracted.
     language: The C{string} name of the textual unit's language.
     normalized_form: The most generic C{string} form of the textual unit.
     tokens: The C{list} of the textual unit's tokens.
@@ -18,6 +20,7 @@ class KBTextualUnit(object):
   """
 
   def __init__(self,
+               corpus_name,
                language,
                normalized_form,
                tokens,
@@ -26,6 +29,7 @@ class KBTextualUnit(object):
                pos_tags):
     super(KBTextualUnit, self).__init__()
 
+    self._corpus_name = corpus_name
     self._language = language
     self._normalized_form = normalized_form
     self._tokens = tokens
@@ -36,7 +40,8 @@ class KBTextualUnit(object):
     self._offsets = {}
 
   def __eq__(self, other):
-    return self._language == other._language \
+    return self._corpus_name == other.corpus_name \
+           and self._language == other._language \
            and self._normalized_form == other._normalized_form \
            and self._tokens == other._tokens \
            and self._lemmas == other._lemmas \
@@ -46,6 +51,10 @@ class KBTextualUnit(object):
 
   def __ne__(self, other):
     return not self.__eq__(other)
+
+  @property
+  def corpus_name(self):
+    return self._corpus_name
 
   @property
   def language(self):

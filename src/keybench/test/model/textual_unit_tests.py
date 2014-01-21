@@ -6,17 +6,19 @@ from keybench.main import model
 class KBTextualUnitTests(unittest.TestCase):
 
   def setUp(self):
-    self._tu = model.KBTextualUnit("fr",      # language
-                                   "test",    # normalized form
-                                   ["test"],  # tokens
-                                   ["test"],  # lemmas
-                                   ["test"],  # stems
-                                   ["N"])     # POS tags
+    self._tu = model.KBTextualUnit("test-corpus", # corpus name
+                                   "fr",          # language
+                                   "test",        # normalized form
+                                   ["test"],      # tokens
+                                   ["test"],      # lemmas
+                                   ["test"],      # stems
+                                   ["N"])         # POS tags
 
   def tearDown(self):
     self._tu = None
 
   def testInitialization(self):
+    self.failUnless(self._tu.corpus_name == "test-corpus")
     self.failUnless(self._tu.language == "fr")
     self.failUnless(self._tu.normalized_form == "test")
     self.failUnless(self._tu.tokens == ["test"])
@@ -59,48 +61,54 @@ class KBTextualUnitTests(unittest.TestCase):
       self._tu.addOccurrence("Test", "test_document", 10)
 
   def testEqual(self):
-    tu1 = model.KBTextualUnit("fr",     # language
-                              "test",   # normalized form
-                              ["test"], # tokens
-                              ["test"], # lemmas
-                              ["test"], # stems
-                              ["N"])    # POS tags
-    tu2 = model.KBTextualUnit("fr",       # language
-                              "test2",    # normalized form
-                              ["test 2"], # tokens
-                              ["test 2"], # lemmas
-                              ["test 2"], # stems
-                              ["N"])      # POS tags
-    tu3 = model.KBTextualUnit("fr",     # language
-                              "test ",  # normalized form
-                              ["test"], # tokens
-                              ["test"], # lemmas
-                              ["test"], # stems
-                              ["N"])    # POS tags
+    tu1 = model.KBTextualUnit("test-corpus",  # corpus name
+                              "fr",           # language
+                              "test",         # normalized form
+                              ["test"],       # tokens
+                              ["test"],       # lemmas
+                              ["test"],       # stems
+                              ["N"])          # POS tags
+    tu2 = model.KBTextualUnit("test-corpus",  # corpus name
+                              "fr",           # language
+                              "test2",        # normalized form
+                              ["test 2"],     # tokens
+                              ["test 2"],     # lemmas
+                              ["test 2"],     # stems
+                              ["N"])          # POS tags
+    tu3 = model.KBTextualUnit("test-corpus2", # corpus name
+                              "fr",           # language
+                              "test",         # normalized form
+                              ["test"],       # tokens
+                              ["test"],       # lemmas
+                              ["test"],       # stems
+                              ["N"])          # POS tags
 
     self.failUnless(self._tu == tu1)
     self.failIf(self._tu == tu2)
     self.failIf(self._tu == tu3)
 
   def testNotEqual(self):
-    tu1 = model.KBTextualUnit("fr",     # language
-                              "test",   # normalized form
-                              ["test"], # tokens
-                              ["test"], # lemmas
-                              ["test"], # stems
-                              ["N"])    # POS tags
-    tu2 = model.KBTextualUnit("fr",       # language
-                              "test2",    # normalized form
-                              ["test 2"], # tokens
-                              ["test 2"], # lemmas
-                              ["test 2"], # stems
-                              ["N"])      # POS tags
-    tu3 = model.KBTextualUnit("fr",     # language
-                              "test ",  # normalized form
-                              ["test"], # tokens
-                              ["test"], # lemmas
-                              ["test"], # stems
-                              ["N"])    # POS tags
+    tu1 = model.KBTextualUnit("test-corpus",  # corpus name
+                              "fr",           # language
+                              "test",         # normalized form
+                              ["test"],       # tokens
+                              ["test"],       # lemmas
+                              ["test"],       # stems
+                              ["N"])          # POS tags
+    tu2 = model.KBTextualUnit("test-corpus",  # corpus name
+                              "fr",           # language
+                              "test2",        # normalized form
+                              ["test 2"],     # tokens
+                              ["test 2"],     # lemmas
+                              ["test 2"],     # stems
+                              ["N"])          # POS tags
+    tu3 = model.KBTextualUnit("test-corpus2", # corpus name
+                              "fr",           # language
+                              "test",         # normalized form
+                              ["test"],       # tokens
+                              ["test"],       # lemmas
+                              ["test"],       # stems
+                              ["N"])          # POS tags
 
     self.failIf(self._tu != tu1)
     self.failUnless(self._tu != tu2)
