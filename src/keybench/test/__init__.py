@@ -1,5 +1,6 @@
 import unittest
 
+from keybench.test import core
 from keybench.test import model
 
 def runTests():
@@ -7,6 +8,7 @@ def runTests():
   testSuite = unittest.TestSuite()
 
   # adds tests from the keybench test modules
+  testSuite.addTests(testLoader.loadTestsFromModule(core))
   testSuite.addTests(testLoader.loadTestsFromModule(model))
 
   # executes all the tests
