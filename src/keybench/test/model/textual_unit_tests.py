@@ -26,40 +26,6 @@ class KBTextualUnitTests(unittest.TestCase):
     self.failUnless(self._tu.stems == ["test"])
     self.failUnless(self._tu.pos_tags == ["N"])
 
-  def testAddOccurrence(self):
-    self._tu.addOccurrence("Test",          # seen form
-                           "test_document", # document in which it appears
-                           10)              # offset
-    self._tu.addOccurrence("Test",                  # seen form
-                           "second_test_document",  # document in which it
-                                                    # appears
-                           3)                       # offset
-    self._tu.addOccurrence("test",          # seen form
-                           "test_document", # document in which it appears
-                           42)              # offset
-    self._tu.addOccurrence("Test",          # seen form
-                           "test_document", # document in which it appears
-                           37)              # offset
-    self.failUnless(self._tu.offsets("test_document") == [10, 42, 37])
-    self.failUnless(self._tu.offsets("second_test_document") == [3])
-    self.failUnless(self._tu.seen_forms("test_document") == [("Test", [10, 37]),
-                                                            ("test", [42])])
-    self.failUnless(self._tu.seen_forms("second_test_document") == [("Test",
-                                                                     [3])])
-
-    self.failUnless(self._tu.numberOfOccurrences("test_document") == 3)
-    self.failUnless(self._tu.numberOfOccurrences("second_test_document") == 1)
-    self.failUnless(self._tu.numberOfDocuments() == 2)
-
-  def testAddExistingOccurrence(self):
-    self._tu.addOccurrence("Test",          # seen form
-                           "test_document", # document in which it appears
-                           10)              # offset
-
-    # same offsets are not allowed for the same textual unit
-    with self.assertRaises(exception.KBOffsetException):
-      self._tu.addOccurrence("Test", "test_document", 10)
-
   def testEqual(self):
     tu1 = model.KBTextualUnit("test-corpus",  # corpus name
                               "fr",           # language
@@ -113,4 +79,38 @@ class KBTextualUnitTests(unittest.TestCase):
     self.failIf(self._tu != tu1)
     self.failUnless(self._tu != tu2)
     self.failUnless(self._tu != tu3)
+
+  def testAddOccurrence(self):
+    self._tu.addOccurrence("Test",          # seen form
+                           "test_document", # document in which it appears
+                           10)              # offset
+    self._tu.addOccurrence("Test",                  # seen form
+                           "second_test_document",  # document in which it
+                                                    # appears
+                           3)                       # offset
+    self._tu.addOccurrence("test",          # seen form
+                           "test_document", # document in which it appears
+                           42)              # offset
+    self._tu.addOccurrence("Test",          # seen form
+                           "test_document", # document in which it appears
+                           37)              # offset
+    self.failUnless(self._tu.offsets("test_document") == [10, 42, 37])
+    self.failUnless(self._tu.offsets("second_test_document") == [3])
+    self.failUnless(self._tu.seen_forms("test_document") == [("Test", [10, 37]),
+                                                            ("test", [42])])
+    self.failUnless(self._tu.seen_forms("second_test_document") == [("Test",
+                                                                     [3])])
+
+    self.failUnless(self._tu.numberOfOccurrences("test_document") == 3)
+    self.failUnless(self._tu.numberOfOccurrences("second_test_document") == 1)
+    self.failUnless(self._tu.numberOfDocuments() == 2)
+
+  def testAddExistingOccurrence(self):
+    self._tu.addOccurrence("Test",          # seen form
+                           "test_document", # document in which it appears
+                           10)              # offset
+
+    # same offsets are not allowed for the same textual unit
+    with self.assertRaises(exception.KBOffsetException):
+      self._tu.addOccurrence("Test", "test_document", 10)
 

@@ -1,9 +1,9 @@
-import main.component
-import main.core
-import main.exception
-import main.factory
-import main.model
-import main.nlp_tool
+from main import component
+from main import core
+from main import exception
+from main import factory
+from main import model
+from main import nlp_tool
 
 from test import runTests
 
