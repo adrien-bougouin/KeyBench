@@ -1,15 +1,46 @@
+import codecs
 import os
 import pickle
 
+from exceptions import NotImplementedError
 from os import path
 
 from keybench.main import exception
 
 class KBCacheManager(object):
-  """
+  """A tool to manage object into cache.
+
+  A tool that stores objects into a cache directory. Objects can be stored using
+  either C{pickle} or a string parser (C{CacheParserI}).
 
   Attributes:
+    cache_directory: The C{string} path to the directory where the cached
+      objects must be stored.
   """
+  
+  ##############################################################################
+  class CacheParserI(object):
+    """An C{object} to C{string} and C{string} to C{object} converter.
+    """
+
+    def toString(self, obj):
+      """Represents a given object as a string.
+
+      Args:
+        obj: The C{object} to convert as a C{string}.
+      """
+
+      raise NotImplementedError()
+
+    def fromString(self, obj_string):
+      """Parses a string to produce the represented object.
+
+      Args:
+        obj_string: The C{string} representation of an C{object}.
+      """
+
+      raise NotImplementedError()
+  ##############################################################################
 
   def __init__(self, cache_directory):
     super(KBCacheManager, self).__init__()
@@ -30,13 +61,25 @@ class KBCacheManager(object):
     return self._cache_directory
 
   def exists(self, identifier):
-    """
+    """Checks if an object as been cached using a given identifier.
+
+    Args:
+      identifier: A unique C{string} used to identify a cached C{object}.
+
+    Returns:
+      True if an C{object} is cached using the C{identifier}. False, otherwise.
     """
 
     return path.exists(path.join(self._cache_directory, identifier))
 
   def store(self, identifier, obj):
-    """
+    """Puts an object into cache.
+
+    Stores an object within the cache directory using a given identifier.
+
+    Args:
+      identifier: The C{string} identifier representing the C{object} to store.
+      obj: The C{object} to store into the C{cache_directory}.
     """
 
     filepath = path.join(self._cache_directory, identifier)
@@ -44,17 +87,38 @@ class KBCacheManager(object):
     with open(filepath, "w") as cache_file:
       pickle.dump(obj, cache_file)
 
-  def storeString(self, identifier, obj, parser):
-    """
+  def storeString(self, identifier, obj, parser, encoding):
+    """Puts an object into cache.
+
+    Stores an object within the cache directory using a given identifier. The
+    object is converted as a string.
+
+    Args:
+      identifier: The C{string} identifier representing the C{object} to store.
+      obj: The C{object} to store into the C{cache_directory}.
+      parser: The C{CacheParserI} parser to use for the C{string} convertion.
+      encoding: The C{string} encoding of the stringified C{object}.
     """
 
-    # TODO
-    pass
+    filepath = path.join(self._cache_directory, identifier)
 
-  # TODO exception
+    with codecs.open(filepath, "w", encoding) as cache_file:
+      cache_file.write(parser.toString(obj))
+
   def load(self, identifier):
-    """
+    """Gives an object stored in cache.
+
+    Gives an object stored within the C{cache_directory}.
+
+    Args:
+      identifier: The C{string} identifier representing the C{object} to load.
+
+    Returns:
+      The C{object} stored for the given C{identifier}.
+
     Raises:
+      KBCacheException: An exception occurred when there is no C{object} stored
+        for the given C{identifier}.
     """
 
     if self.exists(identifier):
@@ -70,12 +134,36 @@ class KBCacheManager(object):
                                        identifier,
                                        "Identifier does not exists!")
 
-  # TODO exception
-  def loadFromString(self, identifier, parser):
-    """
-    Raises
+  def loadFromString(self, identifier, parser, encoding):
+    """Gives an object stored in cache.
+
+    Gives an object stored within the C{cache_directory}. The object is stored
+    as a string representation.
+
+    Args:
+      identifier: The C{string} identifier representing the C{object} to load.
+      parser: The C{CacheParserI} parser to use to create an C{object}
+        represented by a C{string}.
+      encoding: The C{string} encoding of the stringified C{object}.
+
+    Returns:
+      The C{object} stored for the given C{identifier}.
+
+    Raises:
+      KBCacheException: An exception occurred when there is no C{object} stored
+        for the given C{identifier}.
     """
 
-    # TODO
-    pass
+    if self.exists(identifier):
+      filepath = path.join(self._cache_directory, identifier)
+      cached_object = None
+
+      with codecs.open(filepath, "r", encoding) as cached_file:
+        cached_object = parser.fromString(cached_file.read())
+
+      return cached_object
+    else:
+      raise exception.KBCacheException(self._cache_directory,
+                                       identifier,
+                                       "Identifier does not exists!")
 

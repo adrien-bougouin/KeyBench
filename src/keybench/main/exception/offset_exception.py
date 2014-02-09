@@ -1,7 +1,7 @@
 
 class KBOffsetException(Exception):
-  """Exception triggered when an unexpected offset is found for a given textual
-  unit within a given document.
+  """An exception triggered when an unexpected offset is found for a given
+    textual unit within a given document.
   """
 
   def __init__(self, offset, textual_unit, document, message):

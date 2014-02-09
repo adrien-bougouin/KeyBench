@@ -9,7 +9,7 @@ class KBTextualUnit(object):
   which the textual unit appears.
 
   Attributes:
-    corpus_name; The C{string} name of the corpus from which the textual unit is
+    corpus_name: The C{string} name of the corpus from which the textual unit is
       extracted.
     language: The C{string} name of the textual unit's language.
     normalized_form: The most generic C{string} form of the textual unit.

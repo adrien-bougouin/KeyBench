@@ -53,6 +53,7 @@ class KBTextualUnitCluster(object):
 
     Args:
       textual_unit: The C{KBTextualUnit} to add to the clusters.
+
     Raises:
       KBTextualUnitCluster: An exception occurred when the C{textual_unit} that
         is given already exists in the cluster.

@@ -1,5 +1,5 @@
 class KBTextualUnitClusterException(Exception):
-  """Exception triggered when an error occurres while modifying a cluster of
+  """An exception triggered when an error occurres while modifying a cluster of
   textual units.
   """
 
