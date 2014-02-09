@@ -37,6 +37,9 @@ class KBCacheManager(object):
 
       Args:
         obj_string: The C{string} representation of an C{object}.
+
+      Returns:
+        The C{object} represented by the C{obj_string} C{string}.
       """
 
       raise NotImplementedError()
