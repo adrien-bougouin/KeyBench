@@ -1,1 +1,1 @@
-from keybench.test.component.component import KBComponentTests
+from keybench.test.component.component_tests import KBComponentTests
