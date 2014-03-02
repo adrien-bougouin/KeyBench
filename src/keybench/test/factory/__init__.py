@@ -1,0 +1,2 @@
+from keybench.test.factory.component_factory_tests import KBComponentFactoryTests
+
