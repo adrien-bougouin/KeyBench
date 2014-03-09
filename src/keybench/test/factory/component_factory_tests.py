@@ -47,32 +47,22 @@ class KBComponentFactoryTests(unittest.TestCase):
     self.failIf(self._config != config1)
     self.failUnless(self._config != config2)
 
-  # TODO complete after component interface creation
-  def testRightCongifurationCreation(self):
-    self.failUnless(False)
+  def testModification(self):
+    self._config.document_builders = "Dummy document builder"
+    self._config.corpus_builders = "Dummy corpus builder"
+    self._config.candidate_extractor = "Dummy candidate extractor"
+    self._config.candidate_clusterer = "Dummy candidate clusterer"
+    self._config.candidate_ranker = "Dummy candidate ranker"
+    self._config.candidate_classifier = "Dummy  candidate classifier"
+    self._config.keyphrase_extractor = "Dummy keyphrase extractor"
+    self._config.keyphrase_consumers = "Dummy keyphrase consumers"
 
-  # TODO should after component interface creation
-  def testWrongCongifurationCreation(self):
-    with self.assertRaises(exception.KBConfigurationException):
-      self._config.document_builders = "Wrong document builder"
-    with self.assertRaises(exception.KBConfigurationException):
-     self._config.document_builders = {"Wrong document builder": "Told you!"}
-    with self.assertRaises(exception.KBConfigurationException):
-      self._config.corpus_builders = "Wrong corpus builder"
-    with self.assertRaises(exception.KBConfigurationException):
-      self._config.corpus_builders = ["Wrong corpus builder"]
-    with self.assertRaises(exception.KBConfigurationException):
-      self._config.candidate_extractor = "Wrong candidate extractor"
-    with self.assertRaises(exception.KBConfigurationException):
-      self._config.candidate_clusterer = "Wrong candidate clusterer"
-    with self.assertRaises(exception.KBConfigurationException):
-      self._config.candidate_ranker = "Wrong candidate ranker"
-    with self.assertRaises(exception.KBConfigurationException):
-      self._config.candidate_classifier = "Wrong  candidate classifier"
-    with self.assertRaises(exception.KBConfigurationException):
-      self._config.keyphrase_extractor = "Wrong keyphrase extractor"
-    with self.assertRaises(exception.KBConfigurationException):
-      self._config.keyphrase_consumers = "Wrong keyphrase consumers"
-    with self.assertRaises(exception.KBConfigurationException):
-      self._config.keyphrase_consumers = ["Wrong keyphrase consumers"]
+    self.failUnless(self._config.document_builders == "Dummy document builder")
+    self.failUnless(self._config.corpus_builders == "Dummy corpus builder")
+    self.failUnless(self._config.candidate_extractor == "Dummy candidate extractor")
+    self.failUnless(self._config.candidate_clusterer == "Dummy candidate clusterer")
+    self.failUnless(self._config.candidate_ranker == "Dummy candidate ranker")
+    self.failUnless(self._config.candidate_classifier == "Dummy  candidate classifier")
+    self.failUnless(self._config.keyphrase_extractor == "Dummy keyphrase extractor")
+    self.failUnless(self._config.keyphrase_consumers == "Dummy keyphrase consumers")
 

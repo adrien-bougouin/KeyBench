@@ -8,9 +8,10 @@ class KBComponentFactory(object):
 
   Attributes:
     document_builder: The C{KBDocumentBuilderI} components responsible of the
-      creation of C{KBDocument}s, associated to one specific corpus.
+      creation of C{KBDocument}s, associated to one specific corpus (C{map} of
+      C{string} name keys and C{KBDocumentBuilderI} values).
     corpus_builders: The C{KBDocumentBuilder} components responsible of the
-      creation of specific corpora.
+      creation of specific corpora (C{list} of C{KBDocumentBuilder}).
     candidate_extractor: The C{KBCandidateExtractorI} component responsible of
       the extraction of C{KBTextualUnit} candidates.
     candidate_clusterer: The C{KBCandidateClustererI} component responsible of
@@ -22,7 +23,7 @@ class KBComponentFactory(object):
     keyphrase_extractor: The C{KBKeyphraseExtractorI} component responsible of
       the extraction of keyphrases among C{KBTextualUnit} candidates.
     keyphrase_consumers: The C{KBKeyphraseConsumer} componets that makes usage
-      of the extracted C{KBTextualUnit} keyphrases.
+      of the extracted C{KBTextualUnit} keyphrases (C{list} of C{KBKeyphraseConsumerI}).
   """
 
   def __init__(self):
@@ -79,12 +80,6 @@ class KBComponentFactory(object):
 
   @document_builders.setter
   def document_builders(self, value):
-    if value.__class__.__name__ != "dict":
-      raise exception.KBConfigurationException(self,
-                                               "Putting %s instead of %s!"%(
-                                                 value.__class__.__name__,
-                                                 "dict"
-                                               ))
     self._document_builders = value
 
   @property
@@ -96,12 +91,6 @@ class KBComponentFactory(object):
 
   @corpus_builders.setter
   def corpus_builders(self, value):
-    if value.__class__.__name__ != "list":
-      raise exception.KBConfigurationException(self,
-                                               "Putting %s instead of %s!"%(
-                                                 value.__class__.__name__,
-                                                 "list"
-                                               ))
     self._corpus_builders = value
 
   @property
@@ -168,11 +157,5 @@ class KBComponentFactory(object):
 
   @keyphrase_consumers.setter
   def keyphrase_consumers(self, value):
-    if value.__class__.__name__ != "list":
-      raise exception.KBConfigurationException(self,
-                                               "Putting %s instead of %s!"%(
-                                                 value.__class__.__name__,
-                                                 "list"
-                                               ))
     self._keyphrase_consumers = value
 
