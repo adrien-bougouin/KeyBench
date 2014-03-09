@@ -25,9 +25,9 @@ class KBComponentFactoryTests(unittest.TestCase):
     with self.assertRaises(exception.KBConfigurationException):
       self._config.candidate_classifier
     with self.assertRaises(exception.KBConfigurationException):
-      self._config.candidate_extractor
+      self._config.keyphrase_extractor
     with self.assertRaises(exception.KBConfigurationException):
-      self._config.keyphrase_consumer
+      self._config.keyphrase_consumers
 
   def testEqual(self):
     config1 = factory.KBComponentFactory()
@@ -70,7 +70,9 @@ class KBComponentFactoryTests(unittest.TestCase):
     with self.assertRaises(exception.KBConfigurationException):
       self._config.candidate_classifier = "Wrong  candidate classifier"
     with self.assertRaises(exception.KBConfigurationException):
-      self._config.candidate_extractor = "Wrong candidate extractor"
+      self._config.keyphrase_extractor = "Wrong keyphrase extractor"
     with self.assertRaises(exception.KBConfigurationException):
-      self._config.keyphrase_consumer = "Wrong keyphrase consumer"
+      self._config.keyphrase_consumers = "Wrong keyphrase consumers"
+    with self.assertRaises(exception.KBConfigurationException):
+      self._config.keyphrase_consumers = ["Wrong keyphrase consumers"]
 
