@@ -9,6 +9,10 @@ class KBBenchmark(object):
   Attributes:
     run_configurations: The run configurations (C{map} of C{string} name keys
       and C{KBComponentFactory} values).
+    run_tools: The NLP tools to use in each run (C{map} of C{string} name keys
+      and C{KBNLPToolFactory} values).
+    run_resources: The NLP resources to use in each run (C{map} of C{string}
+      name keys and C{KBNLPToolFactory} values).
   """
 
   __singleton_instance = None
@@ -23,6 +27,8 @@ class KBBenchmark(object):
     super(KBBenchmark, self).__init__()
 
     self._run_configurations = {}
+    self._run_tools = {}
+    self._run_resources = {}
 
   @property
   def run_configurations(self):
@@ -31,6 +37,22 @@ class KBBenchmark(object):
   @run_configurations.setter
   def run_configurations(self, value):
     self._run_configurations = value
+
+  @property
+  def run_tools(self):
+    return self._run_tools
+
+  @run_tools.setter
+  def run_tools(self, value):
+    self._run_tools = value
+
+  @property
+  def run_resources(self):
+    return self._run_resources
+
+  @run_resources.setter
+  def run_resources(self, value):
+    self._run_resources = value
 
   def start(self):
     """Executes every run.
