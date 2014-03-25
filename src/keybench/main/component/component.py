@@ -71,7 +71,7 @@ class KBComponent(object):
     Args:
       document: The C{KBDocument} to identify.
 
-    Return:
+    Returns:
       The unique C{string} identifier that represents the given C{document}.
     """
 
