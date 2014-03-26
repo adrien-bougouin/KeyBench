@@ -19,6 +19,8 @@ from os import listdir
 # CLARIT96Extractor
 # FromTerminologyExtractor
 # POSSequenceExtractor
+# POSBoundaryBasedCandidateExtractor
+# ExpandedCoreWordExtractor
 
 ################################################################################
 
@@ -1153,4 +1155,353 @@ class POSSequenceExtractor(CandidateExtractorC):
 #        return False
 
     return True
+
+################################################################################
+
+class POSBoundaryBasedCandidateExtractor(CandidateExtractorC):
+  """
+  """
+
+  def __init__(self, name, is_lazy, lazy_directory, debug, pos_boundaries):
+    """
+    Constructor of the component.
+
+    @param  name:           The name of the component.
+    @type   name:           C{string}
+    @param  is_lazy:        True if the component must load previous data, False
+                            if data must be computed tought they have already
+                            been computed.
+    @type   is_lazy:        C{bool}
+    @param  lazy_directory: The directory used to store previously computed
+                            data.
+    @type   lazy_directory: C{string}
+    @param  debug:          True if the component is in debug mode, else False.
+                            When the component is in debug mode, it will output
+                            each step of its processing.
+    @type   debug:          C{bool}
+    TODO pos_boundaries {"POS boundary": ["exception", "words", "when", "not", "at", "the", "beging", "or", "end"]}
+    TODO pos_boundaries {"POS boundary": ["exception", "words", "when", "not", "at", "the", "beging", "or", "end"]}
+    TODO pos_boundaries {"POS boundary": ["exception", "words", "when", "not", "at", "the", "beging", "or", "end"]}
+    TODO pos_boundaries {"POS boundary": ["exception", "words", "when", "not", "at", "the", "beging", "or", "end"]}
+    """
+
+    super(POSBoundaryBasedCandidateExtractor, self).__init__(name,
+                                                             is_lazy,
+                                                             lazy_directory,
+                                                             debug)
+
+    self._pos_boundaries = pos_boundaries
+
+  def candidate_extraction(self, pre_processed_file):
+    """
+    Extracts the candidates from a pre-processed file.
+
+    @param    pre_processed_file: The pre-processed analysed file.
+    @type     pre_processed_file: C{PreProcessedFile}
+
+    @return:  A list of candidates.
+    @rtype:   C{list(string)}
+    """
+
+    sentences = pre_processed_file.full_text()
+    candidates = []
+    
+    for sentence in sentences:
+      current_candidate = []
+      for wt in sentence.split(" "):
+        w = wt.rsplit(pre_processed_file.tag_separator(), 1)[0]
+        t = wt.rsplit(pre_processed_file.tag_separator(), 1)[1]
+
+        if t in self._pos_boundaries:
+          # do not consider exception cases yet
+          if w not in self._pos_boundaries[t]:
+            if len(current_candidate) > 0:
+              # check exception at the begining
+              while current_candidate[0].rsplit(pre_processed_file.tag_separator(), 1)[1] in self._pos_boundaries:
+                if len(current_candidate) > 1:
+                  current_candidate = current_candidate[1:]
+                else:
+                  current_candidate = []
+                  break
+              if len(current_candidate) > 0:
+                # check exception at the end
+                while current_candidate[-1].rsplit(pre_processed_file.tag_separator(), 1)[1] in self._pos_boundaries:
+                  if len(current_candidate) > 1:
+                    current_candidate = current_candidate[:-1]
+                  else:
+                    current_candidate = []
+                    break
+              if len(current_candidate) > 0:
+                candidate = " ".join(current_candidate)
+                current_candidate = []
+                if self.filtering(candidate, pre_processed_file.tag_separator()):
+                  candidates.append(candidate)
+          else:
+            current_candidate.append(wt)
+        else:
+          current_candidate.append(wt)
+
+    return candidates
+
+  def filtering(self, term, tag_separator):
+    """
+    Indicates if a candidate can be concidered as a keyphrase candidate or not.
+
+    @param    candidate:      The POS tagged candidate.
+    @type     candidate:      C{string}
+    @param    tag_separator:  The character used to separate a words from its
+                              tag.
+    @type     tag_separator:  C{string}
+
+    @return:  True if the candidate is a keyphrase candidate, else False.
+    @rtype:   C{bool}
+    """
+
+      # FIXME semeval trick
+#      if len(word) <= 2:
+#        return False
+
+    return True
+
+################################################################################
+
+class ExpandedCoreWordExtractor(CandidateExtractorC):
+  """
+  Component performing candidate terms extraction. It extracts NP chunks (based
+  on a given rule).
+  """
+
+  def __init__(self, name, is_lazy, lazy_directory, debug, stop_words, verb_tags, stemmer):
+    """
+    Constructor of the component.
+
+    @param  name:           The name of the component.
+    @type   name:           C{string}
+    @param  is_lazy:        True if the component must load previous data, False
+                            if data must be computed tought they have already
+                            been computed.
+    @type   is_lazy:        C{bool}
+    @param  lazy_directory: The directory used to store previously computed
+                            data.
+    @type   lazy_directory: C{string}
+    @param  debug:          True if the component is in debug mode, else False.
+                            When the component is in debug mode, it will output
+                            each step of its processing.
+    @type   debug:          C{bool}
+    """
+
+    super(ExpandedCoreWordExtractor, self).__init__(name, is_lazy, lazy_directory, debug)
+
+    self._stop_words = stop_words
+    self._verb_tags = verb_tags
+    self._stemmer = stemmer
+
+  def candidate_extraction(self, pre_processed_file):
+    """
+    Extracts the candidates from a pre-processed file.
+
+    @param    pre_processed_file: The pre-processed analysed file.
+    @type     pre_processed_file: C{PreProcessedFile}
+
+    @return:  A list of candidates.
+    @rtype:   C{list(string)}
+    """
+
+    tagged_sentences = pre_processed_file.full_text()
+    stemmed_words = {}
+    stem_positions = {}
+    candidates = []
+
+    # create reverse indexes
+    for sent_pos, tagged_sentence in enumerate(tagged_sentences):
+      for pos, tagged_word in enumerate(tagged_sentence.split()):
+        if tagged_word not in stemmed_words:
+          # only if it is not a stop word
+          if self.filtering(tagged_word, pre_processed_file.tag_separator()):
+            word = tagged_word.rsplit(pre_processed_file.tag_separator(), 1)[0]
+            stemmed_word = self._stemmer.stem(word)
+            stemmed_words[tagged_word] = stemmed_word
+            if stemmed_word not in stem_positions:
+              stem_positions[stemmed_word] = []
+            stem_positions[stemmed_word].append((sent_pos, pos))
+        else:
+          stemmed_word = stemmed_words[tagged_word]
+          stem_positions[stemmed_word].append((sent_pos, pos))
+
+    # generate candidates from core words
+    core_word_ordering = sorted(stem_positions.items(),
+                                key=lambda (c, p): len(p),
+                                reverse=True)
+    for core_word_stem, positions in core_word_ordering[:50]:
+      for sent_pos, pos in positions:
+        candidate = tagged_sentences[sent_pos].split()[pos]
+        forward_position = pos + 1
+        # forward expansion
+              # maximum candidate size
+              # check index
+              # check non stop word
+              # frequency requirement
+        while len(candidate.split()) < 4 \
+              and forward_position < len(tagged_sentences[sent_pos].split()) \
+              and tagged_sentences[sent_pos].split()[forward_position] in stemmed_words \
+              and len(stem_positions[stemmed_words[tagged_sentences[sent_pos].split()[forward_position]]]) > 1:
+          candidate += " " + tagged_sentences[sent_pos].split()[forward_position]
+          forward_position += 1
+        candidates.append(candidate)
+
+        candidate = tagged_sentences[sent_pos].split()[pos]
+        backward_position = pos - 1
+        # backward expansion
+              # maximum candidate size
+              # check index
+              # check non stop word
+              # frequency requirement
+        while len(candidate.split()) < 4 \
+              and backward_position >= 0 \
+              and tagged_sentences[sent_pos].split()[backward_position] in stemmed_words \
+              and len(stem_positions[stemmed_words[tagged_sentences[sent_pos].split()[backward_position]]]) > 1:
+          candidate = tagged_sentences[sent_pos].split()[backward_position] + " " + candidate
+          backward_position -= 1
+        candidates.append(candidate)
+
+    return candidates
+
+  def filtering(self, term, tag_separator):
+    """
+    Indicates if a candidate can be concidered as a keyphrase candidate or not.
+
+    @warning: This function includes a trick to avoid from extracting variables
+              that could be find into SemEval document.
+
+    @param    candidate:      The POS tagged candidate.
+    @type     candidate:      C{string}
+    @param    tag_separator:  The character used to separate a words from its
+                              tag.
+    @type     tag_separator:  C{string}
+
+    @return:  True if the candidate is a keyphrase candidate, else False.
+    @rtype:   C{bool}
+    """
+
+    tagged_words = term.split()
+
+    for i, tagged_word in enumerate(tagged_words):
+      word = tagged_word.lower().rsplit(tag_separator, 1)[0]
+      tag = tagged_word.lower().rsplit(tag_separator, 1)[1]
+
+      # only candidate with first and last words not included into the stop word
+      # list are accepted
+      if i == 0 or i == (len(tagged_words) - 1):
+        if self._stop_words.count(word) > 0 \
+           or self._verb_tags.count(tag) > 0:
+          return False
+
+      # FIXME semeval trick
+#      if len(word) <= 2:
+#        return False
+
+    return True
+
+################################################################################
+
+class NounAndADJRExtractor(CandidateExtractorC):
+  """
+  """
+
+  def __init__(self,
+               name,
+               is_lazy,
+               lazy_directory,
+               debug,
+               patterns,
+               adj_tags,
+               is_adjr_function):
+    """
+    Constructor of the component.
+
+    @param  name:           The name of the component.
+    @type   name:           C{string}
+    @param  is_lazy:        True if the component must load previous data, False
+                            if data must be computed tought they have already
+                            been computed.
+    @type   is_lazy:        C{bool}
+    @param  lazy_directory: The directory used to store previously computed
+                            data.
+    @type   lazy_directory: C{string}
+    @param  debug:          True if the component is in debug mode, else False.
+                            When the component is in debug mode, it will output
+                            each step of its processing.
+    @type   debug:          C{bool}
+    TODO patterns
+    TODO patterns
+    """
+
+    super(NounAndADJRExtractor, self).__init__(name,
+                                               is_lazy,
+                                               lazy_directory,
+                                               debug)
+
+    self.set_patterns(patterns)
+    self._adj_tags = adj_tags
+    self._is_adjr_function = is_adjr_function
+
+  def patterns(self):
+    """
+    """
+
+    return self._patterns
+
+  def set_patterns(self, patterns):
+    """
+    """
+
+    self._patterns = patterns
+
+  def candidate_extraction(self, pre_processed_file):
+    """
+    Extracts the candidates from a pre-processed file.
+
+    @warning: This function includes a trick to avoid from extracting variables
+              that could be find into SemEval document.
+
+    @param    pre_processed_file: The pre-processed analysed file.
+    @type     pre_processed_file: C{PreProcessedFile}
+
+    @return:  A list of candidates.
+    @rtype:   C{list(string)}
+    """
+
+    sentences = pre_processed_file.full_text()
+    non_filtered_candidate_counts = {}
+    candidates = []
+
+    for sentence in sentences:
+      # pattern matching
+      for pattern in self.patterns():
+        for match in re.finditer(pattern, sentence):
+          candidate = match.group(0).strip()
+
+          if candidate not in non_filtered_candidate_counts:
+            non_filtered_candidate_counts[candidate] = 0
+          non_filtered_candidate_counts[candidate] += 1
+
+    # split the component to the non-relational adjectives
+    for candidate in non_filtered_candidate_counts:
+      if non_filtered_candidate_counts[candidate] > 1:
+        candidates.append(candidate)
+      else:
+        start = 0
+        for pos, wt in enumerate(candidate.split()):
+          word = wt.rsplit(pre_processed_file.tag_separator(), 1)[0]
+          tag = wt.rsplit(pre_processed_file.tag_separator(), 1)[1]
+
+          if tag in self._adj_tags \
+             and not self._is_adjr_function(word):
+            if pos != 0 and start != (len(candidate.split()) - 1):
+              candidates.append(" ".join(candidate.split()[start:pos]))
+            start = pos + 1
+          elif pos == (len(candidate.split()) - 1):
+            candidates.append(" ".join(candidate.split()[start:]))
+
+    return candidates
 

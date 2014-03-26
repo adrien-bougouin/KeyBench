@@ -38,7 +38,7 @@ class SemEvalFileRep(CorpusFileRep):
       abstract += l
     self.set_abstract(abstract)
     content = ""
-    for section in sections[1:-1]:
+    for section in sections[1:-1]: # Do not take references
       sec = self.clean_section(section.split("\n"))
 
       if content != "" and sec !="":

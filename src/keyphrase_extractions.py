@@ -3,6 +3,9 @@
 
 import sys
 import codecs
+from candidate_extractors import NounAndADJRExtractor
+from candidate_extractors import ExpandedCoreWordExtractor
+from candidate_extractors import POSBoundaryBasedCandidateExtractor
 from candidate_extractors import POSSequenceExtractor
 from candidate_extractors import FromTerminologyExtractor
 from candidate_extractors import NPChunkExtractor
@@ -43,6 +46,10 @@ from util import DUCFileRep
 from util import term_scoring
 from util import WikiNewsFileRep
 from util import bonsai_tokenization
+from util import french_stemmed_adjr
+from util import french_adjr_suffix_2_counts
+from util import french_adjr_suffix_3_counts
+from nltk.corpus import wordnet
 from nltk.stem import PorterStemmer
 from nltk.stem.snowball import FrenchStemmer
 from nltk.tokenize.treebank import TreebankWordTokenizer
@@ -105,7 +112,7 @@ ENGLISH_STOP_WORDS_FILEPATH = path.join(CORPORA_DIR, "english_unine_stop_words")
 ##### execution configurations #################################################
 
 LAZY_PRE_PROCESSING = True
-LAZY_CANDIDATE_EXTRACTION = True
+LAZY_CANDIDATE_EXTRACTION = False
 LAZY_CANDIDATE_CLUSTERING = False
 LAZY_RANKING = False
 LAZY_SELECTION = False
@@ -136,6 +143,9 @@ BEST_PATTERN_CA = "best_pattern"
 CLARIT96_CA = "clarit96"
 TERM_SUITE_TERMINOLOGY_CA = "term_suite"
 ACABIT_TERMINOLOGY_CA = "acabit"
+POS_BOUNDARY_BASED_CA = "pos_boundaries"
+CORE_WORD_BASED_CA = "core_words"
+NOUN_AND_ADJR_CA = "nouns_and_adjr_final"
 
 # clustering names
 NO_CLUSTER_CC = "no_cluster"
@@ -153,18 +163,19 @@ TEXTRANK_SE = "textrank"
 
 ##### runs #####################################################################
 
-CORPORA_RU = [DUC_CO, SEMEVAL_CO, DEFT_CO]
+CORPORA_RU = [DEFT_CO]
 METHODS_RU = [TOPICRANK_ME]
 NUMBERS_RU = [10]
 LENGTHS_RU = [0]
-CANDIDATES_RU = [TERM_SUITE_TERMINOLOGY_CA]
-CLUSTERING_RU = [TERM_VARIANT_CLUSTER_CC]
+CANDIDATES_RU = [NOUN_AND_ADJR_CA]
+CLUSTERING_RU = [HIERARCHICAL_CLUSTER_CC]
 SCORINGS_RU = [WEIGHT_SC]
 SELECTIONS_RU = [WHOLE_SE]
 
 # used for the noun phrases extraction
 NOUN_TAGS = ["nn", "nns", "nnp", "nnps", "nc", "npp"]
 ADJ_TAGS = ["jj", "adj"]
+VERB_TAGS = ["vb", "vbd", "vbg", "vbn", "vbp", "vbz", "v", "vimp", "vinf", "vpp", "vpr", "vs"]
 # used for tokens filtering in ****Rank methods
 TEXTRANK_TAGS = ["nn", "nns", "nnp", "nnps", "jj", "nc", "npp", "adj"]
 # rules for NP chunking
@@ -174,8 +185,23 @@ french_np_chunk_rules = "{(<npp>+)|(<adj>?<nc><adj>+)|(<adj><nc>)|(<nc>+)}"
 tagged_word_pattern = "([^ ]+\\/%s( |$))" # WARNING space or end line delimiter is in the pattern
 english_lnp_tags = "(jj|nnps|nnp|nns|nn)"
 french_lnp_tags = "(adj|npp|nc)"
+english_n_tags = "(nnps|nnp|nns|nn)"
+french_n_tags = "(npp|nc)"
+english_a_tags = "(jj)"
+french_a_tags = "(adj)"
+french_p_tags = "(p)"
+french_d_tags = "(det)"
 english_lnp_patterns = ["%s+"%(tagged_word_pattern%english_lnp_tags)]
 french_lnp_patterns = ["%s+"%(tagged_word_pattern%french_lnp_tags)]
+english_na_patterns = ["%s?%s+"%(tagged_word_pattern%english_a_tags,
+                                 tagged_word_pattern%english_n_tags)]
+french_na_patterns = ["%s+%s?"%(tagged_word_pattern%french_n_tags,
+                                tagged_word_pattern%french_a_tags)]#,
+                      #"%s((%s%s)|(%s))?%s"%(tagged_word_pattern%french_n_tags,
+                      #             tagged_word_pattern%french_p_tags,
+                      #             tagged_word_pattern%french_d_tags,
+                      #             tagged_word_pattern%"(p+d)",
+                      #             tagged_word_pattern%french_n_tags)]
 # rules for CLARIT'96 subcompounding
 english_clarit_np_patterns = english_lnp_patterns
 french_clarit_np_patterns = french_lnp_patterns
@@ -208,6 +234,58 @@ french_clarit_impossible_patterns = [
           tagged_word_pattern%"(npp|nc)"),
   "%s%s"%(tagged_word_pattern%"(adjwh|adj)",
           tagged_word_pattern%"(advwh|adv|adjwh|adj)")]
+english_pos_boundaries = {
+  "cc": ["for", "or", "and"],
+  "dt": [],
+  "ex": [],
+  "fw": [],
+  "in": ["of"],
+  "jjr": [],
+  "jjs": [],
+  "ls": [],
+  "md": [],
+  "pdt": [],
+  "pos": [],
+  "prp": [],
+  "prp$": [],
+  "rb": [],
+  "rbr": [],
+  "rbs": [],
+  "rp": [],
+  "to": [],
+  "uh": [],
+  "vb": [],
+  "vbd": [],
+  "vbg": [],
+  "vbn": [],
+  "vbp": [],
+  "vbz": [],
+  "wdt": [],
+  "wp": [],
+  "wp$": [],
+  "wrb": [],
+  #"cd": [],
+  #"sym": [],
+  "''": [],
+  "``": [],
+  "\"": [],
+  ")": [],
+  "(": [],
+  "]": [],
+  "[": [],
+  "}": [],
+  "{": [],
+  ",": [],
+  ":": [],
+  "...": [],
+  ".": [],
+  "!": [],
+  "?": [],
+  "punct": []
+}
+# TODO
+french_pos_boundaries = {
+}
 
 ################################################################################
 
@@ -224,6 +302,16 @@ def extract_stop_words(stop_words_filepath):
   stop_words.append(".")
   stop_words.append("!")
   stop_words.append("?")
+  # NEWLY ADDED
+  stop_words.append("]")
+  stop_words.append("[")
+  stop_words.append("=")
+  stop_words.append("..")
+  stop_words.append("...")
+  stop_words.append(";")
+  stop_words.append("(")
+  stop_words.append(")")
+  stop_words.append(":")
 
   return stop_words
 
@@ -237,6 +325,68 @@ def english_tokenization(term):
     tokenized_term += word
 
   return tokenized_term
+
+def is_french_adjr(word):
+  stemmer = FrenchStemmer()
+  new_list = [
+    u"ique",
+    u"aire",
+    u"eux",
+    u"ier",
+    u"ien",
+    u"ois",
+    u"ain",
+    u"al",
+    u"el",
+    u"estre",
+    u"il",
+    u"in",
+    u"esque",
+    u"é",
+    u"if"
+  ]
+
+  #return stemmer.stem(word) in french_stemmed_adjr
+  #return False \
+  #return stemmer.stem(word) in french_stemmed_adjr \
+  #       or (stemmer.stem(word)[-2:] in french_adjr_suffix_2_counts \
+  #           and french_adjr_suffix_2_counts[stemmer.stem(word)[-2:]] >= 1)
+  if stemmer.stem(word) in french_stemmed_adjr:
+    return True
+  for suffix in new_list:
+    if stemmer.stem(word)[-len(suffix):] == suffix:
+      return True
+  return False
+
+english_adjr_suffix_2_counts = {}
+english_adjr_suffix_3_counts = {}
+for adjective in wordnet.all_synsets("a"):
+  for lemma in adjective.lemmas:
+    if len(lemma.pertainyms()) > 0:
+      suffix_2 = adjective.name.rsplit(".", 2)[0][-2:]
+      suffix_3 = adjective.name.rsplit(".", 2)[0][-3:]
+      if suffix_2 not in english_adjr_suffix_2_counts:
+        english_adjr_suffix_2_counts[suffix_2] = 0
+      english_adjr_suffix_2_counts[suffix_2] += 1
+      if suffix_3 not in english_adjr_suffix_3_counts:
+        english_adjr_suffix_3_counts[suffix_3] = 0
+      english_adjr_suffix_3_counts[suffix_3] += 1
+def is_english_adjr(word):
+  new_list = [
+    u"ic",
+    u"al"
+  ]
+  for synset in wordnet.synsets(word):
+    if synset.name.find(".a.") != -1:
+      for lemma in synset.lemmas:
+        if len(lemma.pertainyms()) > 0:
+          return True
+  for suffix in new_list:
+    if word[-len(suffix):] == suffix:
+      return True
+  return False
+  #return word[-2:] in english_adjr_suffix_2_counts \
+  #       and english_adjr_suffix_2_counts[word[-2:]] >= 1
 
 def learn_tag_sequences(train_docs,
                         ext,
@@ -328,10 +478,13 @@ def main(argv):
           nb_documents = None
           np_chunk_rules = None
           lnp_patterns = None
+          na_patterns = None
+          is_adjr_function = None
           clarit_np_patterns = None
           clarit_lexatom_patterns = None
           clarit_special_patterns = None
           clarit_impossible_patterns = None
+          pos_boundaries = None
 
           if corpus == DEFT_CO:
             docs = DEFT_CORPUS_DOCS
@@ -353,10 +506,13 @@ def main(argv):
             language = FRENCH_LA
             np_chunk_rules = french_np_chunk_rules
             lnp_patterns = french_lnp_patterns
+            na_patterns = french_na_patterns
+            is_adjr_function = is_french_adjr
             clarit_np_patterns = french_clarit_np_patterns
             clarit_lexatom_patterns = french_clarit_lexatom_patterns
             clarit_special_patterns = french_clarit_special_patterns
             clarit_impossible_patterns = french_clarit_impossible_patterns
+            pos_boundaries = french_pos_boundaries
           else:
             if corpus == WIKINEWS_CO:
               docs = WIKINEWS_CORPUS_DOCS
@@ -375,10 +531,13 @@ def main(argv):
               language = FRENCH_LA
               np_chunk_rules = french_np_chunk_rules
               lnp_patterns = french_lnp_patterns
+              na_patterns = french_na_patterns
+              is_adjr_function = is_french_adjr
               clarit_np_patterns = french_clarit_np_patterns
               clarit_lexatom_patterns = french_clarit_lexatom_patterns
               clarit_special_patterns = french_clarit_special_patterns
               clarit_impossible_patterns = french_clarit_impossible_patterns
+              pos_boundaries = french_pos_boundaries
             else:
               if corpus == SEMEVAL_CO:
                 docs = SEMEVAL_CORPUS_DOCS
@@ -401,10 +560,13 @@ def main(argv):
                 language = ENGLISH_LA
                 np_chunk_rules = english_np_chunk_rules
                 lnp_patterns = english_lnp_patterns
+                na_patterns = english_na_patterns
+                is_adjr_function = is_english_adjr
                 clarit_np_patterns = english_clarit_np_patterns
                 clarit_lexatom_patterns = english_clarit_lexatom_patterns
                 clarit_special_patterns = english_clarit_special_patterns
                 clarit_impossible_patterns = english_clarit_impossible_patterns
+                pos_boundaries = english_pos_boundaries
               else:
                 if corpus == DUC_CO:
                   docs = DUC_CORPUS_DOCS
@@ -427,10 +589,13 @@ def main(argv):
                   language = ENGLISH_LA
                   np_chunk_rules = english_np_chunk_rules
                   lnp_patterns = english_lnp_patterns
+                  na_patterns = english_na_patterns
+                  is_adjr_function = is_english_adjr
                   clarit_np_patterns = english_clarit_np_patterns
                   clarit_lexatom_patterns = english_clarit_lexatom_patterns
                   clarit_special_patterns = english_clarit_special_patterns
                   clarit_impossible_patterns = english_clarit_impossible_patterns
+                  pos_boundaries = english_pos_boundaries
                 else:
                   if corpus == INSPEC_CO:
                     docs = INSPEC_CORPUS_DOCS
@@ -450,10 +615,13 @@ def main(argv):
                     language = ENGLISH_LA
                     np_chunk_rules = english_np_chunk_rules
                     lnp_patterns = english_lnp_patterns
+                    na_patterns = english_na_patterns
+                    is_adjr_function = is_english_adjr
                     clarit_np_patterns = english_clarit_np_patterns
                     clarit_lexatom_patterns = english_clarit_lexatom_patterns
                     clarit_special_patterns = english_clarit_special_patterns
                     clarit_impossible_patterns = english_clarit_impossible_patterns
+                    pos_boundaries = english_pos_boundaries
 
           for candidate in CANDIDATES_RU:
             for cluster in CLUSTERING_RU:
@@ -542,6 +710,31 @@ def main(argv):
                                                              acabit_terms,
                                                              "utf-8", # FIXME
                                                              tokenize)
+                              else:
+                                if candidate == POS_BOUNDARY_BASED_CA:
+                                  c = POSBoundaryBasedCandidateExtractor(run_name,
+                                                                         LAZY_CANDIDATE_EXTRACTION,
+                                                                         RUNS_DIR,
+                                                                         True,
+                                                                         pos_boundaries)
+                                else:
+                                  if candidate == CORE_WORD_BASED_CA:
+                                      c = ExpandedCoreWordExtractor(run_name,
+                                                                    LAZY_CANDIDATE_EXTRACTION,
+                                                                    RUNS_DIR,
+                                                                    True,
+                                                                    stop_words,
+                                                                    VERB_TAGS,
+                                                                    stemmer)
+                                  else:
+                                    if candidate == NOUN_AND_ADJR_CA:
+                                      c = NounAndADJRExtractor(run_name,
+                                                               LAZY_CANDIDATE_EXTRACTION,
+                                                               RUNS_DIR,
+                                                               True,
+                                                               na_patterns,
+                                                               ADJ_TAGS,
+                                                               is_adjr_function)
                   ##### candidate clusterer ####################################
                   if cluster == NO_CLUSTER_CC:
                     cc = FakeClusterer(run_name,

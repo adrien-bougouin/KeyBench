@@ -134,6 +134,10 @@ class TextRankRanker(RankerC):
                                 - Centroid: The centroid of the cluster is
                                 ranked first.
     @type   ordering_criteria: C{ORDERING_CRITERIA}
+    TODO TODO
+    TODO TODO
+    TODO TODO
+    TODO TODO
     """
 
     super(TextRankRanker, self).__init__(name, is_lazy, lazy_directory, debug)
@@ -290,10 +294,11 @@ class TextRankRanker(RankerC):
     else:
       if self._ordering_criteria == ORDERING_CRITERIA.FREQUENCY:
         return sorted(cluster, key=lambda (t): (frequency[t],
-                                                -1 * len(t.split())))
+                                                len(t.split())), reverse=True)
       else:
-        return sorted(cluster, key=lambda (t): (t != centroid,
-                                                -1 * len(t.split())))
+        if self._ordering_criteria == ORDERING_CRITERIA.CENTROID:
+          return sorted(cluster, key=lambda (t): (t != centroid,
+                                                  -1 * len(t.split())))
 
 ################################################################################
 
@@ -341,6 +346,7 @@ def get_features(candidate, pre_processed_file, tfidf):
     total_length += float(len(sentence.split()))
 
   return [(first_position / total_length), tfidf]
+  #return [(first_position / total_length), tfidf, total_length]
   #return {"Position": (first_position / total_length), "TF-IDF": tfidf}
 
 ##### Multi-processing #########################################################
@@ -367,6 +373,7 @@ def feature_class_extraction_pool_worker(arguments):
 
   # keyphrase stemming
   stemmed_keyphrases = {}
+  # SUPERVISED LEARNING
   for keyphrase in ref_file.read().split(";"):
     keyphrase = ref_tokenization_function(keyphrase.lower().strip())
     stemmed_keyphrase = ""
@@ -377,6 +384,20 @@ def feature_class_extraction_pool_worker(arguments):
       stemmed_keyphrase += stemmer.stem(word)
 
     stemmed_keyphrases[stemmed_keyphrase] = True
+  # UNSUPERVISED LEARNING
+#  abstract_sentences_to_take = len(pre_processed_file.abstract())
+#  if abstract_sentences_to_take > 5:
+#    abstract_sentences_to_take = 5
+#  pos_tagged_title = " ".join(pre_processed_file.title_words()) + " " + " ".join(pre_processed_file.abstract()[:abstract_sentences_to_take])
+#  for candidate in candidates:
+#    if pos_tagged_title.find(candidate) != -1:
+#      stemmed_candidate = ""
+#
+#      for word in candidate.split():
+#        if stemmed_candidate != "":
+#          stemmed_candidate += " "
+#        stemmed_candidate += stemmer.stem(word.rsplit(pre_processor.tag_separator(), 1)[0])
+#      stemmed_keyphrases[stemmed_candidate] = True
 
   for candidate in candidates:
     candidate_class = NOT_KEYPHRASE
@@ -439,7 +460,10 @@ def train_kea(model_filename,
                           candidate_clusterer,
                           tfidf_ranker))
 
-    feature_sets_and_target_sets = working_pool.map(feature_class_extraction_pool_worker, pool_args)
+    #feature_sets_and_target_sets = working_pool.map(feature_class_extraction_pool_worker, pool_args)
+    feature_sets_and_target_sets = []
+    for args in pool_args:
+      feature_sets_and_target_sets.append(feature_class_extraction_pool_worker(args))
 
     for feature_set, target_set in feature_sets_and_target_sets:
       for i, features in enumerate(feature_set):

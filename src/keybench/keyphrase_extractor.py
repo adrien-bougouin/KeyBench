@@ -287,9 +287,9 @@ class KeyphraseExtractor(object):
                           self.candidate_clusterer(),
                           self.ranker(),
                           self.selector()))
-    pool_results = working_pool.map(keyphrase_extraction_pool_worker, pool_args)
-    #for args in pool_args:
-    #  pool_results.append(keyphrase_extraction_pool_worker(args))
+    #pool_results = working_pool.map(keyphrase_extraction_pool_worker, pool_args)
+    for args in pool_args:
+      pool_results.append(keyphrase_extraction_pool_worker(args))
 
     ##### Evaluation of the extracted keyphrases ###############################
     for filename, keyphrases in pool_results:

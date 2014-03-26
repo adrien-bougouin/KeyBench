@@ -82,7 +82,7 @@ def document_frequencies(corpus_directory,
   """
 
 
-  working_pool = Pool()
+  working_pool = Pool(8)
   pool_args = []
   document_terms = []
   nb_documents = 0.0
