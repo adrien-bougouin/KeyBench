@@ -54,8 +54,8 @@ class KBDocumentBuilderI(component.KBComponent):
 
       ## NLP tools #############################################################
       tool_factory = core.KBBenchmark.singleton().run_tools[self.run_name]
-      tokenizer = tool_factory.tokenizers[language]
-      pos_tagger = tool_factory.pos_taggers[language]
+      tokenizer = tool_factory.tokenizers(language)
+      pos_tagger = tool_factory.pos_taggers(language)
       ##########################################################################
 
       ## parsing ###############################################################

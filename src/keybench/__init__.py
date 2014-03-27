@@ -1,12 +1,12 @@
 # modules
-from main import component
-from main import core
-from main import exception
-from main import factory
-from main import model
-from main import nlp_tool
+from keybench.main import component
+from keybench.main import core
+from keybench.main import exception
+from keybench.main import factory
+from keybench.main import model
+from keybench.main import nlp_tool
 
 # functions
-from main import launch
-from test import runTests
+from keybench.main import launch
+from keybench.test import runTests
 

@@ -13,7 +13,7 @@ class KBConfigurationException(Exception):
 
     super(KBConfigurationException, self).__init__()
 
-    self._message = "Error with configurate \\%s\\: %s"%(configuration, message)
+    self._message = "Error with configuration %s\\: %s"%(configuration.__class__.__name__, message)
 
   def __str__(self):
     return self._message

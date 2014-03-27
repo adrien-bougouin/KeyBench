@@ -2,7 +2,6 @@ import unittest
 
 from keybench.test import component
 from keybench.test import core
-from keybench.test import factory
 from keybench.test import model
 
 def runTests():
@@ -12,7 +11,6 @@ def runTests():
   # adds tests from the keybench test modules
   testSuite.addTests(testLoader.loadTestsFromModule(component))
   testSuite.addTests(testLoader.loadTestsFromModule(core))
-  testSuite.addTests(testLoader.loadTestsFromModule(factory))
   testSuite.addTests(testLoader.loadTestsFromModule(model))
 
   # executes all the tests
