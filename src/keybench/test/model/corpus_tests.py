@@ -1,5 +1,7 @@
 import unittest
+import shutil
 
+import os
 from os import path
 
 from keybench.main import model

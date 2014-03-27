@@ -36,16 +36,21 @@ class KBDocumentBuilderI(component.KBComponent):
 
     document = model.KBDocument()
 
-    # fill the document 'meta-data'
+    ## fill the document 'meta-data' ###########################################
     document.corpus_name = corpus_name
     document.name = name
     document.language = language
     document.encoding = encoding
 
+    ## complete the document ###################################################
+
     # can the component do lazy loading?
     if self.isLazy():
+      # does the document exist?
       if self.exists(document):
+        # complete the document from cache
         document = self.load(document)
+    # parse and preprocess the document
     else:
       document_file = codecs.open(filepath, "r", encoding)
       title, abstract, content = self._documentParsing(document_file)

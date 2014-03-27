@@ -1,3 +1,4 @@
+import os
 from os import path
 
 class KBCorpus(object):
@@ -168,4 +169,34 @@ class KBCorpus(object):
   @property
   def test_reference_directory(self):
     return path.join(self._directory, self._test_reference_subdirectory)
+
+  def train_documents(self, document_builder):
+    documents = []
+
+    for filename in os.listdir(self.train_directory):
+      if filename[-len(self._file_extension):] == self._file_extension:
+        document = document_builder(path.join(self.train_directory, filename),
+                                    self._name,
+                                    filename[:-len(self._file_extension)],
+                                    self._language,
+                                    self._encoding)
+
+        documents.append(document)
+
+    return documents
+
+  def test_documents(self, document_builder):
+    documents = []
+
+    for filename in os.listdir(self.test_directory):
+      if filename[-len(self._file_extension):] == self._file_extension:
+        document = document_builder(path.join(self.test_directory, filename),
+                                    self._name,
+                                    filename[:-len(self._file_extension)],
+                                    self._language,
+                                    self._encoding)
+
+        documents.append(document)
+
+    return documents
 

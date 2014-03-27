@@ -1,5 +1,5 @@
-import unittest
 import shutil
+import unittest
 
 from os import path
 
