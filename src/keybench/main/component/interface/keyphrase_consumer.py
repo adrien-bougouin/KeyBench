@@ -14,7 +14,7 @@ class KBKeyphraseConsumerI(component.KBComponent):
     """Consumes the keyphrases associcated to the documents of a given corpus.
 
     Args:
-      corpus: The C{KBCorpus} for which the keyphrases have been extracted.
+      corpus: The C{KBCorpus} from which the keyphrases have been extracted.
       keyphrases: The extracted keyphrases (C{map} of C{list} of
         C{KBTextualUnit}s associated to a document's name).
     """
@@ -22,11 +22,11 @@ class KBKeyphraseConsumerI(component.KBComponent):
     self.logDebug("Consuming keyphrases of %s..."%(document.name))
     self._keyphraseConsumption(document)
 
-  def _keyphraseConsumption(self, document):
+  def _keyphraseConsumption(self, corpus, keyphrases):
     """Consumes the keyphrases associcated to the documents of a given corpus.
 
     Args:
-      corpus: The C{KBCorpus} for which the keyphrases have been extracted.
+      corpus: The C{KBCorpus} from which the keyphrases have been extracted.
       keyphrases: The extracted keyphrases (C{map} of C{list} of
         C{KBTextualUnit}s associated to a document's name).
     """
