@@ -1,4 +1,6 @@
+import codecs
 import os
+
 from os import path
 
 class KBCorpus(object):
@@ -170,7 +172,17 @@ class KBCorpus(object):
   def test_reference_directory(self):
     return path.join(self._directory, self._test_reference_subdirectory)
 
-  def train_documents(self, document_builder):
+  def trainDocuments(self, document_builder):
+    """Provides every train document of the corpus.
+
+    Args:
+      document_builder: The C{KBDocumentBuilderI} component to use for the
+        creation of each document.
+
+    Returns:
+      The C{list} of C{KBDocument}s in the train directory of the corpus.
+    """
+
     documents = []
 
     for filename in os.listdir(self.train_directory):
@@ -185,7 +197,17 @@ class KBCorpus(object):
 
     return documents
 
-  def test_documents(self, document_builder):
+  def testDocuments(self, document_builder):
+    """Provides every test document of the corpus.
+
+    Args:
+      document_builder: The C{KBDocumentBuilderI} component to use for the
+        creation of each document.
+
+    Returns:
+      The C{list} of C{KBDocument}s in the test directory of the corpus.
+    """
+
     documents = []
 
     for filename in os.listdir(self.test_directory):
@@ -199,4 +221,48 @@ class KBCorpus(object):
         documents.append(document)
 
     return documents
+
+  def trainReferences(self):
+    """Provides the references for every train document.
+
+    Returns:
+      The C{map} of references (C{list} of C{string}) associated to each train
+      document (C{string} name as key).
+    """
+
+    references = {}
+
+    for filename in os.listdir(self.train_reference_directory):
+      if filename[-len(self._reference_extension):] == self._reference_extension:
+        filepath = path.join(self.train_reference_directory, filename)
+        name = filename[:-len(self._reference_extension)]
+        reference_file = codecs.open(filepath, "r", self._encoding)
+
+        references[name] = reference_file.read().splitlines()
+
+        reference_file.close()
+
+    return references
+
+  def testReferences(self):
+    """Provides the references for every test document.
+
+    Returns:
+      The C{map} of references (C{list} of C{string}) associated to each test
+      document (C{string} name as key).
+    """
+
+    references = {}
+
+    for filename in os.listdir(self.test_reference_directory):
+      if filename[-len(self._reference_extension):] == self._reference_extension:
+        filepath = path.join(self.test_reference_directory, filename)
+        name = filename[:-len(self._reference_extension)]
+        reference_file = codecs.open(filepath, "r", self._encoding)
+
+        references[name] = reference_file.read().splitlines()
+
+        reference_file.close()
+
+    return references
 
