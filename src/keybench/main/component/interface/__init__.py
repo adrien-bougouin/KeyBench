@@ -1,2 +1,3 @@
+from keybench.main.component.interface.candidate_extractor import KBCandidateExtractorI
 from keybench.main.component.interface.document_builder import KBDocumentBuilderI
 

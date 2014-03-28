@@ -1,7 +1,8 @@
 from keybench.main import core
 from keybench.main import model
+from keybench.main.component import component # avoid recursive import
 
-class KBCorpusBuilder(object):
+class KBCorpusBuilder(component.KBComponent):
   """The component responsible of the creation of a corpus representation.
 
   The component that creates a C{KBCorpus} from a file.
@@ -9,6 +10,12 @@ class KBCorpusBuilder(object):
 
   def __init__(self,
                name,
+               run_name,
+               shared,
+               lazy_mode,
+               debug_mode,
+               root_cache,
+               corpus_name,
                directory,
                train_subdirectory,
                test_subdicrectory,
@@ -26,6 +33,17 @@ class KBCorpusBuilder(object):
     """Constructor.
 
     Args:
+      name: The C{string} name of the component.
+      run_name: The C{string} name of the run for which the component is
+        affected to.
+      shared: True if the component shares informations with equivalent
+        components (same name).
+      lazy_mode: True if the component load precomputed data. False, otherwise.
+      debug_mode: True if the component can log debug messages. False,
+        otherwise.
+      root_cache: The root of the cache directory where the cached objects must
+        be stored.
+
       name: The name (identifier) of the corpus.
         directory: The C{string} path of the directory containing the corpus'
         materials.
@@ -57,9 +75,14 @@ class KBCorpusBuilder(object):
         Otherwise, C{False}.
     """
 
-    super(KBCorpusBuilder, self).__init__()
+    super(KBCorpusBuilder, self).__init__(name,
+                                          run_name,
+                                          shared,
+                                          lazy_mode,
+                                          debug_mode,
+                                          root_cache)
 
-    self._name = name
+    self._corpus_name = corpus_name
     self._directory = directory
     self._train_subdirectory = train_subdirectory
     self._test_subdicrectory = test_subdicrectory
@@ -84,7 +107,7 @@ class KBCorpusBuilder(object):
       The C{KBCorpus} representation.
     """
 
-    return model.KBCorpus(self._name,
+    return model.KBCorpus(self._corpus_name,
                           self._directory,
                           self._train_subdirectory,
                           self._test_subdicrectory,
