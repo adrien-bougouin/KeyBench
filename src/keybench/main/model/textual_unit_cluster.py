@@ -9,7 +9,8 @@ class KBTextualUnitCluster(object):
 
   Attributes:
     textual_units: The C{list} of cluster's C{KBTextualUnit}s.
-    centroid: The C{KBTextualUnit} that is the centroid of the cluster.
+    centroid: The C{KBTextualUnit} that is the centroid of the cluster. The
+      centroid is not internally computed, it must be set.
   """
 
   def __init__(self):

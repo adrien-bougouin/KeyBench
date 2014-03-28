@@ -6,7 +6,7 @@ class KBCandidateExtractorI(component.KBComponent):
   """The abstract component responsible of the extraction of the candidates of a
   document.
 
-  The component the extracts candidates from a C{KBDocument}. In most cases,
+  The component that extracts candidates from a C{KBDocument}. In most cases,
   subclasses must not override C{extractCandidates()}, but only
   C{candidateExtraction()}.
   """
