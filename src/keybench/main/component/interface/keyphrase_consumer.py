@@ -1,6 +1,6 @@
 import exceptions
 
-from keybench.main.component import component # avoid recursive import
+from keybench.main.component import component
 
 class KBKeyphraseConsumerI(component.KBComponent):
   """The abstract component that make usage of extracted keyphrases.

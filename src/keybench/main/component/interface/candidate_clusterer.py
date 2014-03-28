@@ -1,6 +1,6 @@
 import exceptions
 
-from keybench.main.component import component # avoid recursive import
+from keybench.main.component import component
 
 class KBCandidateClustererI(component.KBComponent):
   """The abstract component responsible of the clustering of the candidates of a

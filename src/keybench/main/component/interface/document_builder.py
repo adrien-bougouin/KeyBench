@@ -3,7 +3,7 @@ import exceptions
 
 from keybench.main import core
 from keybench.main import model
-from keybench.main.component import component # avoid recursive import
+from keybench.main.component import component
 
 class KBDocumentBuilderI(component.KBComponent):
   """The abstract component responsible of the creation of a document

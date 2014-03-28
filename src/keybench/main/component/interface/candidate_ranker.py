@@ -1,6 +1,6 @@
 import exceptions
 
-from keybench.main.component import component # avoid recursive import
+from keybench.main.component import component
 
 class KBCandidateRankerI(component.KBComponent):
   """The abstract component responsible of the ranking of the candidates of a
