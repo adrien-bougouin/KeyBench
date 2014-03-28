@@ -4,4 +4,5 @@ from keybench.main.component.interface.candidate_extractor import KBCandidateExt
 from keybench.main.component.interface.candidate_ranker import KBCandidateRankerI
 from keybench.main.component.interface.document_builder import KBDocumentBuilderI
 from keybench.main.component.interface.keyphrase_consumer import KBKeyphraseConsumerI
+from keybench.main.component.interface.keyphrase_extractor import KBKeyphraseExtractorI
 

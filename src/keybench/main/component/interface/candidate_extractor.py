@@ -53,8 +53,8 @@ class KBCandidateExtractorI(component.KBComponent):
         otherwise.
       root_cache: The root of the cache directory where the cached objects must
         be stored.
-      candidate_filters: A C{list} of C{KBCandidateExtractI.CandidateFilterI} to
-        use to filter out some extracted candidates (e.g. hapaxes).
+      candidate_filters: A C{list} of C{KBCandidateExtractorI.CandidateFilterI}
+        to use to filter out some extracted candidates (e.g. hapaxes).
     """
 
     super(KBCandidateExtractorI, self).__init__(name,
@@ -93,13 +93,19 @@ class KBCandidateExtractorI(component.KBComponent):
       self.logDebug("Filtering candidates of %s..."%(document.name))
       index = 0
       while index != len(candidates):
+        accepted = True
+
         for candidate_filter in self._candidate_filters:
           if not candidate_filter.isAccepted(candidates[index],
                                              candidates,
                                              document):
-            candidates.remove(candidates[index])
-          else:
-            index += 1
+            accepted = False
+            break
+
+        if accepted == False:
+          candidates.remove(candidates[index])
+        else:
+          index += 1
       ## serialization #########################################################
       self.logDebug("Saving candidates of %s..."%(document.name))
       self.store(document, candidates)
