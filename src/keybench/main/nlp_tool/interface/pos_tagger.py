@@ -1,7 +1,7 @@
 import exceptions
 
 class KBPOSTaggerI(object):
-  """Interface of a tokenized sentence POS tagger.
+  """Interface of a tokenized sentence Part-of-Speech tagger.
 
   Attributes:
     tagset: The C{dict} of tags (C{list} of C{string} tags) associated to a
@@ -16,20 +16,30 @@ class KBPOSTaggerI(object):
     meant to match multiple tags.
 
     Attributes:
-      NOUN_KEY: Key used for noun tags.
-      ADJECTIVE_KEY: Key used for adjective tags.
-      VERB_KEY: Key used for verb tags.
-      ADVERB_KEY: Key used for adverb tags.
-      PREPOSITION_KEY: Key used for preposition tags.
-      DETERMINER_KEY: Key used for determiner tags.
+      NOUN: Key used for noun tags.
+      PROPER_NOUN: Key used for proper noun tags.
+      ADJECTIVE: Key used for adjective tags.
+      VERB: Key used for verb tags.
+      ADVERB: Key used for adverb tags.
+      PRONOUN: Key used for pronoun tags.
+      PREPOSITION: Key used for preposition tags.
+      DETERMINER: Key used for determiner tags.
+      NUMBER: Key used for number tags.
+      FOREIGN_WORD: Key used for foreign word tags.
+      PUNCTUATION: Key used for punctuation tags.
     """
 
-    NOUN_KEY        = "__noun__"
-    ADJECTIVE_KEY   = "__adjective__"
-    VERB_KEY        = "__verb__"
-    ADVERB_KEY      = "__adverb__"
-    PREPOSITION_KEY = "__preposition__"
-    DETERMINER_KEY  = "__determiner__"
+    NOUN          = "__noun__"
+    PROPER_NOUN   = "__proper_noun__"
+    ADJECTIVE     = "__adjective__"
+    VERB          = "__verb__"
+    ADVERB        = "__adverb__"
+    PRONOUN       = "__pronoun__"
+    PREPOSITION   = "__preposition__"
+    DETERMINER    = "__determiner__"
+    NUMBER        = "__number__"
+    FOREIGN_WORD  = "__foreign_word__"
+    PUNCTUATION   = "__punctuation__"
   ##############################################################################
 
   def __init__(self):

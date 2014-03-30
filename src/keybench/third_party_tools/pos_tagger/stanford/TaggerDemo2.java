@@ -13,7 +13,7 @@ import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.process.CoreLabelTokenFactory;
 import edu.stanford.nlp.process.DocumentPreprocessor;
 import edu.stanford.nlp.process.PTBTokenizer;
-import edu.stanford.nlp.objectbank.TokenizerFactory;
+import edu.stanford.nlp.process.TokenizerFactory;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 
 /** This demo shows user-provided sentences (i.e., {@code List<HasWord>})
@@ -28,7 +28,7 @@ class TaggerDemo2 {
 
   public static void main(String[] args) throws Exception {
     if (args.length != 2) {
-      System.err.println("usage: java TaggerDemo modelFile fileToTag");
+      System.err.println("usage: java TaggerDemo2 modelFile fileToTag");
       return;
     }
     MaxentTagger tagger = new MaxentTagger(args[0]);
@@ -42,6 +42,17 @@ class TaggerDemo2 {
       List<TaggedWord> tSentence = tagger.tagSentence(sentence);
       pw.println(Sentence.listToString(tSentence, false));
     }
+
+    // print the adjectives in one more sentence. This shows how to get at words and tags in a tagged sentence.
+    List<HasWord> sent = Sentence.toWordList("The", "slimy", "slug", "crawled", "over", "the", "long", ",", "green", "grass", ".");
+    List<TaggedWord> taggedSent = tagger.tagSentence(sent);
+    for (TaggedWord tw : taggedSent) {
+      if (tw.tag().startsWith("JJ")) {
+        pw.println(tw.word());
+      }
+    }
+
+    pw.close();
   }
 
 }
