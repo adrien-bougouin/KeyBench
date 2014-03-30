@@ -3,20 +3,26 @@ import multiprocessing
 import keybench.main.core.benchmark
 
 def __keyphrase_extraction_thread(arguments):
-  """Extracts the keyphrases of a document.
+  """Extracts the keyphrases of a corpus' documents.
 
   Args:
     arguments: The C{KBKeyphraseExtractorI} component to use for the keyphrase
-      extraction and the C{KBDocument} from which the keyphrases must be
+      extraction and the C{KBCorpus} from which the keyphrases must be
       extracted (C{tuple}).
 
   Returns:
-    The C{string} name of the treated document and its C{list} of extracted
-    keyphrases
+    The C{KBCorpus} from which the keyphrases are extracted and the C{map} of
+    extracted keyphrases (C{list} of C{string} as value) associated to a
+    document (C{string name as key}).
   """
-  keyphrase_extractor, document = arguments
+  keyphrase_extractor, corpus_builder = arguments
+  corpus = corpus_builder.buildCorpus()
+  keyphrase_documents = {}
 
-  return (document.name, keyphrase_extractor.extractKeyphrases(document))
+  for document in corpus.testDocuments():
+    document_keyphrases[document.name] = keyphrase_extractor.extractKeyphrases(document)
+
+  return (corpus, document_keyphrases)
 
 class KBRun(object):
   """The executor of a specific run.
@@ -46,40 +52,32 @@ class KBRun(object):
 
   def start(self):
     """Executes the run.
+
+    Execute the keyphrase extraction run using one thread for each corpus to
+    treat during the run.
     """
 
     benchmark_singleton = benchmark.KBBenchmark.singleton()
     configuration = benchmark_singleton.run_configurations[self._name]
-    nb_threads = benchmark_singleton.run_threads[self._name]
+    keyphrase_extractor = configuration.keyphraseExtractor()
+    thread_arguments = []
 
-    # keyphrase extraction of the corpora taken one by one
+    # preparation of the keyphrase extract
     for corpus_builder in configuration.corpusBuilders():
-      keyphrases = {}
-      corpus = corpus_builder.buildCorpus()
-      document_builder = configuration.documentBuilder(corpus.name)
-      thread_arguments = []
-      extraction_results = []
+      thread_arguments.append((keyphrase_extractor, corpus_builder))
 
-      # preparation of the keyphrase extraction of the documents
-      for document in corpus.testDocuments(document_builder):
-        thread_arguments.append((configuration.keyphraseExtractor(), document))
+    # keyphrase extraction
+    if len(thread_arguments) == 1:
+      extraction_results = [__keyphrase_extraction_thread(thread_arguments[0])]
+    # multi-threaded keyphrase extraction
+    else:
+      thread_pool = multiprocessing.Pool()
+      extraction_results = thread_pool.map(__keyphrase_extraction_thread,
+                                           thread_arguments)
 
-      # sequential keyphrase extraction of the documents
-      if nb_threads == 1:
-        for arguments in thread_arguments:
-          extraction_results.append(__keyphrase_extraction_thread(arguments))
-      # multi-threaded keyphrase extraction of the documents
-      else:
-        thread_pool = multiprocessing.Pool(nb_threads)
-        extraction_results = thread_pool.map(__keyphrase_extraction_thread,
-                                             thread_arguments)
-
-      # formating result
-      for document_name, document_keyphrases in extraction_results:
-        keyphrases[document_name] = document_keyphrases
-
-      # consumption of the keyphrases extracted from each documents of the
-      # corpus
+    # consumption of the keyphrases extracted from each documents of each
+    # corpus
+    for corpus, document_keyphrases in extraction_results:
       for keyphrase_consumer in configuration.keyphraseConsumers():
-        keyphrase_consumer.consumeKeyphrases(corpus, keyphrases)
+        keyphrase_consumer.consumeKeyphrases(corpus, document_keyphrases)
 

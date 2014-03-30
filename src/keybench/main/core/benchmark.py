@@ -29,7 +29,6 @@ class KBBenchmark(object):
     self._run_configurations = {}
     self._run_tools = {}
     self._run_resources = {}
-    self._run_threads = {}
 
   @property
   def run_configurations(self):
@@ -54,14 +53,6 @@ class KBBenchmark(object):
   @run_resources.setter
   def run_resources(self, value):
     self._run_resources = value
-
-  @property
-  def run_threads(self):
-    return self._run_threads
-
-  @run_threads.setter
-  def run_threads(self, value):
-    self._run_threads = value
 
   def start(self):
     """Executes every run.
