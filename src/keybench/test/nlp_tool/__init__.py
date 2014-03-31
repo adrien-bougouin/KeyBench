@@ -1,0 +1,5 @@
+from keybench.test.nlp_tool.english_punkt_tokenizer_tests import EnglishPunktTokenizerTests
+from keybench.test.nlp_tool.lowercase_normalizer_tests import LowercaseNormalizerTests
+from keybench.test.nlp_tool.snowball_stemmer_tests import SnowballStemmerTests
+from keybench.test.nlp_tool.stanford_pos_tagger_tests import StanfordPOSTaggerTests
+

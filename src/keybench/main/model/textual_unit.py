@@ -12,7 +12,7 @@ class KBTextualUnit(object):
     corpus_name: The C{string} name of the corpus from which the textual unit is
       extracted.
     language: The C{string} name of the textual unit's language (see
-      C{keybench.main.language.KBLanguage.ENGLISH}).
+      C{keybench.main.language_support.KBLanguage.ENGLISH}).
     normalized_form: The most generic C{string} form of the textual unit.
     tokens: The C{list} of the textual unit's tokens.
     lemmas: The C{list} of the textual unit's lemmas.

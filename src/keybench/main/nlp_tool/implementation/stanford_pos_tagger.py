@@ -1,8 +1,10 @@
-from nltk.stem import snowball
+import string
+
+from nltk.tag import stanford
 from os import path
 
 from keybench.main.nlp_tool import interface
-from keybench.main import language
+from keybench.main import language_support
 
 KEYBENCH_DIRECTORY = path.join(path.dirname(__file__), "..", "..", "..")
 THIRD_PARTY_TOOL_DIRECTORY = path.join(KEYBENCH_DIRECTORY, "third_party_tools")
@@ -16,7 +18,7 @@ class StanfordPOSTagger(interface.KBPOSTaggerI):
   """Stanford Part-of-Speech tagger.
 
   Stanford Part-of-Speech tagger. It currently only supports English
-  (C{keybench.main.language.KBLanguage.ENGLISH}).
+  (C{keybench.main.language_support.KBLanguage.ENGLISH}).
   """
 
   def __init__(self, language, encoding):
@@ -24,12 +26,12 @@ class StanfordPOSTagger(interface.KBPOSTaggerI):
 
     Args:
       language: The C{string} name of the language of the data to treat (see
-        C{keybench.main.language.KBLanguage.ENGLISH}).
+        C{keybench.main.language_support.KBLanguage.ENGLISH}).
       encoding: The C{string} encoding of the data to treat.
     """
 
     language_model = None
-    if language == language.KBLanguage.ENGLISH:
+    if language == language_support.KBLanguage.ENGLISH:
       language_model = path.join(STANFORD_MODEL_DIRECTORY,
                                  "english-bidirectional-distsim.tagger")
       self._tagset = {
@@ -49,7 +51,9 @@ class StanfordPOSTagger(interface.KBPOSTaggerI):
         interface.KBPOSTaggerI.POSTagKey.PUNCTUATION:   ["PUNCT"]
       }
 
-    self._pos_tagger = POSTagger(language_model, STANFORD_JAR, encoding)
+    self._pos_tagger = stanford.POSTagger(language_model,
+                                          STANFORD_JAR,
+                                          encoding)
 
   def tag(self, tokenized_sentences):
     """POS tags tokenized sentences.
@@ -69,7 +73,8 @@ class StanfordPOSTagger(interface.KBPOSTaggerI):
       pos_tagged_sentence = []
 
       for word, tag in word_tag_sentence:
-        if word == tag:
+        if word == tag \
+           or tag in string.punctuation:
           pos_tagged_sentence.append("PUNCT")
         else:
           pos_tagged_sentence.append(tag)

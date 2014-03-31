@@ -1,3 +1,5 @@
+import re
+
 from nltk.tokenize import punkt
 
 from keybench.main.nlp_tool import interface
@@ -44,7 +46,18 @@ class EnglishPunktTokenizer(interface.KBTokenizerI):
     tokenized_sentences = []
 
     for sentence in sentences:
-      tokenized_sentences.append(self._word_tokenizer.tokenize(sentence))
+      tokenized_sentence = self._word_tokenizer.tokenize(sentence)
+
+      # split the unsplitted "."
+      if tokenized_sentence[-1].find(".") == len(tokenized_sentence[-1]) - 1:
+        tokenized_last_word = re.sub(r"(\.+)$", r" \1", tokenized_sentence[-1])
+        w1 = tokenized_last_word.rsplit(" ", 1)[0]
+        w2 = tokenized_last_word.rsplit(" ", 1)[1]
+
+        tokenized_sentence[-1] = w1
+        tokenized_sentence.append(w2)
+
+      tokenized_sentences.append(tokenized_sentence)
 
     return tokenized_sentences
 

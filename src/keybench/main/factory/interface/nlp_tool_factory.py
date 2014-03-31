@@ -12,7 +12,7 @@ class KBNLPToolFactoryI(object):
 
     Args:
       language: The C{string} name of the language to treat (see
-        C{keybench.main.language.KBLanguage.ENGLISH}).
+        C{keybench.main.language_support.KBLanguage.ENGLISH}).
 
     Returns:
       The C{KBNormalizerI} to use for the given C{language}.
@@ -25,7 +25,7 @@ class KBNLPToolFactoryI(object):
 
     Args:
       language: The C{string} name of the language to treat (see
-        C{keybench.main.language.KBLanguage.ENGLISH}).
+        C{keybench.main.language_support.KBLanguage.ENGLISH}).
 
     Returns:
       The C{KBTokenizerI} to use for the given C{language}.
@@ -38,7 +38,7 @@ class KBNLPToolFactoryI(object):
 
     Args:
       language: The C{string} name of the language to treat (see
-        C{keybench.main.language.KBLanguage.ENGLISH}).
+        C{keybench.main.language_support.KBLanguage.ENGLISH}).
 
     Returns:
       The C{KBStemmerI} to use for the given C{language}.
@@ -51,7 +51,7 @@ class KBNLPToolFactoryI(object):
 
     Args:
       language: The C{string} name of the language to treat (see
-        C{keybench.main.language.KBLanguage.ENGLISH}).
+        C{keybench.main.language_support.KBLanguage.ENGLISH}).
 
     Returns:
       The C{KBlemmatizerI} to use for the given C{language}.
@@ -64,7 +64,7 @@ class KBNLPToolFactoryI(object):
 
     Args:
       language: The C{string} name of the language to treat (see
-        C{keybench.main.language.KBLanguage.ENGLISH}).
+        C{keybench.main.language_support.KBLanguage.ENGLISH}).
 
     Returns:
       The C{KBPOSTaggerI} to use for the given C{language}.

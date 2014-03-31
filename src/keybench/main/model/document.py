@@ -11,7 +11,7 @@ class KBDocument(object):
       to.
     name: The name (identifier) of the document.
     language: The C{string} name of the document's language (see
-      C{keybench.main.language.KBLanguage.ENGLISH}).
+      C{keybench.main.language_support.KBLanguage.ENGLISH}).
     encoding: The C{string} name of the document's encoding.
     title: The title of the document.
     abstract: The abstract of the document.
