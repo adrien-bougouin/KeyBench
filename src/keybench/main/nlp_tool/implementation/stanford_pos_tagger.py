@@ -42,11 +42,13 @@ class StanfordPOSTagger(interface.KBPOSTaggerI):
         interface.KBPOSTaggerI.POSTagKey.PROPER_NOUN:   ["NNP", "NNPS"],
         interface.KBPOSTaggerI.POSTagKey.ADJECTIVE:     ["JJ", "JJR", "JJS"],
         interface.KBPOSTaggerI.POSTagKey.VERB:          ["VB", "VBD", "VBP",
-                                                         "VBZ"], # VBN, VBG
-        interface.KBPOSTaggerI.POSTagKey.ADVERB:        ["RB", "RBR", "RBS"], # WRB
-        interface.KBPOSTaggerI.POSTagKey.PRONOUN:       ["PRP", "PRP$"], # WP", WP$
+                                                         "VBZ", "VBN", "VBG"],
+        interface.KBPOSTaggerI.POSTagKey.ADVERB:        ["RB", "RBR", "RBS",
+                                                         "WRB"],
+        interface.KBPOSTaggerI.POSTagKey.PRONOUN:       ["PRP", "PRP$", "WP",
+                                                         "WP$"],
         interface.KBPOSTaggerI.POSTagKey.PREPOSITION:   ["IN"],
-        interface.KBPOSTaggerI.POSTagKey.DETERMINER:    ["DT"], # WDT
+        interface.KBPOSTaggerI.POSTagKey.DETERMINER:    ["DT", "WDT"],
         interface.KBPOSTaggerI.POSTagKey.NUMBER:        ["CC"],
         interface.KBPOSTaggerI.POSTagKey.FOREIGN_WORD:  ["FW"],
         interface.KBPOSTaggerI.POSTagKey.PUNCTUATION:   ["PUNCT"]

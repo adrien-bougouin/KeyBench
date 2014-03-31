@@ -50,15 +50,15 @@ class MEltPOSTagger(interface.KBPOSTaggerI):
       self._tagset = {
         interface.KBPOSTaggerI.POSTagKey.NOUN:          ["NC"],
         interface.KBPOSTaggerI.POSTagKey.PROPER_NOUN:   ["NPP"],
-        interface.KBPOSTaggerI.POSTagKey.ADJECTIVE:     ["ADJ"], # ADJWH
+        interface.KBPOSTaggerI.POSTagKey.ADJECTIVE:     ["ADJ", "ADJWH"],
         interface.KBPOSTaggerI.POSTagKey.VERB:          ["V", "VIMP", "VINF",
-                                                         "VS"], # VPP, VPR
-        interface.KBPOSTaggerI.POSTagKey.ADVERB:        ["ADV"], # ADVWH
+                                                         "VS", "VPP", "VPR"],
+        interface.KBPOSTaggerI.POSTagKey.ADVERB:        ["ADV", "ADVWH"],
         interface.KBPOSTaggerI.POSTagKey.PRONOUN:       ["PRO", "PROREL",
                                                          "PROWH", "CLO", "CLR",
                                                          "CLS"],
         interface.KBPOSTaggerI.POSTagKey.PREPOSITION:   ["P"],
-        interface.KBPOSTaggerI.POSTagKey.DETERMINER:    ["DET"], # DETWH
+        interface.KBPOSTaggerI.POSTagKey.DETERMINER:    ["DET", "DETWH"],
         interface.KBPOSTaggerI.POSTagKey.NUMBER:        [],
         interface.KBPOSTaggerI.POSTagKey.FOREIGN_WORD:  ["ET"],
         interface.KBPOSTaggerI.POSTagKey.PUNCTUATION:   ["PONCT"]
@@ -77,11 +77,13 @@ class MEltPOSTagger(interface.KBPOSTaggerI):
         interface.KBPOSTaggerI.POSTagKey.PROPER_NOUN:   ["NNP", "NNPS"],
         interface.KBPOSTaggerI.POSTagKey.ADJECTIVE:     ["JJ", "JJR", "JJS"],
         interface.KBPOSTaggerI.POSTagKey.VERB:          ["VB", "VBD", "VBP",
-        "VBZ"], # VBN, VBG
-        interface.KBPOSTaggerI.POSTagKey.ADVERB:        ["RB", "RBR", "RBS"], # WRB
-        interface.KBPOSTaggerI.POSTagKey.PRONOUN:       ["PRP", "PRP$"], # WP", WP$
+                                                         "VBZ", "VBN", "VBG"],
+        interface.KBPOSTaggerI.POSTagKey.ADVERB:        ["RB", "RBR", "RBS",
+                                                         "WRB"],
+        interface.KBPOSTaggerI.POSTagKey.PRONOUN:       ["PRP", "PRP$", "WP",
+                                                         "WP$"],
         interface.KBPOSTaggerI.POSTagKey.PREPOSITION:   ["IN"],
-        interface.KBPOSTaggerI.POSTagKey.DETERMINER:    ["DT"], # WDT
+        interface.KBPOSTaggerI.POSTagKey.DETERMINER:    ["DT", "WDT"],
         interface.KBPOSTaggerI.POSTagKey.NUMBER:        ["CC"],
         interface.KBPOSTaggerI.POSTagKey.FOREIGN_WORD:  ["FW"],
         interface.KBPOSTaggerI.POSTagKey.PUNCTUATION:   ["PUNCT"]

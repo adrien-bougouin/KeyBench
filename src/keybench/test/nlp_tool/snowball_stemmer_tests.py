@@ -14,5 +14,5 @@ class SnowballStemmerTests(unittest.TestCase):
     plural_word = "words"
     stemmed_word = "word"
 
-    self.failUnless(self._stemmer.stem(plural_word))
+    self.failUnless(self._stemmer.stem(plural_word) == stemmed_word)
 

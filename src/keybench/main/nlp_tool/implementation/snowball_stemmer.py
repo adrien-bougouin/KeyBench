@@ -16,6 +16,8 @@ class SnowballStemmer(interface.KBStemmerI):
         (see C{keybench.main.language_support.KBLanguage}).
     """
 
+    super(SnowballStemmer, self).__init__()
+
     self._stemmer = snowball.SnowballStemmer(language)
 
   def stem(self, word):
