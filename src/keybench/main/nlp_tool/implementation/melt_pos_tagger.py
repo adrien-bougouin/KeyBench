@@ -20,7 +20,8 @@ class MEltPOSTagger(interface.KBPOSTaggerI):
   """MElt Part-of-Speech tagger.
 
   MElt Part-of-Speech tagger. It currently only supports French
-  (C{keybench.main.language_support.KBLanguage.FRENCH}).
+  (C{keybench.main.language_support.KBLanguage.FRENCH}) and English
+  (C{keybench.main.language_support.KBLanguage.English}).
   """
 
   def __init__(self, language, encoding):
@@ -61,6 +62,29 @@ class MEltPOSTagger(interface.KBPOSTaggerI):
         interface.KBPOSTaggerI.POSTagKey.NUMBER:        [],
         interface.KBPOSTaggerI.POSTagKey.FOREIGN_WORD:  ["ET"],
         interface.KBPOSTaggerI.POSTagKey.PUNCTUATION:   ["PONCT"]
+      }
+    elif language == language_support.KBLanguage.ENGLISH:
+      model_directory = path.join(MELT_MODEL_DIRECTORY, "en")
+      self._melt_command = "python %s -m %s -d %s -l %s -e %s"%(
+                             MELT_EXEC,
+                             model_directory,
+                             path.join(model_directory, "tag_dict.json"),
+                             path.join(model_directory, "lexicon.json"),
+                             encoding
+                           )
+      self._tagset = {
+        interface.KBPOSTaggerI.POSTagKey.NOUN:          ["NN", "NNS"],
+        interface.KBPOSTaggerI.POSTagKey.PROPER_NOUN:   ["NNP", "NNPS"],
+        interface.KBPOSTaggerI.POSTagKey.ADJECTIVE:     ["JJ", "JJR", "JJS"],
+        interface.KBPOSTaggerI.POSTagKey.VERB:          ["VB", "VBD", "VBP",
+        "VBZ"], # VBN, VBG
+        interface.KBPOSTaggerI.POSTagKey.ADVERB:        ["RB", "RBR", "RBS"], # WRB
+        interface.KBPOSTaggerI.POSTagKey.PRONOUN:       ["PRP", "PRP$"], # WP", WP$
+        interface.KBPOSTaggerI.POSTagKey.PREPOSITION:   ["IN"],
+        interface.KBPOSTaggerI.POSTagKey.DETERMINER:    ["DT"], # WDT
+        interface.KBPOSTaggerI.POSTagKey.NUMBER:        ["CC"],
+        interface.KBPOSTaggerI.POSTagKey.FOREIGN_WORD:  ["FW"],
+        interface.KBPOSTaggerI.POSTagKey.PUNCTUATION:   ["PUNCT"]
       }
 
   def tag(self, tokenized_sentences):

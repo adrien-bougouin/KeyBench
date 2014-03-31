@@ -18,7 +18,8 @@ class StanfordPOSTagger(interface.KBPOSTaggerI):
   """Stanford Part-of-Speech tagger.
 
   Stanford Part-of-Speech tagger. It currently only supports English
-  (C{keybench.main.language_support.KBLanguage.ENGLISH}).
+  (C{keybench.main.language_support.KBLanguage.ENGLISH}) and French
+  (C{keybench.main.language_support.KBLanguage.FRENCH}).
   """
 
   def __init__(self, language, encoding):
@@ -50,6 +51,21 @@ class StanfordPOSTagger(interface.KBPOSTaggerI):
         interface.KBPOSTaggerI.POSTagKey.FOREIGN_WORD:  ["FW"],
         interface.KBPOSTaggerI.POSTagKey.PUNCTUATION:   ["PUNCT"]
       }
+    if language == language_support.KBLanguage.FRENCH:
+      language_model = path.join(STANFORD_MODEL_DIRECTORY, "french.tagger")
+      self._tagset = {
+        interface.KBPOSTaggerI.POSTagKey.NOUN:          ["NC"],
+        interface.KBPOSTaggerI.POSTagKey.PROPER_NOUN:   ["NP"],
+        interface.KBPOSTaggerI.POSTagKey.ADJECTIVE:     ["A"],
+        interface.KBPOSTaggerI.POSTagKey.VERB:          ["V"],
+        interface.KBPOSTaggerI.POSTagKey.ADVERB:        ["ADV"],
+        interface.KBPOSTaggerI.POSTagKey.PRONOUN:       ["PRO", "CL"],
+        interface.KBPOSTaggerI.POSTagKey.PREPOSITION:   ["P"],
+        interface.KBPOSTaggerI.POSTagKey.DETERMINER:    ["D"],
+        interface.KBPOSTaggerI.POSTagKey.NUMBER:        [],
+        interface.KBPOSTaggerI.POSTagKey.FOREIGN_WORD:  ["ET"],
+        interface.KBPOSTaggerI.POSTagKey.PUNCTUATION:   ["PONCT"]
+      }
 
     self._pos_tagger = stanford.POSTagger(language_model,
                                           STANFORD_JAR,
@@ -75,7 +91,7 @@ class StanfordPOSTagger(interface.KBPOSTaggerI):
       for word, tag in word_tag_sentence:
         if word == tag \
            or tag in string.punctuation:
-          pos_tagged_sentence.append("PUNCT")
+          pos_tagged_sentence.append(self._tagset[interface.KBPOSTaggerI.POSTagKey.PUNCTUATION][0])
         else:
           pos_tagged_sentence.append(tag)
 

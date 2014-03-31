@@ -1,4 +1,5 @@
 from keybench.test.nlp_tool.english_punkt_tokenizer_tests import EnglishPunktTokenizerTests
+from keybench.test.nlp_tool.french_bonsai_tokenizer_tests import FrenchBonsaiTokenizerTests
 from keybench.test.nlp_tool.lowercase_normalizer_tests import LowercaseNormalizerTests
 from keybench.test.nlp_tool.melt_pos_tagger_tests import MEltPOSTaggerTests
 from keybench.test.nlp_tool.snowball_stemmer_tests import SnowballStemmerTests

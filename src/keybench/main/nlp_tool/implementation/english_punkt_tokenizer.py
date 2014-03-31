@@ -7,12 +7,14 @@ from keybench.main.nlp_tool import interface
 class EnglishPunktTokenizer(interface.KBTokenizerI):
   """Sentence and word tokenizer.
 
-  Sentence and word tokenizer using the NLTK's C{punct} module.
+  Sentence and word tokenizer using the NLTK's C{punkt} module.
   """
 
   def __init__(self):
     """Constructor.
     """
+
+    super(EnglishPunktTokenizer, self).__init__()
 
     self._sentence_tokenizer = punkt.PunktSentenceTokenizer()
     self._word_tokenizer = punkt.PunktWordTokenizer()
