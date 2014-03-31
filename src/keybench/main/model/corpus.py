@@ -25,7 +25,7 @@ class KBCorpus(object):
       directory) of the directory containing the references associated to the
       test documents.
     language: The C{string} name of the corpus' language (see
-      C{keybench.main.language_support.KBLanguage.ENGLISH}). 
+      C{keybench.main.language_support.KBLanguage}). 
     encoding: The C{string} name of the corpus' encoding.
     file_extension: The C{string} extention of the corpus' files (including the
       '.').

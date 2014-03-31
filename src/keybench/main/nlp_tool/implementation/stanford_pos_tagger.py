@@ -26,9 +26,11 @@ class StanfordPOSTagger(interface.KBPOSTaggerI):
 
     Args:
       language: The C{string} name of the language of the data to treat (see
-        C{keybench.main.language_support.KBLanguage.ENGLISH}).
+        C{keybench.main.language_support.KBLanguage}).
       encoding: The C{string} encoding of the data to treat.
     """
+
+    super(StanfordPOSTagger, self).__init__()
 
     language_model = None
     if language == language_support.KBLanguage.ENGLISH:
@@ -38,14 +40,12 @@ class StanfordPOSTagger(interface.KBPOSTaggerI):
         interface.KBPOSTaggerI.POSTagKey.NOUN:          ["NN", "NNS"],
         interface.KBPOSTaggerI.POSTagKey.PROPER_NOUN:   ["NNP", "NNPS"],
         interface.KBPOSTaggerI.POSTagKey.ADJECTIVE:     ["JJ", "JJR", "JJS"],
-        interface.KBPOSTaggerI.POSTagKey.VERB:          ["VB", "VBD", "VBG",
-                                                         "VBN", "VBP", "VBZ"],
-        interface.KBPOSTaggerI.POSTagKey.ADVERB:        ["RB", "RBR", "RBS",
-                                                         "WRB"],
-        interface.KBPOSTaggerI.POSTagKey.PRONOUN:       ["PRP", "PRP$", "WP",
-                                                         "WP$"],
+        interface.KBPOSTaggerI.POSTagKey.VERB:          ["VB", "VBD", "VBP",
+                                                         "VBZ"], # VBN, VBG
+        interface.KBPOSTaggerI.POSTagKey.ADVERB:        ["RB", "RBR", "RBS"], # WRB
+        interface.KBPOSTaggerI.POSTagKey.PRONOUN:       ["PRP", "PRP$"], # WP", WP$
         interface.KBPOSTaggerI.POSTagKey.PREPOSITION:   ["IN"],
-        interface.KBPOSTaggerI.POSTagKey.DETERMINER:    ["DT", "WDT"],
+        interface.KBPOSTaggerI.POSTagKey.DETERMINER:    ["DT"], # WDT
         interface.KBPOSTaggerI.POSTagKey.NUMBER:        ["CC"],
         interface.KBPOSTaggerI.POSTagKey.FOREIGN_WORD:  ["FW"],
         interface.KBPOSTaggerI.POSTagKey.PUNCTUATION:   ["PUNCT"]

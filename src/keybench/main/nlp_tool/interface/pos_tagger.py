@@ -13,7 +13,8 @@ class KBPOSTaggerI(object):
     """Part-of-Speech names.
 
     Part-of-Speech names to use as tagset keys. Those names are generic and
-    meant to match multiple tags.
+    meant to match multiple tags. However, highly specific class may not be
+    given.
 
     Attributes:
       NOUN: Key used for noun tags.

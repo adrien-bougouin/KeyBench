@@ -12,7 +12,7 @@ class KBNLPResourceFactoryI(object):
 
     Args:
       language: The C{string} name of the language of the data to treat (see
-        C{keybench.main.language_support.KBLanguage.ENGLISH}).
+        C{keybench.main.language_support.KBLanguage}).
 
     Returns:
       The C{list} of C{string} words to use as stop words.
