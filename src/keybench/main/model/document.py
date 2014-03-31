@@ -10,7 +10,8 @@ class KBDocument(object):
     corpus_name: The C{string} name of the corpus to which the document belongs
       to.
     name: The name (identifier) of the document.
-    language: The C{string} name of the document's language.
+    language: The C{string} name of the document's language (see
+      C{keybench.main.language.KBLanguage.ENGLISH}).
     encoding: The C{string} name of the document's encoding.
     title: The title of the document.
     abstract: The abstract of the document.

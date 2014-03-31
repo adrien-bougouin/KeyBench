@@ -7,8 +7,12 @@ class KBNLPResourceFactoryI(object):
   resources (e.g. list of stop words) for specific languages.
   """
 
-  def stopLists(self):
+  def stopList(self, language):
     """Provides a list of stop words.
+
+    Args:
+      language: The C{string} name of the language of the data to treat (see
+        C{keybench.main.language.KBLanguage.ENGLISH}).
 
     Returns:
       The C{list} of C{string} words to use as stop words.

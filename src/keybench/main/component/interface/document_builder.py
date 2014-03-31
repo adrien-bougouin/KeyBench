@@ -27,7 +27,8 @@ class KBDocumentBuilderI(component.KBComponent):
         built.
       corpus_name: The C{string} of the corpus to which the document belongs.
       name: The C{string} name of the document.
-      language: The C{string} language of the document.
+      language: The C{string} language of the document (see
+        C{keybench.main.language.KBLanguage.ENGLISH}).
       encoding: The C{string} encoding of the file from which the document must
         be built.
 

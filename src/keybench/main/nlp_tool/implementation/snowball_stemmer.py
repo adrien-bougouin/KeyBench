@@ -12,7 +12,8 @@ class SnowballStemmer(interface.KBStemmerI):
     """Constructor.
 
     Args:
-      language: The C{string} name of the language to be treated by the stemmer.
+      language: The C{string} name of the language to be treated by the stemmer
+        (see C{keybench.main.language.KBLanguage.ENGLISH}).
     """
 
     self._stemmer = snowball.SnowballStemmer(language)

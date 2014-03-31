@@ -23,7 +23,8 @@ class StanfordPOSTagger(interface.KBPOSTaggerI):
     """Constructor.
 
     Args:
-      language: The C{string} name of the language of the data to treat.
+      language: The C{string} name of the language of the data to treat (see
+        C{keybench.main.language.KBLanguage.ENGLISH}).
       encoding: The C{string} encoding of the data to treat.
     """
 
