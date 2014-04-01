@@ -40,6 +40,7 @@ class KBDocumentBuilderI(component.KBComponent):
 
     ## fill the document 'meta-data' ###########################################
     document.corpus_name = corpus_name
+    document.filepath = filepath
     document.name = name
     document.language = language
     document.encoding = encoding

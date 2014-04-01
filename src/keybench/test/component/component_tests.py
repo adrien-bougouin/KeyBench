@@ -117,6 +117,7 @@ class KBComponentTests(unittest.TestCase):
 
   def testStoringIdentification(self):
     doc = model.KBDocument("Test-Corpus",
+                           "a/file/path",
                            "1337",
                            "fr",
                            "utf-8",
@@ -151,6 +152,7 @@ class KBComponentTests(unittest.TestCase):
 
   def testNoLazyLoading(self):
     doc = model.KBDocument("Test-Corpus",
+                           "a/file/path",
                            "1337",
                            "fr",
                            "utf-8",

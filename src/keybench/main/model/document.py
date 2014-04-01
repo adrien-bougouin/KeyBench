@@ -9,6 +9,7 @@ class KBDocument(object):
   Attributes:
     corpus_name: The C{string} name of the corpus to which the document belongs
       to.
+    filepath: The C{string} path of the file containing the document.
     name: The name (identifier) of the document.
     language: The C{string} name of the document's language (see
       C{keybench.main.language_support.KBLanguage}).
@@ -44,6 +45,7 @@ class KBDocument(object):
 
   def __init__(self,
                corpus_name,
+               filepath,
                name,
                language,
                encoding,
@@ -62,6 +64,7 @@ class KBDocument(object):
     super(KBDocument, self).__init__()
 
     self._corpus_name = corpus_name
+    self._filepath = filepath
     self._name = name
     self._language = language
     self._encoding = encoding
@@ -80,6 +83,7 @@ class KBDocument(object):
 
   def __eq__(self, other):
     return self._corpus_name == other._corpus_name \
+           and self._filepath == other._filepath \
            and self._name == other._name \
            and self._language == other._language \
            and self._encoding == other._encoding \
@@ -102,6 +106,10 @@ class KBDocument(object):
   @property
   def corpus_name(self):
     return self._corpus_name
+
+  @property
+  def filepath(self):
+    return self._filepath
 
   @property
   def name(self):

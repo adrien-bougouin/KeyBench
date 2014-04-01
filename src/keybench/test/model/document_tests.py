@@ -6,6 +6,7 @@ class KBDocumentTests(unittest.TestCase):
 
   def setUp(self):
     self._doc = model.KBDocument("test-corpus",
+                                 "a/file/path",
                                  "1337",
                                  "fr",
                                  "utf-8",
@@ -33,6 +34,7 @@ class KBDocumentTests(unittest.TestCase):
 
   def testInitialization(self):
     self.failUnless(self._doc.corpus_name == "test-corpus")
+    self.failUnless(self._doc.filepath == "a/file/path")
     self.failUnless(self._doc.name == "1337")
     self.failUnless(self._doc.language == "fr")
     self.failUnless(self._doc.encoding == "utf-8")
@@ -75,6 +77,7 @@ class KBDocumentTests(unittest.TestCase):
 
   def testEqual(self):
     doc1 = model.KBDocument("test-corpus",
+                            "a/file/path",
                             "1337",
                             "fr",
                             "utf-8",
@@ -97,6 +100,7 @@ class KBDocumentTests(unittest.TestCase):
                             [["N", "N", "NUM", "PONCT"],
                              ["N", "N", "NUM", "PONCT"]])
     doc2 = model.KBDocument("test-corpus",
+                            "a/file/path",
                             "1338",
                             "fr",
                             "utf-8",
@@ -124,6 +128,7 @@ class KBDocumentTests(unittest.TestCase):
 
   def testNotEqual(self):
     doc1 = model.KBDocument("test-corpus",
+                            "a/file/path",
                             "1337",
                             "fr",
                             "utf-8",
@@ -146,6 +151,7 @@ class KBDocumentTests(unittest.TestCase):
                             [["N", "N", "NUM", "PONCT"],
                              ["N", "N", "NUM", "PONCT"]])
     doc2 = model.KBDocument("test-corpus",
+                            "a/file/path",
                             "1338",
                             "fr",
                             "utf-8",
