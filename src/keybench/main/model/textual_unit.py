@@ -89,8 +89,8 @@ class KBTextualUnit(object):
         the textual unit's seen forms.
 
     Returns:
-      A C{list} of all the textual unit's seen forms paired with a list of their
-      offsets, within the given C{document}.
+      A C{map} of C{list} of all offsets of the textual unit's seen form
+      associated to the index of a sentence, within the given C{document}.
     """
 
     return self._seen_forms[document].items()

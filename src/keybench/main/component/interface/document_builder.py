@@ -61,7 +61,7 @@ class KBDocumentBuilderI(component.KBComponent):
       document_file.close()
 
       ## NLP tools #############################################################
-      tool_factory = core.KBBenchmark.singleton().run_tools[self.run_name]
+      tool_factory = core.KBBenchmark.singleton().run_tools[self._run_name]
       tokenizer = tool_factory.tokenizer(language)
       pos_tagger = tool_factory.pos_tagger(language)
       ##########################################################################
