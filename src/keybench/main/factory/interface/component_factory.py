@@ -4,7 +4,10 @@ class KBComponentFactoryI(object):
   """The configuration of a run.
 
   The abstract factory providing the components to use for one specific
-  keyphrase extraction run.
+  keyphrase extraction run. Components for one service (candidate extraction,
+  candidate ranking, etc.) may differ for each language. However, it is
+  recommended that, despite language specific processing, such components
+  provide similar treatment.
   """
 
   def documentBuilder(self, corpus_name):
@@ -33,8 +36,12 @@ class KBComponentFactoryI(object):
 
     raise exception.KBConfigurationException(self, "Uncomplete configuration!")
 
-  def candidateExtractor(self):
+  def candidateExtractor(self, language):
     """Provides the component to use for candidate extraction in the run.
+
+    Args:
+      language: The C{string} name of the language to treat (see
+        C{keybench.main.language_support.KBLanguage}).
 
     Returns:
       The C{KBCandidateExtractorI} of the run.
@@ -42,8 +49,12 @@ class KBComponentFactoryI(object):
 
     raise exception.KBConfigurationException(self, "Uncomplete configuration!")
 
-  def candidateClusterer(self):
+  def candidateClusterer(self, language):
     """Provides the component to use for candidate clustering in the run.
+
+    Args:
+      language: The C{string} name of the language to treat (see
+        C{keybench.main.language_support.KBLanguage}).
 
     Returns:
       The C{KBCandidateClustererI} of the run.
@@ -51,8 +62,12 @@ class KBComponentFactoryI(object):
 
     raise exception.KBConfigurationException(self, "Uncomplete configuration!")
 
-  def candidateRanker(self):
+  def candidateRanker(self, language):
     """Provides the component to use for candidate ranking in the run.
+
+    Args:
+      language: The C{string} name of the language to treat (see
+        C{keybench.main.language_support.KBLanguage}).
 
     Returns:
       The C{KBCandidateRankerI} of the run.
@@ -60,8 +75,12 @@ class KBComponentFactoryI(object):
 
     raise exception.KBConfigurationException(self, "Uncomplete configuration!")
 
-  def candidateClassifier(self):
+  def candidateClassifier(self, language):
     """Provides the component to use for candidate classification in the run.
+
+    Args:
+      language: The C{string} name of the language to treat (see
+        C{keybench.main.language_support.KBLanguage}).
 
     Returns:
       The C{KBCandidateClassifierI} of the run.
@@ -69,8 +88,12 @@ class KBComponentFactoryI(object):
 
     raise exception.KBConfigurationException(self, "Uncomplete configuration!")
 
-  def keyphraseExtractor(self):
+  def keyphraseExtractor(self, language):
     """Provides the component to use for keyphrase extraction in the run.
+
+    Args:
+      language: The C{string} name of the language to treat (see
+        C{keybench.main.language_support.KBLanguage}).
 
     Returns:
       The C{KBKeyphraseExtractorI} of the run.
@@ -78,8 +101,12 @@ class KBComponentFactoryI(object):
 
     raise exception.KBConfigurationException(self, "Uncomplete configuration!")
 
-  def keyphraseConsumers(self):
+  def keyphraseConsumers(self, language):
     """Provides a list of keyphrase consumers.
+
+    Args:
+      language: The C{string} name of the language to treat (see
+        C{keybench.main.language_support.KBLanguage}).
 
     Provides a list of keyphrase consumers. It can be keyphrase extraction
     evaluators, keyphrase indexing systems, word cloud generators, etc.
