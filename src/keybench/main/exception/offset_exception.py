@@ -4,10 +4,18 @@ class KBOffsetException(Exception):
     textual unit within a given document.
   """
 
-  def __init__(self, offset, textual_unit, document, message):
+  def __init__(self,
+               sentence_offset,
+               inner_sentence_offset,
+               textual_unit,
+               document,
+               message):
     """
     Args:
-      offset: The offset value (C{int)}) for which the exception occurred.
+      sentence_offset: The sentence offset value (C{int)}) for which the
+        exception occurred.
+      inner_sentence_offset: The inner sentence offset value (C{int)}) for which
+        the exception occurred.
       textual_unit: The C{string} representation of the textual unit for which
         the exception occurred.
       document: The C{string} identifier of the document for which the exception
@@ -17,10 +25,12 @@ class KBOffsetException(Exception):
 
     super(KBOffsetException, self).__init__()
 
-    self._message = "Error with offset %d of '%s' from '%s': %s"%(offset,
-                                                                 textual_unit,
-                                                                 document,
-                                                                 message)
+    self._message = "Error with offset (%d, %d) of '%s' from '%s': %s"%(
+                      sentence_offset,
+                      inner_sentence_offset,
+                      textual_unit,
+                      document,
+                      message)
 
   def __str__(self):
     return self._message

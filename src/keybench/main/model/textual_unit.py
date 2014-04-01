@@ -103,13 +103,17 @@ class KBTextualUnit(object):
         the textual unit's offsets.
 
     Returns:
-      A C{list} of all offsets of the textual unit, within the given
-      C{document}.
+      A C{map} of C{list} of all offsets of the textual unit associated to the
+      index of a sentence, within the given C{document}.
     """
 
     return self._offsets[document]
 
-  def addOccurrence(self, seen_form, document, offset):
+  def addOccurrence(self,
+                    seen_form,
+                    document,
+                    sentence_offset,
+                    inner_sentence_offset):
     """Records another occurrence of the textual unit.
 
     Adds another occurrencei, within a C{document} of the textual unit
@@ -119,7 +123,10 @@ class KBTextualUnit(object):
       seen_form: The C{string} representing the textual unit. It may differs
         from the C{normalized_form} (case, spelling, abbreviation, etc.).
       document: The C{string} identifier of the document it appears in.
-      offset: The C{int} position of the C{seen_form} within the C{document}.
+      sentence_offset: The C{int} sentence position of the C{seen_form} within
+        the C{document}.
+      inner_sentence_offset: The C{int} position of the C{seen_form} within the
+        C{document}'s sentence.
 
     Raises:
       KBOffsetException: An exception occurred when the offset is already
@@ -128,16 +135,22 @@ class KBTextualUnit(object):
 
     if document not in self._offsets:
       self._seen_forms[document] = {}
-      self._offsets[document] = []
+      self._offsets[document] = {}
 
-    if offset not in self._offsets[document]:
-      self._offsets[document].append(offset)
+    if sentence_offset not in self._offsets[document] \
+       or inner_sentence_offset not in self._offsets[document][sentence_offset]:
+      if sentence_offset not in self._offsets[document]:
+        self._offsets[document][sentence_offset] = []
+      self._offsets[document][sentence_offset].append(inner_sentence_offset)
 
       if seen_form not in self._seen_forms[document]:
-        self._seen_forms[document][seen_form] = []
-      self._seen_forms[document][seen_form].append(offset)
+        self._seen_forms[document][seen_form] = {}
+      if sentence_offset not in self._seen_forms[document][seen_form]:
+        self._seen_forms[document][seen_form][sentence_offset] = []
+      self._seen_forms[document][seen_form][sentence_offset].append(inner_sentence_offset)
     else:
-      raise exception.KBOffsetException(offset,
+      raise exception.KBOffsetException(sentence_offset,
+                                        inner_sentence_offset,
                                         self._normalized_form,
                                         document,
                                         "Already exists!")
@@ -154,7 +167,12 @@ class KBTextualUnit(object):
       The number of occurrences of the textual unit within the C{document}.
     """
 
-    return len(self._offsets[document])
+    number_of_occurrences = 0
+
+    for sentence in self._offsets[document]:
+      number_of_occurrences += len(self._offsets[document][sentence])
+
+    return number_of_occurrences
 
   def numberOfDocuments(self):
     """Gives the number of documents where the textual unit appears.
