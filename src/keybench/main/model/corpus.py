@@ -188,11 +188,12 @@ class KBCorpus(object):
 
     for filename in os.listdir(self.train_directory):
       if filename[-len(self._file_extension):] == self._file_extension:
-        document = document_builder(path.join(self.train_directory, filename),
-                                    self._name,
-                                    filename[:-len(self._file_extension)],
-                                    self._language,
-                                    self._encoding)
+        document = document_builder.buildDocument(path.join(self.train_directory,
+                                                            filename),
+                                                  self._name,
+                                                  filename[:-len(self._file_extension)],
+                                                  self._language,
+                                                  self._encoding)
 
         documents.append(document)
 
@@ -213,11 +214,12 @@ class KBCorpus(object):
 
     for filename in os.listdir(self.test_directory):
       if filename[-len(self._file_extension):] == self._file_extension:
-        document = document_builder(path.join(self.test_directory, filename),
-                                    self._name,
-                                    filename[:-len(self._file_extension)],
-                                    self._language,
-                                    self._encoding)
+        document = document_builder.buildDocument(path.join(self.test_directory,
+                                                            filename),
+                                                  self._name,
+                                                  filename[:-len(self._file_extension)],
+                                                  self._language,
+                                                  self._encoding)
 
         documents.append(document)
 

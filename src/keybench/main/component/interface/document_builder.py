@@ -36,14 +36,16 @@ class KBDocumentBuilderI(component.KBComponent):
       The C{KBDocument} representation.
     """
 
-    document = model.KBDocument()
-
-    ## fill the document 'meta-data' ###########################################
-    document.corpus_name = corpus_name
-    document.filepath = filepath
-    document.name = name
-    document.language = language
-    document.encoding = encoding
+    # first initialization so the cache functions can be used
+    document = model.KBDocument(corpus_name,
+                                filepath,
+                                name,
+                                language,
+                                encoding,
+                                "", "", "",
+                                [], [], [],
+                                [], [], [],
+                                [], [], [])
 
     ## complete the document ###################################################
 
@@ -55,43 +57,59 @@ class KBDocumentBuilderI(component.KBComponent):
       document = self.load(document)
     # parse and preprocess the document
     else:
+      ## parsing ###############################################################
+      self.logDebug("Parsing of %s..."%(name))
       document_file = codecs.open(filepath, "r", encoding)
       title, abstract, content = self._documentParsing(document_file)
 
       document_file.close()
 
-      ## NLP tools #############################################################
-      tool_factory = core.KBBenchmark.singleton().run_tools[self._run_name]
-      tokenizer = tool_factory.tokenizer(language)
-      pos_tagger = tool_factory.pos_tagger(language)
-      ##########################################################################
+      if title != "" or abstract != "" or content != "":
+        ## NLP tools ###########################################################
+        tool_factory = core.KBBenchmark.singleton().run_tools[self._run_name]
+        tokenizer = tool_factory.tokenizer(language)
+        pos_tagger = tool_factory.pos_tagger(language)
+        ########################################################################
 
-      ## parsing ###############################################################
-      self.logDebug("Parsing of %s..."%(name))
-      document.title = title
-      document.abstract = abstract
-      document.content = content
-      ## tokenization ##########################################################
-      self.logDebug("Sentence tokenization of %s..."%(name))
-      document.title_sentences = tokenizer.tokenizeSentences(document.title)
-      document.abstract_sentences = tokenizer.tokenizeSentences(document.abstract)
-      document.content_sentences = tokenizer.tokenizeSentences(document.content)
-      self.logDebug("Word tokenization of %s..."%(name))
-      document.title_sentence_tokens = tokenizer.tokenizeWords(document.title_sentences)
-      document.abstract_sentence_tokens = tokenizer.tokenizeWords(document.abstract_sentences)
-      document.content_sentence_tokens = tokenizer.tokenizeWords(document.content_sentences)
-      ## part-of-speech tagging ################################################
-      self.logDebug("Part-of-Speech tagging of %s..."%(name))
-      document.title_token_pos_tags = pos_tagger.tag(document.title_sentence_tokens)
-      document.abstract_token_pos_tags = pos_tagger.tag(document.abstract_sentence_tokens)
-      document.content_token_pos_tags = pos_tagger.tag(document.content_sentence_tokens)
+        ## tokenization ########################################################
+        self.logDebug("Sentence tokenization of %s..."%(name))
+        title_sentences = tokenizer.tokenizeSentences(title)
+        abstract_sentences = tokenizer.tokenizeSentences(abstract)
+        content_sentences = tokenizer.tokenizeSentences(content)
+        self.logDebug("Word tokenization of %s..."%(name))
+        title_sentence_tokens = tokenizer.tokenizeWords(title_sentences)
+        abstract_sentence_tokens = tokenizer.tokenizeWords(abstract_sentences)
+        content_sentence_tokens = tokenizer.tokenizeWords(content_sentences)
+        ## part-of-speech tagging ##############################################
+        self.logDebug("Part-of-Speech tagging of %s..."%(name))
+        title_token_pos_tags = pos_tagger.tag(title_sentence_tokens)
+        abstract_token_pos_tags = pos_tagger.tag(abstract_sentence_tokens)
+        content_token_pos_tags = pos_tagger.tag(content_sentence_tokens)
+        ## fill every attributes of the document ###############################
+        document = model.KBDocument(corpus_name,
+                                    filepath,
+                                    name,
+                                    language,
+                                    encoding,
+                                    title,
+                                    abstract,
+                                    content,
+                                    title_sentences,
+                                    abstract_sentences,
+                                    content_sentences,
+                                    title_sentence_tokens,
+                                    abstract_sentence_tokens,
+                                    content_sentence_tokens,
+                                    title_token_pos_tags,
+                                    abstract_token_pos_tags,
+                                    content_token_pos_tags)
       ## serialization #########################################################
       self.logDebug("Saving the document representation of %s..."%(name))
       self.store(document, document)
 
     return document
 
-  def _documentParsing(document_file):
+  def _documentParsing(self, document_file):
     """Extracts the title, the abstract and the content of a document.
 
     Args:
