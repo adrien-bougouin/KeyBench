@@ -1,4 +1,5 @@
 from keybench.main.component.implementation.corpus_builder import KBCorpusBuilder
 from keybench.main.component.implementation.n_gram_extractor import NGramExtractor
 from keybench.main.component.implementation.plain_text_document_builder import PlainTextDocumentBuilder
+from keybench.main.component.implementation.pos_sequence_based_candidate_extractor import POSSequenceBasedCandidateExtractor
 

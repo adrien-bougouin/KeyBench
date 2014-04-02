@@ -33,7 +33,12 @@ class NGramExtractor(interface.KBCandidateExtractorI):
       n: The maximum word size of a candidate.
     """
 
-    super(NGramExtractor, self).__init__()
+    super(NGramExtractor, self).__init__(name,
+                                         run_name,
+                                         shared,
+                                         lazy_mode,
+                                         debug_mode,
+                                         root_cache)
 
     self._n = n
 
@@ -84,10 +89,10 @@ class NGramExtractor(interface.KBCandidateExtractorI):
             # compute the n-gram's lemmas and stems
             n_gram_normalized_lemmas = []
             n_gram_normalized_stems = []
+
             for word in n_gram_normalized_tokens:
               n_gram_normalized_lemmas.append(lemmatizer.lemmatize(word))
               n_gram_normalized_stems.append(stemmer.stem(word))
-
             candidates[n_gram_id] = model.KBTextualUnit(document.corpus_name,
                                                         document.language,
                                                         n_gram_normalized_form,
