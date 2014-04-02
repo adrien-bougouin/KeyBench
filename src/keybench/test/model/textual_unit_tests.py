@@ -21,9 +21,9 @@ class KBTextualUnitTests(unittest.TestCase):
     self.failUnless(self._tu.corpus_name == "test-corpus")
     self.failUnless(self._tu.language == "fr")
     self.failUnless(self._tu.normalized_form == "test")
-    self.failUnless(self._tu.tokens == ["test"])
-    self.failUnless(self._tu.lemmas == ["test"])
-    self.failUnless(self._tu.stems == ["test"])
+    self.failUnless(self._tu.normalized_tokens == ["test"])
+    self.failUnless(self._tu.normalized_lemmas == ["test"])
+    self.failUnless(self._tu.normalized_stems == ["test"])
     self.failUnless(self._tu.pos_tags == ["N"])
 
   def testEqual(self):
@@ -37,9 +37,9 @@ class KBTextualUnitTests(unittest.TestCase):
     tu2 = model.KBTextualUnit("test-corpus",  # corpus name
                               "fr",           # language
                               "test2",        # normalized form
-                              ["test 2"],     # tokens
-                              ["test 2"],     # lemmas
-                              ["test 2"],     # stems
+                              ["test2"],     # tokens
+                              ["test2"],     # lemmas
+                              ["test2"],     # stems
                               ["N"])          # POS tags
     tu3 = model.KBTextualUnit("test-corpus2", # corpus name
                               "fr",           # language
@@ -64,9 +64,9 @@ class KBTextualUnitTests(unittest.TestCase):
     tu2 = model.KBTextualUnit("test-corpus",  # corpus name
                               "fr",           # language
                               "test2",        # normalized form
-                              ["test 2"],     # tokens
-                              ["test 2"],     # lemmas
-                              ["test 2"],     # stems
+                              ["test2"],     # tokens
+                              ["test2"],     # lemmas
+                              ["test2"],     # stems
                               ["N"])          # POS tags
     tu3 = model.KBTextualUnit("test-corpus2", # corpus name
                               "fr",           # language

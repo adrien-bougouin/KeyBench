@@ -70,11 +70,11 @@ class NGramExtractor(interface.KBCandidateExtractorI):
       for n in range(1, self._n + 1):
         for i in range(n, len(tokenized_sentence) + 1):
           inner_sentence_offset = i - n
-          n_gram_tokens = tokenized_sentence[inner_sentence_offset:i]
-          n_gram_pos_tags = pos_tagged_sentence[inner_sentence_offset:i]
-          n_gram = " ".join(n_gram_tokens)
+          n_gram = " ".join(tokenized_sentence[inner_sentence_offset:i])
           n_gram_seen_form = n_gram # FIXME tokenized form, not seen form :{
           n_gram_normalized_form = normalizer.normalize(n_gram)
+          n_gram_normalized_tokens = n_gram_normalized_form.split(" ")
+          n_gram_pos_tags = pos_tagged_sentence[inner_sentence_offset:i]
 
           # identify the candidates using the POS tags, so same normalized forms
           # with different POS tags are considered as different candidates
@@ -82,18 +82,18 @@ class NGramExtractor(interface.KBCandidateExtractorI):
           # create the textual unit if no existing candidate matches it
           if n_gram_id not in candidates:
             # compute the n-gram's lemmas and stems
-            n_gram_lemmas = []
-            n_gram_stems = []
-            for word in n_gram_tokens:
-              n_gram_lemmas.append(lemmatizer.lemmatize(word))
-              n_gram_stems.append(stemmer.stem(word))
+            n_gram_normalized_lemmas = []
+            n_gram_normalized_stems = []
+            for word in n_gram_normalized_tokens:
+              n_gram_normalized_lemmas.append(lemmatizer.lemmatize(word))
+              n_gram_normalized_stems.append(stemmer.stem(word))
 
             candidates[n_gram_id] = model.KBTextualUnit(document.corpus_name,
                                                         document.language,
                                                         n_gram_normalized_form,
-                                                        n_gram_tokens,
-                                                        n_gram_lemmas,
-                                                        n_gram_stems,
+                                                        n_gram_normalized_tokens,
+                                                        n_gram_normalized_lemmas,
+                                                        n_gram_normalized_stems,
                                                         n_gram_pos_tags)
           candidates[n_gram_id].addOccurrence(n_gram_seen_form,
                                               document.name,

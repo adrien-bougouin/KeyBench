@@ -14,9 +14,9 @@ class KBTextualUnit(object):
     language: The C{string} name of the textual unit's language (see
       C{keybench.main.language_support.KBLanguage}).
     normalized_form: The most generic C{string} form of the textual unit.
-    tokens: The C{list} of the textual unit's tokens.
-    lemmas: The C{list} of the textual unit's lemmas.
-    stems: The C{list} of the textual unit's  stems.
+    normalized_tokens: The C{list} of the textual unit's normalized tokens.
+    normalized_lemmas: The C{list} of the textual unit's normalized lemmas.
+    normalized_stems: The C{list} of the textual unit's  normalized stems.
     pos_tags: The C{list} of the textual unit's POS tags.
   """
 
@@ -24,18 +24,18 @@ class KBTextualUnit(object):
                corpus_name,
                language,
                normalized_form,
-               tokens,
-               lemmas,
-               stems,
+               normalized_tokens,
+               normalized_lemmas,
+               normalized_stems,
                pos_tags):
     super(KBTextualUnit, self).__init__()
 
     self._corpus_name = corpus_name
     self._language = language
     self._normalized_form = normalized_form
-    self._tokens = tokens
-    self._lemmas = lemmas
-    self._stems = stems
+    self._normalized_tokens = normalized_tokens
+    self._normalized_lemmas = normalized_lemmas
+    self._normalized_stems = normalized_stems
     self._pos_tags = pos_tags
     self._seen_forms = {}
     self._offsets = {}
@@ -44,8 +44,9 @@ class KBTextualUnit(object):
     return self._corpus_name == other.corpus_name \
            and self._language == other._language \
            and self._normalized_form == other._normalized_form \
-           and self._tokens == other._tokens \
-           and self._lemmas == other._lemmas \
+           and self._normalized_tokens == other._normalized_tokens \
+           and self._normalized_lemmas == other._normalized_lemmas \
+           and self._normalized_stems == other._normalized_stems \
            and self._pos_tags == other._pos_tags \
            and self._seen_forms == other._seen_forms \
            and self._offsets == other._offsets
@@ -66,16 +67,16 @@ class KBTextualUnit(object):
     return self._normalized_form
 
   @property
-  def tokens(self):
-    return self._tokens
+  def normalized_tokens(self):
+    return self._normalized_tokens
 
   @property
-  def lemmas(self):
-    return self._lemmas
+  def normalized_lemmas(self):
+    return self._normalized_lemmas
 
   @property
-  def stems(self):
-    return self._stems
+  def normalized_stems(self):
+    return self._normalized_stems
 
   @property
   def pos_tags(self):
