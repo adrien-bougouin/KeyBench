@@ -181,10 +181,11 @@ class KBCorpus(object):
         creation of each document.
 
     Returns:
-      The C{list} of C{KBDocument}s in the train directory of the corpus.
+      The C{map} of C{KBDocument}s (associated to their C{string} name -- key)
+      in the train directory of the corpus.
     """
 
-    documents = []
+    documents = {}
 
     for filename in os.listdir(self.train_directory):
       if filename[-len(self._file_extension):] == self._file_extension:
@@ -195,7 +196,7 @@ class KBCorpus(object):
                                                   self._language,
                                                   self._encoding)
 
-        documents.append(document)
+        documents[document.name] = document
 
     return documents
 
@@ -207,10 +208,11 @@ class KBCorpus(object):
         creation of each document.
 
     Returns:
-      The C{list} of C{KBDocument}s in the test directory of the corpus.
+      The C{map} of C{KBDocument}s (associated to their C{string} name -- key)
+      in the test directory of the corpus.
     """
 
-    documents = []
+    documents = {}
 
     for filename in os.listdir(self.test_directory):
       if filename[-len(self._file_extension):] == self._file_extension:
@@ -221,7 +223,7 @@ class KBCorpus(object):
                                                   self._language,
                                                   self._encoding)
 
-        documents.append(document)
+        documents[document.name] = document
 
     return documents
 

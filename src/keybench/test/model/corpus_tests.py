@@ -253,8 +253,10 @@ class KBCorpusTests(unittest.TestCase):
                                                                          False,
                                                                          ".test_tmp")
 
-    self.failUnless(len(self._corpus.trainDocuments(document_builder)))
-    self.failUnless(len(self._corpus.testDocuments(document_builder)))
+    self.failUnless(self._corpus.trainDocuments(document_builder).keys() == ["doc2",
+                                                                             "doc1"])
+    self.failUnless(self._corpus.testDocuments(document_builder).keys() == ["doc3",
+                                                                            "doc4"])
     self.failUnless(self._corpus.trainReferences() == {
       "doc1": ["key11", "key12"],
       "doc2": ["key21", "key22"]
