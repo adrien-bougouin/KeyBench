@@ -208,7 +208,7 @@ class KBCorpus(object):
         creation of each document.
 
     Returns:
-      The C{map} of C{KBDocument}s (associated to their C{string} name -- key)
+      The C{dict} of C{KBDocument}s (associated to their C{string} name -- key)
       in the test directory of the corpus.
     """
 
@@ -231,7 +231,7 @@ class KBCorpus(object):
     """Provides the references for every train document.
 
     Returns:
-      The C{map} of references (C{list} of C{string}) associated to each train
+      The C{dict} of references (C{list} of C{string}) associated to each train
       document (C{string} name as key).
     """
 
@@ -253,7 +253,7 @@ class KBCorpus(object):
     """Provides the references for every test document.
 
     Returns:
-      The C{map} of references (C{list} of C{string}) associated to each test
+      The C{dict} of references (C{list} of C{string}) associated to each test
       document (C{string} name as key).
     """
 
