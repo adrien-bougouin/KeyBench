@@ -20,15 +20,15 @@ class SnowballStemmer(interface.KBStemmerI):
 
     self._stemmer = snowball.SnowballStemmer(language)
 
-  def stem(self, word):
-    """Stems a word.
+  def stem(self, normalized_word):
+    """Stems a normalized word.
 
     Args:
-      word: The C{string} word to stem.
+      normalized_word: The C{string} word to stem. It must be normalized first.
 
     Returns:
-      The C{string} stemmed C{word}.
+      The C{string} stemmed C{normalized_word}.
     """
 
-    return self._stemmer.stem(word)
+    return self._stemmer.stem(normalized_word)
 

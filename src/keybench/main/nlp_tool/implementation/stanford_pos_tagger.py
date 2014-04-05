@@ -45,6 +45,7 @@ class StanfordPOSTagger(interface.KBPOSTaggerI):
                                                          "VBZ", "VBN", "VBG"],
         interface.KBPOSTaggerI.POSTagKey.ADVERB:        ["RB", "RBR", "RBS",
                                                          "WRB"],
+        interface.KBPOSTaggerI.POSTagKey.COORDINATION:  ["CC"],
         interface.KBPOSTaggerI.POSTagKey.PRONOUN:       ["PRP", "PRP$", "WP",
                                                          "WP$"],
         interface.KBPOSTaggerI.POSTagKey.PREPOSITION:   ["IN"],
@@ -53,6 +54,7 @@ class StanfordPOSTagger(interface.KBPOSTaggerI):
         interface.KBPOSTaggerI.POSTagKey.FOREIGN_WORD:  ["FW"],
         interface.KBPOSTaggerI.POSTagKey.PUNCTUATION:   ["PUNCT"]
       }
+    # Not checked yet (http://beta.visl.sdu.dk/visl/fr/info/taginfo_french.html)
     if language == language_support.KBLanguage.FRENCH:
       language_model = path.join(STANFORD_MODEL_DIRECTORY, "french.tagger")
       self._tagset = {
@@ -60,6 +62,7 @@ class StanfordPOSTagger(interface.KBPOSTaggerI):
         interface.KBPOSTaggerI.POSTagKey.PROPER_NOUN:   ["NP"],
         interface.KBPOSTaggerI.POSTagKey.ADJECTIVE:     ["A"],
         interface.KBPOSTaggerI.POSTagKey.VERB:          ["V"],
+        interface.KBPOSTaggerI.POSTagKey.COORDINATION:  ["KC"],
         interface.KBPOSTaggerI.POSTagKey.ADVERB:        ["ADV"],
         interface.KBPOSTaggerI.POSTagKey.PRONOUN:       ["PRO", "CL"],
         interface.KBPOSTaggerI.POSTagKey.PREPOSITION:   ["P"],

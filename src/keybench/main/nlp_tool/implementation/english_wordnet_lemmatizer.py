@@ -11,26 +11,29 @@ class EnglishWordNetLemmatizer(interface.KBLemmatizerI):
 
     self._lemmatizer = wordnet.WordNetLemmatizer()
 
-  def lemmatize(self, word, tag):
-    """lemmatizes a word.
+  def lemmatize(self, normalized_word, tag):
+    """Lemmatizes a normalized word.
 
     Args:
-      word: The C{string} word to lemmatize.
-      tag: The C{string} POS tag of the C{word} (see
+      normalized_word: The C{string} word to lemmatize. It mus be normalized
+        first.
+      tag: The C{string} POS tag of the C{normalized_word} (see
         C{keybench.main.nlp_tool.interface.KBPOSTaggerI.POSKey}).
 
     Returns:
-      The C{string} lemmatized C{word}.
+      The C{string} lemmatized C{normalized_word}.
     """
 
-    pos = "n"
-
-    if tag == interface.KBPOSTaggerI.POSTagKey.ADJECTIVE:
+    if tag == interface.KBPOSTaggerI.POSTagKey.NOUN:
+      pos = "n"
+    elif tag == interface.KBPOSTaggerI.POSTagKey.ADJECTIVE:
       pos = "a"
     elif tag == interface.KBPOSTaggerI.POSTagKey.VERB:
       pos = "v"
     elif tag == interface.KBPOSTaggerI.POSTagKey.ADVERB:
       pos = "r"
+    else:
+      return normalized_word
 
-    return self._lemmatizer.lemmatize(word, pos)
+    return self._lemmatizer.lemmatize(normalized_word, pos)
 

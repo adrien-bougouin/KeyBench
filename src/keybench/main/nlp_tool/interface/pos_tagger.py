@@ -35,6 +35,7 @@ class KBPOSTaggerI(object):
     ADJECTIVE     = "__adjective__"
     VERB          = "__verb__"
     ADVERB        = "__adverb__"
+    COORDINATION  = "__coordination__"
     PRONOUN       = "__pronoun__"
     PREPOSITION   = "__preposition__"
     DETERMINER    = "__determiner__"
