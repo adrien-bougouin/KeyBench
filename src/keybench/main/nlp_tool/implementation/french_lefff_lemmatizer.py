@@ -16,34 +16,32 @@ class FrenchLeFFFLemmatizer(interface.KBLemmatizerI):
   French lemmatizer that uses the LeFFF linguistic resource.
   """
 
-  def lefff_lemmas(self):
-    """Provides the LEFFF lemmas.
+  def __init__(self):
+    super(FrenchLeFFFLemmatizer, self).__init__()
 
-    Returns:
-      The C{dict} of C{list} of normalized C{string} lemmas associated to
-      C{string} Part-of-Speech (POS) associated to C{string} normalized words
-      (e.g. lefff_lemmas()[word][pos] = lemmas).
-    """
+    self._lemmas = {}
 
+    # parse the lefff lemma file
     lemma_file = codecs.open(LEFFF_LEMMA_FILEPATH, "r", "utf-8")
-    lemmas = {}
 
     is_reading_header = True
     for word_pos_lemma in lemma_file.read().splitlines():
       if not is_reading_header and word_pos_lemma != "":
         word, pos, lemma = word_pos_lemma.split("\t")
 
-        if word not in lemmas:
-          lemmas[word] = {}
-        if pos not in lemmas[word]:
-          lemmas[word][pos] = []
-        lemmas[word][pos].append(lemma)
+        if word not in self._lemmas:
+          self._lemmas[word] = {}
+        if pos not in self._lemmas[word]:
+          self._lemmas[word][pos] = []
+        self._lemmas[word][pos].append(lemma)
       elif word_pos_lemma == "# END OF TERMS AND CONDITIONS":
         is_reading_header = False
 
     lemma_file.close()
 
-    return lemmas
+  @property
+  def lemmas(self):
+    return self._lemmas
 
   def lemmatize(self, normalized_word, tag):
     """Lemmatizes a normalized word.
@@ -78,7 +76,7 @@ class FrenchLeFFFLemmatizer(interface.KBLemmatizerI):
     try:
       # FIXME
       # same ambiguity resolution than the nltk.stem.wordnet.WordNetLemmatizer
-      return min(self.lefff_lemmas()[normalized_word][pos], key=len)
+      return min(self._lemmas[normalized_word][pos], key=len)
     except:
       return normalized_word
 
