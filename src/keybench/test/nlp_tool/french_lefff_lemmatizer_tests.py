@@ -1,12 +1,12 @@
 import unittest
 
-from keybench.main.nlp_tool import implementation
+from keybench.main.nlp_tool.implementation import lemmatizer as nlp_tool
 from keybench.main.nlp_tool import interface
 
 class FrenchLeFFFLemmatizerTests(unittest.TestCase):
 
   def setUp(self):
-    self._lemmatizer = implementation.FrenchLeFFFLemmatizer()
+    self._lemmatizer = nlp_tool.FrenchLeFFFLemmatizer()
 
   def tearDown(self):
     self._lemmatizer = None

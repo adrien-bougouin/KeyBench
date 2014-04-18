@@ -1,6 +1,6 @@
 import unittest
 
-from keybench.main.nlp_tool import implementation as nlp_tool
+from keybench.main.nlp_tool.implementation import stemmer as nlp_tool
 
 class SnowballStemmerTests(unittest.TestCase):
 

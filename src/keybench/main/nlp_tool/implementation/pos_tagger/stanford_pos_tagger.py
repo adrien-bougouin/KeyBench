@@ -6,7 +6,7 @@ from os import path
 from keybench.main.nlp_tool import interface
 from keybench.main import language_support
 
-KEYBENCH_DIRECTORY = path.join(path.dirname(__file__), "..", "..", "..")
+KEYBENCH_DIRECTORY = path.join(path.dirname(__file__), "..", "..", "..", "..")
 THIRD_PARTY_TOOL_DIRECTORY = path.join(KEYBENCH_DIRECTORY, "third_party_tools")
 STANFORD_DIRECTORY = path.join(THIRD_PARTY_TOOL_DIRECTORY,
                                "pos_tagger",

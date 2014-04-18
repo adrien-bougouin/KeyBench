@@ -6,7 +6,7 @@ import os
 from os import path
 
 from keybench.main import model
-from keybench.main.component import implementation as component_implementation
+from keybench.main.component.implementation import document_builder as db
 
 class KBCorpusTests(unittest.TestCase):
 
@@ -246,12 +246,12 @@ class KBCorpusTests(unittest.TestCase):
     self.failUnless(self._corpus != corpus3)
 
   def testDocumentExtraction(self):
-    document_builder = component_implementation.PlainTextDocumentBuilder("name",
-                                                                         "run_name",
-                                                                         False,
-                                                                         False,
-                                                                         False,
-                                                                         ".test_tmp")
+    document_builder = db.PlainTextDocumentBuilder("name",
+                                                   "run_name",
+                                                   False,
+                                                   False,
+                                                   False,
+                                                   ".test_tmp")
 
     self.failUnless(self._corpus.trainDocuments(document_builder).keys() == ["doc2",
                                                                              "doc1"])
