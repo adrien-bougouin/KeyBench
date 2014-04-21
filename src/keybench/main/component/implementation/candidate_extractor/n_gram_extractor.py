@@ -62,6 +62,7 @@ class NGramExtractor(interface.KBCandidateExtractorI):
 
     ## NLP tools ###############################################################
     tool_factory = core.KBBenchmark.singleton().run_tools[self._run_name]
+    pos_tagger = tool_factory.posTagger(document.language)
     normalizer = tool_factory.normalizer(document.language)
     lemmatizer = tool_factory.lemmatizer(document.language)
     stemmer = tool_factory.stemmer(document.language)
@@ -90,8 +91,12 @@ class NGramExtractor(interface.KBCandidateExtractorI):
             n_gram_normalized_lemmas = []
             n_gram_normalized_stems = []
 
-            for word in n_gram_normalized_tokens:
-              n_gram_normalized_lemmas.append(lemmatizer.lemmatize(word))
+            for word_index, word in enumerate(n_gram_normalized_tokens):
+              pos_tag = n_gram_pos_tags[word_index]
+              tag_name = pos_tagger.tagName(pos_tag)
+              n_gram_normalized_lemmas.append(lemmatizer.lemmatize(word,
+                                                                   tag_name,
+                                                                   pos_tag))
               n_gram_normalized_stems.append(stemmer.stem(word))
             candidates[n_gram_id] = model.KBTextualUnit(document.corpus_name,
                                                         document.language,

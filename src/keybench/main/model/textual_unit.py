@@ -86,8 +86,8 @@ class KBTextualUnit(object):
     """Access the seen forms of the textual unit in a given document.
     
     Args:
-      document: The C{string} identifier of the document from which to access
-        the textual unit's seen forms.
+      document: The C{string} name of the document from which to access the
+        textual unit's seen forms.
 
     Returns:
       A C{map} of C{list} of all offsets of the textual unit's seen form
@@ -100,8 +100,8 @@ class KBTextualUnit(object):
     """Access the offsets of the textual unit in a given document.
     
     Args:
-      document: The C{string} identifier of the document from which to access
-        the textual unit's offsets.
+      document: The C{string} name of the document from which to access the
+        textual unit's offsets.
 
     Returns:
       A C{map} of C{list} of all offsets of the textual unit associated to the
@@ -123,7 +123,7 @@ class KBTextualUnit(object):
     Args:
       seen_form: The C{string} representing the textual unit. It may differs
         from the C{normalized_form} (case, spelling, abbreviation, etc.).
-      document: The C{string} identifier of the document it appears in.
+      document: The C{string} name of the document it appears in.
       sentence_offset: The C{int} sentence position of the C{seen_form} within
         the C{document}.
       inner_sentence_offset: The C{int} position of the C{seen_form} within the
@@ -161,7 +161,7 @@ class KBTextualUnit(object):
     document.
 
     Args:
-      document: The C{string} identifier of the document from which to get the
+      document: The C{string} name of the document from which to get the
         number of occurrences.
 
     Returns:

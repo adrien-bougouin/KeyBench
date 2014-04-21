@@ -61,6 +61,7 @@ class POSSequenceBasedCandidateExtractor(interface.KBCandidateExtractorI):
 
     ## NLP tools ###############################################################
     tool_factory = core.KBBenchmark.singleton().run_tools[self._run_name]
+    pos_tagger = tool_factory.posTagger(document.language)
     normalizer = tool_factory.normalizer(document.language)
     lemmatizer = tool_factory.lemmatizer(document.language)
     stemmer = tool_factory.stemmer(document.language)
@@ -82,7 +83,7 @@ class POSSequenceBasedCandidateExtractor(interface.KBCandidateExtractorI):
 
       # find the textual unit matching the POS tag sequence represented by the
       # regexp
-      for match in re.finditer(self._regexp, full_pos_tag_sequence):
+      for match in re.finditer(self._pos_regexp, full_pos_tag_sequence):
         pos_tag_sequence = match.string[match.start():match.end()]
         candidate_pos_tags = pos_tag_sequence.split(" ")
         inner_sentence_offset = pos_position_to_inner_sentence_position[match.start()]
@@ -103,8 +104,12 @@ class POSSequenceBasedCandidateExtractor(interface.KBCandidateExtractorI):
           candidate_normalized_lemmas = []
           candidate_normalized_stems = []
 
-          for word in candidate_normalized_tokens:
-            candidate_normalized_lemmas.append(lemmatizer.lemmatize(word))
+          for word_index, word in enumerate(candidate_normalized_tokens):
+            pos_tag = candidate_pos_tags[word_index]
+            tag_name = pos_tagger.tagName(pos_tag)
+            candidate_normalized_lemmas.append(lemmatizer.lemmatize(word,
+                                                                    tag_name,
+                                                                    pos_tag))
             candidate_normalized_stems.append(stemmer.stem(word))
           candidates[candidate_id] = model.KBTextualUnit(document.corpus_name,
                                                          document.language,

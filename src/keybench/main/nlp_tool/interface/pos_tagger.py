@@ -53,6 +53,22 @@ class KBPOSTaggerI(object):
   def tagset(self):
     return self._tagset
 
+  def tagName(self, pos_tag):
+    """Gives the tag name of a given POS tag.
+
+    Args:
+      pos_tag: The C{string} POS tag to get the name of.
+
+    Returns:
+      The C{string} tag name corresponding to the POS tag.
+    """
+
+    for tag, pos_tags in self._tagset.items() :
+      if pos_tag in pos_tags:
+        return tag
+
+    return None
+
   def tag(self, tokenized_sentences):
     """POS tags tokenized sentences.
 
