@@ -106,7 +106,6 @@ class NGramExtractor(interface.KBCandidateExtractorI):
                                                         n_gram_normalized_stems,
                                                         n_gram_pos_tags)
           candidates[n_gram_id].addOccurrence(n_gram_seen_form,
-                                              document.name,
                                               sentence_offset,
                                               inner_sentence_offset)
 

@@ -119,7 +119,6 @@ class POSSequenceBasedCandidateExtractor(interface.KBCandidateExtractorI):
                                                          candidate_normalized_stems,
                                                          candidate_pos_tags)
         candidates[candidate_id].addOccurrence(candidate_seen_form,
-                                               document.name,
                                                sentence_offset,
                                                inner_sentence_offset)
 

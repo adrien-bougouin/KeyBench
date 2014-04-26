@@ -5,8 +5,7 @@ class KBTextualUnit(object):
 
   A representation of a normalized textual unit along with its seen forms,
   occurrence information and linguistic information (tokens, lemmas, stems and
-  POS tags). Seen forms and occurrence information are store per document in
-  which the textual unit appears.
+  POS tags).
 
   Attributes:
     corpus_name: The C{string} name of the corpus from which the textual unit is
@@ -18,6 +17,12 @@ class KBTextualUnit(object):
     normalized_lemmas: The C{list} of the textual unit's normalized lemmas.
     normalized_stems: The C{list} of the textual unit's  normalized stems.
     pos_tags: The C{list} of the textual unit's POS tags.
+    seen_forms: The C{string} seen forms associated to their offset positions
+      (C{map} of C{map} of C{list} of C{int}, where the second map as the
+      sentence offsets as keys and the inner sentence offsets as values).
+    offsets: The offsets of the textual unit (C{map} of C{map} of C{list} of
+      C{int}, where the second map as the sentence offsets as keys and the inner
+      sentence offsets as values).
   """
 
   def __init__(self,
@@ -82,105 +87,61 @@ class KBTextualUnit(object):
   def pos_tags(self):
     return self._pos_tags
 
-  def seen_forms(self, document):
-    """Access the seen forms of the textual unit in a given document.
-    
-    Args:
-      document: The C{string} name of the document from which to access the
-        textual unit's seen forms.
+  @property
+  def seen_forms(self):
+    return self._seen_forms
 
-    Returns:
-      A C{map} of C{list} of all offsets of the textual unit's seen form
-      associated to the index of a sentence, within the given C{document}.
-    """
-
-    return self._seen_forms[document].items()
-
-  def offsets(self, document):
-    """Access the offsets of the textual unit in a given document.
-    
-    Args:
-      document: The C{string} name of the document from which to access the
-        textual unit's offsets.
-
-    Returns:
-      A C{map} of C{list} of all offsets of the textual unit associated to the
-      index of a sentence, within the given C{document}.
-    """
-
-    return self._offsets[document]
+  @property
+  def offsets(self):
+    return self._offsets
 
   def addOccurrence(self,
                     seen_form,
-                    document,
                     sentence_offset,
                     inner_sentence_offset):
     """Records another occurrence of the textual unit.
 
-    Adds another occurrencei, within a C{document} of the textual unit
-    identified by its C{normalized_form}.
+    Adds another occurrence of the textual unit.
 
     Args:
       seen_form: The C{string} representing the textual unit. It may differs
         from the C{normalized_form} (case, spelling, abbreviation, etc.).
-      document: The C{string} name of the document it appears in.
-      sentence_offset: The C{int} sentence position of the C{seen_form} within
-        the C{document}.
+      sentence_offset: The C{int} sentence position of the C{seen_form}.
       inner_sentence_offset: The C{int} position of the C{seen_form} within the
-        C{document}'s sentence.
+        sentence.
 
     Raises:
-      KBOffsetException: An exception occurred when the offset is already
-        recorded for the given document.
+      KBOffsetException: An exception occurred when the offset is already.
     """
 
-    if document not in self._offsets:
-      self._seen_forms[document] = {}
-      self._offsets[document] = {}
+    if sentence_offset not in self._offsets \
+       or inner_sentence_offset not in self._offsets[sentence_offset]:
+      if sentence_offset not in self._offsets:
+        self._offsets[sentence_offset] = []
+      self._offsets[sentence_offset].append(inner_sentence_offset)
 
-    if sentence_offset not in self._offsets[document] \
-       or inner_sentence_offset not in self._offsets[document][sentence_offset]:
-      if sentence_offset not in self._offsets[document]:
-        self._offsets[document][sentence_offset] = []
-      self._offsets[document][sentence_offset].append(inner_sentence_offset)
-
-      if seen_form not in self._seen_forms[document]:
-        self._seen_forms[document][seen_form] = {}
-      if sentence_offset not in self._seen_forms[document][seen_form]:
-        self._seen_forms[document][seen_form][sentence_offset] = []
-      self._seen_forms[document][seen_form][sentence_offset].append(inner_sentence_offset)
+      if seen_form not in self._seen_forms:
+        self._seen_forms[seen_form] = {}
+      if sentence_offset not in self._seen_forms[seen_form]:
+        self._seen_forms[seen_form][sentence_offset] = []
+      self._seen_forms[seen_form][sentence_offset].append(inner_sentence_offset)
     else:
       raise exception.KBOffsetException(sentence_offset,
                                         inner_sentence_offset,
                                         self._normalized_form,
-                                        document,
                                         "Already exists!")
 
-  def numberOfOccurrences(self, document):
-    """Gives the number of time the textual unit appears within a given
-    document.
-
-    Args:
-      document: The C{string} name of the document from which to get the
-        number of occurrences.
+  def numberOfOccurrences(self):
+    """Gives the number of time the textual unit appears.
 
     Returns:
-      The number of occurrences of the textual unit within the C{document}.
+      The number of occurrences of the textual unit.
     """
 
     number_of_occurrences = 0
 
-    for sentence in self._offsets[document]:
-      number_of_occurrences += len(self._offsets[document][sentence])
+    for sentence in self._offsets:
+      number_of_occurrences += len(self._offsets[sentence])
 
     return number_of_occurrences
-
-  def numberOfDocuments(self):
-    """Gives the number of documents where the textual unit appears.
-
-    Returns:
-      The number of documents where the textual unit appears.
-    """
-
-    return len(self._offsets)
 

@@ -88,7 +88,7 @@ class FrenchRefinedNounPhraseExtractor(interface.POSSequenceBasedCandidateExtrac
       # WARNING works only for N+A? (one adjective at the right)
       # check if the adjective must be filtered out or not
       if candidate.pos_tags[-1] in self._adjective_tags \
-         and not self.check_adjective(candidate, document.name):
+         and not self.check_adjective(candidate):
         candidate_normalized_tokens = candidate_normalized_tokens[:-1]
         # create a new candidate without the adjective
         candidate_normalized_form = " ".join(candidate_normalized_tokens)
@@ -104,14 +104,13 @@ class FrenchRefinedNounPhraseExtractor(interface.POSSequenceBasedCandidateExtrac
                                             candidate_pos_tags)
 
         # add all the occurrences
-        seen_forms = candidate.seen_forms(document.name)
+        seen_forms = candidate.seen_forms
         for seen_form in seen_forms:
           new_seen_form =" ".join(seen_form.split(" ")[:-1]) # FIXME tokenized form, not seen form :{
 
           for sentence_offset, inner_sentence_offsets in seen_forms[seen_form].items():
             for inner_sentence_offset in inner_sentence_offsets:
               new_candidate.addOccurrence(new_seen_form,
-                                          document.name,
                                           sentence_offset,
                                           inner_sentence_offset)
 
@@ -119,7 +118,7 @@ class FrenchRefinedNounPhraseExtractor(interface.POSSequenceBasedCandidateExtrac
 
     return candidates.values()
 
-  def check_adjective(self, candidate, document_name):
+  def check_adjective(self, candidate):
     """Check that a given candidate does not contain an useless adjective.
 
     Check that a given candidate does not contain an useless adjective. A
@@ -129,8 +128,6 @@ class FrenchRefinedNounPhraseExtractor(interface.POSSequenceBasedCandidateExtrac
 
     Args:
       candidate: The C{KBTextualUnit} to check.
-      document_name: The C{string} name of the document where the candidate is
-        extracted (used to know the number of occurrences of the candidate).
 
     Returns:
       True if the given C{candidate} is alright, False if the it contains an
@@ -141,7 +138,7 @@ class FrenchRefinedNounPhraseExtractor(interface.POSSequenceBasedCandidateExtrac
     # check if the adjective must be filtered out or not
     if candidate.pos_tags[-1] not in self._adjective_tags \
        or candidate.normalized_lemmas[-1] in util.french_denominal_adjectives \
-       or candidate.numberOfOccurrences(document_name) > 1:
+       or candidate.numberOfOccurrences() > 1:
       return True
 
     return False
