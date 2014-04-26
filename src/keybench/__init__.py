@@ -1,3 +1,5 @@
+# -*- encoding: utf-8
+
 # modules
 from keybench.main import component
 from keybench.main import core

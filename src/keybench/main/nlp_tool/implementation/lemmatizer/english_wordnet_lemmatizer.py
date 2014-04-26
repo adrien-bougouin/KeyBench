@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 from nltk.stem import wordnet
 
 from keybench.main.nlp_tool import interface

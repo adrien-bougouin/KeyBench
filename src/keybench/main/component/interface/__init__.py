@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 from keybench.main.component.interface.candidate_classifier import KBCandidateClassifierI
 from keybench.main.component.interface.candidate_clusterer import KBCandidateClustererI
 from keybench.main.component.interface.candidate_extractor import KBCandidateExtractorI

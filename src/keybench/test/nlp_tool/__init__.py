@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 from keybench.test.nlp_tool.english_punkt_tokenizer_tests import EnglishPunktTokenizerTests
 from keybench.test.nlp_tool.english_wordnet_lemmatizer_tests import EnglishWordNetLemmatizerTests
 from keybench.test.nlp_tool.french_bonsai_tokenizer_tests import FrenchBonsaiTokenizerTests

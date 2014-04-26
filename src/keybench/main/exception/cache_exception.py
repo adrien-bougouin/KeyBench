@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 class KBCacheException(Exception):
   """An Exception triggered when an error occurres while managing objects within
   cache.

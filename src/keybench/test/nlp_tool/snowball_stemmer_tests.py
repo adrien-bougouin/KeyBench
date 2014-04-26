@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 import unittest
 
 from keybench.main.nlp_tool.implementation import stemmer as nlp_tool

@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 class KBConfigurationException(Exception):
   """An exception triggered when the required components do not fit the
   configuration.

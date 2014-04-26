@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 from keybench.main.exception.cache_exception import KBCacheException
 from keybench.main.exception.configuration_exception import KBConfigurationException
 from keybench.main.exception.lazy_component_exception import KBLazyComponentException

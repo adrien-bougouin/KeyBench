@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 from keybench.main.nlp_tool.implementation import tokenizer
 from keybench.main.nlp_tool.implementation import lemmatizer
 from keybench.main.nlp_tool.implementation import normalizer

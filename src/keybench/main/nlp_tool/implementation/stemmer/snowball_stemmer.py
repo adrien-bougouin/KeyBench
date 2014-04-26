@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 from nltk.stem import snowball
 
 from keybench.main.nlp_tool import interface

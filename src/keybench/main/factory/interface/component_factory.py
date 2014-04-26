@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 from keybench.main import exception
 
 class KBComponentFactoryI(object):

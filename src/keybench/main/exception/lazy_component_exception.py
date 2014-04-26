@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 class KBLazyComponentException(Exception):
   """An Exception triggered when an error occurres while loading cached objects
   with a non-lazy component.

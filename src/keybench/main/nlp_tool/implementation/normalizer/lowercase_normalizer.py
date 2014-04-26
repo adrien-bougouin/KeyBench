@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 from keybench.main.nlp_tool import interface
 
 class LowercaseNormalizer(interface.KBNormalizerI):

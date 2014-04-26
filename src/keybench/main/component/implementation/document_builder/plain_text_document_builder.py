@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 from keybench.main.component import interface
 
 class PlainTextDocumentBuilder(interface.KBDocumentBuilderI):

@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 import codecs
 
 from nltk.stem import wordnet

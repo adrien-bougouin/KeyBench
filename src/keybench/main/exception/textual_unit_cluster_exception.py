@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 class KBTextualUnitClusterException(Exception):
   """An exception triggered when an error occurres while modifying a cluster of
   textual units.

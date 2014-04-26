@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 
 class KBOffsetException(Exception):
   """An exception triggered when an unexpected offset is found for a given

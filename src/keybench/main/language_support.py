@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 class KBLanguage(object):
   """Supported language names (following the Snowball convention).
 
