@@ -47,6 +47,9 @@ class KBDocumentBuilderI(component.KBComponent):
                                 "", "", "",
                                 [], [], [],
                                 [], [], [],
+                                [], [], [],
+                                [], [], [],
+                                [], [], [],
                                 [], [], [])
 
     ## complete the document ###################################################
@@ -70,6 +73,9 @@ class KBDocumentBuilderI(component.KBComponent):
         ## NLP tools ###########################################################
         tool_factory = core.KBBenchmark.singleton().run_tools[self._run_name]
         tokenizer = tool_factory.tokenizer(language)
+        normalizer = tool_factory.normalizer(language)
+        lemmatizer = tool_factory.lemmatizer(language)
+        stemmer = tool_factory.stemmer(language)
         pos_tagger = tool_factory.pos_tagger(language)
         ########################################################################
 
@@ -82,11 +88,55 @@ class KBDocumentBuilderI(component.KBComponent):
         title_sentence_tokens = tokenizer.tokenizeWords(title_sentences)
         abstract_sentence_tokens = tokenizer.tokenizeWords(abstract_sentences)
         content_sentence_tokens = tokenizer.tokenizeWords(content_sentences)
+        ## normalization #######################################################
+        self.logDebug("token normalization of %s..."%(name))
+        title_normalized_tokens = normalizer.normalize(" ".join(title_sentence_tokens)).split(" ")
+        abstract_normalized_tokens = normalizer.normalize(" ".join(abstract_sentence_tokens)).split(" ")
+        content_normalized_tokens = normalizer.normalize(" ".join(content_sentence_tokens)).split(" ")
+        ## stemming ############################################################
+        self.logDebug("token stemming of %s..."%(name))
+        title_token_stems = []
+        abstract_token_stems = []
+        content_token_stems = []
+
+        for normalized_sentence in title_token_stems:
+          title_token_stems.append([])
+          for normalized_token in tokenized_sentence:
+            title_token_stems[-1].append(stemmer.stem(normalized_token))
+        for normalized_sentence in abstract_token_stems:
+          abstract_token_stems.append([])
+          for normalized_token in tokenized_sentence:
+            abstract_token_stems[-1].append(stemmer.stem(normalized_token))
+        for normalized_sentence in content_token_stems:
+          content_token_stems.append([])
+          for normalized_token in tokenized_sentence:
+            content_token_stems[-1].append(stemmer.stem(normalized_token))
         ## part-of-speech tagging ##############################################
         self.logDebug("Part-of-Speech tagging of %s..."%(name))
         title_token_pos_tags = pos_tagger.tag(title_sentence_tokens)
         abstract_token_pos_tags = pos_tagger.tag(abstract_sentence_tokens)
         content_token_pos_tags = pos_tagger.tag(content_sentence_tokens)
+        ## lemmatization #######################################################
+        self.logDebug("token lemmatization of %s..."%(name))
+        title_token_lemmas = []
+        abstract_token_lemmas = []
+        content_token_lemmas = []
+
+        for i, normalized_sentence in enumerate(title_token_lemmas):
+          title_token_lemmas.append([])
+          for j, normalized_token in enumerate(tokenized_sentence):
+            title_token_lemmas[-1].append(lemmatizer.lemmatize(normalized_token),
+                                          title_token_pos_tags[i][j])
+        for i, normalized_sentence in enumerate(abstract_token_lemmas):
+          abstract_token_lemmas.append([])
+          for j, normalized_token in enumerate(tokenized_sentence):
+            abstract_token_lemmas[-1].append(lemmatizer.lemmatize(normalized_token),
+                                             abstract_token_pos_tags[i][j])
+        for i, normalized_sentence in enumerate(content_token_lemmas):
+          content_token_lemmas.append([])
+          for j, normalized_token in enumerate(tokenized_sentence):
+            content_token_lemmas[-1].append(lemmatizer.lemmatize(normalized_token),
+                                            token_token_pos_tags[i][j])
         ## fill every attributes of the document ###############################
         document = model.KBDocument(corpus_name,
                                     filepath,
@@ -102,6 +152,15 @@ class KBDocumentBuilderI(component.KBComponent):
                                     title_sentence_tokens,
                                     abstract_sentence_tokens,
                                     content_sentence_tokens,
+                                    title_normalized_tokens,
+                                    abstract_normalized_tokens,
+                                    content_normalized_tokens,
+                                    title_token_lemmas,
+                                    abstract_token_lemmas,
+                                    content_token_lemmas,
+                                    title_token_stems,
+                                    abstract_token_stems,
+                                    content_token_stems,
                                     title_token_pos_tags,
                                     abstract_token_pos_tags,
                                     content_token_pos_tags)

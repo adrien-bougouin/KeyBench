@@ -23,18 +23,36 @@ class KBDocument(object):
     abstract_sentences: The sentences of the abstract, as a C{list} of
       C{string}.
     content_sentences: The sentences of the content, as a C{list} of C{string}.
-    title_sentence_tokens: The tokens of the sentences of the title, as a
+    title_sentence_tokens: The tokens of the tile sentences, as a C{list} of
+      C{list} of C{string}.
+    abstract_sentence_tokens: The tokens of the abstract sentences, as a C{list}
+      of C{list} of C{string}.
+    content_sentence_tokens: The tokens of the content sentences, as a C{list
+      of C{list} of C{string}.
+    title_normalized_tokens: The normalized tokens of the title sentences, as a
       C{list} of C{list} of C{string}.
-    abstract_sentence_tokens: The tokens of the sentences of the abstract, as a
-      C{list} of C{list} of C{string}.
-    content_sentence_tokens: The tokens of the sentences of the content, as a
-      C{list} of C{list} of C{string}.
-    title_token_pos_tags: The POS tags of the tokens of the sentences of the
-      title, as a C{list} of C{list} of C{string}.
-    abstract_token_pos_tags: The POS tags of the tokens of the sentences of the
-      abstract, as a C{list} of C{list} of C{string}.
-    content_token_pos_tags: The POS tags of the tokens of the sentences of the
-      content, as a C{list} of C{list} of C{string}.
+    abstract_normalized_tokens: The normalized tokens of the abstract sentences,
+      as a C{list} of C{list} of C{string}.
+    content_normalized_tokens: The normalized tokens of the content sentences,
+      as a C{list} of C{list} of C{string}.
+    title_token_lemmas: The lemmas of the normalized tokens of the title
+      sentences, as a C{list} of C{list} of C{string}.
+    abstract_token_lemmas: The lemmas of the normalized tokens of the abstract
+      sentences, as a C{list} of C{list} of C{string}.
+    content_token_lemmas: The lemmas of the normalized tokens of the content
+      sentences, as a C{list} of C{list} of C{string}.
+    title_token_stems: The stems of the normalized tokens of the title
+      sentences, as a C{list} of C{list} of C{string}.
+    abstract_token_stems: The stems of the normalized tokens of the abstract
+      sentences, as a C{list} of C{list} of C{string}.
+    content_token_stems: The stems of the normalized tokens of the content
+      sentences, as a C{list} of C{list} of C{string}.
+    title_token_pos_tags: The POS tags of the tokens of the title sentences, as
+      a C{list} of C{list} of C{string}.
+    abstract_token_pos_tags: The POS tags of the tokens of the abstract
+      sentences, as a C{list} of C{list} of C{string}.
+    content_token_pos_tags: The POS tags of the tokens of the content sentences,
+      as a C{list} of C{list} of C{string}.
     full_text: The concatenation of the title, the abstract and the content of
       the document.
     full_text_sentences: The concatenation of the sentences of the title, the
@@ -60,6 +78,15 @@ class KBDocument(object):
                title_sentence_tokens,
                abstract_sentence_tokens,
                content_sentence_tokens,
+               title_normalized_tokens,
+               abstract_normalized_tokens,
+               content_normalized_tokens,
+               title_token_lemmas,
+               abstract_token_lemmas,
+               content_token_lemmas,
+               title_token_stems,
+               abstract_token_stems,
+               content_token_stems,
                title_token_pos_tags,
                abstract_token_pos_tags,
                content_token_pos_tags):
@@ -79,6 +106,15 @@ class KBDocument(object):
     self._title_sentence_tokens = title_sentence_tokens
     self._abstract_sentence_tokens = abstract_sentence_tokens
     self._content_sentence_tokens = content_sentence_tokens
+    self._title_normalized_tokens = title_normalized_tokens
+    self._abstract_normalized_tokens = abstract_normalized_tokens
+    self._content_normalized_tokens = content_normalized_tokens
+    self._title_token_lemmas = title_token_lemmas
+    self._abstract_token_lemmas = abstract_token_lemmas
+    self._content_token_lemmas = content_token_lemmas
+    self._title_token_stems = title_token_stems
+    self._abstract_token_stems = abstract_token_stems
+    self._content_token_stems = content_token_stems
     self._title_token_pos_tags = title_token_pos_tags
     self._abstract_token_pos_tags = abstract_token_pos_tags
     self._content_token_pos_tags = content_token_pos_tags
@@ -98,6 +134,15 @@ class KBDocument(object):
            and self._title_sentence_tokens == other._title_sentence_tokens \
            and self._abstract_sentence_tokens == other._abstract_sentence_tokens \
            and self._content_sentence_tokens == other._content_sentence_tokens \
+           and self._title_normalized_tokens == other._title_normalized_tokens \
+           and self._abstract_normalized_tokens == other._abstract_normalized_tokens \
+           and self._content_normalized_tokens == other._content_normalized_tokens \
+           and self._title_token_lemmas == other._title_token_lemmas \
+           and self._abstract_token_lemmas == other._abstract_token_lemmas \
+           and self._content_token_lemmas == other._content_token_lemmas \
+           and self._title_token_stems == other._title_token_stems \
+           and self._abstract_token_stems == other._abstract_token_stems \
+           and self._content_token_stems == other._content_token_stems \
            and self._title_token_pos_tags == other._title_token_pos_tags \
            and self._abstract_token_pos_tags == other._abstract_token_pos_tags \
            and self._content_token_pos_tags == other._content_token_pos_tags
@@ -162,6 +207,42 @@ class KBDocument(object):
     return self._content_sentence_tokens
 
   @property
+  def title_normalized_tokens(self):
+    return self._title_normalized_tokens
+
+  @property
+  def abstract_normalized_tokens(self):
+    return self._abstract_normalized_tokens
+
+  @property
+  def content_normalized_tokens(self):
+    return self._content_normalized_tokens
+
+  @property
+  def title_token_lemmas(self):
+    return self._title_token_lemmas
+
+  @property
+  def abstract_token_lemmas(self):
+    return self._abstract_token_lemmas
+
+  @property
+  def content_token_lemmas(self):
+    return self._content_token_lemmas
+
+  @property
+  def title_token_stems(self):
+    return self._title_token_stems
+
+  @property
+  def abstract_token_stems(self):
+    return self._abstract_token_stems
+
+  @property
+  def content_token_stems(self):
+    return self._content_token_stems
+
+  @property
   def title_token_pos_tags(self):
     return self._title_token_pos_tags
 
@@ -194,6 +275,36 @@ class KBDocument(object):
     result.extend(self._title_sentence_tokens)
     result.extend(self._abstract_sentence_tokens)
     result.extend(self.content_sentence_tokens)
+
+    return result
+
+  @property
+  def full_text_normalized_tokens(self):
+    result = []
+    
+    result.extend(self._title_normalized_tokens)
+    result.extend(self._abstract_normalized_tokens)
+    result.extend(self.content_normalized_tokens)
+
+    return result
+
+  @property
+  def full_text_token_lemmas(self):
+    result = []
+    
+    result.extend(self._title_token_lemmas)
+    result.extend(self._abstract_token_lemmas)
+    result.extend(self.content_token_lemmas)
+
+    return result
+
+  @property
+  def full_text_token_stems(self):
+    result = []
+    
+    result.extend(self._title_token_stems)
+    result.extend(self._abstract_token_stems)
+    result.extend(self.content_token_stems)
 
     return result
 

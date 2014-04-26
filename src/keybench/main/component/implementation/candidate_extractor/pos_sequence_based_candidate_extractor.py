@@ -57,17 +57,9 @@ class POSSequenceBasedCandidateExtractor(interface.KBCandidateExtractorI):
       The C{list} of extracted, and filtered, candidates (C{KBTextualUnit}s).
     """
 
-    tokenized_sentences = document.full_text_sentence_tokens()
-    pos_tagged_sentences = document.full_text_token_pos_tags()
+    tokenized_sentences = document.full_text_sentence_tokens
+    pos_tagged_sentences = document.full_text_token_pos_tags
     candidates = {}
-
-    ## NLP tools ###############################################################
-    tool_factory = core.KBBenchmark.singleton().run_tools[self._run_name]
-    pos_tagger = tool_factory.posTagger(document.language)
-    normalizer = tool_factory.normalizer(document.language)
-    lemmatizer = tool_factory.lemmatizer(document.language)
-    stemmer = tool_factory.stemmer(document.language)
-    ############################################################################
 
     # extract sentences' textual units matching POS tag patterns
     for sentence_offset, tokenized_sentence in enumerate(tokenized_sentences):
@@ -95,6 +87,8 @@ class POSSequenceBasedCandidateExtractor(interface.KBCandidateExtractorI):
         candidate_seen_form = candidate # FIXME tokenized form, not seen form :{
         candidate_normalized_form = normalizer.normalize(candidate)
         candidate_normalized_tokens = candidate_normalized_form.split(" ")
+        candidate_normalized_lemmas = document.full_text_token_lemmas[sentence_offset][start:end]
+        candidate_normalized_stems = document.full_text_token_stems[sentence_offset][start:end]
 
         # identify the candidates using the POS tags, so same normalized forms
         # with different POS tags are considered as different candidates
@@ -102,17 +96,6 @@ class POSSequenceBasedCandidateExtractor(interface.KBCandidateExtractorI):
                                str(candidate_pos_tags))
         # create the textual unit if no existing candidate matches it
         if candidate_id not in candidates:
-          # compute the n-gram's lemmas and stems
-          candidate_normalized_lemmas = []
-          candidate_normalized_stems = []
-
-          for word_index, word in enumerate(candidate_normalized_tokens):
-            pos_tag = candidate_pos_tags[word_index]
-            tag_name = pos_tagger.tagName(pos_tag)
-            candidate_normalized_lemmas.append(lemmatizer.lemmatize(word,
-                                                                    tag_name,
-                                                                    pos_tag))
-            candidate_normalized_stems.append(stemmer.stem(word))
           candidates[candidate_id] = model.KBTextualUnit(document.corpus_name,
                                                          document.language,
                                                          candidate_normalized_form,
