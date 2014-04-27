@@ -43,6 +43,10 @@ class KBCorpus(object):
       Otherwise, C{False}.
     pos_tagged_references: C{True} if the reference keyphrases are POS tagged.
       Otherwise, C{False}.
+   train_documents: The C{KBDocument}s used for training referenced by their
+    name (C{map} of C{KBDocument}).
+   test_documents: The C{KBDocument}s used for testing referenced by their name
+    (C{map} of C{KBDocument}).
   """
 
   def __init__(self,
@@ -60,7 +64,10 @@ class KBCorpus(object):
                tokenized_references,
                stemmed_references,
                lemmatized_references,
-               pos_tagged_references):
+               pos_tagged_references,
+               train_documents,
+               test_documents):
+
     super(KBCorpus, self).__init__()
 
     self._name = name
@@ -78,6 +85,8 @@ class KBCorpus(object):
     self._stemmed_references = stemmed_references
     self._lemmatized_references = lemmatized_references
     self._pos_tagged_references = pos_tagged_references
+    self._train_documents = train_documents
+    self._test_documents = test_documents
 
   def __eq__(self, other):
     return self._name == other._name \
@@ -94,7 +103,9 @@ class KBCorpus(object):
            and self._tokenized_references == other._tokenized_references \
            and self._stemmed_references == other._stemmed_references \
            and self._lemmatized_references == other._lemmatized_references \
-           and self._pos_tagged_references == other._pos_tagged_references
+           and self._pos_tagged_references == other._pos_tagged_references \
+           and self._train_documents == other._train_documents \
+           and self._test_documents == other._test_documents
 
   def __ne__(self, other):
     return not self.__eq__(other)
@@ -175,68 +186,16 @@ class KBCorpus(object):
   def test_reference_directory(self):
     return path.join(self._directory, self._test_reference_subdirectory)
 
-  def trainDocuments(self, document_builder):
-    """Provides every train document of the corpus.
+  @property
+  def train_documents(self):
+    return self._train_documents
 
-    Args:
-      document_builder: The C{KBDocumentBuilderI} component to use for the
-        creation of each document.
+  @property
+  def test_documents(self):
+    return self._test_documents
 
-    Returns:
-      The C{map} of C{KBDocument}s (associated to their C{string} name -- key)
-      in the train directory of the corpus.
-    """
-
-    documents = {}
-
-    for filename in os.listdir(self.train_directory):
-      if filename[-len(self._file_extension):] == self._file_extension:
-        document = document_builder.buildDocument(path.join(self.train_directory,
-                                                            filename),
-                                                  self._name,
-                                                  filename[:-len(self._file_extension)],
-                                                  self._language,
-                                                  self._encoding)
-
-        documents[document.name] = document
-
-    return documents
-
-  def testDocuments(self, document_builder):
-    """Provides every test document of the corpus.
-
-    Args:
-      document_builder: The C{KBDocumentBuilderI} component to use for the
-        creation of each document.
-
-    Returns:
-      The C{dict} of C{KBDocument}s (associated to their C{string} name -- key)
-      in the test directory of the corpus.
-    """
-
-    documents = {}
-
-    for filename in os.listdir(self.test_directory):
-      if filename[-len(self._file_extension):] == self._file_extension:
-        document = document_builder.buildDocument(path.join(self.test_directory,
-                                                            filename),
-                                                  self._name,
-                                                  filename[:-len(self._file_extension)],
-                                                  self._language,
-                                                  self._encoding)
-
-        documents[document.name] = document
-
-    return documents
-
-  def trainReferences(self):
-    """Provides the references for every train document.
-
-    Returns:
-      The C{dict} of references (C{list} of C{string}) associated to each train
-      document (C{string} name as key).
-    """
-
+  @property
+  def train_references(self):
     references = {}
 
     for filename in os.listdir(self.train_reference_directory):
@@ -251,14 +210,8 @@ class KBCorpus(object):
 
     return references
 
-  def testReferences(self):
-    """Provides the references for every test document.
-
-    Returns:
-      The C{dict} of references (C{list} of C{string}) associated to each test
-      document (C{string} name as key).
-    """
-
+  @property
+  def test_references(self):
     references = {}
 
     for filename in os.listdir(self.test_reference_directory):

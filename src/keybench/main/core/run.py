@@ -21,10 +21,12 @@ def __keyphrase_extraction_thread(arguments):
   corpus = corpus_builder.buildCorpus()
   keyphrase_documents = {}
 
-  for document in corpus.testDocuments():
+  for document in corpus.test_documents:
     document_keyphrases[document.name] = keyphrase_extractor.extractKeyphrases(document)
 
   return (corpus, document_keyphrases)
+
+################################################################################
 
 class KBRun(object):
   """The executor of a specific run.

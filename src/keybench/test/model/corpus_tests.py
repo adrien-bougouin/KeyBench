@@ -8,7 +8,6 @@ import os
 from os import path
 
 from keybench.main import model
-from keybench.main.component.implementation import document_builder as db
 
 class KBCorpusTests(unittest.TestCase):
 
@@ -27,34 +26,13 @@ class KBCorpusTests(unittest.TestCase):
                                   False,
                                   False,
                                   False,
-                                  False)
+                                  False,
+                                  {},
+                                  {})
 
     # create corpus directory
-    os.makedirs(path.join("test_corpus", "train"))
-    os.makedirs(path.join("test_corpus", "test"))
     os.makedirs(path.join("test_corpus", "reference", "train"))
     os.makedirs(path.join("test_corpus", "reference", "test"))
-    # add documents
-    codecs.open(path.join("test_corpus",
-                          "train",
-                          "doc1.txt"),
-                          "a",
-                          "utf-8").close()
-    codecs.open(path.join("test_corpus",
-                          "train",
-                          "doc2.txt"),
-                          "a",
-                          "utf-8").close()
-    codecs.open(path.join("test_corpus",
-                          "test",
-                          "doc3.txt"),
-                          "a",
-                          "utf-8").close()
-    codecs.open(path.join("test_corpus",
-                          "test",
-                          "doc4.txt"),
-                          "a",
-                          "utf-8").close()
     # add keyphrases
     with codecs.open(path.join("test_corpus",
                                "reference",
@@ -84,17 +62,6 @@ class KBCorpusTests(unittest.TestCase):
                                "a",
                                "utf-8") as f:
       f.write("key41\nkey42")
-    # add tricky files
-    codecs.open(path.join("test_corpus",
-                          "train",
-                          "dummy1.key"),
-                          "a",
-                          "utf-8").close()
-    codecs.open(path.join("test_corpus",
-                          "test",
-                          "dummy2.key"),
-                          "a",
-                          "utf-8").close()
     codecs.open(path.join("test_corpus",
                           "reference",
                           "train",
@@ -160,7 +127,9 @@ class KBCorpusTests(unittest.TestCase):
                              False,
                              False,
                              False,
-                             False)
+                             False,
+                             {},
+                             {})
     corpus2 = model.KBCorpus("test-corpus",
                              "test_corpus",
                              "train",
@@ -175,7 +144,9 @@ class KBCorpusTests(unittest.TestCase):
                              False,
                              False,
                              False,
-                             False)
+                             False,
+                             {},
+                             {})
     corpus3 = model.KBCorpus("test-corpus2",
                              "test_corpus2",
                              "train",
@@ -190,7 +161,9 @@ class KBCorpusTests(unittest.TestCase):
                              False,
                              False,
                              False,
-                             False)
+                             False,
+                             {},
+                             {})
 
     self.failUnless(self._corpus == corpus1)
     self.failIf(self._corpus == corpus2)
@@ -211,7 +184,9 @@ class KBCorpusTests(unittest.TestCase):
                              False,
                              False,
                              False,
-                             False)
+                             False,
+                             {},
+                             {})
     corpus2 = model.KBCorpus("test-corpus",
                              "test_corpus",
                              "train",
@@ -226,7 +201,9 @@ class KBCorpusTests(unittest.TestCase):
                              False,
                              False,
                              False,
-                             False)
+                             False,
+                             {},
+                             {})
     corpus3 = model.KBCorpus("test-corpus2",
                              "test_corpus2",
                              "train",
@@ -241,29 +218,20 @@ class KBCorpusTests(unittest.TestCase):
                              False,
                              False,
                              False,
-                             False)
+                             False,
+                             {},
+                             {})
 
     self.failIf(self._corpus != corpus1)
     self.failUnless(self._corpus != corpus2)
     self.failUnless(self._corpus != corpus3)
 
-  def testDocumentExtraction(self):
-    document_builder = db.PlainTextDocumentBuilder("name",
-                                                   "run_name",
-                                                   False,
-                                                   False,
-                                                   False,
-                                                   ".test_tmp")
-
-    self.failUnless(self._corpus.trainDocuments(document_builder).keys() == ["doc2",
-                                                                             "doc1"])
-    self.failUnless(self._corpus.testDocuments(document_builder).keys() == ["doc3",
-                                                                            "doc4"])
-    self.failUnless(self._corpus.trainReferences() == {
+  def testReferenceExtraction(self):
+    self.failUnless(self._corpus.train_references == {
       "doc1": ["key11", "key12"],
       "doc2": ["key21", "key22"]
     })
-    self.failUnless(self._corpus.testReferences() == {
+    self.failUnless(self._corpus.test_references == {
       "doc3": ["key31", "key32"],
       "doc4": ["key41", "key42"]
     })

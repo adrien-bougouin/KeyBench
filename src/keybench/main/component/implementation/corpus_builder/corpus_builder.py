@@ -1,5 +1,9 @@
 # -*- encoding: utf-8 -*-
 
+import os
+
+from os import path
+
 from keybench.main import core
 from keybench.main import model
 from keybench.main.component import component
@@ -101,6 +105,8 @@ class KBCorpusBuilder(component.KBComponent):
     self._lemmatized_references = lemmatized_references
     self._pos_tagged_references = pos_tagged_references
 
+    self._corpus = None
+
   def buildCorpus(self):
     """Builds the corpus.
 
@@ -110,19 +116,58 @@ class KBCorpusBuilder(component.KBComponent):
       The C{KBCorpus} representation.
     """
 
-    return model.KBCorpus(self._corpus_name,
-                          self._directory,
-                          self._train_subdirectory,
-                          self._test_subdicrectory,
-                          self._train_reference_subdirectory,
-                          self._test_reference_subdirectory,
-                          self._language,
-                          self._encoding,
-                          self._file_extension,
-                          self._reference_extension,
-                          self._normalized_references,
-                          self._tokenized_references,
-                          self._stemmed_referecences,
-                          self._lemmatized_references,
-                          self._pos_tagged_references)
+    # lazy loading of the corpus
+    if self._corpus == None:
+      ## NLP tools #############################################################
+      tool_factory = core.KBBenchmark.singleton().run_tools[self._run_name]
+      document_builder = tool_factory.documentBuilder(self._language)
+      ##########################################################################
+
+      # build the train documents
+      train_documents = {}
+      train_directory = path.join(self._directory, self._train_subdirectory)
+      for filename in os.listdir(train_directory):
+        if filename[-len(self._file_extension):] == self._file_extension:
+          document = document_builder.buildDocument(path.join(train_directory,
+                                                              filename),
+                                                    self._name,
+                                                    filename[:-len(self._file_extension)],
+                                                    self._language,
+                                                    self._encoding)
+
+          train_documents[document.name] = document
+      # build the test documents
+      test_documents = {}
+      test_directory = path.join(self._directory, self._test_subdirectory)
+      for filename in os.listdir(test_directory):
+        if filename[-len(self._file_extension):] == self._file_extension:
+          document = document_builder.buildDocument(path.join(test_directory,
+                                                              filename),
+                                                    self._name,
+                                                    filename[:-len(self._file_extension)],
+                                                    self._language,
+                                                    self._encoding)
+
+          test_documents[document.name] = document
+      # the corpus is kept into memory to avoid creating a distinct instance at
+      # each call of buildCorpus(), then increase the memory consumption
+      self._corpus = model.KBCorpus(self._corpus_name,
+                                    self._directory,
+                                    self._train_subdirectory,
+                                    self._test_subdicrectory,
+                                    self._train_reference_subdirectory,
+                                    self._test_reference_subdirectory,
+                                    self._language,
+                                    self._encoding,
+                                    self._file_extension,
+                                    self._reference_extension,
+                                    self._normalized_references,
+                                    self._tokenized_references,
+                                    self._stemmed_referecences,
+                                    self._lemmatized_references,
+                                    self._pos_tagged_references,
+                                    train_documents,
+                                    test_documents)
+
+    return self._corpus
 
