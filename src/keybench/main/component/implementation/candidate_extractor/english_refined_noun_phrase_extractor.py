@@ -2,19 +2,20 @@
 
 import re
 
+from nltk.corpus import wordnet
+
 from keybench.main import core
 from keybench.main import model
 from keybench.main.component.implementation.candidate_extractor import pos_sequence_based_candidate_extractor as interface
-from keybench.main.component.implementation.candidate_extractor import util
 from keybench.main.nlp_tool import interface as nlp_tool_interface
 
-class FrenchRefinedNounPhraseExtractor(interface.POSSequenceBasedCandidateExtractor):
-  """French pattern matching candidate extractor that filters useless
+class EnglishRefinedNounPhraseExtractor(interface.POSSequenceBasedCandidateExtractor):
+  """English pattern matching candidate extractor that filters useless
   adjectives.
 
   Candidate extractor providing only textual units that match the POS tag
-  pattern C{N+A?}. When the adjective is not derived from a 
-  noun, only the modified noun is extracted.
+  pattern C{A?N+}. When the adjective is not derived from a noun, only the
+  modified noun is extracted.
   """
 
   def __init__(self,
@@ -60,10 +61,10 @@ class FrenchRefinedNounPhraseExtractor(interface.POSSequenceBasedCandidateExtrac
 
       adjective_tags = pos_tagger.tagset()[nlp_tool_interface.KBPOSTaggerI.POSTagKey.ADJECTIVE]
 
-    pos_regexp = r"(%s)+(%s)?"%("|".join(self._noun_tags),
-                                "|".join(self._adjective_tags))
+    pos_regexp = r"(%s)?(%s)+"%("|".join(self._adjective_tags),
+                                "|".join(self._noun_tags))
 
-    super(FrenchRefinedNounPhraseExtractor, self).__init__(name,
+    super(EnglishRefinedNounPhraseExtractor, self).__init__(name,
                                                            run_name,
                                                            shared,
                                                            lazy_mode,
@@ -83,19 +84,19 @@ class FrenchRefinedNounPhraseExtractor(interface.POSSequenceBasedCandidateExtrac
       The C{list} of extracted, and filtered, candidates (C{KBTextualUnit}s).
     """
 
-    candidates = super(FrenchRefinedNounPhraseExtractor,
+    candidates = super(EnglishRefinedNounPhraseExtractor,
                        self)._candidateExtraction(document)
 
     for index, candidate in enumerate(candidates):
-      # WARNING works only for N+A? (one adjective at the right)
+      # WARNING works only for A?N+ (one adjective at the left)
       # check if the adjective must be filtered out or not
-      if not self._check_adjective(candidate):
-        candidate_normalized_tokens = candidate.normalized_tokens[:-1]
+      if not self.i_check_adjective(candidate):
+        candidate_normalized_tokens = candidate.normalized_tokens[1:]
         # create a new candidate without the adjective
         candidate_normalized_form = " ".join(candidate_normalized_tokens)
-        candidate_normalized_lemmas = candidate.normalized_lemmas[:-1]
-        candidate_normalized_stems = candidate.normalized_stems[:-1]
-        candidate_pos_tags = candidate.pos_tags[:-1]
+        candidate_normalized_lemmas = candidate.normalized_lemmas[1:]
+        candidate_normalized_stems = candidate.normalized_stems[1:]
+        candidate_pos_tags = candidate.pos_tags[1:]
         new_candidate = model.KBTextualUnit(document.corpus_name,
                                             document.language,
                                             candidate_normalized_form,
@@ -107,7 +108,7 @@ class FrenchRefinedNounPhraseExtractor(interface.POSSequenceBasedCandidateExtrac
         # add all the occurrences
         seen_forms = candidate.seen_forms
         for seen_form in seen_forms:
-          new_seen_form =" ".join(seen_form.split(" ")[:-1]) # FIXME tokenized form, not seen form :{
+          new_seen_form =" ".join(seen_form.split(" ")[1:]) # FIXME tokenized form, not seen form :{
 
           for sentence_offset, inner_sentence_offsets in seen_forms[seen_form].items():
             for inner_sentence_offset in inner_sentence_offsets:
@@ -135,33 +136,28 @@ class FrenchRefinedNounPhraseExtractor(interface.POSSequenceBasedCandidateExtrac
       useless adjective.
     """
 
-    # http://aclweb.org/anthology//F/F13/F13-1023.pdf
+    # http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.380.8821&rep=rep1&type=pdf
     adjr_suffixes = [
-      u"ain", u"ains", u"aine", u"aines",
-      u"aire", u"aires",
-      u"al", u"aux", u"als", u"ale", u"ales",
-      u"el", u"els", u"elle", u"elles",
-      u"esque", u"esques",
-      u"estre", u"estres",
-      u"eux", u"euse", u"euses",
-      u"é", u"és", u"ée", u"ées",
-      u"ien", u"iens", u"ienne", u"iennes",
-      u"ier", u"iers", u"ière", u"ières",
-      u"if", u"ifs", u"ive", u"ives",
-      u"il", u"ils",
-      u"in", u"ins", u"ine", u"ines",
-      u"ique", u"iques",
-      u"ois", u"oise", u"oises"
+      u"al",
+      u"ant",
+      u"ary",
+      u"ic",
+      u"ous",
+      u"ive"
     ]
 
-    # WARNING works only for N+A? (one adjective at the right)
+    # WARNING works only for A?N+ (one adjective at the left)
     # check if the adjective must be filtered out or not
-    if candidate.pos_tags[-1] not in self._adjective_tags \
-       or candidate.normalized_lemmas[-1] in util.french_denominal_adjectives \
+    if candidate.pos_tags[0] not in self._adjective_tags \
        or candidate.numberOfOccurrences() > 1:
       return True
+    for synset in wordnet.synsets(candidate.normalized_tokens[0]):
+      if synset.name.find(".a.") != -1:
+        for lemma in synset.lemmas:
+          if len(lemma.pertainyms()) > 0:
+            return True
     for suffix in adjr_suffixes:
-      if candidate.normalized_tokens[-1][-len(suffix):] == suffix:
+      if candidate.normalized_tokens[0][-len(suffix):] == suffix:
         return True
 
     return False
