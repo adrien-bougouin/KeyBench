@@ -3,6 +3,7 @@
 import codecs
 import os
 import string
+import tempfile
 
 from datetime import datetime
 from os import path
@@ -106,14 +107,16 @@ class MEltPOSTagger(interface.KBPOSTaggerI):
     """
 
     pos_tagged_sentences = []
-    input_filepath = ".melt_%s_%s_input.tmp"%(
-                       hash(str(tokenized_sentences)),
-                       hash(datetime.today().ctime())
-                     )
-    output_filepath = ".melt_%s_%s_output.tmp"%(
-                        hash(str(tokenized_sentences)),
-                        hash(datetime.today().ctime())
-                      )
+    input_filepath = path.join(tempfile.gettempdir(),
+                               ".melt_%s_%s_input.tmp"%(
+                                 hash(str(tokenized_sentences)),
+                                 hash(datetime.today().ctime())
+                               ))
+    output_filepath = path.join(tempfile.gettempdir(),
+                                ".melt_%s_%s_output.tmp"%(
+                                  hash(str(tokenized_sentences)),
+                                  hash(datetime.today().ctime())
+                                ))
 
     # write input
     input_file = codecs.open(input_filepath, "w", self._encoding)

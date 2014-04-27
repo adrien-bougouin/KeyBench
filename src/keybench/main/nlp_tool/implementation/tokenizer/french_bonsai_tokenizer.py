@@ -2,6 +2,7 @@
 
 import codecs
 import os
+import tempfile
 
 from datetime import datetime
 from nltk import data
@@ -60,14 +61,16 @@ class FrenchBonsaiTokenizer(interface.KBTokenizerI):
 
 
     tokenized_sentences = []
-    input_filepath = ".bonsai_%s_%s_input.tmp"%(
-                       hash(str(sentences)),
-                       hash(datetime.today().ctime())
-                     )
-    output_filepath = ".bonsai_%s_%s_output.tmp"%(
-                        hash(str(sentences)),
-                        hash(datetime.today().ctime())
-                      )
+    input_filepath = path.join(tempfile.gettempdir(),
+                               ".bonsai_%s_%s_input.tmp"%(
+                                 hash(str(sentences)),
+                                 hash(datetime.today().ctime())
+                               ))
+    output_filepath = path.join(tempfile.gettempdir(),
+                                ".bonsai_%s_%s_output.tmp"%(
+                                  hash(str(sentences)),
+                                  hash(datetime.today().ctime())
+                                ))
 
     # write input
     input_file = codecs.open(input_filepath, "w", self._encoding)
