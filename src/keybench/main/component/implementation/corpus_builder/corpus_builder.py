@@ -123,32 +123,56 @@ class KBCorpusBuilder(component.KBComponent):
       document_builder = tool_factory.documentBuilder(self._language)
       ##########################################################################
 
-      # build the train documents
-      train_documents = {}
+      # extract the information of the train documents
+      train_document_information = []
       train_directory = path.join(self._directory, self._train_subdirectory)
       for filename in os.listdir(train_directory):
         if filename[-len(self._file_extension):] == self._file_extension:
-          document = document_builder.buildDocument(path.join(train_directory,
-                                                              filename),
-                                                    self._name,
-                                                    filename[:-len(self._file_extension)],
-                                                    self._language,
-                                                    self._encoding)
+          document_filepath = path.join(train_directory, filename)
+          document_name = filename[:-len(self._file_extension)]
 
-          train_documents[document.name] = document
-      # build the test documents
-      test_documents = {}
+          train_document_information.append((document_filepath,
+                                             self._corpus_name,
+                                             document_name,
+                                             self._language,
+                                             self._encoding))
+      # extract the information of the test documents
+      test_document_information = []
       test_directory = path.join(self._directory, self._test_subdirectory)
       for filename in os.listdir(test_directory):
         if filename[-len(self._file_extension):] == self._file_extension:
-          document = document_builder.buildDocument(path.join(test_directory,
-                                                              filename),
-                                                    self._name,
-                                                    filename[:-len(self._file_extension)],
-                                                    self._language,
-                                                    self._encoding)
+          document_filepath = path.join(test_directory, filename)
+          document_name = filename[:-len(self._file_extension)]
 
-          test_documents[document.name] = document
+          test_document_information.append((document_filepath,
+                                            self._corpus_name,
+                                            document_name,
+                                            self._language,
+                                            self._encoding))
+      # extract the train references
+      train_references = {}
+      train_reference_directory = path.join(self._directory, self._train_reference_subdirectory)
+      for filename in os.listdir(train_reference_directory):
+        if filename[-len(self._reference_extension):] == self._reference_extension:
+          filepath = path.join(train_reference_directory, filename)
+          name = filename[:-len(self._reference_extension)]
+          reference_file = codecs.open(filepath, "r", self._encoding)
+
+          train_references[name] = reference_file.read().splitlines()
+
+          reference_file.close()
+      # extract the test references
+      test_references = {}
+      test_reference_directory = path.join(self._directory, self._train_reference_subdirectory)
+      for filename in os.listdir(test_reference_directory):
+        if filename[-len(self._reference_extension):] == self._reference_extension:
+          filepath = path.join(test_reference_directory, filename)
+          name = filename[:-len(self._reference_extension)]
+          reference_file = codecs.open(filepath, "r", self._encoding)
+
+          test_references[name] = reference_file.read().splitlines()
+
+          reference_file.close()
       # the corpus is kept into memory to avoid creating a distinct instance at
       # each call of buildCorpus(), then increase the memory consumption
       self._corpus = model.KBCorpus(self._corpus_name,
@@ -166,8 +190,10 @@ class KBCorpusBuilder(component.KBComponent):
                                     self._stemmed_referecences,
                                     self._lemmatized_references,
                                     self._pos_tagged_references,
-                                    train_documents,
-                                    test_documents)
+                                    train_document_information,
+                                    test_document_information,
+                                    train_document_references,
+                                    test_document_references)
 
     return self._corpus
 

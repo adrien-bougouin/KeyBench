@@ -43,10 +43,16 @@ class KBCorpus(object):
       Otherwise, C{False}.
     pos_tagged_references: C{True} if the reference keyphrases are POS tagged.
       Otherwise, C{False}.
-   train_documents: The C{KBDocument}s used for training referenced by their
-    name (C{map} of C{KBDocument}).
-   test_documents: The C{KBDocument}s used for testing referenced by their name
-    (C{map} of C{KBDocument}).
+   train_document_information: The information of the train documents required
+    to be able to get their C{KBDocument} representation (C{list} of
+    C{tuple(<filepath>, <corpus_name>, <name>, <language>, <encoding>)}).
+   test_document_information: The information of the test documents required
+    to be able to get their C{KBDocument} representation (C{list} of
+    C{tuple(<filepath>, <corpus_name>, <name>, <language>, <encoding>)}).
+   train_references: The C{map} of C{list} of C{string} keyphrases associated to
+    each train document (referenced by its C{string} name).
+   test_references: The C{map} of C{list} of C{string} keyphrases associated to
+    each test document (referenced by its C{string} name).
   """
 
   def __init__(self,
@@ -65,8 +71,10 @@ class KBCorpus(object):
                stemmed_references,
                lemmatized_references,
                pos_tagged_references,
-               train_documents,
-               test_documents):
+               train_document_information,
+               test_document_information,
+               train_references,
+               test_references):
 
     super(KBCorpus, self).__init__()
 
@@ -85,8 +93,10 @@ class KBCorpus(object):
     self._stemmed_references = stemmed_references
     self._lemmatized_references = lemmatized_references
     self._pos_tagged_references = pos_tagged_references
-    self._train_documents = train_documents
-    self._test_documents = test_documents
+    self._train_document_information = train_document_information
+    self._test_document_information = test_document_information
+    self._train_references = train_references
+    self._test_references = test_references
 
   def __eq__(self, other):
     return self._name == other._name \
@@ -104,8 +114,10 @@ class KBCorpus(object):
            and self._stemmed_references == other._stemmed_references \
            and self._lemmatized_references == other._lemmatized_references \
            and self._pos_tagged_references == other._pos_tagged_references \
-           and self._train_documents == other._train_documents \
-           and self._test_documents == other._test_documents
+           and self._train_document_information == other._train_document_information \
+           and self._test_document_information == other._test_document_information \
+           and self._train_references == other._train_references \
+           and self._test_references == other._test_references
 
   def __ne__(self, other):
     return not self.__eq__(other)
@@ -171,6 +183,22 @@ class KBCorpus(object):
     return self._pos_tagged_references
 
   @property
+  def train_document_information(self):
+    return self._train_document_information
+
+  @property
+  def test_document_information(self):
+    return self._test_document_information
+
+  @property
+  def train_references(self):
+    return self._train_references
+
+  @property
+  def test_references(self):
+    return self._test_references
+
+  @property
   def train_directory(self):
     return path.join(self._directory, self._train_subdirectory)
 
@@ -185,44 +213,4 @@ class KBCorpus(object):
   @property
   def test_reference_directory(self):
     return path.join(self._directory, self._test_reference_subdirectory)
-
-  @property
-  def train_documents(self):
-    return self._train_documents
-
-  @property
-  def test_documents(self):
-    return self._test_documents
-
-  @property
-  def train_references(self):
-    references = {}
-
-    for filename in os.listdir(self.train_reference_directory):
-      if filename[-len(self._reference_extension):] == self._reference_extension:
-        filepath = path.join(self.train_reference_directory, filename)
-        name = filename[:-len(self._reference_extension)]
-        reference_file = codecs.open(filepath, "r", self._encoding)
-
-        references[name] = reference_file.read().splitlines()
-
-        reference_file.close()
-
-    return references
-
-  @property
-  def test_references(self):
-    references = {}
-
-    for filename in os.listdir(self.test_reference_directory):
-      if filename[-len(self._reference_extension):] == self._reference_extension:
-        filepath = path.join(self.test_reference_directory, filename)
-        name = filename[:-len(self._reference_extension)]
-        reference_file = codecs.open(filepath, "r", self._encoding)
-
-        references[name] = reference_file.read().splitlines()
-
-        reference_file.close()
-
-    return references
 
