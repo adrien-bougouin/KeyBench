@@ -79,6 +79,11 @@ These directories contain serialized files (<code>pickle</code>) used for lazy
 loading, as well as a readable version of them in a <code>string</code>
 directory.
 
+Bug fixes
+-------
+
+- 29/05/2014: Fix the ordering for the extraction of the most frequent candidate of a cluster.
+
 References
 ----------
 
