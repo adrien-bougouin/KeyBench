@@ -280,7 +280,7 @@ class TextRankRanker(RankerC):
     else:
       if self._ordering_criteria == ORDERING_CRITERIA.FREQUENCY:
         return sorted(cluster, key=lambda (t): (frequency[t],
-                                                -1 * len(t.split())))
+                                                len(t.split())), reverse=True)
       else:
         return sorted(cluster, key=lambda (t): (t != centroid,
                                                 -1 * len(t.split())))
