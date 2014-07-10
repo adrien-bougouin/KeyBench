@@ -59,7 +59,7 @@ from os import listdir
 
 ################################################################################
 
-RUNS_DIR = "results" # directory used to save informations
+RUNS_DIR = "results_fi_2" # directory used to save informations
 
 ##### corpora information ######################################################
 
@@ -145,7 +145,7 @@ TERM_SUITE_TERMINOLOGY_CA = "term_suite"
 ACABIT_TERMINOLOGY_CA = "acabit"
 POS_BOUNDARY_BASED_CA = "pos_boundaries"
 CORE_WORD_BASED_CA = "core_words"
-NOUN_AND_ADJR_CA = "nouns_and_adjr_final"
+NOUN_AND_ADJR_CA = "nouns_and_adjr"
 
 # clustering names
 NO_CLUSTER_CC = "no_cluster"
@@ -328,22 +328,74 @@ def english_tokenization(term):
 
 def is_french_adjr(word):
   stemmer = FrenchStemmer()
+#  new_list = [
+#    u"ique",
+#    u"aire",
+#    u"eux",
+#    u"ier",
+#    u"ien",
+#    u"ois",
+#    u"ain",
+#    u"al",
+#    u"el",
+#    u"estre",
+#    u"il",
+#    u"in",
+#    u"esque",
+#    u"é",
+#    u"if"
+#  ]
+  # suffixes with gender and number flexions
   new_list = [
     u"ique",
+    u"iques",
     u"aire",
+    u"aires",
     u"eux",
+    u"euse",
+    u"euses",
     u"ier",
+    u"iers",
+    u"ière",
+    u"ières",
     u"ien",
+    u"iens",
+    u"ienne",
+    u"iennes",
     u"ois",
+    u"oise",
+    u"oises",
     u"ain",
+    u"ains",
+    u"aine",
+    u"aines",
     u"al",
+    u"aux",
+    u"als",
+    u"ale",
+    u"ales",
     u"el",
+    u"els",
+    u"elle",
+    u"elles",
     u"estre",
+    u"estres",
     u"il",
+    u"ils",
     u"in",
+    u"ins",
+    u"ine",
+    u"ines",
     u"esque",
+    u"esques",
     u"é",
-    u"if"
+    u"és",
+    u"ée",
+    u"ées",
+    u"if",
+    u"ifs",
+    u"ive",
+    u"ives"
   ]
 
   #return stemmer.stem(word) in french_stemmed_adjr
@@ -354,8 +406,10 @@ def is_french_adjr(word):
   if stemmer.stem(word) in french_stemmed_adjr:
     return True
   for suffix in new_list:
-    if stemmer.stem(word)[-len(suffix):] == suffix:
+    if word[-len(suffix):] == suffix:
       return True
+  if word[-2:] in french_adjr_suffix_2_counts:
+    return True
   return False
 
 english_adjr_suffix_2_counts = {}
@@ -373,8 +427,12 @@ for adjective in wordnet.all_synsets("a"):
       english_adjr_suffix_3_counts[suffix_3] += 1
 def is_english_adjr(word):
   new_list = [
+    u"al",
+    u"ant",
+    u"ary",
     u"ic",
-    u"al"
+    u"ous",
+    u"ive"
   ]
   for synset in wordnet.synsets(word):
     if synset.name.find(".a.") != -1:
@@ -384,6 +442,8 @@ def is_english_adjr(word):
   for suffix in new_list:
     if word[-len(suffix):] == suffix:
       return True
+  if word[-2:] in english_adjr_suffix_2_counts:
+    return True
   return False
   #return word[-2:] in english_adjr_suffix_2_counts \
   #       and english_adjr_suffix_2_counts[word[-2:]] >= 1

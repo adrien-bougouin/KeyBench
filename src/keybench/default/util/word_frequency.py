@@ -95,9 +95,9 @@ def document_frequencies(corpus_directory,
       nb_documents += 1.0
 
       pool_args.append((pre_processor, candidate_extractor, filepath))
-  document_terms = working_pool.map(term_bag_extraction_pool_worker, pool_args)
-  #for args in pool_args:
-  #  document_terms.append(term_bag_extraction_pool_worker(args))
+  #document_terms = working_pool.map(term_bag_extraction_pool_worker, pool_args)
+  for args in pool_args:
+    document_terms.append(term_bag_extraction_pool_worker(args))
 
   for terms in document_terms:
     for term in terms:
