@@ -154,7 +154,7 @@ class KBCandidateExtractorI(component.KBComponent):
     # identify the candiate with its normalized form and POS tag in order to
     # prevent from having only one candidate for the same form with a diferent
     # POS tagging
-    identifier = "%s%s"%(candidate_normalized_form, str(n_gram_pos_tags))
+    identifier = "%s%s"%(candidate_normalized_form, str(candidate_pos_tags))
 
     if identifier not in candidates:
       candidates[identifier] = model.KBTextualUnit(document.corpus_name,

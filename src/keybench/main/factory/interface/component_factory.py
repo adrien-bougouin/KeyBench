@@ -33,7 +33,7 @@ class KBComponentFactoryI(object):
     treated in the run.
 
     Returns:
-      The C{list} of C{KBCorpusBuilder} of the run.
+      The C{map} of C{KBCorpusBuilder} of the run.
     """
 
     raise exception.KBConfigurationException(self, "Uncomplete configuration!")

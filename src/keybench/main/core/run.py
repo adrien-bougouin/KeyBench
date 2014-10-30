@@ -71,7 +71,7 @@ class KBRun(object):
     thread_arguments = []
 
     # preparation of the keyphrase extract
-    for corpus_builder in configuration.corpusBuilders():
+    for corpus_builder in configuration.corpusBuilders().values():
       thread_arguments.append((corpus_builder,
                                configuration.documentBuilder(corpus_builder.language),
                                configuration.keyphrase_Extractor(corpus_builder.language)))

@@ -72,7 +72,7 @@ class NGramExtractor(interface.KBCandidateExtractorI):
           start = i - n
           end = i
 
-          super(, self)._updateCandidateDictionary(candidates,
+          super(NGramExtractor, self)._updateCandidateDictionary(candidates,
                                                    document,
                                                    sentence_offset,
                                                    start,
