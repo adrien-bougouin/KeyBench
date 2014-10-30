@@ -151,5 +151,7 @@ class NGramTFIDFRanker(interface.KBCandidateRanker):
 
       tf_idfs.append((candidate, tf_idf))
 
-    return tf_idfs
+    return sorted(tf_idfs,
+                  key=lambda (candidate, tfidf): (tfidf, self._candidateIdentifier(candidate)),
+                  reverse=True)
 
