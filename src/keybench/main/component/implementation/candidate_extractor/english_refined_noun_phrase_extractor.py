@@ -69,6 +69,7 @@ class EnglishRefinedNounPhraseExtractor(interface.POSSequenceBasedCandidateExtra
                                                            shared,
                                                            lazy_mode,
                                                            debug_mode,
+                                                           root_cache,
                                                            pos_regexp)
 
     self._noun_tags = noun_tags

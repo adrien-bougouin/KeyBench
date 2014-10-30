@@ -8,7 +8,7 @@ class NGramExtractor(interface.KBCandidateExtractorI):
   """N-gram candidate extractor.
 
   Attributes:
-    n: The maximum word size of a candidate.
+    n: The maximum size of a candidate (number of words).
   """
 
   def __init__(self,
@@ -32,7 +32,7 @@ class NGramExtractor(interface.KBCandidateExtractorI):
         otherwise.
       root_cache: The root of the cache directory where the cached objects must
         be stored.
-      n: The maximum word size of a candidate.
+      n: The maximum size of a candidate (number of words).
     """
 
     super(NGramExtractor, self).__init__(name,
@@ -69,30 +69,14 @@ class NGramExtractor(interface.KBCandidateExtractorI):
       # extract word lists of size up to n
       for n in range(1, self._n + 1):
         for i in range(n, len(tokenized_sentence) + 1):
-          inner_sentence_offset = i - n
-          n_gram = " ".join(tokenized_sentence[inner_sentence_offset:i])
-          n_gram_seen_form = n_gram # FIXME tokenized form, not seen form :{
-          n_gram_normalized_form = normalizer.normalize(n_gram)
-          n_gram_normalized_tokens = n_gram_normalized_form.split(" ")
-          n_gram_normalized_lemmas = document.full_text_token_lemmas[sentence_offset][inner_sentence_offset:i]
-          n_gram_normalized_stems = document.full_text_token_stems[sentence_offset][inner_sentence_offset:i]
-          n_gram_pos_tags = pos_tagged_sentence[inner_sentence_offset:i]
+          start = i - n
+          end = i
 
-          # identify the candidates using the POS tags, so same normalized forms
-          # with different POS tags are considered as different candidates
-          n_gram_id = "%s%s"%(n_gram_normalized_form, str(n_gram_pos_tags))
-          # create the textual unit if no existing candidate matches it
-          if n_gram_id not in candidates:
-            candidates[n_gram_id] = model.KBTextualUnit(document.corpus_name,
-                                                        document.language,
-                                                        n_gram_normalized_form,
-                                                        n_gram_normalized_tokens,
-                                                        n_gram_normalized_lemmas,
-                                                        n_gram_normalized_stems,
-                                                        n_gram_pos_tags)
-          candidates[n_gram_id].addOccurrence(n_gram_seen_form,
-                                              sentence_offset,
-                                              inner_sentence_offset)
+          super(, self)._updateCandidateDictionary(candidates,
+                                                   document,
+                                                   sentence_offset,
+                                                   start,
+                                                   end)
 
     return candidates.values()
 

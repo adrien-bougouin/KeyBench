@@ -2,6 +2,8 @@
 
 import exceptions
 
+from keybench.main import core
+from keybench.main import model
 from keybench.main.component import component
 
 class KBCandidateExtractorI(component.KBComponent):
@@ -113,6 +115,58 @@ class KBCandidateExtractorI(component.KBComponent):
       self.store(document, candidates)
 
     return candidates
+
+  def _updateCandidateDictionary(self,
+                                 candiates,
+                                 document,
+                                 sentence_offset,
+                                 starting_token,
+                                 ending_token):
+    """Adds or update a newly extracted candidate form to a candidate
+    dictionary.
+
+    Args:
+      candidates: The candidate dictionary to update. Keys are mixtures of
+        candidate forms and POS tags.
+      document: The C{KBDocument} where the candidate is extracted from.
+      sentence_offset: The index of the sentence of the document where the
+        candidate is extracted.
+      starting_token: The index of the first token of the candidate within the
+        sentence it is extracted from.
+      ending_token: The index of the last token of the candidate within the
+        sentence it is extracted from.
+    """
+
+    tool_factory = core.KBBenchmark.singleton().run_tools[self._run_name]
+    normalizer = tool_factory.normalizer(document.language)
+    #---------------------------------------------------------------------------
+    tokenized_sentence = document.full_text_sentence_tokens[sentence_offset]
+    pos_tagged_sentence = document.full_text_sentence_pos_tags[sentence_offset]
+    #---------------------------------------------------------------------------
+    candidate = " ".join(tokenized_sentence[starting_token:ending_token])
+    candidate_seen_form = candidate # FIXME tokenized form :{
+    candidate_normalized_form = normalizer.normalize(candidate)
+    candidate_normalized_tokens = candidate_normalized_form.split(" ")
+    candidate_normalized_lemmas = document.full_text_token_lemmas[sentence_offset][starting_token:ending_token]
+    candidate_normalized_stems = document.full_text_token_stems[sentence_offset][starting_token:ending_token]
+    candidate_pos_tags = pos_tagged_sentence[starting_token:ending_token]
+
+    # identify the candiate with its normalized form and POS tag in order to
+    # prevent from having only one candidate for the same form with a diferent
+    # POS tagging
+    identifier = "%s%s"%(candidate_normalized_form, str(n_gram_pos_tags))
+
+    if identifier not in candidates:
+      candidates[identifier] = model.KBTextualUnit(document.corpus_name,
+                                                   document.language,
+                                                   candidate_normalized_form,
+                                                   candidate_normalized_tokens,
+                                                   candidate_normalized_lemmas,
+                                                   candidate_normalized_stems,
+                                                   candidate_pos_tags)
+    candidates[identifier].addOccurrence(candidate_seen_form,
+                                         sentence_offset,
+                                         starting_token)
 
   def _candidateExtraction(self, document):
     """Extracts the candidates of a given document.

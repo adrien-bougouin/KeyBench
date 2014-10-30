@@ -19,7 +19,7 @@ def __keyphrase_extraction_thread(arguments):
   """
   corpus_builder, document_builder, keyphrase_extractor = arguments
   corpus = corpus_builder.buildCorpus()
-  keyphrase_documents = {}
+  document_keyphrases = {}
 
   for filepath, corpus_name, name, language, encoding in corpus.test_document_information:
     document = document_builder.buildDocument(filepath,
