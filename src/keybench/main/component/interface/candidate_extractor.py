@@ -143,27 +143,24 @@ class KBCandidateExtractorI(component.KBComponent):
     tokenized_sentence = document.full_text_sentence_tokens[sentence_offset]
     pos_tagged_sentence = document.full_text_sentence_pos_tags[sentence_offset]
     #---------------------------------------------------------------------------
-    candidate = " ".join(tokenized_sentence[starting_token:ending_token])
-    candidate_seen_form = candidate # FIXME tokenized form :{
-    candidate_normalized_form = normalizer.normalize(candidate)
+    candidate_string = " ".join(tokenized_sentence[starting_token:ending_token])
+    candidate_seen_form = candidate_string # FIXME tokenized form :{
+    candidate_normalized_form = normalizer.normalize(candidate_string)
     candidate_normalized_tokens = candidate_normalized_form.split(" ")
     candidate_normalized_lemmas = document.full_text_token_lemmas[sentence_offset][starting_token:ending_token]
     candidate_normalized_stems = document.full_text_token_stems[sentence_offset][starting_token:ending_token]
     candidate_pos_tags = pos_tagged_sentence[starting_token:ending_token]
+    #---------------------------------------------------------------------------
+    candidate = model.KBTextualUnit(document.corpus_name,
+                                    document.language,
+                                    candidate_normalized_form,
+                                    candidate_normalized_tokens,
+                                    candidate_normalized_lemmas,
+                                    candidate_normalized_stems,
+                                    candidate_pos_tags)
 
-    # identify the candiate with its normalized form and POS tag in order to
-    # prevent from having only one candidate for the same form with a diferent
-    # POS tagging
-    identifier = "%s%s"%(candidate_normalized_form, str(candidate_pos_tags))
-
-    if identifier not in candidates:
-      candidates[identifier] = model.KBTextualUnit(document.corpus_name,
-                                                   document.language,
-                                                   candidate_normalized_form,
-                                                   candidate_normalized_tokens,
-                                                   candidate_normalized_lemmas,
-                                                   candidate_normalized_stems,
-                                                   candidate_pos_tags)
+    if candidate.identifier not in candidates:
+      candidates[identifier] = candidate
     candidates[identifier].addOccurrence(candidate_seen_form,
                                          sentence_offset,
                                          starting_token)

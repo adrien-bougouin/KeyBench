@@ -56,25 +56,6 @@ class NGramTFIDFRanker(interface.KBCandidateRanker):
   def n(self):
     return self._n
 
-  def candidateIdentifier(self, candidate):
-    """Creates an unique identifier for a candidate.
-
-    This method should be replaced by an attribute of KBTextualUnit
-    (see issue #7).
-
-    Args:
-      candidate: The C{KBTextualUnit} to identify.
-
-    Returns:
-      A C{string} identifier for the C{candidate}.
-    """
-
-    # FIXME boiler plate (copy of code from keybench.component.interface.candidate_extractor.py)
-    # identify the candiate with its normalized form and POS tag in order to
-    # prevent from having only one candidate for the same form with a diferent
-    # POS tagging
-    return "%s%s"%(candidate.normalized_form, str(candidate.pos_tags))
-
   def _learnDFs(self, corpus_name):
     """Learns document frequencies (DFs) of n-grams extracted from the train
     documents of a given corpus.
@@ -131,11 +112,9 @@ class NGramTFIDFRanker(interface.KBCandidateRanker):
 
         # learn DFs
         for candidate in candidates:
-          identifier = self._candidateIdentifier(candidate)
-
-          if identifier not in self._dfs[corpus_name]:
-            dfs[corpus_name][identifier] = 0.0
-          dfs[corpus_name][identifier] += 1.0
+          if candidate.identifier not in self._dfs[corpus_name]:
+            dfs[corpus_name][candidate.identifier] = 0.0
+          dfs[corpus_name][candidate.identifier] += 1.0
 
   def _candidateRanking(self, document):
     """Ranks the candidates of a given document.
@@ -158,11 +137,10 @@ class NGramTFIDFRanker(interface.KBCandidateRanker):
       self._learnDFs(document.corpus_name)
 
     for candidate in candidates:
-      identifier =  self._candidateIdentifier(candidate)
       tf = candidate.numberOfOccurrences()
       df = 1.0
-      if identifier in self._dfs[document.corpus_name]:
-        df += self._idfs[document.corpus_name][identifier]
+      if candidate.identifier in self._dfs[document.corpus_name]:
+        df += self._idfs[document.corpus_name][candidate.identifier]
       idf = -math.log(1.0 / df, 2)
       tf_idf = tf * idf
 

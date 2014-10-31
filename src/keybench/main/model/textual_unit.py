@@ -10,6 +10,7 @@ class KBTextualUnit(object):
   POS tags).
 
   Attributes:
+    identifier: An unique C{string} identifier.
     corpus_name: The C{string} name of the corpus from which the textual unit is
       extracted.
     language: The C{string} name of the textual unit's language (see
@@ -37,6 +38,9 @@ class KBTextualUnit(object):
                pos_tags):
     super(KBTextualUnit, self).__init__()
 
+    self._identifier = "%s_%s_%s"%("-".join(corpus_name.split(" ")),
+                                   "-".join(normalized_form.split(" ")),
+                                   "-".join(pos_tags))
     self._corpus_name = corpus_name
     self._language = language
     self._normalized_form = normalized_form
@@ -48,7 +52,9 @@ class KBTextualUnit(object):
     self._offsets = {}
 
   def __eq__(self, other):
-    return self._corpus_name == other.corpus_name \
+    # FIXME test on identifier should be enough
+    return self._identifier == other.identifier \
+           and self._corpus_name == other.corpus_name \
            and self._language == other._language \
            and self._normalized_form == other._normalized_form \
            and self._normalized_tokens == other._normalized_tokens \
@@ -60,6 +66,10 @@ class KBTextualUnit(object):
 
   def __ne__(self, other):
     return not self.__eq__(other)
+
+  @property
+  def identifier(self):
+    return self._identifier
 
   @property
   def corpus_name(self):
