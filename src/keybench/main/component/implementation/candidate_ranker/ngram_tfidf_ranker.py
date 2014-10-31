@@ -57,7 +57,16 @@ class NGramTFIDFRanker(interface.KBCandidateRanker):
     return self._n
 
   def candidateIdentifier(self, candidate):
-    """TODO
+    """Creates an unique identifier for a candidate.
+
+    This method should be replaced by an attribute of KBTextualUnit
+    (see issue #7).
+
+    Args:
+      candidate: The C{KBTextualUnit} to identify.
+
+    Returns:
+      A C{string} identifier for the C{candidate}.
     """
 
     # FIXME boiler plate (copy of code from keybench.component.interface.candidate_extractor.py)
@@ -67,7 +76,15 @@ class NGramTFIDFRanker(interface.KBCandidateRanker):
     return "%s%s"%(candidate.normalized_form, str(candidate.pos_tags))
 
   def _learnDFs(self, corpus_name):
-    """TODO
+    """Learns document frequencies (DFs) of n-grams extracted from the train
+    documents of a given corpus.
+
+    This method may have unwanted behavior in case of concurrent access. One
+    should not make this component a shared component. Also, one should not
+    process documents of a same corpus in parallel.
+
+    Args:
+      corpus_name: The name of the corpus to use for the learning.
     """
 
     if corpus_name not in self._dfs:
