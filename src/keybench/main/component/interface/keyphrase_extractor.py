@@ -58,7 +58,7 @@ class KBKeyphraseExtractorI(component.KBComponent):
         redundant keyphrases.
     """
 
-    super(KBCandidateExtractorI, self).__init__(name,
+    super(KBKeyphraseExtractorI, self).__init__(name,
                                                 run_name,
                                                 shared,
                                                 lazy_mode,
