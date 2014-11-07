@@ -43,16 +43,16 @@ class KBCorpus(object):
       Otherwise, C{False}.
     pos_tagged_references: C{True} if the reference keyphrases are POS tagged.
       Otherwise, C{False}.
-   train_document_information: The information of the train documents required
-    to be able to get their C{KBDocument} representation (C{list} of
-    C{tuple(<filepath>, <corpus_name>, <name>, <language>, <encoding>)}).
-   test_document_information: The information of the test documents required
-    to be able to get their C{KBDocument} representation (C{list} of
-    C{tuple(<filepath>, <corpus_name>, <name>, <language>, <encoding>)}).
-   train_references: The C{map} of C{list} of C{string} keyphrases associated to
-    each train document (referenced by its C{string} name).
-   test_references: The C{map} of C{list} of C{string} keyphrases associated to
-    each test document (referenced by its C{string} name).
+    train_document_information: The information of the train documents required
+     to be able to get their C{KBDocument} representation (C{list} of
+     C{tuple(<filepath>, <corpus_name>, <name>, <language>, <encoding>)}).
+    test_document_information: The information of the test documents required
+     to be able to get their C{KBDocument} representation (C{list} of
+     C{tuple(<filepath>, <corpus_name>, <name>, <language>, <encoding>)}).
+    train_references: The C{map} of C{list} of C{string} keyphrases associated
+      to each train document (referenced by its C{string} name).
+    test_references: The C{map} of C{list} of C{string} keyphrases associated to
+     each test document (referenced by its C{string} name).
   """
 
   def __init__(self,
