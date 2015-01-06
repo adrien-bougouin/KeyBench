@@ -47,9 +47,9 @@ from util import term_scoring
 from util import WikiNewsFileRep
 from util import bonsai_tokenization
 from util import french_stemmed_adjr
-from util import french_adjr_suffix_2_counts
-from util import french_adjr_suffix_3_counts
-from nltk.corpus import wordnet
+from util import french_adjr_stem_ending_counts
+from util import english_stemmed_adjr
+from util import english_adjr_stem_ending_counts
 from nltk.stem import PorterStemmer
 from nltk.stem.snowball import FrenchStemmer
 from nltk.tokenize.treebank import TreebankWordTokenizer
@@ -59,7 +59,7 @@ from os import listdir
 
 ################################################################################
 
-RUNS_DIR = "results_fi_2" # directory used to save informations
+RUNS_DIR = "results_16_11_2014" # directory used to save informations
 
 ##### corpora information ######################################################
 
@@ -145,7 +145,7 @@ TERM_SUITE_TERMINOLOGY_CA = "term_suite"
 ACABIT_TERMINOLOGY_CA = "acabit"
 POS_BOUNDARY_BASED_CA = "pos_boundaries"
 CORE_WORD_BASED_CA = "core_words"
-NOUN_AND_ADJR_CA = "nouns_and_adjr"
+NOUN_AND_ADJR_CA = "nouns_and_adjr" # TODO change adjr tests
 
 # clustering names
 NO_CLUSTER_CC = "no_cluster"
@@ -163,12 +163,12 @@ TEXTRANK_SE = "textrank"
 
 ##### runs #####################################################################
 
-CORPORA_RU = [DEFT_CO]
-METHODS_RU = [TOPICRANK_ME]
+CORPORA_RU = [DUC_CO, SEMEVAL_CO, DEFT_CO] # TODO change adjr tests
+METHODS_RU = [TFIDF_ME, KEA_ME] # TODO change adjr tests
 NUMBERS_RU = [10]
 LENGTHS_RU = [0]
 CANDIDATES_RU = [NOUN_AND_ADJR_CA]
-CLUSTERING_RU = [HIERARCHICAL_CLUSTER_CC]
+CLUSTERING_RU = [NO_CLUSTER_CC] # TODO change adjr tests
 SCORINGS_RU = [WEIGHT_SC]
 SELECTIONS_RU = [WHOLE_SE]
 
@@ -326,107 +326,44 @@ def english_tokenization(term):
 
   return tokenized_term
 
-def is_french_adjr(word):
+def is_french_adjr(word): # TODO change adjr tests
   stemmer = FrenchStemmer()
-#  new_list = [
-#    u"ique",
-#    u"aire",
-#    u"eux",
-#    u"ier",
-#    u"ien",
-#    u"ois",
-#    u"ain",
-#    u"al",
-#    u"el",
-#    u"estre",
-#    u"il",
-#    u"in",
-#    u"esque",
-#    u"é",
-#    u"if"
-#  ]
   # suffixes with gender and number flexions
-  new_list = [
-    u"ique",
-    u"iques",
-    u"aire",
-    u"aires",
-    u"eux",
-    u"euse",
-    u"euses",
-    u"ier",
-    u"iers",
-    u"ière",
-    u"ières",
-    u"ien",
-    u"iens",
-    u"ienne",
-    u"iennes",
-    u"ois",
-    u"oise",
-    u"oises",
-    u"ain",
-    u"ains",
-    u"aine",
-    u"aines",
-    u"al",
-    u"aux",
-    u"als",
-    u"ale",
-    u"ales",
-    u"el",
-    u"els",
-    u"elle",
-    u"elles",
-    u"estre",
-    u"estres",
-    u"il",
-    u"ils",
-    u"in",
-    u"ins",
-    u"ine",
-    u"ines",
-    u"esque",
-    u"esques",
-    u"é",
-    u"és",
-    u"ée",
-    u"ées",
-    u"if",
-    u"ifs",
-    u"ive",
-    u"ives"
+  suffixes = [
+    u"ain", u"ains", u"aine", u"aines",
+    u"aire", u"aires",
+    u"al", u"aux", u"als", u"ale", u"ales",
+    u"el", u"els", u"elle", u"elles",
+    u"esque", u"esques",
+    u"estre", u"estres",
+    u"eux", u"euse", u"euses",
+    u"é", u"és", u"ée", u"ées",
+    u"ien", u"iens", u"ienne", u"iennes",
+    u"ier", u"iers", u"ière", u"ières",
+    u"if", u"ifs", u"ive", u"ives",
+    u"il", u"ils",
+    u"in", u"ins", u"ine", u"ines",
+    u"ique", u"iques",
+    u"ois", u"oise", u"oises"
   ]
+  stem = stemmer.stem(word)
+  stem_ending = ""
+  if word.replace(u"é", "e").replace(u"è", "e").startswith(stem.replace(u"é", "e").replace(u"è", "e")):
+    stem_ending = word.replace(u"é", "e").replace(u"è", "e").split(stem.replace(u"é", "e").replace(u"è", "e"), 1)[1]
 
-  #return stemmer.stem(word) in french_stemmed_adjr
-  #return False \
-  #return stemmer.stem(word) in french_stemmed_adjr \
-  #       or (stemmer.stem(word)[-2:] in french_adjr_suffix_2_counts \
-  #           and french_adjr_suffix_2_counts[stemmer.stem(word)[-2:]] >= 1)
-  if stemmer.stem(word) in french_stemmed_adjr:
+  if stem in french_stemmed_adjr:
     return True
-  for suffix in new_list:
+  for suffix in suffixes:
     if word[-len(suffix):] == suffix:
       return True
-  if word[-2:] in french_adjr_suffix_2_counts:
-    return True
+  # TODO change adjr tests
+  #if stem_ending in french_adjr_stem_ending_counts:
+  #  return True
   return False
 
-english_adjr_suffix_2_counts = {}
-english_adjr_suffix_3_counts = {}
-for adjective in wordnet.all_synsets("a"):
-  for lemma in adjective.lemmas:
-    if len(lemma.pertainyms()) > 0:
-      suffix_2 = adjective.name.rsplit(".", 2)[0][-2:]
-      suffix_3 = adjective.name.rsplit(".", 2)[0][-3:]
-      if suffix_2 not in english_adjr_suffix_2_counts:
-        english_adjr_suffix_2_counts[suffix_2] = 0
-      english_adjr_suffix_2_counts[suffix_2] += 1
-      if suffix_3 not in english_adjr_suffix_3_counts:
-        english_adjr_suffix_3_counts[suffix_3] = 0
-      english_adjr_suffix_3_counts[suffix_3] += 1
-def is_english_adjr(word):
-  new_list = [
+def is_english_adjr(word): # TODO change adjr tests
+  stemmer = PorterStemmer()
+  suffixes = [
     u"al",
     u"ant",
     u"ary",
@@ -434,19 +371,20 @@ def is_english_adjr(word):
     u"ous",
     u"ive"
   ]
-  for synset in wordnet.synsets(word):
-    if synset.name.find(".a.") != -1:
-      for lemma in synset.lemmas:
-        if len(lemma.pertainyms()) > 0:
-          return True
-  for suffix in new_list:
+  stem = stemmer.stem(word)
+  stem_ending = ""
+  if word.startswith(stem):
+    stem_ending = word.split(stem, 1)[1]
+
+  if stem in english_stemmed_adjr:
+    return True
+  for suffix in suffixes:
     if word[-len(suffix):] == suffix:
       return True
-  if word[-2:] in english_adjr_suffix_2_counts:
-    return True
+  # TODO change adjr tests
+  #if stem_ending in english_adjr_stem_ending_counts:
+  #  return True
   return False
-  #return word[-2:] in english_adjr_suffix_2_counts \
-  #       and english_adjr_suffix_2_counts[word[-2:]] >= 1
 
 def learn_tag_sequences(train_docs,
                         ext,

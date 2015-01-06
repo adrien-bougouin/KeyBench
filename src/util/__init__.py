@@ -13,6 +13,8 @@ from wikinews2012 import WikiNewsFileRep
 from plain_text import PlainTextFileRep
 from wonef_adjr import french_adjr
 from wonef_adjr import french_stemmed_adjr
-from wonef_adjr import french_adjr_suffix_2_counts
-from wonef_adjr import french_adjr_suffix_3_counts
+from wonef_adjr import french_adjr_stem_ending_counts
+from wordnet_adjr import english_adjr
+from wordnet_adjr import english_stemmed_adjr
+from wordnet_adjr import english_adjr_stem_ending_counts
 

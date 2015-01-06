@@ -1487,8 +1487,19 @@ class NounAndADJRExtractor(CandidateExtractorC):
 
     # split the component to the non-relational adjectives
     for candidate in non_filtered_candidate_counts:
-      if non_filtered_candidate_counts[candidate] > 1:
-        candidates.append(candidate)
+      #if non_filtered_candidate_counts[candidate] > 1:
+      #if non_filtered_candidate_counts[candidate] > 0:
+      if candidate.count("/adj") > 0 or candidate.count("/jj") > 0:
+        sub_candidate = " ".join(candidate.split()[1:])
+        if sub_candidate.count("/adj") > 0 or candidate.count("/jj") > 0:
+          sub_candidate = " ".join(candidate.split()[:-1])
+
+          if sub_candidate not in non_filtered_candidate_counts:
+            candidates.append(candidate)
+          elif non_filtered_candidate_counts[candidate] > non_filtered_candidate_counts[sub_candidate]:
+            candidates.append(candidate)
+        else:
+          candidates.append(candidate)
       else:
         start = 0
         for pos, wt in enumerate(candidate.split()):
