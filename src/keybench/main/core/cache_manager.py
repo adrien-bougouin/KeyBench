@@ -92,7 +92,7 @@ class KBCacheManager(object):
     with open(filepath, "w") as cache_file:
       pickle.dump(obj, cache_file)
 
-  def storeString(self, identifier, obj, parser, encoding):
+  def storeString(self, identifier, obj, encoding, parser=None):
     """Puts an object into cache.
 
     Stores an object within the cache directory using a given identifier. The
@@ -101,14 +101,18 @@ class KBCacheManager(object):
     Args:
       identifier: The C{string} identifier representing the C{object} to store.
       obj: The C{object} to store into the C{cache_directory}.
-      parser: The C{CacheParserI} parser to use for the C{string} convertion.
       encoding: The C{string} encoding of the stringified C{object}.
+      parser: The C{CacheParserI} parser to use for the C{string} convertion
+        (default=None => the object is a string).
     """
 
     filepath = path.join(self._cache_directory, identifier)
 
     with codecs.open(filepath, "w", encoding) as cache_file:
-      cache_file.write(parser.toString(obj))
+      if parser == None:
+        cache_file.write(obj)
+      else:
+        cache_file.write(parser.toString(obj))
 
   def load(self, identifier):
     """Gives an object stored in cache.
@@ -139,7 +143,7 @@ class KBCacheManager(object):
                                        identifier,
                                        "Identifier does not exists!")
 
-  def loadFromString(self, identifier, parser, encoding):
+  def loadFromString(self, identifier, encoding, parser=None):
     """Gives an object stored in cache.
 
     Gives an object stored within the C{cache_directory}. The object is stored
@@ -147,9 +151,9 @@ class KBCacheManager(object):
 
     Args:
       identifier: The C{string} identifier representing the C{object} to load.
-      parser: The C{CacheParserI} parser to use to create an C{object}
-        represented by a C{string}.
       encoding: The C{string} encoding of the stringified C{object}.
+      parser: The C{CacheParserI} parser to use to create an C{object}
+        represented by a C{string} (default=None => the object is a string).
 
     Returns:
       The C{object} stored for the given C{identifier}.
@@ -164,7 +168,10 @@ class KBCacheManager(object):
       cached_object = None
 
       with codecs.open(filepath, "r", encoding) as cached_file:
-        cached_object = parser.fromString(cached_file.read())
+        if parser == None:
+          cached_object = cached_file.read()
+        else:
+          cached_object = parser.fromString(cached_file.read())
 
       return cached_object
     else:

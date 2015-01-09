@@ -59,12 +59,12 @@ class KBCacheManagerTests(unittest.TestCase):
     obj = "test object"
     mock_parser = KBCacheManagerTests.MockStringParser()
 
-    self._cm.storeString("test-object", obj, mock_parser, "utf-8")
+    self._cm.storeString("test-object", obj, "utf-8", mock_parser)
 
     self.failUnless(self._cm.exists("test-object"))
     self.failUnless(self._cm.loadFromString("test-object",
-                                            mock_parser,
-                                            "utf-8") == obj)
+                                            "utf-8",
+                                            mock_parser) == obj)
 
   def testDoesNotExist(self):
     mock_parser = KBCacheManagerTests.MockStringParser()
@@ -75,7 +75,7 @@ class KBCacheManagerTests(unittest.TestCase):
       self._cm.load("test-object")
 
     with self.assertRaises(exception.KBCacheException):
-      self._cm.loadFromString("test-object", mock_parser, "utf-8")
+      self._cm.loadFromString("test-object", "utf-8", mock_parser)
 
   def testOverride(self):
     obj1 = [1, 2, 3]
@@ -93,14 +93,14 @@ class KBCacheManagerTests(unittest.TestCase):
     obj2 = "overriden"
     mock_parser = KBCacheManagerTests.MockStringParser()
 
-    self._cm.storeString("test-object", obj1, mock_parser, "utf-8")
-    self._cm.storeString("test-object", obj2, mock_parser, "utf-8")
+    self._cm.storeString("test-object", obj1, "utf-8", mock_parser)
+    self._cm.storeString("test-object", obj2, "utf-8", mock_parser)
 
     self.failUnless(self._cm.exists("test-object"))
     self.failIf(self._cm.loadFromString("test-object",
-                                        mock_parser,
-                                        "utf-8") == obj1)
+                                        "utf-8",
+                                        mock_parser) == obj1)
     self.failUnless(self._cm.loadFromString("test-object",
-                                            mock_parser,
-                                            "utf-8") == obj2)
+                                            "utf-8",
+                                            mock_parser) == obj2)
 

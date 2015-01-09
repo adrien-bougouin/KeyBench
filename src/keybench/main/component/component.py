@@ -150,7 +150,7 @@ class KBComponent(object):
 
     self._cache_manager.store(self.__documentIdentifier(document), obj)
 
-  def storeString(self, document, obj, parser, encoding):
+  def storeString(self, document, obj, encoding, parser):
     """Puts an object into cache.
 
     Stores an object within the cache directory using an identifier computed for
@@ -160,14 +160,15 @@ class KBComponent(object):
     Args:
       document: The document associated with the object to put into cache.
       obj: The C{object} to store into the C{cache_directory}.
-      parser: The C{CacheParserI} parser to use for the C{string} convertion.
       encoding: The C{string} encoding of the stringified C{object}.
+      parser: The C{CacheParserI} parser to use for the C{string} convertion
+      (default=None => the C{object} is a C{string}).
     """
 
     self._cache_manager.storeString(self.__documentIdentifier(document),
                                     obj,
-                                    parser,
-                                    encoding)
+                                    encoding,
+                                    parser)
 
   def load(self, document):
     """Gives an object stored in cache.
@@ -193,7 +194,7 @@ class KBComponent(object):
                                                self._run_name,
                                                "Not lazy, but loading is required!")
 
-  def loadFromString(self, document, parser, encoding):
+  def loadFromString(self, document, encoding, parser):
     """Gives an object stored in cache.
 
     Gives an object stored within the C{cache_directory}. The object is stored
@@ -201,9 +202,10 @@ class KBComponent(object):
 
     Args:
       document: The document associated with the object to load.
-      parser: The C{CacheParserI} parser to use to create an C{object}
-        represented by a C{string}.
       encoding: The C{string} encoding of the stringified C{object}.
+      parser: The C{CacheParserI} parser to use to create an C{object}
+        represented by a C{string} (default=None => the C{object} is a
+        C{string}).
 
     Returns:
       The C{object} stored for the given C{document}.
@@ -215,8 +217,8 @@ class KBComponent(object):
 
     if self._lazy_mode:
       return self._cache_manager.loadFromString(self.__documentIdentifier(document),
-                                                parser,
-                                                encoding)
+                                                encoding,
+                                                parser)
     else:
       raise exception.KBLazyComponentException(self._name,
                                                self.__class__.__name__,

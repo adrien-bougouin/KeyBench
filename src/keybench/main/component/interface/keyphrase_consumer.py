@@ -23,6 +23,7 @@ class KBKeyphraseConsumerI(component.KBComponent):
 
     self.logDebug("Consuming keyphrases of %s..."%(document.name))
     self._keyphraseConsumption(document)
+    self.logDebug("Consumption of keyphrases of %s finished..."%(document.name))
 
   def _keyphraseConsumption(self, corpus, keyphrases):
     """Consumes the keyphrases associcated to the documents of a given corpus.

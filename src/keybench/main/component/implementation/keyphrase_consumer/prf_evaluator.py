@@ -2,6 +2,7 @@
 
 from keybench.main import core
 from keybench.main.component import interface
+from keybench.main import model
 
 class KBPRFEvaluator(interface.KBKeyphraseConsumerI):
   """Component evaluating extracted keyphrases in terms of precision (P), recall
@@ -89,14 +90,83 @@ class KBPRFEvaluator(interface.KBKeyphraseConsumerI):
         C{KBTextualUnit}s associated to a document's name).
     """
 
-    # TODO for every test document of the corpus
-    for filepath, filename, corpus_name, document_name, language, encoding in corpus.test_document_information:
-      reference_keyphrases = corpus.test_references[document_name] # TODO string list (must be stemmed or lemmatized)
-      extracted_keyphrases = keyphrases[document_name] # TODO KBTextualUnits (only need to request stemmed or lemmatized version)
-      # TODO prepare string lists (stemmed, lemmatized, etc.)
-      # TODO for each cut-off
-      for cut_off in self._cut_off:
-        # TODO compute P, R, and F
-        # self._keyphraseComparison(TODO, TODO)
-        pass
+    test_document_information = corpus.test_document_information
+    nb_document = float(len(test_document_information))
+    evaluation_output = "%corpus\tdocument%s\n"
+    measure_string = ""
+    precision = {}
+    recall = {}
+    f1_measure = {}
+
+    for cut_off in self._cut_offs:
+      evaluation_string += "\tp@%d\tr@%d\tf@%d"%(cut_off, cut_off, cut_off)
+    evaluation_output = evaluation_output%evaluation_string
+
+    # evaluation
+    for filepath, filename, corpus_name, document_name, language, encoding in test_document_information:
+      reference_keyphrases = corpus.test_references[document_name] # string list
+      extracted_keyphrases = keyphrases[document_name] # KBTextualUnits
+      stemmed_reference_keyphrases = []
+      stemmed_extracted_keyphrases = []
+
+      # write to output string
+      evaluation_output += "%s\t%s"%(corpus_name, document_name)
+
+      ## NLP tools #############################################################
+      tool_factory = core.KBBenchmark.singleton().run_tools[self._run_name]
+      tokenizer = tool_factory.tokenizer(language)
+      normalizer = tool_factory.normalizer(language)
+      stemmer = tool_factory.stemmer(language)
+      ##########################################################################
+
+      # prepare string lists (stemming)
+      for keyphrase in reference_keyphrases:
+        tokenized_keyphrase = " ".join(tokenizer.tokenizeWords([keyphrase])[0])
+        normalized_keyphrase = normalizer.normalize(tokenized_keyphrase)
+        stemmed_keyphrase = stemmer.stem(normalized_keyphrase)
+
+        stemmed_reference_keyphrases.append(" ".join(stemmed_keyphrase))
+      for keyphrase in extracted_keyphrases:
+        stemmed_keyphrase = " ".join(keyphrase.normalized_stems)
+
+        stemmed_extracted_keyphrases.append(stemmed_keyphrase)
+
+      # evaluation at each cut-off
+      for cut_off in self._cut_offs:
+        p, r, f = self._keyphraseSetsComparison(stemmed_reference_keyphrases,
+                                                stemmed_extracted_keyphrases[:cut_off])
+
+        if cut_off not in precision:
+          precision[cut_off] = 0.0
+        if cut_off not in recall:
+          recall[cut_off] = 0.0
+        if cut_off not in f1_measure:
+          f1_measure[cut_off] = 0.0
+
+        precision[cut_off] += p / nb_document
+        recall[cut_off] += r / nb_document
+        f1_measure[cut_off] += f / nb_document
+
+        # write to output string
+        evaluation_output += "\t%f\t%f\t%f"%(p, r, f)
+      evalution_output += "\n"
+    # write to output string
+    evaluation_output += "################################################################################\n"
+    for cut_off in self._cut_offs:
+      evaluation_output += "precision@%d\t%f\n"%(cut_off, precision[cut_off])
+      evaluation_output += "recall@%d\t%f\n"%(cut_off, recall[cut_off])
+      evaluation_output += "f1_measure@%d\t%f\n"%(cut_off, f1_measure[cut_off])
+    ## serialization ###########################################################
+    self.storeString(model.KBDocument(corpus.name,
+                                      "",
+                                      "p_r_f_evaluation",
+                                      corpus.language,
+                                      corpus.encoding,
+                                      "", "", "",
+                                      [], [], [],
+                                      [], [], [],
+                                      [], [], [],
+                                      [], [], [],
+                                      [], [], [],
+                                      [], [], []), evaluation_string)
 
