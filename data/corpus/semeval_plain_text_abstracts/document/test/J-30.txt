@@ -1,0 +1,8 @@
+Implementation with a Bounded Action Space
+While traditional mechanism design typically assumes isomorphism between the agents' type- and action spaces, in many situations the agents face strict restrictions on their action space due to, e.g., technical, behavioral or regulatory reasons.
+We devise a general framework for the study of mechanism design in single-parameter environments with restricted action spaces.
+Our contribution is threefold.
+First, we characterize sufficient conditions under which the information-theoretically optimal social-choice rule can be implemented in dominant strategies, and prove that any multilinear social-choice rule is dominant-strategy implementable with no additional cost.
+Second, we identify necessary conditions for the optimality of action-bounded mechanisms, and fully characterize the optimal mechanisms and strategies in games with two players and two alternatives.
+Finally, we prove that for any multilinear social-choice rule, the optimal mechanism with k actions incurs an expected loss of O( 1 k2 ) compared to the optimal mechanisms with unrestricted action spaces.
+Our results apply to various economic and computational settings, and we demonstrate their applicability to signaling games, public-good models and routing in networks. 

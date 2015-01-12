@@ -1,0 +1,12 @@
+Self-Adaptive Applications on the Grid
+Grids are inherently heterogeneous and dynamic.
+One important problem in grid computing is resource selection, that is, finding an appropriate resource set for the application.
+Another problem is adaptation to the changing characteristics of the grid environment.
+Existing solutions to these two problems require that a performance model for an application is known.
+However, constructing such models is a complex task.
+In this paper, we investigate an approach that does not require performance models.
+We start an application on any set of resources.
+During the application run, we periodically collect the statistics about the application run and deduce application requirements from these statistics.
+Then, we adjust the resource set to better fit the application needs.
+This approach allows us to avoid performance bottlenecks, such as overloaded WAN links or very slow processors, and therefore can yield significant performance improvements.
+We evaluate our approach in a number of scenarios typical for the Grid.

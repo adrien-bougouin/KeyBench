@@ -1,0 +1,10 @@
+Demonstration of Grid-Enabled Ensemble Kalman Filter Data Assimilation Methodology for Reservoir Characterization
+Ensemble Kalman filter data assimilation methodology is a popular approach for hydrocarbon reservoir simulations in energy exploration.
+In this approach, an ensemble of geological models and production data of oil fields is used to forecast the dynamic response of oil wells.
+The Schlumberger ECLIPSE software is used for these simulations.
+Since models in the ensemble do not communicate, message-passing implementation is a good choice.
+Each model checks out an ECLIPSE license and therefore, parallelizability of reservoir simulations depends on the number licenses available.
+We have Grid-enabled the ensemble Kalman filter data assimilation methodology for the TIGRE Grid computing environment.
+By pooling the licenses and computing resources across the collaborating institutions using GridWay metascheduler and TIGRE environment, the computational accuracy can be increased while reducing the simulation runtime.
+In this paper, we provide an account of our efforts in Grid-enabling the ensemble Kalman Filter data assimilation methodology.
+Potential benefits of this approach, observations and lessons learned will be discussed. 

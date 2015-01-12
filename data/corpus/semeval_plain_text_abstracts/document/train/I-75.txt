@@ -1,0 +1,9 @@
+Hypotheses Refinement under Topological Communication Constraints
+We investigate the properties of a multiagent system where each (distributed) agent locally perceives its environment.
+Upon perception of an unexpected event, each agent locally computes its favoured hypothesis and tries to propagate it to other agents, by exchanging hypotheses and supporting arguments (observations).
+However, we further assume that communication opportunities are severely constrained and change dynamically.
+In this paper, we mostly investigate the convergence of such systems towards global consistency.
+We first show that (for a wide class of protocols that we shall define), the communication constraints induced by the topology will not prevent the convergence of the system, at the condition that the system dynamics guarantees that no agent will ever be isolated forever, and that agents have unlimited time for computation and arguments exchange.
+As this assumption cannot be made in most situations though, we then set up an experimental framework aiming at comparing the relative efficiency and effectiveness of different interaction protocols for hypotheses exchange.
+We study a critical situation involving a number of agents aiming at escaping from a burning building.
+The results reported here provide some insights regarding the design of optimal protocol for hypotheses refinement in this context. 

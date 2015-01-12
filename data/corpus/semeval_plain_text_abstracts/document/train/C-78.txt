@@ -1,0 +1,16 @@
+An Architectural Framework and a Middleware for Cooperating Smart Components
+In a future networked physical world, a myriad of smart sensors and actuators assess and control aspects of their environments and autonomously act in response to it.
+Examples range in telematics, traffic management, team robotics or home automation to name a few.
+To a large extent, such systems operate proactively and independently of direct human control driven by the perception of the environment and the ability to organize respective computations dynamically.
+The challenging characteristics of these applications include sentience and autonomy of components, issues of responsiveness and safety criticality, geographical dispersion, mobility and evolution.
+A crucial design decision is the choice of the appropriate abstractions and interaction mechanisms.
+Looking to the basic building blocks of such systems we may find components which comprise mechanical components, hardware and software and a network interface, thus these components have different characteristics compared to pure software components.
+They are able to spontaneously disseminate information in response to events observed in the physical environment or to events received from other component via the network interface.
+Larger autonomous components may be composed recursively from these building blocks.
+The paper describes an architectural framework and a middleware supporting a component-based system and an integrated view on events-based communication comprising the real world events and the events generated in the system.
+It starts by an outline of the component-based system construction.
+The generic event architecture GEAR is introduced which describes the event-based interaction between the components via a generic event layer.
+The generic event layer hides the different communication channels including the interactions through the environment.
+An appropriate middleware is presented which reflects these needs and allows to specify events which have quality attributes to express temporal constraints.
+This is complemented by the notion of event channels which are abstractions of the underlying network and allow to enforce quality attributes.
+They are established prior to interaction to reserve the needed computational and network resources for highly predictable event dissemination. 

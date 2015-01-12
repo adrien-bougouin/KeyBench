@@ -1,0 +1,6 @@
+Concept and Architecture of a Pervasive Document Editing and Managing System
+Collaborative document processing has been addressed by many approaches so far, most of which focus on document versioning and collaborative editing.
+We address this issue from a different angle and describe the concept and architecture of a pervasive document editing and managing system.
+It exploits database techniques and real-time updating for sophisticated collaboration scenarios on multiple devices.
+Each user is always served with up-to-date documents and can organize his work based on document meta data.
+For this, we present our conceptual architecture for such a system and discuss it with an example. 

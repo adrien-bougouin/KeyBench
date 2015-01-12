@@ -1,0 +1,6 @@
+Service Interface: A New Abstraction for Implementing and Composing Protocols
+In this paper we compare two approaches to the design of protocol frameworks -- tools for implementing modular network protocols.
+The most common approach uses events as the main abstraction for a local interaction between protocol modules.
+We argue that an alternative approach, that is based on service abstraction, is more suitable for expressing modular protocols.
+It also facilitates advanced features in the design of protocols, such as dynamic update of distributed protocols.
+We then describe an experimental implementation of a service-based protocol framework in Java. 

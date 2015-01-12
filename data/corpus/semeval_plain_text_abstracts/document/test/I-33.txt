@@ -1,0 +1,6 @@
+A Formal Road from Institutional Norms to Organizational Structures
+Up to now, the way institutions and organizations have been used in the development of open systems has not often gone further than a useful heuristics.
+In order to develop systems actually implementing institutions and organizations, formal methods should take the place of heuristic ones.
+The paper presents a formal semantics for the notion of institution and its components (abstract and concrete norms, empowerment of agents, roles) and defines a formal relation between institutions and organizational structures.
+As a result, it is shown how institutional norms can be refined to constructs -- organizational structures -- which are closer to an implemented system.
+It is also shown how such a refinement process can be fully formalized and it is therefore amenable to rigorous verification. 

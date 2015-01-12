@@ -1,0 +1,8 @@
+An Evaluation of Availability Latency in Carrier-based Vehicular ad-hoc Networks
+On-demand delivery of audio and video clips in peer-to-peer vehicular ad-hoc networks is an emerging area of research.
+Our target environment uses data carriers, termed zebroids, where a mobile device carries a data item on behalf of a server to a client thereby minimizing its availability latency.
+In this study, we quantify the variation in availability latency with zebroids as a function of a rich set of parameters such as car density, storage per device, repository size, and replacement policies employed by zebroids.
+Using analysis and extensive simulations, we gain novel insights into the design of carrier-based systems.
+Significant improvements in latency can be obtained with zebroids at the cost of a minimal overhead.
+These improvements occur even in scenarios with lower accuracy in the predictions of the car routes.
+Two particularly surprising findings are: (1) a naive random replacement policy employed by the zebroids shows competitive performance, and (2) latency improvements obtained with a simplified instantiation of zebroids are found to be robust to changes in the popularity distribution of the data items. 

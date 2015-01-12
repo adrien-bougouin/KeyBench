@@ -1,0 +1,10 @@
+Learning Consumer Preferences Using Semantic Similarity
+In online, dynamic environments, the services requested by consumers may not be readily served by the providers.
+This requires the service consumers and providers to negotiate their service needs and offers.
+Multiagent negotiation approaches typically assume that the parties agree on service content and focus on finding a consensus on service price.
+In contrast, this work develops an approach through which the parties can negotiate the content of a service.
+This calls for a negotiation approach in which the parties can understand the semantics of their requests and offers and learn each other's preferences incrementally over time.
+Accordingly, we propose an architecture in which both consumers and producers use a shared ontology to negotiate a service.
+Through repetitive interactions, the provider learns consumers' needs accurately and can make better targeted offers.
+To enable fast and accurate learning of preferences, we develop an extension to Version Space and compare it with existing learning techniques.
+We further develop a metric for measuring semantic similarity between services and compare the performance of our approach using different similarity metrics. 

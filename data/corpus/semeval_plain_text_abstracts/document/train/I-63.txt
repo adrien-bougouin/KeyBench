@@ -1,0 +1,8 @@
+Combinatorial Resource Scheduling for Multiagent MDPs
+Optimal resource scheduling in multiagent systems is a computationally challenging task, particularly when the values of resources are not additive.
+We consider the combinatorial problem of scheduling the usage of multiple resources among agents that operate in stochastic environments, modeled as Markov decision processes (MDPs).
+In recent years, efficient resource-allocation algorithms have been developed for agents with resource values induced by MDPs.
+However, this prior work has focused on static resource-allocation problems where resources are distributed once and then utilized in infinite-horizon MDPs.
+We extend those existing models to the problem of combinatorial resource scheduling, where agents persist only for finite periods between their (predefined) arrival and departure times, requiring resources only for those time periods.
+We provide a computationally efficient procedure for computing globally optimal resource assignments to agents over time.
+We illustrate and empirically analyze the method in the context of a stochastic job-scheduling domain. 

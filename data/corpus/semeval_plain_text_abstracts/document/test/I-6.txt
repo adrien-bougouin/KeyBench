@@ -1,0 +1,4 @@
+Dynamic Semantics for Agent Communication Languages
+This paper proposes dynamic semantics for agent communication languages (ACLs) as a method for tackling some of the fundamental problems associated with agent communication in open multiagent systems.
+Based on the idea of providing alternative semantic variants for speech acts and transition rules between them that are contingent on previous agent behaviour, our framework provides an improved notion of grounding semantics in ongoing interaction, a simple mechanism for distinguishing between compliant and expected behaviour, and a way to specify sanction and reward mechanisms as part of the ACL itself.
+We extend a common framework for commitment-based ACL semantics to obtain these properties, discuss desiderata for the design of concrete dynamic semantics together with examples, and analyse their properties. 

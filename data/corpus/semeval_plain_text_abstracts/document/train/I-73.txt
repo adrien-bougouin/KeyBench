@@ -1,0 +1,6 @@
+Exchanging Reputation Values among Heterogeneous Agent Reputation Models: An Experience on ART Testbed
+In open MAS it is often a problem to achieve agents' interoperability.
+The heterogeneity of its components turns the establishment of interaction or cooperation among them into a non trivial task, since agents may use different internal models and the decision about trust other agents is a crucial condition to the formation of agents' cooperation.
+In this paper we propose the use of an ontology to deal with this issue.
+We experiment this idea by enhancing the ART reputation model with semantic data obtained from this ontology.
+This data is used during interaction among heterogeneous agents when exchanging reputation values and may be used for agents that use different reputation models. 

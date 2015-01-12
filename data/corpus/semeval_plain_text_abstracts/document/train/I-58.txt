@@ -1,0 +1,12 @@
+An Efficient Heuristic Approach for Security Against Multiple Adversaries
+In adversarial multiagent domains, security, commonly defined as the ability to deal with intentional threats from other agents, is a critical issue.
+This paper focuses on domains where these threats come from unknown adversaries.
+These domains can be modeled as Bayesian games; much work has been done on finding equilibria for such games.
+However, it is often the case in multiagent security domains that one agent can commit to a mixed strategy which its adversaries observe before choosing their own strategies.
+In this case, the agent can maximize reward by finding an optimal strategy, without requiring equilibrium.
+Previous work has shown this problem of optimal strategy selection to be NP-hard.
+Therefore, we present a heuristic called ASAP, with three key advantages to address the problem.
+First, ASAP searches for the highest-reward strategy, rather than a Bayes-Nash equilibrium, allowing it to find feasible strategies that exploit the natural first-mover advantage of the game.
+Second, it provides strategies which are simple to understand, represent, and implement.
+Third, it operates directly on the compact, Bayesian game representation, without requiring conversion to normal form.
+We provide an efficient Mixed Integer Linear Program (MILP) implementation for ASAP, along with experimental results illustrating significant speedups and higher rewards over other approaches. 

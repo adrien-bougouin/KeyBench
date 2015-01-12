@@ -1,0 +1,3 @@
+Competitive Algorithms for VWAP and Limit Order Trading
+We introduce new online models for two important aspects of modern financial markets: Volume Weighted Average Price trading and limit order books.
+We provide an extensive study of competitive algorithms in these models and relate them to earlier online algorithms for stock trading. 

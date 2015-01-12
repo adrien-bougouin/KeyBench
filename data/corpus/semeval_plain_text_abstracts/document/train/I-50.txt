@@ -1,0 +1,9 @@
+Agents, Beliefs, and Plausible Behavior in a Temporal Setting
+Logics of knowledge and belief are often too static and inflexible to be used on real-world problems.
+In particular, they usually offer no concept for expressing that some course of events is more likely to happen than another.
+We address this problem and extend CTLK (computation tree logic with knowledge) with a notion of plausibility, which allows for practical and counterfactual reasoning.
+The new logic CTLKP (CTLK with plausibility) includes also a particular notion of belief.
+A plausibility update operator is added to this logic in order to change plausibility assumptions dynamically.
+Furthermore, we examine some important properties of these concepts.
+In particular, we show that, for a natural class of models, belief is a KD45 modality.
+We also show that model checking CTLKP is PTIME-complete and can be done in time linear with respect to the size of models and formulae. 

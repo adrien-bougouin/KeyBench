@@ -1,0 +1,7 @@
+Unifying Distributed Constraint Algorithms in a BDI Negotiation Framework
+This paper presents a novel, unified distributed constraint satisfaction framework based on automated negotiation.
+The Distributed Constraint Satisfaction Problem (DCSP) is one that entails several agents to search for an agreement, which is a consistent combination of actions that satisfies their mutual constraints in a shared environment.
+By anchoring the DCSP search on automated negotiation, we show that several well-known DCSP algorithms are actually mechanisms that can reach agreements through a common Belief-Desire-Intention (BDI) protocol, but using different strategies.
+A major motivation for this BDI framework is that it not only provides a conceptually clearer understanding of existing DCSP algorithms from an agent model perspective, but also opens up the opportunities to extend and develop new strategies for DCSP.
+To this end, a new strategy called Unsolicited Mutual Advice (UMA) is proposed.
+Performance evaluation shows that the UMA strategy can outperform some existing mechanisms in terms of computational cycles. 

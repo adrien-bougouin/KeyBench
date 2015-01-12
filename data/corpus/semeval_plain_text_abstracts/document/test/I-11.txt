@@ -1,0 +1,6 @@
+Real-Time Agent Characterization and Prediction
+Reasoning about agents that we observe in the world is challenging.
+Our available information is often limited to observations of the agent's external behavior in the past and present.
+To understand these actions, we need to deduce the agent's internal state, which includes not only rational elements (such as intentions and plans), but also emotive ones (such as fear).
+In addition, we often want to predict the agent's future actions, which are constrained not only by these inward characteristics, but also by the dynamics of the agent's interaction with its environment.
+BEE (Behavior Evolution and Extrapolation) uses a faster-than-real-time agent-based model of the environment to characterize agents' internal state by evolution against observed behavior, and then predict their future behavior, taking into account the dynamics of their interaction with the environment. 

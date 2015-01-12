@@ -1,0 +1,13 @@
+Fairness in Dead-Reckoning based Distributed Multi-Player Games
+In a distributed multi-player game that uses dead-reckoning vectors to exchange movement information among players, there is inaccuracy in rendering the objects at the receiver due to network delay between the sender and the receiver.
+The object is placed at the receiver at the position indicated by the dead-reckoning vector, but by that time, the real position could have changed considerably at the sender.
+This inaccuracy would be tolerable if it is consistent among all players; that is, at the same physical time, all players see inaccurate (with respect to the real position of the object) but the same position and trajectory for an object.
+But due to varying network delays between the sender and different receivers, the inaccuracy is different at different players as well.
+This leads to unfairness in game playing.
+In this paper, we first introduce an error measure for estimating this inaccuracy.
+Then we develop an algorithm for scheduling the sending of dead-reckoning vectors at a sender that strives to make this error equal at different receivers over time.
+This algorithm makes the game very fair at the expense of increasing the overall mean error of all players.
+To mitigate this effect, we propose a budget based algorithm that provides improved fairness without increasing the mean error thereby maintaining the accuracy of game playing.
+We have implemented both the scheduling algorithm and the budget based algorithm as part of BZFlag, a popular distributed multi-player game.
+We show through experiments that these algorithms provide fairness among players in spite of widely varying network delays.
+An additional property of the proposed algorithms is that they require less number of DRs to be exchanged (compared to the current implementation of BZflag) to achieve the same level of accuracy in game playing. 

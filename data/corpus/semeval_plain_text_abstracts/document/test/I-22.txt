@@ -1,0 +1,7 @@
+Realistic Cognitive Load Modeling for Enhancing Shared Mental Models in Human-Agent Collaboration
+Human team members often develop shared expectations to predict each other's needs and coordinate their behaviors.
+In this paper the concept Shared Belief Map is proposed as a basis for developing realistic shared expectations among a team of Human-Agent-Pairs (HAPs).
+The establishment of shared belief maps relies on inter-agent information sharing, the effectiveness of which highly depends on agents' processing loads and the instantaneous cognitive loads of their human partners.
+We investigate HMM-based cognitive load models to facilitate team members to share the right information with the right party at the right time.
+The shared belief map concept and the cognitive/processing load models have been implemented in a cognitive agent architecture SMMall.
+A series of experiments were conducted to evaluate the concept, the models, and their impacts on the evolving of shared mental models of HAP teams. 

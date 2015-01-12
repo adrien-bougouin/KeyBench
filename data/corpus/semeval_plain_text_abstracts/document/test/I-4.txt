@@ -1,0 +1,9 @@
+Meta-Level Coordination for Solving Negotiation Chains in Semi-Cooperative Multi-Agent Systems
+A negotiation chain is formed when multiple related negotiations are spread over multiple agents.
+In order to appropriately order and structure the negotiations occurring in the chain so as to optimize the expected utility, we present an extension to a single-agent concurrent negotiation framework.
+This work is aimed at semi-cooperative multi-agent systems, where each agent has its own goals and works to maximize its local utility; however, the performance of each individual agent is tightly related to other agent's cooperation and the system's overall performance.
+We introduce a pre-negotiation phase that allows agents to transfer meta-level information.
+Using this information, the agent can build a more accurate model of the negotiation in terms of modeling the relationship of flexibility and success probability.
+This more accurate model helps the agent in choosing a better negotiation solution in the global negotiation chain context.
+The agent can also use this information to allocate appropriate time for each negotiation, hence to find a good ordering of all related negotiations.
+The experimental data shows that these mechanisms improve the agents' and the system's overall performance significantly. 

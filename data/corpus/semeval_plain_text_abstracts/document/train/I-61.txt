@@ -1,0 +1,9 @@
+Distributed Agent-Based Air Traffic Flow Management
+Air traffic flow management is one of the fundamental challenges facing the Federal Aviation Administration (FAA) today.
+The FAA estimates that in 2005 alone, there were over 322,000 hours of delays at a cost to the industry in excess of three billion dollars.
+Finding reliable and adaptive solutions to the flow management problem is of paramount importance if the Next Generation Air Transportation Systems are to achieve the stated goal of accommodating three times the current traffic volume.
+This problem is particularly complex as it requires the integration and/or coordination of many factors including: new data (e.g., changing weather info), potentially conflicting priorities (e.g., different airlines), limited resources (e.g., air traffic controllers) and very heavy traffic volume (e.g., over 40,000 flights over the US airspace).
+In this paper we use FACET -- an air traffic flow simulator developed at NASA and used extensively by the FAA and industry -- to test a multi-agent algorithm for traffic flow management.
+An agent is associated with a fix (a specific location in 2D space) and its action consists of setting the separation required among the airplanes going though that fix.
+Agents use reinforcement learning to set this separation and their actions speed up or slow down traffic to manage congestion.
+Our FACET based results show that agents receiving personalized rewards reduce congestion by up to 45% over agents receiving a global reward and by up to 67% over a current industry approach (Monte Carlo estimation). 

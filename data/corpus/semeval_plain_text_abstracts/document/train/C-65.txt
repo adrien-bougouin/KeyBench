@@ -1,0 +1,8 @@
+Shooter Localization and Weapon Classification with Soldier-Wearable Networked Sensors
+The paper presents a wireless sensor network-based mobile countersniper system.
+A sensor node consists of a helmetmounted microphone array, a COTS MICAz mote for internode communication and a custom sensorboard that implements the acoustic detection and Time of Arrival (ToA) estimation algorithms on an FPGA.
+A 3-axis compass provides self orientation and Bluetooth is used for communication with the soldier's PDA running the data fusion and the user interface.
+The heterogeneous sensor fusion algorithm can work with data from a single sensor or it can fuse ToA or Angle of Arrival (AoA) observations of muzzle blasts and ballistic shockwaves from multiple sensors.
+The system estimates the trajectory, the range, the caliber and the weapon type.
+The paper presents the system design and the results from an independent evaluation at the US Army Aberdeen Test Center.
+The system performance is characterized by 1-degree trajectory precision and over 95% caliber estimation accuracy for all shots, and close to 100% weapon estimation accuracy for 4 out of 6 guns tested. 

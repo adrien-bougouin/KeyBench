@@ -1,0 +1,11 @@
+Location based Indexing Scheme for DAYS
+Data dissemination through wireless channels for broadcasting information to consumers is becoming quite common.
+Many dissemination schemes have been proposed but most of them push data to wireless channels for general consumption.
+Push based broadcast [1] is essentially asymmetric, i.e., the volume of data being higher from the server to the users than from the users back to the server.
+Push based scheme requires some indexing which indicates when the data will be broadcast and its position in the broadcast.
+Access latency and tuning time are the two main parameters which may be used to evaluate an indexing scheme.
+Two of the important indexing schemes proposed earlier were tree based and the exponential indexing schemes.
+None of these schemes were able to address the requirements of location dependent data (LDD) which is highly desirable feature of data dissemination.
+In this paper, we discuss the broadcast of LDD in our project DAta in Your Space (DAYS), and propose a scheme for indexing LDD.
+We argue that this scheme, when applied to LDD, significantly improves performance in terms of tuning time over the above mentioned schemes.
+We prove our argument with the help of simulation results. 

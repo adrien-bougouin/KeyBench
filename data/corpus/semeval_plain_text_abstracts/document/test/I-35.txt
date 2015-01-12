@@ -1,0 +1,9 @@
+Distributed Norm Management in Regulated Multi-Agent Systems
+Norms are widely recognised as a means of coordinating multi-agent systems.
+The distributed management of norms is a challenging issue and we observe a lack of truly distributed computational realisations of normative models.
+In order to regulate the behaviour of autonomous agents that take part in multiple, related activities, we propose a normative model, the Normative Structure (NS), an artifact that is based on the propagation of normative positions (obligations, prohibitions, permissions), as consequences of agents' actions.
+Within a NS, conflicts may arise due to the dynamic nature of the MAS and the concurrency of agents' actions.
+However, ensuring conflict-freedom of a NS at design time is computationally intractable.
+We show this by formalising the notion of conflict, providing a mapping of NSs into Coloured Petri Nets and borrowing well-known theoretical results from that field.
+Since online conflict resolution is required, we present a tractable algorithm to be employed distributedly.
+We then demonstrate that this algorithm is paramount for the distributed enactment of a NS. 

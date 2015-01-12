@@ -1,0 +1,7 @@
+On the Benefits of Cheating by Self-Interested Agents in Vehicular Networks
+As more and more cars are equipped with GPS and Wi-Fi transmitters, it becomes easier to design systems that will allow cars to interact autonomously with each other, e.g., regarding traffic on the roads.
+Indeed, car manufacturers are already equipping their cars with such devices.
+Though, currently these systems are a proprietary, we envision a natural evolution where agent applications will be developed for vehicular systems, e.g., to improve car routing in dense urban areas.
+Nonetheless, this new technology and agent applications may lead to the emergence of self-interested car owners, who will care more about their own welfare than the social welfare of their peers.
+These car owners will try to manipulate their agents such that they transmit false data to their peers.
+Using a simulation environment, which models a real transportation network in a large city, we demonstrate the benefits achieved by self-interested agents if no counter-measures are implemented. 

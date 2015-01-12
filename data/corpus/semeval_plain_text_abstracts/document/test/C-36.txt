@@ -1,0 +1,8 @@
+Encryption-Enforced Access Control in Dynamic Multi-Domain Publish/Subscribe Networks
+Publish/subscribe systems provide an efficient, event-based, wide-area distributed communications infrastructure.
+Large scale publish/subscribe systems are likely to employ components of the event transport network owned by cooperating, but independent organisations.
+As the number of participants in the network increases, security becomes an increasing concern.
+This paper extends previous work to present and evaluate a secure multi-domain publish/subscribe infrastructure that supports and enforces fine-grained access control over the individual attributes of event types.
+Key refresh allows us to ensure forward and backward security when event brokers join and leave the network.
+We demonstrate that the time and space overheads can be minimised by careful consideration of encryption techniques, and by the use of caching to decrease unnecessary decryptions.
+We show that our approach has a smaller overall communication overhead than existing approaches for achieving the same degree of control over security in publish/subscribe networks. 

@@ -1,0 +1,12 @@
+Automatic Extraction of Titles from General Documents using Machine Learning
+In this paper, we propose a machine learning approach to title extraction from general documents.
+By general documents, we mean documents that can belong to any one of a number of specific genres, including presentations, book chapters, technical papers, brochures, reports, and letters.
+Previously, methods have been proposed mainly for title extraction from research papers.
+It has not been clear whether it could be possible to conduct automatic title extraction from general documents.
+As a case study, we consider extraction from Office including Word and PowerPoint.
+In our approach, we annotate titles in sample documents (for Word and PowerPoint respectively) and take them as training data, train machine learning models, and perform title extraction using the trained models.
+Our method is unique in that we mainly utilize formatting information such as font size as features in the models.
+It turns out that the use of formatting information can lead to quite accurate extraction from general documents.
+Precision and recall for title extraction from Word is 0.810 and 0.837 respectively, and precision and recall for title extraction from PowerPoint is 0.875 and 0.895 respectively in an experiment on intranet data.
+Other important new findings in this work include that we can train models in one domain and apply them to another domain, and more surprisingly we can even train models in one language and apply them to another language.
+Moreover, we can significantly improve search ranking results in document retrieval by using the extracted titles. 

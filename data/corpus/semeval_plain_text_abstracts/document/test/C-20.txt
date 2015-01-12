@@ -1,0 +1,6 @@
+Live Data Center Migration across WANs: A Robust Cooperative Context Aware Approach
+A significant concern for Internet-based service providers is the continued operation and availability of services in the face of outages, whether planned or unplanned.
+In this paper we advocate a cooperative, context-aware approach to data center migration across WANs to deal with outages in a non-disruptive manner.
+We specifically seek to achieve high availability of data center services in the face of both planned and unanticipated outages of data center facilities.
+We make use of server virtualization technologies to enable the replication and migration of server functions.
+We propose new network functions to enable server migration and replication across wide area networks (e.g., the Internet), and finally show the utility of intelligent and dynamic storage replication technology to ensure applications have access to data in the face of outages with very tight recovery point objectives. 

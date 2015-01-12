@@ -1,0 +1,4 @@
+Collaboration Among a Satellite Swarm
+The paper deals with on-board planning for a satellite swarm via communication and negotiation.
+We aim at defining individual behaviours that result in a global behaviour that meets the mission requirements.
+We will present the formalization of the problem, a communication protocol, a solving method based on reactive decision rules, and first results. 

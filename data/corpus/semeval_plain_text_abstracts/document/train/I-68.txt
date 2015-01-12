@@ -1,0 +1,8 @@
+On Opportunistic Techniques for Solving Decentralized Markov Decision Processes with Temporal Constraints
+Decentralized Markov Decision Processes (DEC-MDPs) are a popular model of agent-coordination problems in domains with uncertainty and time constraints but very difficult to solve.
+In this paper, we improve a state-of-the-art heuristic solution method for DEC-MDPs, called OC-DEC-MDP, that has recently been shown to scale up to larger DEC-MDPs.
+Our heuristic solution method, called Value Function Propagation (VFP), combines two orthogonal improvements of OC-DEC-MDP.
+First, it speeds up OC-DEC-MDP by an order of magnitude by maintaining and manipulating a value function for each state (as a function of time) rather than a separate value for each pair of sate and time interval.
+Furthermore, it achieves better solution qualities than OC-DEC-MDP because, as our analytical results show, it does not overestimate the expected total reward like OC-DEC-MDP.
+We test both improvements independently in a crisis-management domain as well as for other types of domains.
+Our experimental results demonstrate a significant speedup of VFP over OC-DEC-MDP as well as higher solution qualities in a variety of situations. 

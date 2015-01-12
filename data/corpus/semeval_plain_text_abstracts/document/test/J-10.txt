@@ -1,0 +1,9 @@
+Understanding User Behavior in Online Feedback Reporting
+Online reviews have become increasingly popular as a way to judge the quality of various products and services.
+Previous work has demonstrated that contradictory reporting and underlying user biases make judging the true worth of a service difficult.
+In this paper, we investigate underlying factors that influence user behavior when reporting feedback.
+We look at two sources of information besides numerical ratings: linguistic evidence from the textual comment accompanying a review, and patterns in the time sequence of reports.
+We first show that groups of users who amply discuss a certain feature are more likely to agree on a common rating for that feature.
+Second, we show that a user's rating partly reflects the difference between true quality and prior expectation of quality as inferred from previous reviews.
+Both give us a less noisy way to produce rating estimates and reveal the reasons behind user bias.
+Our hypotheses were validated by statistical evidence from hotel reviews on the TripAdvisor website. 

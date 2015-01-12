@@ -1,0 +1,8 @@
+Searching for Joint Gains in Automated Negotiations Based on Multi-criteria Decision Making Theory
+It is well established by conflict theorists and others that successful negotiation should incorporate creating value as well as claiming value.
+Joint improvements that bring benefits to all parties can be realised by (i) identifying attributes that are not of direct conflict between the parties, (ii) tradeoffs on attributes that are valued differently by different parties, and (iii) searching for values within attributes that could bring more gains to one party while not incurring too much loss on the other party.
+In this paper we propose an approach for maximising joint gains in automated negotiations by formulating the negotiation problem as a multi-criteria decision making problem and taking advantage of several optimisation techniques introduced by operations researchers and conflict theorists.
+We use a mediator to protect the negotiating parties from unnecessary disclosure of information to their opponent, while also allowing an objective calculation of maximum joint gains.
+We separate out attributes that take a finite set of values (simple attributes) from those with continuous values, and we show that for simple attributes, the mediator can determine the Pareto-optimal values.
+In addition we show that if none of the simple attributes strongly dominates the other simple attributes, then truth telling is an equilibrium strategy for negotiators during the optimisation of simple attributes.
+We also describe an approach for improving joint gains on non-simple attributes, by moving the parties in a series of steps, towards the Pareto-optimal frontier. 

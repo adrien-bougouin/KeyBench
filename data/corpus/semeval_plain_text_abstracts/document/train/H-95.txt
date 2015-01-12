@@ -1,0 +1,5 @@
+Handling Locations in Search Engine Queries
+This paper proposes simple techniques for handling place references in search engine queries, an important aspect of geographical information retrieval.
+We address not only the detection, but also the disambiguation of place references, by matching them explicitly with concepts at an ontology.
+Moreover, when a query does not reference any locations, we propose to use information from documents matching the query, exploiting geographic scopes previously assigned to these documents.
+Evaluation experiments, using topics from CLEF campaigns and logs from real search engine queries, show the effectiveness of the proposed approaches. 

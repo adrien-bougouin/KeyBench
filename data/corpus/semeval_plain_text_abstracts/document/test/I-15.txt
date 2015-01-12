@@ -1,0 +1,5 @@
+Information Searching and Sharing in Large-Scale Dynamic Networks
+Finding the right agents in a large and dynamic network to provide the needed resources in a timely fashion, is a long standing problem.
+This paper presents a method for information searching and sharing that combines routing indices with token-based methods.
+The proposed method enables agents to search effectively by acquiring their neighbors' interests, advertising their information provision abilities and maintaining indices for routing queries, in an integrated way.
+Specifically, the paper demonstrates through performance experiments how static and dynamic networks of agents can be ‘tuned' to answer queries effectively as they gather evidence for the interests and information provision abilities of others, without altering the topology or imposing an overlay structure to the network of acquaintances. 

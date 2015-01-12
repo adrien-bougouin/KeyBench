@@ -1,0 +1,8 @@
+Letting loose a SPIDER on a network of POMDPs: Generating quality guaranteed policies
+Distributed Partially Observable Markov Decision Problems (Distributed POMDPs) are a popular approach for modeling multi-agent systems acting in uncertain domains.
+Given the significant complexity of solving distributed POMDPs, particularly as we scale up the numbers of agents, one popular approach has focused on approximate solutions.
+Though this approach is efficient, the algorithms within this approach do not provide any guarantees on solution quality.
+A second less popular approach focuses on global optimality, but typical results are available only for two agents, and also at considerable computational cost.
+This paper overcomes the limitations of both these approaches by providing SPIDER, a novel combination of three key features for policy generation in distributed POMDPs: (i) it exploits agent interaction structure given a network of agents (i.e.
+allowing easier scale-up to larger number of agents); (ii) it uses a combination of heuristics to speedup policy search; and (iii) it allows quality guaranteed approximations, allowing a systematic tradeoff of solution quality for time.
+Experimental results show orders of magnitude improvement in performance when compared with previous global optimal algorithms. 

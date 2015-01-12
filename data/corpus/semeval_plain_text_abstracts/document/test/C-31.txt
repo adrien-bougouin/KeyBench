@@ -1,0 +1,9 @@
+Apocrita: A Distributed Peer-to-Peer File Sharing System for Intranets
+Many organizations are required to author documents for various purposes, and such documents may need to be accessible by all member of the organization.
+This access may be needed for editing or simply viewing a document.
+In some cases these documents are shared between authors, via email, to be edited.
+This can easily cause incorrect version to be sent or conflicts created between multiple users trying to make amendments to a document.
+There may even be multiple different documents in the process of being edited.
+The user may be required to search for a particular document, which some search tools such as Google Desktop may be a solution for local documents but will not find a document on another user's machine.
+Another problem arises when a document is made available on a user's machine and that user is offline, in which case the document is no longer accessible.
+In this paper we present Apocrita, a revolutionary distributed P2P file sharing system for Intranets. 

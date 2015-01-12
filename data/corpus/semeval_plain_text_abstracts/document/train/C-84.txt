@@ -1,0 +1,7 @@
+Selfish Caching in Distributed Systems: A Game-Theoretic Analysis
+We analyze replication of resources by server nodes that act selfishly, using a game-theoretic approach.
+We refer to this as the selfish caching problem.
+In our model, nodes incur either cost for replicating resources or cost for access to a remote replica.
+We show the existence of pure strategy Nash equilibria and investigate the price of anarchy, which is the relative cost of the lack of coordination.
+The price of anarchy can be high due to undersupply problems, but with certain network topologies it has better bounds.
+With a payment scheme the game can always implement the social optimum in the best case by giving servers incentive to replicate. 

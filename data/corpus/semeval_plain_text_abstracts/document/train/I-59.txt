@@ -1,0 +1,6 @@
+An Agent-Based Approach for Privacy-Preserving Recommender Systems
+Recommender Systems are used in various domains to generate personalized information based on personal user data.
+The ability to preserve the privacy of all participants is an essential requirement of the underlying Information Filtering architectures, because the deployed Recommender Systems have to be accepted by privacy-aware users as well as information and service providers.
+Existing approaches neglect to address privacy in this multilateral way.
+We have developed an approach for privacy-preserving Recommender Systems based on Multi-Agent System technology which enables applications to generate recommendations via various filtering techniques while preserving the privacy of all participants.
+We describe the main modules of our solution as well as an application we have implemented based on this approach. 

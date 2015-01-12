@@ -1,0 +1,6 @@
+Researches on Scheme of Pairwise Key Establishment for Distributed Sensor Networks
+Security schemes of pairwise key establishment, which enable sensors to communicate with each other securely, play a fundamental role in research on security issue in wireless sensor networks.
+A new kind of cluster deployed sensor networks distribution model is presented, and based on which, an innovative Hierarchical Hypercube model -- H(k,u,m,v,n) and the mapping relationship between cluster deployed sensor networks and the H(k,u,m,v,n) are proposed.
+By utilizing nice properties of H(k,u,m,v,n) model, a new general framework for pairwise key predistribution and a new pairwise key establishment algorithm are designed, which combines the idea of KDC (Key Distribution Center) and polynomial pool schemes.
+Furthermore, the working performance of the newly proposed pairwise key establishment algorithm is seriously inspected.
+Theoretic analysis and experimental figures show that the new algorithm has better performance and provides higher possibilities for sensor to establish pairwise key, compared with previous related works. 

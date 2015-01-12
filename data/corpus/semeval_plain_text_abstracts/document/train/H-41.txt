@@ -1,0 +1,7 @@
+HITS on the Web: How does it Compare?
+This paper describes a large-scale evaluation of the effectiveness of HITS in comparison with other link-based ranking algorithms, when used in combination with a state-of-the-art text retrieval algorithm exploiting anchor text.
+We quantified their effectiveness using three common performance measures: the mean reciprocal rank, the mean average precision, and the normalized discounted cumulative gain measurements.
+The evaluation is based on two large data sets: a breadth-first search crawl of 463 million web pages containing 17.6 billion hyperlinks and referencing 2.9 billion distinct URLs; and a set of 28,043 queries sampled from a query log, each query having on average 2,383 results, about 17 of which were labeled by judges.
+We found that HITS outperforms PageRank, but is about as effective as web-page in-degree.
+The same holds true when any of the link-based features are combined with the text retrieval algorithm.
+Finally, we studied the relationship between query specificity and the effectiveness of selected features, and found that link-based features perform better for general queries, whereas BM25F performs better for specific queries. 

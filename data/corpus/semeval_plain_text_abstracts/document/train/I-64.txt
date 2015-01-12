@@ -1,0 +1,10 @@
+Organizational Self-Design in Semi-dynamic Environments
+Organizations are an important basis for coordination in multiagent systems.
+However, there is no best way to organize and all ways of organizing are not equally effective.
+Attempting to optimize an organizational structure depends strongly on environmental features including problem characteristics, available resources, and agent capabilities.
+If the environment is dynamic, the environmental conditions or the problem task structure may change over time.
+This precludes the use of static, design-time generated, organizational structures in such systems.
+On the other hand, for many real environments, the problems are not totally unique either: certain characteristics and conditions change slowly, if at all, and these can have an important effect in creating stable organizational structures.
+Organizational-Self Design (OSD) has been proposed as an approach for constructing suitable organizational structures at runtime.
+We extend the existing OSD approach to include worth-oriented domains, model other resources in addition to only processor resources and build in robustness into the organization.
+We then evaluate our approach against the contract-net approach and show that our OSD agents perform better, are more efficient, and more flexible to changes in the environment. 

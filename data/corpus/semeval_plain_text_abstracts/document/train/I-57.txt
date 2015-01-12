@@ -1,0 +1,7 @@
+Rumours and Reputation: Evaluating Multi-Dimensional Trust within a Decentralised Reputation System
+In this paper we develop a novel probabilistic model of computational trust that explicitly deals with correlated multi-dimensional contracts.
+Our starting point is to consider an agent attempting to estimate the utility of a contract, and we show that this leads to a model of computational trust whereby an agent must determine a vector of estimates that represent the probability that any dimension of the contract will be successfully fulfilled, and a covariance matrix that describes the uncertainty and correlations in these probabilities.
+We present a formalism based on the Dirichlet distribution that allows an agent to calculate these probabilities and correlations from their direct experience of contract outcomes, and we show that this leads to superior estimates compared to an alternative approach using multiple independent beta distributions.
+We then show how agents may use the sufficient statistics of this Dirichlet distribution to communicate and fuse reputation within a decentralised reputation system.
+Finally, we present a novel solution to the problem of rumour propagation within such systems.
+This solution uses the notion of private and shared information, and provides estimates consistent with a centralised reputation system, whilst maintaining the anonymity of the agents, and avoiding bias and overconfidence. 

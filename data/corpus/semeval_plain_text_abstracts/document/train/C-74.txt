@@ -1,0 +1,7 @@
+Adapting Asynchronous Messaging Middleware to ad-hoc Networking
+The characteristics of mobile environments, with the possibility of frequent disconnections and fluctuating bandwidth, have forced a rethink of traditional middleware.
+In particular, the synchronous communication paradigms often employed in standard middleware do not appear to be particularly suited to ad-hoc environments, in which not even the intermittent availability of a backbone network can be assumed.
+Instead, asynchronous communication seems to be a generally more suitable paradigm for such environments.
+Message oriented middleware for traditional systems has been developed and used to provide an asynchronous paradigm of communication for distributed systems, and, recently, also for some specific mobile computing systems.
+In this paper, we present our experience in designing, implementing and evaluating EMMA (Epidemic Messaging Middleware for ad-hoc networks), an adaptation of Java Message Service (JMS) for mobile ad-hoc environments.
+We discuss in detail the design challenges and some possible solutions, showing a concrete example of the feasibility and suitability of the application of the asynchronous paradigm in this setting and outlining a research roadmap for the coming years. 

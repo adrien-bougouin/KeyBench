@@ -1,0 +1,12 @@
+Bidding Algorithms for a Distributed Combinatorial Auction
+Distributed allocation and multiagent coordination problems can be solved through combinatorial auctions.
+However, most of the existing winner determination algorithms for combinatorial auctions are centralized.
+The PAUSE auction is one of a few efforts to release the auctioneer from having to do all the work (it might even be possible to get rid of the auctioneer).
+It is an increasing price combinatorial auction that naturally distributes the problem of winner determination amongst the bidders in such a way that they have an incentive to perform the calculation.
+It can be used when we wish to distribute the computational load among the bidders or when the bidders do not wish to reveal their true valuations unless necessary.
+PAUSE establishes the rules the bidders must obey.
+However, it does not tell us how the bidders should calculate their bids.
+We have developed a couple of bidding algorithms for the bidders in a PAUSE auction.
+Our algorithms always return the set of bids that maximizes the bidder's utility.
+Since the problem is NP-Hard, run time remains exponential on the number of items, but it is remarkably better than an exhaustive search.
+In this paper we present our bidding algorithms, discuss their virtues and drawbacks, and compare the solutions obtained by them to the revenue-maximizing solution found by a centralized winner determination algorithm. 

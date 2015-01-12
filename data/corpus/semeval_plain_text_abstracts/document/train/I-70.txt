@@ -1,0 +1,7 @@
+A Multi-Agent System for Building Dynamic Ontologies
+Ontologies building from text is still a time-consuming task which justifies the growth of Ontology Learning.
+Our system named Dynamo is designed along this domain but following an original approach based on an adaptive multi-agent architecture.
+In this paper we present a distributed hierarchical clustering algorithm, core of our approach.
+It is evaluated and compared to a more conventional centralized algorithm.
+We also present how it has been improved using a multi-criteria approach.
+With those results in mind, we discuss the limits of our system and add as perspectives the modifications required to reach a complete ontology building solution. 

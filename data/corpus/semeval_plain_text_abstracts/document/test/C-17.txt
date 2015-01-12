@@ -1,0 +1,10 @@
+Deployment Issues of a VoIP Conferencing System in a Virtual Conferencing Environment
+Real-time services have been supported by and large on circuit-switched networks.
+Recent trends favour services ported on packet-switched networks.
+For audio conferencing, we need to consider many issues -- scalability, quality of the conference application, floor control and load on the clients/servers -- to name a few.
+In this paper, we describe an audio service framework designed to provide a Virtual Conferencing Environment (VCE).
+The system is designed to accommodate a large number of end users speaking at the same time and spread across the Internet.
+The framework is based on Conference Servers [14], which facilitate the audio handling, while we exploit the SIP capabilities for signaling purposes.
+Client selection is based on a recent quantifier called "Loudness Number" that helps mimic a physical face-to-face conference.
+We deal with deployment issues of the proposed solution both in terms of scalability and interactivity, while explaining the techniques we use to reduce the traffic.
+We have implemented a Conference Server (CS) application on a campus-wide network at our Institute. 

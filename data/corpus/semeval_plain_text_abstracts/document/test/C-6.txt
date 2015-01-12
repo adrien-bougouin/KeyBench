@@ -1,0 +1,13 @@
+Design and Implementation of a Distributed Content Management System
+The convergence of advances in storage, encoding, and networking technologies has brought us to an environment where huge amounts of continuous media content is routinely stored and exchanged between network enabled devices.
+Keeping track of (or managing) such content remains challenging due to the sheer volume of data.
+Storing live continuous media (such as TV or radio content) adds to the complexity in that this content has no well defined start or end and is therefore cumbersome to deal with.
+Networked storage allows content that is logically viewed as part of the same collection to in fact be distributed across a network, making the task of content management all but impossible to deal with without a content management system.
+In this paper we present the design and implementation of the Spectrum content management system, which deals with rich media content effectively in this environment.
+Spectrum has a modular architecture that allows its application to both stand-alone and various networked scenarios.
+A unique aspect of Spectrum is that it requires one (or more) retention policies to apply to every piece of content that is stored in the system.
+This means that there are no eviction policies.
+Content that no longer has a retention policy applied to it is simply removed from the system.
+Different retention policies can easily be applied to the same content thus naturally facilitating sharing without duplication.
+This approach also allows Spectrum to easily apply time based policies which are basic building blocks required to deal with the storage of live continuous media, to content.
+We not only describe the details of the Spectrum architecture but also give typical use cases. 

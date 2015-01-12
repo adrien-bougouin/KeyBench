@@ -1,0 +1,5 @@
+A Hierarchical Process Execution Support for Grid Computing
+Grid is an emerging infrastructure used to share resources among virtual organizations in a seamless manner and to provide breakthrough computing power at low cost.
+Nowadays there are dozens of academic and commercial products that allow execution of isolated tasks on grids, but few products support the enactment of long-running processes in a distributed fashion.
+In order to address such subject, this paper presents a programming model and an infrastructure that hierarchically schedules process activities using available nodes in a wide grid environment.
+Their advantages are automatic and structured distribution of activities and easy process monitoring and steering. 

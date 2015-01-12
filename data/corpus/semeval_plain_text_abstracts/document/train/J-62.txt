@@ -1,0 +1,5 @@
+Weak Monotonicity Suffices for Truthfulness on Convex Domains
+Weak monotonicity is a simple necessary condition for a social choice function to be implementable by a truthful mechanism.
+Roberts [10] showed that it is sufficient for all social choice functions whose domain is unrestricted.
+Lavi, Mu'alem and Nisan [6] proved the sufficiency of weak monotonicity for functions over order-based domains and Gui, Muller and Vohra [5] proved sufficiency for order-based domains with range constraints and for domains defined by other special types of linear inequality constraints.
+Here we show the more general result, conjectured by Lavi, Mu'alem and Nisan [6], that weak monotonicity is sufficient for functions defined on any convex domain. 

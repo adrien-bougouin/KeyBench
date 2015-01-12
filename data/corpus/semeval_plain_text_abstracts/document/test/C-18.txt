@@ -1,0 +1,11 @@
+An Initial Analysis and Presentation of Malware Exhibiting Swarm-Like Behavior
+The Slammer, which is currently the fastest computer worm in recorded history, was observed to infect 90 percent of all vulnerable Internets hosts within 10 minutes.
+Although the main action that the Slammer worm takes is a relatively unsophisticated replication of itself, it still spreads so quickly that human response was ineffective.
+Most proposed countermeasures strategies are based primarily on rate detection and limiting algorithms.
+However, such strategies are being designed and developed to effectively contain worms whose behaviors are similar to that of Slammer.
+In our work, we put forth the hypothesis that next generation worms will be radically different, and potentially such techniques will prove ineffective.
+Specifically, we propose to study a new generation of worms called Swarm Worms, whose behavior is predicated on the concept of emergent intelligence.
+Emergent Intelligence is the behavior of systems, very much like biological systems such as ants or bees, where simple local interactions of autonomous members, with simple primitive actions, gives rise to complex and intelligent global behavior.
+In this manuscript we will introduce the basic principles behind the idea of Swarm Worms, as well as the basic structure required in order to be considered a swarm worm.
+In addition, we will present preliminary results on the propagation speeds of one such swarm worm, called the ZachiK worm.
+We will show that ZachiK is capable of propagating at a rate 2 orders of magnitude faster than similar worms without swarm capabilities. 

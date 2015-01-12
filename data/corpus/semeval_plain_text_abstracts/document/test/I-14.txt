@@ -1,0 +1,10 @@
+A Reinforcement Learning based Distributed Search Algorithm For Hierarchical Peer-to-Peer Information Retrieval Systems
+The dominant existing routing strategies employed in peerto-peer(P2P) based information retrieval(IR) systems are similarity-based approaches.
+In these approaches, agents depend on the content similarity between incoming queries and their direct neighboring agents to direct the distributed search sessions.
+However, such a heuristic is myopic in that the neighboring agents may not be connected to more relevant agents.
+In this paper, an online reinforcement-learning based approach is developed to take advantage of the dynamic run-time characteristics of P2P IR systems as represented by information about past search sessions.
+Specifically, agents maintain estimates on the downstream agents' abilities to provide relevant documents for incoming queries.
+These estimates are updated gradually by learning from the feedback information returned from previous search sessions.
+Based on this information, the agents derive corresponding routing policies.
+Thereafter, these agents route the queries based on the learned policies and update the estimates based on the new routing policies.
+Experimental results demonstrate that the learning algorithm improves considerably the routing performance on two test collection sets that have been used in a variety of distributed IR studies. 

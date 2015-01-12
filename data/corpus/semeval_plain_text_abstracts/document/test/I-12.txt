@@ -1,0 +1,7 @@
+Sharing Experiences to Learn User Characteristics in Dynamic Environments with Sparse Data
+This paper investigates the problem of estimating the value of probabilistic parameters needed for decision making in environments in which an agent, operating within a multi-agent system, has no a priori information about the structure of the distribution of parameter values.
+The agent must be able to produce estimations even when it may have made only a small number of direct observations, and thus it must be able to operate with sparse data.
+The paper describes a mechanism that enables the agent to significantly improve its estimation by augmenting its direct observations with those obtained by other agents with which it is coordinating.
+To avoid undesirable bias in relatively heterogeneous environments while effectively using relevant data to improve its estimations, the mechanism weighs the contributions of other agents' observations based on a real-time estimation of the level of similarity between each of these agents and itself.
+The coordination autonomy module of a coordination-manager system provided an empirical setting for evaluation.
+Simulation-based evaluations demonstrated that the proposed mechanism outperforms estimations based exclusively on an agent's own observations as well as estimations based on an unweighted aggregate of all other agents' observations. 

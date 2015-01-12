@@ -1,0 +1,12 @@
+Resolving Conflict and Inconsistency in Norm-Regulated Virtual Organizations
+Norm-governed virtual organizations define, govern and facilitate coordinated resource sharing and problem solving in societies of agents.
+With an explicit account of norms, openness in virtual organizations can be achieved: new components, designed by various parties, can be seamlessly accommodated.
+We focus on virtual organizations realised as multi-agent systems, in which human and software agents interact to achieve individual and global goals.
+However, any realistic account of norms should address their dynamic nature: norms will change as agents interact with each other and their environment.
+Due to the changing nature of norms or due to norms stemming from different virtual organizations, there will be situations when an action is simultaneously permitted and prohibited, that is, a conflict arises.
+Likewise, there will be situations when an action is both obliged and prohibited, that is, an inconsistency arises.
+We introduce an approach, based on first-order unification, to detect and resolve such conflicts and inconsistencies.
+In our proposed solution, we annotate a norm with the set of values their variables should not have in order to avoid a conflict or an inconsistency with another norm.
+Our approach neatly accommodates the domain-dependent interrelations among actions and the indirect conflicts/inconsistencies these may cause.
+More generally, we can capture a useful notion of inter-agent (and inter-role) delegation of actions and norms associated to them, and use it to address conflicts/inconsistencies caused by action delegation.
+We illustrate our approach with an e-Science example in which agents support Grid services. 

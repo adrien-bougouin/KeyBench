@@ -1,0 +1,5 @@
+Sensor Deployment Strategy for Target Detection
+In order to monitor a region for traffic traversal, sensors can be deployed to perform collaborative target detection.
+Such a sensor network achieves a certain level of detection performance with an associated cost of deployment.
+This paper addresses this problem by proposing path exposure as a measure of the goodness of a deployment and presents an approach for sequential deployment in steps.
+It illustrates that the cost of deployment can be minimized to achieve the desired detection performance by appropriately choosing the number of sensors deployed in each step. 

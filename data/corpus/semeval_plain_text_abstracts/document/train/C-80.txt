@@ -1,0 +1,7 @@
+Consistency-preserving Caching of Dynamic Database Content
+With the growing use of dynamic web content generated from relational databases, traditional caching solutions for throughput and latency improvements are ineffective.
+We describe a middleware layer called Ganesh that reduces the volume of data transmitted without semantic interpretation of queries or results.
+It achieves this reduction through the use of cryptographic hashing to detect similarities with previous results.
+These benefits do not require any compromise of the strict consistency semantics provided by the back-end database.
+Further, Ganesh does not require modifications to applications, web servers, or database servers, and works with closed-source applications and databases.
+Using two benchmarks representative of dynamic web sites, measurements of our prototype show that it can increase end-to-end throughput by as much as twofold for non-data intensive applications and by as much as tenfold for data intensive ones. 

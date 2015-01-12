@@ -1,0 +1,6 @@
+On the relevance of utterances in formal inter-agent dialogues
+Work on argumentation-based dialogue has defined frameworks within which dialogues can be carried out, established protocols that govern dialogues, and studied different properties of dialogues.
+This work has established the space in which agents are permitted to interact through dialogues.
+Recently, there has been increasing interest in the mechanisms agents might use to choose how to act -- the rhetorical manoeuvring that they use to navigate through the space defined by the rules of the dialogue.
+Key in such considerations is the idea of relevance, since a usual requirement is that agents stay focussed on the subject of the dialogue and only make relevant remarks.
+Here we study several notions of relevance, showing how they can be related to both the rules for carrying out dialogues and to rhetorical manoeuvring. 

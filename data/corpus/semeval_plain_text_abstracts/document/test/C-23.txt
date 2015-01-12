@@ -1,0 +1,7 @@
+Implementation of a Dynamic Adjustment Mechanism with Efficient Replica Selection in Data Grid Environments
+The co-allocation architecture was developed in order to enable parallel downloading of datasets from multiple servers.
+Several co-allocation strategies have been coupled and used to exploit rate differences among various client-server links and to address dynamic rate fluctuations by dividing files into multiple blocks of equal sizes.
+However, a major obstacle, the idle time of faster servers having to wait for the slowest server to deliver the final block, makes it important to reduce differences in finishing time among replica servers.
+In this paper, we propose a dynamic coallocation scheme, namely Recursive-Adjustment Co-Allocation scheme, to improve the performance of data transfer in Data Grids.
+Our approach reduces the idle time spent waiting for the slowest server and decreases data transfer completion time.
+We also provide an effective scheme for reducing the cost of reassembling data blocks. 

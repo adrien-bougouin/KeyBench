@@ -1,0 +1,9 @@
+Remote Access to Large Spatial Databases
+Enterprises in the public and private sectors have been making their large spatial data archives available over the Internet.
+However, interactive work with such large volumes of online spatial data is a challenging task.
+We propose two efficient approaches to remote access to large spatial data.
+First, we introduce a client-server architecture where the work is distributed between the server and the individual clients for spatial query evaluation, data visualization, and data management.
+We enable the minimization of the requirements for system resources on the client side while maximizing system responsiveness as well as the number of connections one server can handle concurrently.
+Second, for prolonged periods of access to large online data, we introduce APPOINT (an Approach for Peer-to-Peer Offloading the INTernet).
+This is a centralized peer-to-peer approach that helps Internet users transfer large volumes of online data efficiently.
+In APPOINT, active clients of the client-server architecture act on the server's behalf and communicate with each other to decrease network latency, improve service bandwidth, and resolve server congestions. 

@@ -1,0 +1,11 @@
+Downloading Textual Hidden Web Content Through Keyword Queries
+An ever-increasing amount of information on the Web today is available only through search interfaces: the users have to type in a set of keywords in a search form in order to access the pages from certain Web sites.
+These pages are often referred to as the Hidden Web or the Deep Web.
+Since there are no static links to the Hidden Web pages, search engines cannot discover and index such pages and thus do not return them in the results.
+However, according to recent studies, the content provided by many Hidden Web sites is often of very high quality and can be extremely valuable to many users.
+In this paper, we study how we can build an effective Hidden Web crawler that can autonomously discover and download pages from the Hidden Web.
+Since the only entry point to a Hidden Web site is a query interface, the main challenge that a Hidden Web crawler has to face is how to automatically generate meaningful queries to issue to the site.
+Here, we provide a theoretical framework to investigate the query generation problem for the Hidden Web and we propose effective policies for generating queries automatically.
+Our policies proceed iteratively, issuing a different query in every iteration.
+We experimentally evaluate the effectiveness of these policies on 4 real Hidden Web sites and our results are very promising.
+For instance, in one experiment, one of our policies downloaded more than 90% of a Hidden Web site (that contains 14 million documents) after issuing fewer than 100 queries. 

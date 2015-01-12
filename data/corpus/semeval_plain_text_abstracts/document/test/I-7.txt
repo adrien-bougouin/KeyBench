@@ -1,0 +1,9 @@
+Commitment and Extortion
+Making commitments, e.g., through promises and threats, enables a player to exploit the strengths of his own strategic position as well as the weaknesses of that of his opponents.
+Which commitments a player can make with credibility depends on the circumstances.
+In some, a player can only commit to the performance of an action, in others, he can commit himself conditionally on the actions of the other players.
+Some situations even allow for commitments on commitments or for commitments to randomized actions.
+We explore the formal properties of these types of (conditional) commitment and their interrelationships.
+So as to preclude inconsistencies among conditional commitments, we assume an order in which the players make their commitments.
+Central to our analyses is the notion of an extortion, which we define, for a given order of the players, as a profile that contains, for each player, an optimal commitment given the commitments of the players that committed earlier.
+On this basis, we investigate for different commitment types whether it is advantageous to commit earlier rather than later, and how the outcomes obtained through extortions relate to backward induction and Pareto efficiency.

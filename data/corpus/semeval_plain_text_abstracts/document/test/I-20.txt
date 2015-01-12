@@ -1,0 +1,9 @@
+Computing the Banzhaf Power Index in Network Flow Games
+Preference aggregation is used in a variety of multiagent applications, and as a result, voting theory has become an important topic in multiagent system research.
+However, power indices (which reflect how much real power a voter has in a weighted voting system) have received relatively little attention, although they have long been studied in political science and economics.
+The Banzhaf power index is one of the most popular; it is also well-defined for any simple coalitional game.
+In this paper, we examine the computational complexity of calculating the Banzhaf power index within a particular multiagent domain, a network flow game.
+Agents control the edges of a graph; a coalition wins if it can send a flow of a given size from a source vertex to a target vertex.
+The relative power of each edge/agent reflects its significance in enabling such a flow, and in real-world networks could be used, for example, to allocate resources for maintaining parts of the network.
+We show that calculating the Banzhaf power index of each agent in this network flow domain is #P-complete.
+We also show that for some restricted network flow domains there exists a polynomial algorithm to calculate agents' Banzhaf power indices. 

@@ -1,0 +1,15 @@
+Approximate and Online Multi-Issue Negotiation
+This paper analyzes bilateral multi-issue negotiation between self-interested autonomous agents.
+The agents have time constraints in the form of both deadlines and discount factors.
+There are m > 1 issues for negotiation where each issue is viewed as a pie of size one.
+The issues are indivisible (i.e., individual issues cannot be split between the parties; each issue must be allocated in its entirety to either agent).
+Here different agents value different issues differently.
+Thus, the problem is for the agents to decide how to allocate the issues between themselves so as to maximize their individual utilities.
+For such negotiations, we first obtain the equilibrium strategies for the case where the issues for negotiation are known a priori to the parties.
+Then, we analyse their time complexity and show that finding the equilibrium offers is an NP-hard problem, even in a complete information setting.
+In order to overcome this computational complexity, we then present negotiation strategies that are approximately optimal but computationally efficient, and show that they form an equilibrium.
+We also analyze the relative error (i.e., the difference between the true optimum and the approximate).
+The time complexity of the approximate equilibrium strategies is O(nm/ 2 ) where n is the negotiation deadline and the relative error.
+Finally, we extend the analysis to online negotiation where different issues become available at different time points and the agents are uncertain about their valuations for these issues.
+Specifically, we show that an approximate equilibrium exists for online negotiation and show that the expected difference between the optimum and the approximate is O( √ m) .
+These approximate strategies also have polynomial time complexity. 

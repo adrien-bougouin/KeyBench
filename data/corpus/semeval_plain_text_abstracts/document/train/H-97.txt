@@ -1,0 +1,5 @@
+Feature Representation for Effective Action-Item Detection
+E-mail users face an ever-growing challenge in managing their inboxes due to the growing centrality of email in the workplace for task assignment, action requests, and other roles beyond information dissemination.
+Whereas Information Retrieval and Machine Learning techniques are gaining initial acceptance in spam filtering and automated folder assignment, this paper reports on a new task: automated action-item detection, in order to flag emails that require responses, and to highlight the specific passage(s) indicating the request(s) for action.
+Unlike standard topic-driven text classification, action-item detection requires inferring the sender's intent, and as such responds less well to pure bag-of-words classification.
+However, using enriched feature sets, such as n-grams (up to n=4) with chi-squared feature selection, and contextual cues for action-item location improve performance by up to 10% over unigrams, using in both cases state of the art classifiers such as SVMs with automated model selection via embedded cross-validation. 

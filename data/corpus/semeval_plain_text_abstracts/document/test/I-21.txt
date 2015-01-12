@@ -1,0 +1,7 @@
+Interactions between Market Barriers and Communication Networks in Marketing Systems
+We investigate a framework where agents search for satisfying products by using referrals from other agents.
+Our model of a mechanism for transmitting word-of-mouth and the resulting behavioural effects is based on integrating a module governing the local behaviour of agents with a module governing the structure and function of the underlying network of agents.
+Local behaviour incorporates a satisficing model of choice, a set of rules governing the interactions between agents, including learning about the trustworthiness of other agents over time, and external constraints on behaviour that may be imposed by market barriers or switching costs.
+Local behaviour takes place on a network substrate across which agents exchange positive and negative information about products.
+We use various degree distributions dictating the extent of connectivity, and incorporate both small-world effects and the notion of preferential attachment in our network models.
+We compare the effectiveness of referral systems over various network structures for easy and hard choice tasks, and evaluate how this effectiveness changes with the imposition of market barriers. 

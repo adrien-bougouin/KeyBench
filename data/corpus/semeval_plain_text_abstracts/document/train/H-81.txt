@@ -1,0 +1,7 @@
+Distance Measures for MPEG-7-based Retrieval
+In visual information retrieval the careful choice of suitable proximity measures is a crucial success factor.
+The evaluation presented in this paper aims at showing that the distance measures suggested by the MPEG-7 group for the visual descriptors can be beaten by general-purpose measures.
+Eight visual MPEG-7 descriptors were selected and 38 distance measures implemented.
+Three media collections were created and assessed, performance indicators developed and more than 22500 tests performed.
+Additionally, a quantisation model was developed to be able to use predicate-based distance measures on continuous data as well.
+The evaluation shows that the distance measures recommended in the MPEG-7-standard are among the best but that other measures perform even better. 

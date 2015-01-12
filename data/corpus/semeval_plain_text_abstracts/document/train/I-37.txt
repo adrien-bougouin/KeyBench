@@ -1,0 +1,6 @@
+A Framework for Agent-Based Distributed Machine Learning and Data Mining
+This paper proposes a framework for agent-based distributed machine learning and data mining based on (i) the exchange of meta-level descriptions of individual learning processes among agents and (ii) online reasoning about learning success and learning progress by learning agents.
+We present an abstract architecture that enables agents to exchange models of their local learning processes and introduces a number of different methods for integrating these processes.
+This allows us to apply existing agent interaction mechanisms to distributed machine learning tasks, thus leveraging the powerful coordination methods available in agent-based computing, and enables agents to engage in meta-reasoning about their own learning decisions.
+We apply this architecture to a real-world distributed clustering application to illustrate how the conceptual framework can be used in practical systems in which different learners may be using different datasets, hypotheses and learning algorithms.
+We report on experimental results obtained using this system, review related work on the subject, and discuss potential future extensions to the framework. 

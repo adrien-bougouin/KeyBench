@@ -1,0 +1,8 @@
+Aborting Tasks in BDI Agents
+Intelligent agents that are intended to work in dynamic environments must be able to gracefully handle unsuccessful tasks and plans.
+In addition, such agents should be able to make rational decisions about an appropriate course of action, which may include aborting a task or plan, either as a result of the agent's own deliberations, or potentially at the request of another agent.
+In this paper we investigate the incorporation of aborts into a BDI-style architecture.
+We discuss some conditions under which aborting a task or plan is appropriate, and how to determine the consequences of such a decision.
+We augment each plan with an optional abort-method, analogous to the failure method found in some agent programming languages.
+We provide an operational semantics for the execution cycle in the presence of aborts in the abstract agent language CAN, which enables us to specify a BDI-based execution model without limiting our attention to a particular agent system (such as JACK, Jadex, Jason, or SPARK).
+A key technical challenge we address is the presence of parallel execution threads and of sub-tasks, which require the agent to ensure that the abort methods for each plan are carried out in an appropriate sequence. 

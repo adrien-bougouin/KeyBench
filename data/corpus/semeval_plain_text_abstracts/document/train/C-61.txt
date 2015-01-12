@@ -1,0 +1,7 @@
+Authority Assignment in Distributed Multi-Player Proxy-based Games
+We present a proxy-based gaming architecture and authority assignment within this architecture that can lead to better game playing experience in Massively Multi-player Online games.
+The proposed game architecture consists of distributed game clients that connect to game proxies (referred to as communication proxies) which forward game related messages from the clients to one or more game servers.
+Unlike proxy-based architectures that have been proposed in the literature where the proxies replicate all of the game state, the communication proxies in the proposed architecture support clients that are in proximity to it in the physical network and maintain information about selected portions of the game space that are relevant only to the clients that they support.
+Using this architecture, we propose an authority assignment mechanism that divides the authority for deciding the outcome of different actions/events that occur within the game between client and servers on a per action/event basis.
+We show that such division of authority leads to a smoother game playing experience by implementing this mechanism in a massively multi-player online game called RPGQuest.
+In addition, we argue that cheat detection techniques can be easily implemented at the communication proxies if they are made aware of the game-play mechanics. 

@@ -1,0 +1,6 @@
+Empirical Mechanism Design: Methods, with Application to a Supply-Chain Scenario
+Our proposed methods employ learning and search techniques to estimate outcome features of interest as a function of mechanism parameter settings.
+We illustrate our approach with a design task from a supply-chain trading competition.
+Designers adopted several rule changes in order to deter particular procurement behavior, but the measures proved insufficient.
+Our empirical mechanism analysis models the relation between a key design parameter and outcomes, confirming the observed behavior and indicating that no reasonable parameter settings would have been likely to achieve the desired effect.
+More generally, we show that under certain conditions, the estimator of optimal mechanism parameter setting based on empirical data is consistent. 

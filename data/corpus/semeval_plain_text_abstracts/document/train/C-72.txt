@@ -1,0 +1,8 @@
+GUESS: Gossiping Updates for Efficient Spectrum Sensing
+Wireless radios of the future will likely be frequency-agile, that is, supporting opportunistic and adaptive use of the RF spectrum.
+Such radios must coordinate with each other to build an accurate and consistent map of spectral utilization in their surroundings.
+We focus on the problem of sharing RF spectrum data among a collection of wireless devices.
+The inherent requirements of such data and the time-granularity at which it must be collected makes this problem both interesting and technically challenging.
+We propose GUESS, a novel incremental gossiping approach to coordinated spectral sensing.
+It (1) reduces protocol overhead by limiting the amount of information exchanged between participating nodes, (2) is resilient to network alterations, due to node movement or node failures, and (3) allows exponentially-fast information convergence.
+We outline an initial solution incorporating these ideas and also show how our approach reduces network overhead by up to a factor of 2.4 and results in up to 2.7 times faster information convergence than alternative approaches. 

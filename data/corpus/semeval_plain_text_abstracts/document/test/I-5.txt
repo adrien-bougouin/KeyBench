@@ -1,0 +1,7 @@
+Towards Self-organising Agent-based Resource Allocation in a Multi-Server Environment
+Distributed applications require distributed techniques for efficient resource allocation.
+These techniques need to take into account the heterogeneity and potential unreliability of resources and resource consumers in a distributed environments.
+In this paper we propose a distributed algorithm that solves the resource allocation problem in distributed multi-agent systems.
+Our solution is based on the self-organisation of agents, which does not require any facilitator or management layer.
+The resource allocation in the system is a purely emergent effect.
+We present results of the proposed resource allocation mechanism in the simulated static and dynamic multi-server environment. 

@@ -1,0 +1,8 @@
+Machine Learning for Information Architecture in a Large Governmental Website
+This paper describes ongoing research into the application of machine learning techniques for improving access to governmental information in complex digital libraries.
+Under the auspices of the GovStat Project, our goal is to identify a small number of semantically valid concepts that adequately spans the intellectual domain of a collection.
+The goal of this discovery is twofold.
+First we desire a practical aid for information architects.
+Second, automatically derived document-concept relationships are a necessary precondition for realworld deployment of many dynamic interfaces.
+The current study compares concept learning strategies based on three document representations: keywords, titles, and full-text.
+In statistical and user-based studies, human-created keywords provide significant improvements in concept learning over both title-only and full-text representations. 

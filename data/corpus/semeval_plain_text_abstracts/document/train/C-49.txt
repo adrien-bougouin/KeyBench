@@ -1,0 +1,6 @@
+Evaluating Opportunistic Routing Protocols with Large Realistic Contact Traces
+Traditional mobile ad-hoc network (MANET) routing protocols assume that contemporaneous end-to-end communication paths exist between data senders and receivers.
+In some mobile ad-hoc networks with a sparse node population, an end-to-end communication path may break frequently or may not exist at any time.
+Many routing protocols have been proposed in the literature to address the problem, but few were evaluated in a realistic opportunistic network setting.
+We use simulation and contact traces (derived from logs in a production network) to evaluate and compare five existing protocols: direct-delivery, epidemic, random, PRoPHET, and Link-State, as well as our own proposed routing protocol.
+We show that the direct delivery and epidemic routing protocols suffer either low delivery ratio or high resource usage, and other protocols make tradeoffs between delivery ratio and resource usage. 

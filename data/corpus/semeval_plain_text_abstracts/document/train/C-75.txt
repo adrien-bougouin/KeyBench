@@ -1,0 +1,4 @@
+Composition of a DIDS by Integrating Heterogeneous IDSs on Grids
+This paper considers the composition of a DIDS (Distributed Intrusion Detection System) by integrating heterogeneous IDSs (Intrusion Detection Systems).
+A Grid middleware is used for this integration.
+In addition, an architecture for this integration is proposed and validated through simulation. 

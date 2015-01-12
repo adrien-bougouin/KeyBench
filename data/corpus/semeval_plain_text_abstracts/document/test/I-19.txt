@@ -1,0 +1,9 @@
+Bidding Optimally in Concurrent Second-Price Auctions of Perfectly Substitutable Goods
+We derive optimal bidding strategies for a global bidding agent that participates in multiple, simultaneous second-price auctions with perfect substitutes.
+We first consider a model where all other bidders are local and participate in a single auction.
+For this case, we prove that, assuming free disposal, the global bidder should always place non-zero bids in all available auctions, irrespective of the local bidders' valuation distribution.
+Furthermore, for non-decreasing valuation distributions, we prove that the problem of finding the optimal bids reduces to two dimensions.
+These results hold both in the case where the number of local bidders is known and when this number is determined by a Poisson distribution.
+This analysis extends to online markets where, typically, auctions occur both concurrently and sequentially.
+In addition, by combining analytical and simulation results, we demonstrate that similar results hold in the case of several global bidders, provided that the market consists of both global and local bidders.
+Finally, we address the efficiency of the overall market, and show that information about the number of local bidders is an important determinant for the way in which a global bidder affects efficiency. 

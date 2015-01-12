@@ -1,0 +1,9 @@
+Distributed Management of Flexible Times Schedules
+We consider the problem of managing schedules in an uncertain, distributed environment.
+We assume a team of collaborative agents, each responsible for executing a portion of a globally pre-established schedule, but none possessing a global view of either the problem or solution.
+The goal is to maximize the joint quality obtained from the activities executed by all agents, given that, during execution, unexpected events will force changes to some prescribed activities and reduce the utility of executing others.
+We describe an agent architecture for solving this problem that couples two basic mechanisms: (1) a flexible times representation of the agent's schedule (using a Simple Temporal Network) and (2) an incremental rescheduling procedure.
+The former hedges against temporal uncertainty by allowing execution to proceed from a set of feasible solutions, and the latter acts to revise the agent's schedule when execution is forced outside of this set of solutions or when execution events reduce the expected value of this feasible solution set.
+Basic coordination with other agents is achieved simply by communicating schedule changes to those agents with inter-dependent activities.
+Then, as time permits, the core local problem solving infra-structure is used to drive an inter-agent option generation and query process, aimed at identifying opportunities for solution improvement through joint change.
+Using a simulator to model the environment, we compare the performance of our multi-agent system with that of an expected optimal (but non-scalable) centralized MDP solver. 

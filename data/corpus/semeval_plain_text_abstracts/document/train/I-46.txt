@@ -1,0 +1,4 @@
+Modular Interpreted Systems
+We propose a new class of representations that can be used for modeling (and model checking) temporal, strategic and epistemic properties of agents and their teams.
+Our representations borrow the main ideas from interpreted systems of Halpern, Fagin et al.; however, they are also modular and compact in the way concurrent programs are.
+We also mention preliminary results on model checking alternating-time temporal logic for this natural class of models. 

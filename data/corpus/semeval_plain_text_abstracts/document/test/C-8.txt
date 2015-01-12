@@ -1,0 +1,10 @@
+Operation Context and Context-based Operational Transformation
+Operational Transformation (OT) is a technique for consistency maintenance and group undo, and is being applied to an increasing number of collaborative applications.
+The theoretical foundation for OT is crucial in determining its capability to solve existing and new problems, as well as the quality of those solutions.
+The theory of causality has been the foundation of all prior OT systems, but it is inadequate to capture essential correctness requirements.
+Past research had invented various patches to work around this problem, resulting in increasingly intricate and complicated OT algorithms.
+After having designed, implemented, and experimented with a series of OT algorithms, we reflected on what had been learned and set out to develop a new theoretical framework for better understanding and resolving OT problems, reducing its complexity, and supporting its continual evolution.
+In this paper, we report the main results of this effort: the theory of operation context and the COT (Context-based OT) algorithm.
+The COT algorithm is capable of supporting both do and undo of any operations at anytime, without requiring transformation functions to preserve Reversibility Property, Convergence Property 2, Inverse Properties 2 and 3.
+The COT algorithm is not only simpler and more efficient than prior OT control algorithms, but also simplifies the design of transformation functions.
+We have implemented the COT algorithm in a generic collaboration engine and used it for supporting a range of novel collaborative applications. 

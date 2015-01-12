@@ -1,0 +1,7 @@
+Dynamics Based Control with an Application to Area-Sweeping Problems
+In this paper we introduce Dynamics Based Control (DBC), an approach to planning and control of an agent in stochastic environments.
+Unlike existing approaches, which seek to optimize expected rewards (e.g., in Partially Observable Markov Decision Problems (POMDPs)), DBC optimizes system behavior towards specified system dynamics.
+We show that a recently developed planning and control approach, Extended Markov Tracking (EMT) is an instantiation of DBC.
+EMT employs greedy action selection to provide an efficient control algorithm in Markovian environments.
+We exploit this efficiency in a set of experiments that applied multitarget EMT to a class of area-sweeping problems (searching for moving targets).
+We show that such problems can be naturally defined and efficiently solved using the DBC framework, and its EMT instantiation. 

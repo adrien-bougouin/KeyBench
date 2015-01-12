@@ -1,0 +1,5 @@
+A Unified and General Framework for Argumentation-based Negotiation
+This paper proposes a unified and general framework for argumentation-based negotiation, in which the role of argumentation is formally analyzed.
+The framework makes it possible to study the outcomes of an argumentation-based negotiation.
+It shows what an agreement is, how it is related to the theories of the agents, when it is possible, and how this can be attained by the negotiating agents in this case.
+It defines also the notion of concession, and shows in which situation an agent will make one, as well as how it influences the evolution of the dialogue. 

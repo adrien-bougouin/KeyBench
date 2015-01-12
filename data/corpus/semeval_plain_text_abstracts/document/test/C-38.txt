@@ -1,0 +1,7 @@
+A Framework for Architecting Peer-to-Peer Receiver-driven Overlays
+This paper presents a simple and scalable framework for architecting peer-to-peer overlays called Peer-to-peer Receiverdriven Overlay (or PRO).
+PRO is designed for non-interactive streaming applications and its primary design goal is to maximize delivered bandwidth (and thus delivered quality) to peers with heterogeneous and asymmetric bandwidth.
+To achieve this goal, PRO adopts a receiver-driven approach where each receiver (or participating peer) (i) independently discovers other peers in the overlay through gossiping, and (ii) selfishly determines the best subset of parent peers through which to connect to the overlay to maximize its own delivered bandwidth.
+Participating peers form an unstructured overlay which is inherently robust to high churn rate.
+Furthermore, each receiver leverages congestion controlled bandwidth from its parents as implicit signal to detect and react to long-term changes in network or overlay condition without any explicit coordination with other participating peers.
+Independent parent selection by individual peers dynamically converge to an efficient overlay structure. 

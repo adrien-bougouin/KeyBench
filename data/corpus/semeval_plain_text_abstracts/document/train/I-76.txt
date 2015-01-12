@@ -1,0 +1,7 @@
+Negotiation by Abduction and Relaxation
+This paper studies a logical framework for automated negotiation between two agents.
+We suppose an agent who has a knowledge base represented by a logic program.
+Then, we introduce methods of constructing counter-proposals in response to proposals made by an agent.
+To this end, we combine the techniques of extended abduction in artificial intelligence and relaxation in cooperative query answering for databases.
+These techniques are respectively used for producing conditional proposals and neighborhood proposals in the process of negotiation.
+We provide a negotiation protocol based on the exchange of these proposals and develop procedures for computing new proposals. 

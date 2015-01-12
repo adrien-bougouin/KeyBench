@@ -1,0 +1,7 @@
+Temporal Linear Logic as a Basis for Flexible Agent Interactions
+Interactions between agents in an open system such as the Internet require a significant degree of flexibility.
+A crucial aspect of the development of such methods is the notion of commitments, which provides a mechanism for coordinating interactive behaviors among agents.
+In this paper, we investigate an approach to model commitments with tight integration with protocol actions.
+This means that there is no need to have an explicit mapping from protocols actions to operations on commitments and an external mechanism to process and enforce commitments.
+We show how agents can reason about commitments and protocol actions to achieve the end results of protocols using a reasoning system based on temporal linear logic, which incorporates both temporal and resource-sensitive reasoning.
+We also discuss the application of this framework to scenarios such as online commerce. 

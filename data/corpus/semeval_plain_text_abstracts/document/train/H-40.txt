@@ -1,0 +1,10 @@
+Cross-Lingual Query Suggestion Using Query Logs of Different Languages
+Query suggestion aims to suggest relevant queries for a given query, which help users better specify their information needs.
+Previously, the suggested terms are mostly in the same language of the input query.
+In this paper, we extend it to cross-lingual query suggestion (CLQS): for a query in one language, we suggest similar or relevant queries in other languages.
+This is very important to scenarios of cross-language information retrieval (CLIR) and cross-lingual keyword bidding for search engine advertisement.
+Instead of relying on existing query translation technologies for CLQS, we present an effective means to map the input query of one language to queries of the other language in the query log.
+Important monolingual and cross-lingual information such as word translation relations and word co-occurrence statistics, etc. are used to estimate the cross-lingual query similarity with a discriminative model.
+Benchmarks show that the resulting CLQS system significantly outperforms a baseline system based on dictionary-based query translation.
+Besides, the resulting CLQS is tested with French to English CLIR tasks on TREC collections.
+The results demonstrate higher effectiveness than the traditional query translation methods. 

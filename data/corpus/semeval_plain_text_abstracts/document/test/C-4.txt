@@ -1,0 +1,16 @@
+Intra-flow Loss Recovery and Control for VolP
+"Best effort" packet-switched networks, like the Internet, do not offer a reliable transmission of packets to applications with real-time constraints such as voice.
+Thus, the loss of packets impairs the application-level utility.
+For voice this utility impairment is twofold: on one hand, even short bursts of lost packets may decrease significantly the ability of the receiver to conceal the packet loss and the speech signal playout is interrupted.
+On the other hand, some packets may be particular sensitive to loss as they carry more important information in terms of user perception than other packets.
+We first develop an end-to-end model based on loss runlengths with which we can describe the loss distribution within a flow.
+These packet-level metrics are then linked to user-level objective speech quality metrics.
+Using this framework, we find that for low-compressing sample-based codecs (PCM) with loss concealment isolated packet losses can be concealed well, whereas burst losses have a higher perceptual impact.
+For high-compressing frame-based codecs (G.729) on one hand the impact of loss is amplified through error propagation caused by the decoder filter memories, though on the other hand such coding schemes help to perform loss concealment by extrapolation of decoder state.
+Contrary to sample-based codecs we show that the concealment performance may break at transitions within the speech signal however.
+We then propose mechanisms which differentiate between packets within a voice data flow to minimize the impact of packet loss.
+We designate these methods as intra-flow loss recovery and control.
+At the end-to-end level, identification of packets sensitive to loss (sender) as well as loss concealment (receiver) takes place.
+Hop-by-hop support schemes then allow to (statistically) trade the loss of one packet, which is considered more important, against another one of the same flow which is of lower importance.
+As both packets require the same cost in terms of network transmission, a gain in user perception is obtainable.
+We show that significant speech quality improvements can be achieved and additional data and delay overhead can be avoided while still maintaining a network service which is virtually identical to best effort in the long term. 

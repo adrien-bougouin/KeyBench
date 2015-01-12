@@ -1,0 +1,7 @@
+Normative System Games
+We develop a model of normative systems in which agents are assumed to have multiple goals of increasing priority, and investigate the computational complexity and game theoretic properties of this model.
+In the underlying model of normative systems, we use Kripke structures to represent the possible transitions of a multi-agent system.
+A normative system is then simply a subset of the Kripke structure, which contains the arcs that are forbidden by the normative system.
+We specify an agent's goals as a hierarchy of formulae of Computation Tree Logic (CTL), a widely used logic for representing the properties of Kripke structures: the intuition is that goals further up the hierarchy are preferred by the agent over those that appear further down the hierarchy.
+Using this scheme, we define a model of ordinal utility, which in turn allows us to interpret our Kripke-based normative systems as games, in which agents must determine whether to comply with the normative system or not.
+We then characterise the computational complexity of a number of decision problems associated with these Kripke-based normative system games; for example, we show that the complexity of checking whether there exists a normative system which has the property of being a Nash implementation is NP-complete. 

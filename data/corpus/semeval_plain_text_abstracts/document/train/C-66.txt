@@ -1,0 +1,7 @@
+Heuristics-Based Scheduling of Composite Web Service Workloads
+Web services can be aggregated to create composite workflows that provide streamlined functionality for human users or other systems.
+Although industry standards and recent research have sought to define best practices and to improve end-to-end workflow composition, one area that has not fully been explored is the scheduling of a workflow's web service requests to actual service provisioning in a multi-tiered, multi-organisation environment.
+This issue is relevant to modern business scenarios where business processes within a workflow must complete within QoS-defined limits.
+Because these business processes are web service consumers, service requests must be mapped and scheduled across multiple web service providers, each with its own negotiated service level agreement.
+In this paper we provide heuristics for scheduling service requests from multiple business process workflows to web service providers such that a business value metric across all workflows is maximised.
+We show that a genetic search algorithm is appropriate to perform this scheduling, and through experimentation we show that our algorithm scales well up to a thousand workflows and produces better mappings than traditional approaches. 

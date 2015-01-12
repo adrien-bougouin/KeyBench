@@ -1,0 +1,7 @@
+Globally Synchronized Dead-Reckoning with Local Lag for Continuous Distributed Multiplayer Games
+Dead-Reckoning (DR) is an effective method to maintain consistency for Continuous Distributed Multiplayer Games (CDMG).
+Since DR can filter most unnecessary state updates and improve the scalability of a system, it is widely used in commercial CDMG.
+However, DR cannot maintain high consistency, and this constrains its application in highly interactive games.
+With the help of global synchronization, DR can achieve higher consistency, but it still cannot eliminate before inconsistency.
+In this paper, a method named Globally Synchronized DR with Local Lag (GS-DR-LL), which combines local lag and Globally Synchronized DR (GS-DR), is presented.
+Performance evaluation shows that GS-DR-LL can effectively decrease before inconsistency, and the effects increase with the lag. 

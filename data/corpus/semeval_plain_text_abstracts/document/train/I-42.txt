@@ -1,0 +1,10 @@
+A Complete Distributed Constraint Optimization Method For Non-Traditional Pseudotree Arrangements
+Distributed Constraint Optimization (DCOP) is a general framework that can model complex problems in multi-agent systems.
+Several current algorithms that solve general DCOP instances, including ADOPT and DPOP, arrange agents into a traditional pseudotree structure.
+We introduce an extension to the DPOP algorithm that handles an extended set of pseudotree arrangements.
+Our algorithm correctly solves DCOP instances for pseudotrees that include edges between nodes in separate branches.
+The algorithm also solves instances with traditional pseudotree arrangements using the same procedure as DPOP.
+We compare our algorithm with DPOP using several metrics including the induced width of the pseudotrees, the maximum dimensionality of messages and computation, and the maximum sequential path cost through the algorithm.
+We prove that for some problem instances it is not possible to generate a traditional pseudotree using edge-traversal heuristics that will outperform a cross-edged pseudotree.
+We use multiple heuristics to generate pseudotrees and choose the best pseudotree in linear space-time complexity.
+For some problem instances we observe significant improvements in message and computation sizes compared to DPOP. 
