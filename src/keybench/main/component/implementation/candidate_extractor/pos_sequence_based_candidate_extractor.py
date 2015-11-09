@@ -35,7 +35,7 @@ class POSSequenceBasedCandidateExtractor(interface.KBCandidateExtractorI):
         otherwise.
       root_cache: The root of the cache directory where the cached objects must
         be stored.
-    pos_regexp: The regular expression that represents Part-of-Speech patterns.
+      pos_regexp: The regular expression that represents Part-of-Speech patterns.
     """
 
     super(POSSequenceBasedCandidateExtractor, self).__init__(name,

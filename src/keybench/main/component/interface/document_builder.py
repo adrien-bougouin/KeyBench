@@ -76,7 +76,7 @@ class KBDocumentBuilderI(component.KBComponent):
         normalizer = tool_factory.normalizer(language)
         lemmatizer = tool_factory.lemmatizer(language)
         stemmer = tool_factory.stemmer(language)
-        pos_tagger = tool_factory.pos_tagger(language)
+        pos_tagger = tool_factory.posTagger(language)
         ########################################################################
 
         ## tokenization ########################################################
@@ -90,6 +90,7 @@ class KBDocumentBuilderI(component.KBComponent):
         content_sentence_tokens = tokenizer.tokenizeWords(content_sentences)
         ## normalization #######################################################
         self.logDebug("token normalization of %s..."%(name))
+        # FIXME sentence tokens are list of lists
         title_normalized_tokens = normalizer.normalize(" ".join(title_sentence_tokens)).split(" ")
         abstract_normalized_tokens = normalizer.normalize(" ".join(abstract_sentence_tokens)).split(" ")
         content_normalized_tokens = normalizer.normalize(" ".join(content_sentence_tokens)).split(" ")

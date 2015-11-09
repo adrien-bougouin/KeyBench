@@ -8,7 +8,7 @@ from keybench.main import core
 from keybench.main.component import implementation
 from keybench.main.component import interface
 
-class NGramTFIDFRanker(interface.KBCandidateRanker):
+class NGramTFIDFRanker(interface.KBCandidateRankerI):
   """N-gram based candidate ranker.
 
   Attributes:

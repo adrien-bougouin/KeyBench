@@ -36,13 +36,13 @@ class KBFullKeyphraseExtractor(interface.KBKeyphraseExtractorI):
         redundant keyphrases.
     """
 
-    super(KBFullKeyphraseExtractorI, self).__init__(name,
-                                                    run_name,
-                                                    shared,
-                                                    lazy_mode,
-                                                    debug_mode,
-                                                    root_cache,
-                                                    redundancy_filters)
+    super(KBFullKeyphraseExtractor, self).__init__(name,
+                                                   run_name,
+                                                   shared,
+                                                   lazy_mode,
+                                                   debug_mode,
+                                                   root_cache,
+                                                   redundancy_filters)
 
   def _keyphraseExtraction(self, document):
     """Extracts the keyphrases of a given document.

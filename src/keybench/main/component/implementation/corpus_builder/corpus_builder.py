@@ -24,7 +24,7 @@ class KBCorpusBuilder(component.KBComponent):
                corpus_name,
                directory,
                train_subdirectory,
-               test_subdicrectory,
+               test_subdirectory,
                train_reference_subdirectory,
                test_reference_subdirectory,
                language,
@@ -51,7 +51,7 @@ class KBCorpusBuilder(component.KBComponent):
         be stored.
 
       name: The name (identifier) of the corpus.
-        directory: The C{string} path of the directory containing the corpus'
+      directory: The C{string} path of the directory containing the corpus'
         materials.
       train_subdirectory: The C{strin} path (relative to the copus' directory)
         of the directory containing the training documents.
@@ -92,7 +92,7 @@ class KBCorpusBuilder(component.KBComponent):
     self._corpus_name = corpus_name
     self._directory = directory
     self._train_subdirectory = train_subdirectory
-    self._test_subdicrectory = test_subdicrectory
+    self._test_subdirectory = test_subdirectory
     self._train_reference_subdirectory = train_reference_subdirectory
     self._test_reference_subdirectory = test_reference_subdirectory
     self._language = language
@@ -107,6 +107,66 @@ class KBCorpusBuilder(component.KBComponent):
 
     self._corpus = None
 
+  @property
+  def corpus_name(self):
+    return self._corpus_name
+
+  @property
+  def directory(self):
+    return self._directory
+
+  @property
+  def train_subdirectory(self):
+    return self._train_subdirectory
+
+  @property
+  def test_subdirectory(self):
+    return self._test_subdirectory
+
+  @property
+  def train_reference_subdirectory(self):
+    return self._train_reference_subdirectory
+
+  @property
+  def test_reference_subdirectory(self):
+    return self._test_reference_subdirectory
+
+  @property
+  def language(self):
+    return self._language
+
+  @property
+  def encoding(self):
+    return self._encoding
+
+  @property
+  def file_extension(self):
+    return self._file_extension
+
+  @property
+  def reference_extension(self):
+    return self._reference_extension
+
+  @property
+  def normalized_references(self):
+    return self._normalized_references
+
+  @property
+  def tokenized_references(self):
+    return self._tokenized_references
+
+  @property
+  def stemmed_referecences(self):
+    return self._stemmed_referecences
+
+  @property
+  def lemmatized_references(self):
+    return self._lemmatized_references
+
+  @property
+  def pos_tagged_references(self):
+    return self._pos_tagged_references
+
   def buildCorpus(self):
     """Builds the corpus.
 
@@ -118,9 +178,9 @@ class KBCorpusBuilder(component.KBComponent):
 
     # lazy loading of the corpus
     if self._corpus == None:
-      ## NLP tools #############################################################
-      tool_factory = core.KBBenchmark.singleton().run_tools[self._run_name]
-      document_builder = tool_factory.documentBuilder(self._language)
+      ## Components ############################################################
+      component_factory = core.KBBenchmark.singleton().run_configurations[self._run_name]
+      document_builder = component_factory.documentBuilder(self._language)
       ##########################################################################
 
       # extract the information of the train documents
@@ -178,7 +238,7 @@ class KBCorpusBuilder(component.KBComponent):
       self._corpus = model.KBCorpus(self._corpus_name,
                                     self._directory,
                                     self._train_subdirectory,
-                                    self._test_subdicrectory,
+                                    self._test_subdirectory,
                                     self._train_reference_subdirectory,
                                     self._test_reference_subdirectory,
                                     self._language,
@@ -192,8 +252,8 @@ class KBCorpusBuilder(component.KBComponent):
                                     self._pos_tagged_references,
                                     train_document_information,
                                     test_document_information,
-                                    train_document_references,
-                                    test_document_references)
+                                    train_references,
+                                    test_references)
 
     return self._corpus
 

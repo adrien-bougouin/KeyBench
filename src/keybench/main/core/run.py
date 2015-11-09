@@ -2,9 +2,11 @@
 
 import multiprocessing
 
-import keybench.main.core.benchmark
+# FIXME
+#from keybench.main.core import benchmark
+import benchmark
 
-def __keyphrase_extraction_thread(arguments):
+def _keyphrase_extraction_thread(arguments):
   """Extracts the keyphrases of a corpus' documents.
 
   Args:
@@ -74,15 +76,15 @@ class KBRun(object):
     for corpus_builder in configuration.corpusBuilders().values():
       thread_arguments.append((corpus_builder,
                                configuration.documentBuilder(corpus_builder.language),
-                               configuration.keyphrase_Extractor(corpus_builder.language)))
+                               configuration.keyphraseExtractor(corpus_builder.language)))
 
     # keyphrase extraction
     if len(thread_arguments) == 1:
-      extraction_results = [__keyphrase_extraction_thread(thread_arguments[0])]
+      extraction_results = [_keyphrase_extraction_thread(thread_arguments[0])]
     # multi-threaded keyphrase extraction
     else:
       thread_pool = multiprocessing.Pool()
-      extraction_results = thread_pool.map(__keyphrase_extraction_thread,
+      extraction_results = thread_pool.map(_keyphrase_extraction_thread,
                                            thread_arguments)
 
     # consumption of the keyphrases extracted from each documents of each

@@ -63,7 +63,7 @@ class KBBenchmark(object):
     """
 
     for run_name in self._run_configurations:
-      run = run.KBRun(run_name)
+      r = run.KBRun(run_name)
 
-      run.start()
+      r.start()
 
