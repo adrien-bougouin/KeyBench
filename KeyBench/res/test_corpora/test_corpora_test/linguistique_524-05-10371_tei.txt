@@ -1,0 +1,2 @@
+L'exploration de la BDTS (Banque de données textuelles de Sherbrooke) au moyen d'Hyperbase.
+On s'intéresse ici à l'un des grands projets de recherche que suscite l'intérêt passionné du Québec pour sa langue. Sous le titre de BDTS (Banque de données textuelles de Sherbrooke), l'entreprise vise à établir un corpus représentatif des usages québécois et à en extraire un dictionnaire. Le présent article explore cette base textuelle à l'aide du logiciel Hyperbase.

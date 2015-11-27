@@ -1,0 +1,2 @@
+Les grammaires HPSG.
+L'objectif de cet article est de fournir une présentation simplifiée du modèle de Grammaires HPSG, Head-driven Phrase Structure Grammar, parfois traduit Grammaire syntagmatique guidée par les têtes. Tout d'abord, nous évoquerons brièvement les acquis qui président à la naissance de HPSG et ses caractéristiques générales, puis nous présenterons l'architecture du formalisme, que nous illustrerons par l'analyse d'une phrase simple (Jean donne une pomme à Marie).

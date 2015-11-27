@@ -1,0 +1,2 @@
+Ponctuation et structure prosodique.
+En se basant sur les propriétés de la structure prosodique, indépendante mais associée à la structure syntaxique au travers de contraintes spécifiques, on pose l'existence d'une structure de ponctuation propre à l'écrit, qui livre au lecteur les indications nécessaires et suffisantes pour reconstituer la structure prosodique indispensable à la compréhension du texte, que ce soit en lecture silencieuse ou en lecture vocale.

@@ -1,0 +1,2 @@
+Sur le statut sémantique de il y a.
+On sait que B. Russell considérait il existe (et conséquemment il y a) comme un quantificateur et non pas comme un prédicat. Il existe et il y a entrent aisément, en effet, dans la traduction du quantificateur logique dit existentiel. Mais il ne faut pas oublier le rôle que tient l'article (il existe / il y a un x, tel que...) : linguistiquement, toutes sortes d'arguments imposent de placer il existe et il y a du côté des prédicats.

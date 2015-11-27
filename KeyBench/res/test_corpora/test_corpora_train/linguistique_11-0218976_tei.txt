@@ -1,0 +1,2 @@
+The Stress Site : la conception d'un parcours multimédia pour un travail en autonomie sur l'accentuation des mots.
+La compréhension et la production de l'anglais sont peut-être les deux compétences les moins bien maîtrisées par les étudiants non-anglicistes. Pour aborder ce problème, nous avons mis en place un dispositif multimédia qui permet un travail interactif sur l'accentuation des mots. Ce projet s'inscrit dans une démarche de recherche-développement et comprend une enquête sur les motivations des apprenants-cibles.

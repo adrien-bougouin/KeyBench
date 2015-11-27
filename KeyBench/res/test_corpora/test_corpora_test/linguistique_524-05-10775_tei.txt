@@ -1,0 +1,2 @@
+Accès mesurés aux sens.
+On rencontre un besoin croissant d'accès sémantique robuste à des données textuelles volumineuses et hétérogènes. Nous présentons ici en trois grands types les méthodes qui aident à obtenir cet accès, et qui s'appliquent aux mots comme aux textes: découper en unités porteuses de sens, partitionner pour obtenir des catégories thématiques ou sémantiques, et répartir dans des classes prédéfinies.

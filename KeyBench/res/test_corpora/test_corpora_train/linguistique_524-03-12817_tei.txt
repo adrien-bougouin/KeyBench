@@ -1,0 +1,2 @@
+Existe-t-il un DP en turc ?.
+Dans cet article, nous montrons que le turc est une langue sans projection DP. Nous fondons notre analyse sur le fait que ni les articles ni les démonstratifs ne peuvent être analysés comme des têtes D°, et sur l'absence de complémenteur dans cette langue. Nous présentons ensuite la structure du SN turc, où à chaque niveau de complexité morphosyntaxique correspond un type d'interprétation particulier: référence à un type, indéfinitude, définitude.

@@ -1,0 +1,2 @@
+L'analyse de la construction en tout N par D. Leeman: Quelques remarques.
+Cet article se propose de réexaminer l'analyse du complément circonstanciel en tout(e) N menée d'un point de vue harrissien dans Leeman (1998). Au travers de l'étude d'un certain nombre de problèmes et d'exemples, une solution est proposée en termes de stéréotypes, qui permet de rapprocher la structure étudiée de la structure proche en N.

@@ -1,0 +1,2 @@
+Figement absolu ou relatif : la notion de degré de figement.
+Il s’agit de dégager une synthèse des outils méthodologiques forgés à la fin du XXe siècle pour effectuer une analyse appropriée des séquences figées. C’est à partir d’une telle synthèse qu’il serait possible de poser, moyennant des critères sémantiques et syntaxiques précis, figement absolu et figement relatif. Seule une description de ce genre permettrait un traitement automatique des telles séquences, en tenant compte de l’articulation entre structure interne et externe.
