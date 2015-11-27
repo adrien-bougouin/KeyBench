@@ -8,13 +8,13 @@ This work was supported by the French National Research Agency (TermITH project
 
 The project is developed in Python (2.6.6 or later) and makes use of third party
 tools:
-- NLTK \[2\] (python Natural Language Tool Kit -- to install:
-  [https://pypi.python.org/pypi/nltk/2.0.4])
+- NLTK \[2\] (python Natural Language Tool Kit --
+  [to install](https://pypi.python.org/pypi/nltk/2.0.4))
 - Stanford POS tagger \[3\] (java software -- included)
 - Bonsai word tokenizer (perl command line tool used by the Bonsai PCFG-LA
   parser -- included)
-- MElt POS tagger \[4\] (python french POS tagger -- to install:
-  [http://ressources.labex-efl.org/melt])
+- MElt POS tagger \[4\] (python french POS tagger --
+  [to install](http://ressources.labex-efl.org/melt))
 
 # Usage
 
@@ -99,8 +99,7 @@ ranking), `selections/CORPUS_NAME` (keyphrase identification) and
 already done steps (e.g. POS tagging), but a readable version can be found in a
 sub-directory name `string`.
 
-References
-----------
+# References
 
 [1] Adrien Bougouin, Florian Boudin and Béatrice Daille. 2013. Topicrank:
 Graph-Based Topic Ranking for keyphrase Extraction. In Proceedings of the
