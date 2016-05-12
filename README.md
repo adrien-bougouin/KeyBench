@@ -1,6 +1,6 @@
 # TODO
 
-Usecode on branch topicrank_topiccorank_stable
+Use code on branch topicrank_topiccorank_stable
 
 # Required
 
