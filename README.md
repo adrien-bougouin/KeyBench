@@ -8,13 +8,14 @@ This work was supported by the French National Research Agency (TermITH project
 
 The project is developed in Python (2.6.6 or later) and makes use of third party
 tools:
-- NLTK \[2\] (python Natural Language Tool Kit --
-  [to install](https://pypi.python.org/pypi/nltk/2.0.4))
+- NLTK-2.0.4 \[2\] ([python Natural Language Tool Kit](https://pypi.python.org/pypi/nltk/2.0.4)): `sudo pip install http://pypi.python.org/packages/source/n/nltk/nltk-2.0.4.tar.gz`
+- LXML: `sudo pip install lxml`
+- NetworkX: `sudo pip install networkx`
+- MElt POS tagger \[4\] (python french POS tagger --
+  [to install](http://ressources.labex-efl.org/melt))
 - Stanford POS tagger \[3\] (java software -- included)
 - Bonsai word tokenizer (perl command line tool used by the Bonsai PCFG-LA
   parser -- included)
-- MElt POS tagger \[4\] (python french POS tagger --
-  [to install](http://ressources.labex-efl.org/melt))
 
 # Usage
 
@@ -91,13 +92,14 @@ A reference file is a list of documents associated with keyphrases:
 ## Outputs
 
 The results of every processing steps are serialized in an output directory.
-Their is one directory for each processing step: `pre_processings/CORPUS_NAME`
-(POS tagging), `candidates/CORPUS_NAME` (candidate selection),
-`clusters/CORPUS_NAME` (candidate clustering), `rankings/CORPUS_NAME` (candidate
-ranking), `selections/CORPUS_NAME` (keyphrase identification) and
-`evaluation/CORPUS_NAME` (evaluation). They are used for lazy processing of
-already done steps (e.g. POS tagging), but a readable version can be found in a
-sub-directory name `string`.
+Their is one directory for each processing step: `pre_processings/<run_or_corpus_name>`
+(POS tagging), `candidates/<run_or_corpus_name><method_name>` (candidate selection),
+`clusters/<run_or_corpus_name><method_name>` (candidate clustering),
+`rankings/<run_or_corpus_name><method_name>` (candidate ranking),
+`selections/<run_or_corpus_name><method_name>` (keyphrase identification) and
+`evaluation/<run_or_corpus_name><method_name>` (evaluation). They are used for lazy
+processing of already done steps (e.g. POS tagging), but a readable version
+can be found in a sub-directory name `string`.
 
 # References
 
