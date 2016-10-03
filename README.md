@@ -1,8 +1,13 @@
-TopicRank \[1\] - TopicCoRank
+TopicRank \[1\] - TopicCoRank \[6\]
 ===========================================================================
 
-This work was supported by the French National Research Agency (TermITH project
--- ANR-12-CORD-0029).
+This is the work presented in the 26th International Conference on Computational Linguistics (COLING 2016).
+This work was supported by the French National Research Agency (TermITH project -- ANR-12-CORD-0029).
+
+# Purpose
+
+The provided source code and command line tool aim to ease the reproduction and usage of TopicCoRank.
+You will also find the subset listing to reconstruct our dataset from the DEFT-2016 dataset \[5\].
 
 # Requirements
 
@@ -18,32 +23,6 @@ tools:
   parser -- included)
 
 # Usage
-
-## TopicRank
-
-To process a corpus of plain text (.txt) files with TopicRank \[1\], one can
-use:
-```
-  usage: sh topicrank.sh [options] corpus language
-
-  positional arguments:
-    corpus                path to the .txt files to process
-    language              language of the corpus files (french or english)
-
-  optional arguments:
-    -h, --help            show this help message and exit
-    -n RUN_NAME, --run-name RUN_NAME
-                          name of the run (for identification within the output
-                          directory)
-    -r REFERENCE_FILEPATH, --reference REFERENCE_FILEPATH
-                          path to the file containing the references (for
-                          evaluation only)
-    -o OUTPUT_DIR, --output-dir OUTPUT_DIR
-                          path to the directory where processings must be stored
-                          (default=results)
-    -p PROCESSUS_NUMBER, --processus-number PROCESSUS_NUMBER
-                          number of documents to process simultaneously
-```
 
 ## TopicCoRank
 
@@ -70,6 +49,32 @@ To process a corpus of plain text (.txt) files with TopicCoRank, one can use:
     -p PROCESSUS_NUMBER, --processus-number PROCESSUS_NUMBER
                           number of documents to process simultaneously
   
+```
+
+## TopicRank
+
+To process a corpus of plain text (.txt) files with TopicRank \[1\], one can
+use:
+```
+  usage: sh topicrank.sh [options] corpus language
+
+  positional arguments:
+    corpus                path to the .txt files to process
+    language              language of the corpus files (french or english)
+
+  optional arguments:
+    -h, --help            show this help message and exit
+    -n RUN_NAME, --run-name RUN_NAME
+                          name of the run (for identification within the output
+                          directory)
+    -r REFERENCE_FILEPATH, --reference REFERENCE_FILEPATH
+                          path to the file containing the references (for
+                          evaluation only)
+    -o OUTPUT_DIR, --output-dir OUTPUT_DIR
+                          path to the directory where processings must be stored
+                          (default=results)
+    -p PROCESSUS_NUMBER, --processus-number PROCESSUS_NUMBER
+                          number of documents to process simultaneously
 ```
 
 # Format
@@ -124,3 +129,11 @@ Effort. In Proceedings of the 23rd Pacific Asia Conference on Language,
 Information and Computation (PACLIC), pages 110-119, Hong Kong, December.
 City University of Hong Kong.
 
+[5] Béatrice Daille, Sabine Barreaux, Florian Boudin, Adrien Bougouin, Damien Cram, et Amir Hazem. 2016.
+Indexation d'articles scientifiques : Présentation et résultats du défi fouille de textes DEFT 2016.
+In Défi fouille de textes (DEFT), Paris, France.
+
+[1] Adrien Bougouin, Florian Boudin and Béatrice Daille. 2016.
+Keyphrase Annotation with Graph Co-Ranking. In Proceedings of the
+26th International Conference on Computational Linguistics (COLING),
+Osaka, Japan, December.
