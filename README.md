@@ -7,7 +7,7 @@ This work was supported by the French National Research Agency (TermITH project 
 # Purpose
 
 The provided source code and command line tool aim to ease the reproduction and usage of TopicCoRank.
-You will also find the subset listing to reconstruct our dataset from the DEFT-2016 dataset \[5\].
+You will also find the subset listing to reconstruct our dataset from recently published DEFT-2016 dataset \[5\].
 
 # Requirements
 
